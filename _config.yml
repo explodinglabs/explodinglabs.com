@@ -9,6 +9,7 @@ author: Beau Barker
 baseurl: "" # the subpath of your site, e.g. /blog
 description: >
   ...
+destination: docs/
 future: true # Include posts with a date in the future
 github_username: explodinglabs
 highlighter: rouge
@@ -24,7 +25,7 @@ social:
   name: Exploding Labs
   links:
     - https://github.com/explodinglabs
-source: _source
+source: src
 title: Exploding Labs
 tagline: 
 url: "https://www.explodinglabs.com" # the base hostname & protocol for your site
