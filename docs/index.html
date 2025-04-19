@@ -1,25 +1,59 @@
----
-layout: page
----
-<div id="logo" />
-    <img src="/assets/logo.png" />
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exploding Labs</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
 
-<!--
-<div class="wrapper">
-    <span class="logo"></span>
-    <a href="/"><img src="/assets/logo.png" /></a>
-</div>
-<div class="product">
-    <img src="/assets/composed.png" />
-    <b>Composed</b> - A programming blog.
-</div>
-<div class="product">
-    <img src="/assets/jsonrpcserver.png" />
-    Jsonrpcserver - Process JSON-RPC requests in Python.
-</div>
-<div class="product">
-    <img src="/assets/jsonrpcclient.png" />
-    Jsonrpcclient - Process JSON-RPC requests in Python.
-</div>
--->
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+        background-color: #071039;
+      }
+
+      .wrapper {
+      }
+
+      .wrapper img {
+        max-width: 300px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .wrapper p {
+        text-align: center;
+        margin-top: 2em;
+        line-height: 180%;
+        a {
+          color: white;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <img src="/assets/logo.png" alt="Logo" data-aos="flip-left" />
+      <p data-aos="fade-up">
+        📞 <a href="tel:+61412345678">+61 437 807 666</a>
+      </p>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script
+      type="text/javascript"
+      src="https://explodinglabs.github.io/refresh.js/refresh.js"
+    ></script>
+  </body>
+</html>
