@@ -23,28 +23,42 @@
       .wrapper {
       }
 
-      .wrapper img {
+      .wrapper img#logo {
         max-width: 300px;
         height: auto;
         display: block;
         margin: 0 auto;
       }
 
-      .wrapper p {
-        text-align: center;
+      .wrapper img#reliableapps {
+        max-width: 300px;
+        margin: 2em auto 0 auto;
+        display: block;
+      }
+
+      .wrapper p#pitch {
+        color: #40dafe;
+        max-width: 600px;
         margin-top: 2em;
         line-height: 180%;
-        a {
-          color: white;
-        }
+        text-align: center;
       }
     </style>
   </head>
   <body>
     <div class="wrapper">
-      <img src="/assets/logo.png" alt="Logo" data-aos="flip-left" />
-      <p data-aos="fade-up">
-        📞 <a href="tel:+61412345678">+61 437 807 666</a>
+      <img id="logo" src="/assets/logo.png" alt="Logo" data-aos="flip-left" />
+      <img
+        id="reliableapps"
+        src="/assets/reliableapps.png"
+        data-aos="flip-right"
+      />
+      <p id="pitch">
+        Exploding Labs builds profitable SaaS apps using our own open-source
+        backend infrastructure. At the core is <b>Minibase</b> — a lightweight,
+        modular platform for quickly launching database-driven web apps. We use
+        it to ship real products, and so can you. Our tools are open. Our
+        mission is focused: create software that pays its way.
       </p>
     </div>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
