@@ -3,52 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exploding Labs</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-      }
-
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: sans-serif;
-        background-color: #071039;
-      }
-
-      .wrapper {
-      }
-
-      .wrapper img#logo {
-        max-width: 300px;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-      }
-
-      .wrapper img#reliableapps {
-        max-width: 300px;
-        margin: 2em auto 0 auto;
-        display: block;
-      }
-
-      .wrapper p#pitch {
-        color: white;
-        max-width: 600px;
-        margin-top: 2em;
-        line-height: 180%;
-        text-align: center;
-        padding: 0 1em;
-        a {
-          color: white;
-          font-weight: bold;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="/index.css" />
+    <title>Exploding Labs</title>
   </head>
   <body>
     <div class="wrapper">
@@ -67,13 +24,19 @@
         mission is focused: create software that pays its way.
       </p>
     </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init();
     </script>
+
     <script
+      id="powersync"
       type="text/javascript"
-      src="https://explodinglabs.github.io/refresh.js/refresh.js"
+      data-events-uri=":8080/.well-known/mercure"
+      data-events-topic="powersync"
+      src="/powersync.dev.js"
+      async
     ></script>
   </body>
 </html>
