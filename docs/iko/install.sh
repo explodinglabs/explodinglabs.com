@@ -9,7 +9,11 @@ mkdir -p "$INSTALL_DIR"
 
 cat > "$WRAPPER" <<'EOF'
 #!/bin/sh
-docker run --rm -it -v "${PWD}/migrations:/repo:rw" -v "${PWD}/scripts:/scripts:ro" ghcr.io/explodinglabs/iko:0.1.0 "$@"
+
+docker run --rm -it \
+  -v "${PWD}/migrations:/repo:rw" \
+  -v "${PWD}/scripts:/scripts:ro" \
+  ghcr.io/explodinglabs/iko:0.1.0 "$@"
 EOF
 
 chmod +x "$WRAPPER"
