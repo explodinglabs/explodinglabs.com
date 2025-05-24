@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="/index.css" />
+    <title>Exploding Labs</title>
+  </head>
+  <body>
+    <main>
+      <img id="logo" src="/assets/logo.png" alt="Logo" data-aos="flip-left" />
+
+      <img
+        id="reliableapps"
+        src="/assets/reliableapps.png"
+        data-aos="flip-right"
+      />
+
+      <p id="pitch">
+        Exploding Labs builds profitable SaaS apps using our own open-source
+        infrastructure. At the core is <b>Minibase</b> — a lightweight platform
+        for quickly launching database-driven web apps. We use it to ship real
+        products, and so can you. Our tools are open.
+      </p>
+
+      <div class="projects">
+        <!-- iko -->
+        <div class="project">
+          <a href="/iko/">
+            <img src="/assets/iko.png" alt="iko logo" />
+          </a>
+          <h2>iko</h2>
+          <p>
+            <a href="/iko/">Docs</a> |
+            <a href="https://github.com/explodinglabs/iko">GitHub</a>
+          </p>
+        </div>
+
+        <!-- powersync -->
+        <div class="project">
+          <img src="/assets/powersync.png" alt="powersync logo" />
+          <h2>PowerSync</h2>
+          <p>
+            <a href="https://github.com/explodinglabs/powersync">GitHub</a>
+          </p>
+        </div>
+
+        <!-- jsonrpcserver -->
+        <div class="project">
+          <a href="/jsonrpcserver/">
+            <img src="/assets/jsonrpcserver.png" alt="jsonrpcserver logo" />
+          </a>
+          <h2>jsonrpcserver</h2>
+          <p>
+            <a href="/jsonrpcserver/">Docs</a> |
+            <a href="https://github.com/explodinglabs/jsonrpcserver">GitHub</a>
+          </p>
+        </div>
+
+        <!-- jsonrpcclient -->
+        <div class="project">
+          <a href="/jsonrpcclient/">
+            <img src="/assets/jsonrpcclient.png" alt="jsonrpcclient logo" />
+          </a>
+          <h2>jsonrpcclient</h2>
+          <p>
+            <a href="/jsonrpcclient/">Docs</a> |
+            <a href="https://github.com/explodinglabs/jsonrpcclient">GitHub</a>
+          </p>
+        </div>
+
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
+    <script
+      id="powersync"
+      type="text/javascript"
+      data-events-uri=":8080/.well-known/mercure"
+      data-events-topic="powersync"
+      src="https://explodinglabs.github.io/powersync/powersync-0.1.0.js"
+      async
+    ></script>
+  </body>
+</html>

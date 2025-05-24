@@ -10,7 +10,7 @@ body {
   background-color: #071039;
 }
 
-.wrapper {
+main {
   max-width: 800px;
   margin: 0 auto;
   padding: 2em 2em;
@@ -31,7 +31,7 @@ body {
 h2 {
   font-size: 1.6em;
   margin-top: 1em;
-  color: #333;
+  color: #eee;
   text-align: center;
 }
 
@@ -51,4 +51,22 @@ h2 {
 
 #pitch a:hover {
   text-decoration: underline;
+}
+
+.project {
+  margin-bottom: 3em;
+}
+
+.project img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project p {
+  text-align: center;
+}
+
+.project p a {
+  color: cyan;
 }
