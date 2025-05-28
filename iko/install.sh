@@ -9,19 +9,19 @@ mkdir -p "$INSTALL_DIR"
 
 cat > "$WRAPPER" <<'EOF'
 #!/bin/sh
+set -euo pipefail
 
-if [ -f .env ]; then
-  docker run --rm -it \
-    --env-file .env \
-    -v "${PWD}/migrations:/repo:rw" \
-    -v "${PWD}/scripts:/scripts:ro" \
-    ghcr.io/explodinglabs/iko:0.1.0 "$@"
-else
-  docker run --rm -it \
-    -v "${PWD}/migrations:/repo:rw" \
-    -v "${PWD}/scripts:/scripts:ro" \
-    ghcr.io/explodinglabs/iko:0.1.0 "$@"
-fi
+[ -f .env ] && source .env
+
+ENV_ARG=""
+[ -f .env ] && ENV_ARG="--env-file .env"
+
+docker run --rm -it \
+  $ENV_ARG \
+  --network "${DOCKER_NETWORK:-bridge}" \
+  -v "${PWD}/migrations:/repo:rw" \
+  -v "${PWD}/scripts:/scripts:ro" \
+  ghcr.io/explodinglabs/iko:0.1.0 "$@"
 EOF
 
 chmod +x "$WRAPPER"

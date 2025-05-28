@@ -360,20 +360,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-env-file" class="md-nav__link">
+  <a href="#1-initialise-a-project" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Create a .env file
+      1. Initialise a project
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-initialise-a-project" class="md-nav__link">
+  <a href="#2-create-a-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Initialise a project
+      2. Create a .env file
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2. Create a .env file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-postgres-is-running-inside-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      If Postgres is running inside Docker:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-postgres-is-installed-directly-on-your-system-eg-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      If Postgres is installed directly on your system (e.g. Linux):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -496,20 +520,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-env-file" class="md-nav__link">
+  <a href="#1-initialise-a-project" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Create a .env file
+      1. Initialise a project
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-initialise-a-project" class="md-nav__link">
+  <a href="#2-create-a-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Initialise a project
+      2. Create a .env file
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2. Create a .env file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-postgres-is-running-inside-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      If Postgres is running inside Docker:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-postgres-is-installed-directly-on-your-system-eg-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      If Postgres is installed directly on your system (e.g. Linux):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -551,15 +599,38 @@
 
 
 <h1 id="usage">🛠️ Usage</h1>
-<h2 id="1-create-a-env-file">1. Create a <code>.env</code> file</h2>
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;PG_URI=pg://user:pass@postgres/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
-</code></pre></div>
-<h2 id="2-initialise-a-project">2. Initialise a project</h2>
-<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span><span class="s1">&#39;$PG_URI&#39;</span><span class="w"> </span>myapp
+<h2 id="1-initialise-a-project">1. Initialise a project</h2>
+<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>myapp
 </code></pre></div>
 <p>This creates a new Sqitch project in a <code>migrations</code> directory. The target is
 set to an environment variable, so it stays portable across dev, CI, and
 production environments.</p>
+<h2 id="2-create-a-env-file">2. Create a <code>.env</code> file</h2>
+<p>Set your database connection URI and (if needed) Docker network settings.</p>
+<h3 id="if-postgres-is-running-inside-docker">If Postgres is running inside Docker:</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;SQITCH_TARGET=db:pg://postgres:postgres@postgres/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;DOCKER_NETWORK=explodinglabs&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.env
+</code></pre></div>
+<blockquote>
+<p>✅ Replace postgres with your Docker Compose service name or container name.
+✅ Replace explodinglabs with your Docker network name (you can find it with
+docker network ls).</p>
+</blockquote>
+<h3 id="if-postgres-is-installed-directly-on-your-system-eg-linux">If Postgres is installed directly on your system (e.g. Linux):</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;SQITCH_TARGET=db:pg://postgres:postgres@localhost/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+</code></pre></div>
+<blockquote>
+<p>✅ localhost refers to your host system from inside the container (only works
+on native Linux).
+⚠️ On Mac or WSL2, use host.docker.internal instead of localhost.</p>
+<p>⚠️ <strong>Important:</strong> Do not create the <code>.env</code> file or set <code>SQITCH_TARGET</code> until <em>after</em> you run:</p>
+<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>myapp
+</code></pre></div>
+<p>If <code>SQITCH_TARGET</code> is set too early, <code>iko init</code> may fail with a message like:</p>
+<div class="highlight"><pre><span></span><code>Missing required arguments: name
+</code></pre></div>
+<p>You can safely add <code>.env</code> and <code>SQITCH_TARGET</code> after initialization is complete.</p>
+</blockquote>
 <h2 id="3-create-a-migration">3. Create a migration</h2>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>create_schema<span class="w"> </span>api
 </code></pre></div>
