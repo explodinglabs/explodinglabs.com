@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/iko/deploy/">
+        <link rel="canonical" href="https://explodinglabs.com/iko/deploying/">
       
       
         <link rel="prev" href="../scripting/">
@@ -602,10 +602,10 @@ inside a custom Docker image.</p>
 <p>This copies your migrations into the image at /repo, where Iko expects them.</p>
 <h3 id="2-build-the-image">2. Build the image</h3>
 <p>Give it a meaningful tag, e.g. for production:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ghcr.io/your-org/iko-with-migrations<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ghcr.io/your-org/iko-with-migrations:latest<span class="w"> </span>.
 </code></pre></div>
 <p>Then push it to your container registry:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>push<span class="w"> </span>ghcr.io/your-org/iko-with-migrations
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>push<span class="w"> </span>ghcr.io/your-org/iko-with-migrations:latest
 </code></pre></div>
 <h3 id="3-run-the-deploy-on-the-remote-environment">3. Run the deploy on the remote environment</h3>
 <p>On the target server or inside your CI/CD pipeline, run:</p>
@@ -614,7 +614,7 @@ inside a custom Docker image.</p>
 <span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_PASS</span><span class="o">=</span>yourpass<span class="w"> </span><span class="se">\</span>
 <span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_HOST</span><span class="o">=</span>postgres<span class="w"> </span><span class="se">\</span>
 <span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_DB</span><span class="o">=</span>app<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>ghcr.io/your-org/iko-with-migrations<span class="w"> </span>deploy<span class="w"> </span>--verify
+<span class="w"> </span>ghcr.io/your-org/iko-with-migrations:latest<span class="w"> </span>deploy<span class="w"> </span>--verify
 </code></pre></div>
 
 
