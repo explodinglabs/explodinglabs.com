@@ -610,10 +610,7 @@ inside a custom Docker image.</p>
 <h3 id="3-run-the-deploy-on-the-remote-environment">3. Run the deploy on the remote environment</h3>
 <p>On the target server or inside your CI/CD pipeline, run:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_USER</span><span class="o">=</span>youruser<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_PASS</span><span class="o">=</span>yourpass<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_HOST</span><span class="o">=</span>postgres<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_DB</span><span class="o">=</span>app<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_URI</span><span class="o">=</span>pg://user:pass@postgres/app<span class="w"> </span><span class="se">\</span>
 <span class="w"> </span>ghcr.io/your-org/iko-with-migrations:latest<span class="w"> </span>deploy<span class="w"> </span>--verify
 </code></pre></div>
 

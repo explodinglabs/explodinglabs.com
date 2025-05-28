@@ -360,27 +360,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-initialise-a-project" class="md-nav__link">
+  <a href="#1-create-a-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Initialise a project
+      1. Create a .env file
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-create-a-migration" class="md-nav__link">
+  <a href="#2-initialise-a-project" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create a migration
+      2. Initialise a project
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-deploy-it" class="md-nav__link">
+  <a href="#3-create-a-migration" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Deploy it
+      3. Create a migration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Deploy it
     </span>
   </a>
   
@@ -487,27 +496,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-initialise-a-project" class="md-nav__link">
+  <a href="#1-create-a-env-file" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Initialise a project
+      1. Create a .env file
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-create-a-migration" class="md-nav__link">
+  <a href="#2-initialise-a-project" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create a migration
+      2. Initialise a project
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-deploy-it" class="md-nav__link">
+  <a href="#3-create-a-migration" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Deploy it
+      3. Create a migration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Deploy it
     </span>
   </a>
   
@@ -533,11 +551,16 @@
 
 
 <h1 id="usage">🛠️ Usage</h1>
-<h2 id="1-initialise-a-project">1. Initialise a project</h2>
-<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>db:pg://user:pass@postgres/dbname<span class="w"> </span>myapp
+<h2 id="1-create-a-env-file">1. Create a <code>.env</code> file</h2>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;PG_URI=pg://user:pass@postgres/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
 </code></pre></div>
-<p>This creates a new project with a <code>sqitch.plan</code>, ready for migrations.</p>
-<h2 id="2-create-a-migration">2. Create a migration</h2>
+<h2 id="2-initialise-a-project">2. Initialise a project</h2>
+<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span><span class="s1">&#39;$PG_URI&#39;</span><span class="w"> </span>myapp
+</code></pre></div>
+<p>This creates a new Sqitch project in a <code>migrations</code> directory. The target is
+set to an environment variable, so it stays portable across dev, CI, and
+production environments.</p>
+<h2 id="3-create-a-migration">3. Create a migration</h2>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>create_schema<span class="w"> </span>api
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Created deploy/create_schema_api.sql
@@ -552,8 +575,8 @@ create schema api;
 <li>The change was added to sqitch.plan.</li>
 <li>The deploy script was output for your review.</li>
 </ul>
-<h2 id="3-deploy-it">3. Deploy it</h2>
-<p>Make sure your database is running, then:</p>
+<h2 id="4-deploy-it">4. Deploy it</h2>
+<p>Ensure your Postgres server is running, then:</p>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>deploy
 </code></pre></div>
 
