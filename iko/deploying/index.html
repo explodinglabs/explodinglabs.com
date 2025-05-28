@@ -461,11 +461,35 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-run-the-deploy-on-the-remote-environment" class="md-nav__link">
+  <a href="#3-set-the-target-connection" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Run the deploy on the remote environment
+      3. Set the target connection
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-run-the-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Run the deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Run the deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-i-need-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Do I need --network?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -546,11 +570,35 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-run-the-deploy-on-the-remote-environment" class="md-nav__link">
+  <a href="#3-set-the-target-connection" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Run the deploy on the remote environment
+      3. Set the target connection
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-run-the-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Run the deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Run the deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-i-need-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Do I need --network?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -607,12 +655,30 @@ inside a custom Docker image.</p>
 <p>Then push it to your container registry:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>push<span class="w"> </span>ghcr.io/your-org/iko-with-migrations:latest
 </code></pre></div>
-<h3 id="3-run-the-deploy-on-the-remote-environment">3. Run the deploy on the remote environment</h3>
-<p>On the target server or inside your CI/CD pipeline, run:</p>
+<h3 id="3-set-the-target-connection">3. Set the target connection</h3>
+<p>Iko uses the <code>SQITCH_TARGET</code> environment variable to connect to your database.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SQITCH_TARGET</span><span class="o">=</span>db:pg://admin:secret@your-database-host/app
+</code></pre></div>
+<p>Alternatively, set it in your CI/CD system’s environment configuration.</p>
+<blockquote>
+<p>🛡️ Do not hardcode credentials into your Dockerfile or image. Use CI secrets
+or -e flags instead.</p>
+</blockquote>
+<h3 id="4-run-the-deployment">4. Run the deployment</h3>
+<p>From your CI/CD pipeline or target server, run:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_URI</span><span class="o">=</span>pg://user:pass@postgres/app<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ghcr.io/your-org/iko-with-migrations:latest<span class="w"> </span>deploy<span class="w"> </span>--verify
+</code></pre></div>
+<h4 id="do-i-need-network">🤔 Do I need --network?</h4>
+<p>Only if your Postgres instance is running in Docker on the same machine.</p>
+<p>If so, and it's in a custom Docker network, use:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>--network<span class="w"> </span>your-network<span class="w"> </span><span class="se">\</span>
 <span class="w"> </span>ghcr.io/your-org/iko-with-migrations:latest<span class="w"> </span>deploy<span class="w"> </span>--verify
 </code></pre></div>
+<p>Otherwise, for hosted databases (RDS, Cloud SQL, etc.) or Postgres installed on
+the host system, you don’t need a custom Docker network.</p>
 
 
 
