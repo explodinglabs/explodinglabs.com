@@ -388,9 +388,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#if-postgres-is-installed-directly-on-your-system-eg-linux" class="md-nav__link">
+  <a href="#if-postgres-is-installed-directly-on-your-system" class="md-nav__link">
     <span class="md-ellipsis">
-      If Postgres is installed directly on your system (e.g. Linux):
+      If Postgres is installed directly on your system:
     </span>
   </a>
   
@@ -548,9 +548,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#if-postgres-is-installed-directly-on-your-system-eg-linux" class="md-nav__link">
+  <a href="#if-postgres-is-installed-directly-on-your-system" class="md-nav__link">
     <span class="md-ellipsis">
-      If Postgres is installed directly on your system (e.g. Linux):
+      If Postgres is installed directly on your system:
     </span>
   </a>
   
@@ -599,37 +599,28 @@
 
 
 <h1 id="usage">🛠️ Usage</h1>
+<blockquote>
+<p>🧪 This covers <strong>local development</strong>.</p>
+<p>For production or CI/CD usage, see <a href="../deploying/">Deploying to Remote
+Environments</a>.</p>
+</blockquote>
 <h2 id="1-initialise-a-project">1. Initialise a project</h2>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>myapp
 </code></pre></div>
-<p>This creates a new Sqitch project in a <code>migrations</code> directory. The target is
-set to an environment variable, so it stays portable across dev, CI, and
-production environments.</p>
-<h2 id="2-create-a-env-file">2. Create a <code>.env</code> file</h2>
-<p>Set your database connection URI and (if needed) Docker network settings.</p>
+<p>This creates a new Sqitch project in a <code>migrations</code> directory.</p>
+<h2 id="2-create-a-env-file">2. Create a .env file</h2>
+<p>Create a <code>.env</code> file with the appropriate settings based on your Postgres setup:</p>
 <h3 id="if-postgres-is-running-inside-docker">If Postgres is running inside Docker:</h3>
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;SQITCH_TARGET=db:pg://postgres:postgres@postgres/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;DOCKER_NETWORK=explodinglabs&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.env
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;SQITCH_TARGET=db:pg://postgres:postgres@&lt;your_service_name&gt;/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;DOCKER_NETWORK=&lt;your_docker_network&gt;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.env
 </code></pre></div>
-<blockquote>
-<p>✅ Replace postgres with your Docker Compose service name or container name.
-✅ Replace explodinglabs with your Docker network name (you can find it with
-docker network ls).</p>
-</blockquote>
-<h3 id="if-postgres-is-installed-directly-on-your-system-eg-linux">If Postgres is installed directly on your system (e.g. Linux):</h3>
+<h3 id="if-postgres-is-installed-directly-on-your-system">If Postgres is installed directly on your system:</h3>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;SQITCH_TARGET=db:pg://postgres:postgres@localhost/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
 </code></pre></div>
+<p>On Mac or WSL2, use <code>host.docker.internal</code> instead of <code>localhost</code>.</p>
 <blockquote>
-<p>✅ localhost refers to your host system from inside the container (only works
-on native Linux).
-⚠️ On Mac or WSL2, use host.docker.internal instead of localhost.</p>
-<p>⚠️ <strong>Important:</strong> Do not create the <code>.env</code> file or set <code>SQITCH_TARGET</code> until <em>after</em> you run:</p>
-<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>myapp
-</code></pre></div>
-<p>If <code>SQITCH_TARGET</code> is set too early, <code>iko init</code> may fail with a message like:</p>
-<div class="highlight"><pre><span></span><code>Missing required arguments: name
-</code></pre></div>
-<p>You can safely add <code>.env</code> and <code>SQITCH_TARGET</code> after initialization is complete.</p>
+<p>⚠️ Don't set <code>SQITCH_TARGET</code> before running <code>iko init</code>, or you'll get an error
+like "Missing required arguments: name".</p>
 </blockquote>
 <h2 id="3-create-a-migration">3. Create a migration</h2>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>create_schema<span class="w"> </span>api

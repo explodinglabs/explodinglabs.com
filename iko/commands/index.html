@@ -1025,11 +1025,17 @@
 
 
 <h1 id="commands">Commands</h1>
+<p>Iko provides a command-line interface for generating and managing Sqitch-based
+migrations.</p>
+<p>This page is a reference for all available commands.</p>
 <h2 id="sqitch-commands">Sqitch commands</h2>
 <p>Iko aliases all of <a href="https://sqitch.org/docs/manual/">Sqitch's commands</a>.</p>
+<p>For example, <code>sqitch check</code> becomes <code>iko check</code>.</p>
 <p>You can also access <code>sqitch</code> directly, for example:</p>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>sqitch<span class="w"> </span>--version
 </code></pre></div>
+<p>When scripting, the <code>iko</code> part is left out. For example, <code>iko create_schema api</code> becomes simply <code>create_schema api</code>. In this document the <code>iko</code> command is
+left out.</p>
 <h2 id="ad-hoc-migrations">Ad-hoc migrations</h2>
 <blockquote>
 <p>📖 Refer to <a href="https://sqitch.org/docs/manual/sqitch-add/">sqitch-add</a>.</p>
