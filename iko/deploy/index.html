@@ -8,26 +8,26 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/iko/">
+        <link rel="canonical" href="https://explodinglabs.com/iko/deploy/">
+      
+      
+        <link rel="prev" href="../scripting/">
       
       
       
-        <link rel="next" href="installation/">
-      
-      
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>iko</title>
+        <title>Deploying - iko</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#iko" class="md-skip">
+        <a href="#deploying-migrations-to-remote-environments" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +88,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="iko" class="md-header__button md-logo" aria-label="iko" data-md-component="logo">
+    <a href=".." title="iko" class="md-header__button md-logo" aria-label="iko" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Deploying
             
           </span>
         </div>
@@ -225,8 +225,6 @@
           
             
               
-                
-              
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -236,7 +234,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="iko" class="md-nav__button md-logo" aria-label="iko" data-md-component="logo">
+    <a href=".." title="iko" class="md-nav__button md-logo" aria-label="iko" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -263,32 +261,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Home
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -299,35 +275,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
-    <span class="md-ellipsis">
-      Table of Contents
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -339,7 +286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -361,7 +308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/" class="md-nav__link">
+      <a href="../usage/" class="md-nav__link">
         
   
   
@@ -383,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="commands/" class="md-nav__link">
+      <a href="../commands/" class="md-nav__link">
         
   
   
@@ -405,7 +352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="scripting/" class="md-nav__link">
+      <a href="../scripting/" class="md-nav__link">
         
   
   
@@ -424,10 +371,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="deploy/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Deploying
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -438,6 +407,77 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-use-a-custom-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Why use a custom image?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-build-and-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧱 Step-by-Step: Build and Deploy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧱 Step-by-Step: Build and Deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-a-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Create a Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-build-the-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Build the image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-run-the-deploy-on-the-remote-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Run the deploy on the remote environment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -450,9 +490,7 @@
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -471,11 +509,53 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
+  <a href="#why-use-a-custom-image" class="md-nav__link">
     <span class="md-ellipsis">
-      Table of Contents
+      ✅ Why use a custom image?
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-build-and-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧱 Step-by-Step: Build and Deploy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧱 Step-by-Step: Build and Deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-a-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Create a Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-build-the-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Build the image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-run-the-deploy-on-the-remote-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Run the deploy on the remote environment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -492,26 +572,50 @@
               <article class="md-content__inner md-typeset">
                 
                   
-  
-
 
 
   
   
 
 
-<p><img alt="iko" src="images/logo.png" /></p>
-<h1 id="iko">ikō</h1>
-<p><em>Iko is a command-line tool for reliable generation and management of database
-schema migrations.</em></p>
-<h2 id="table-of-contents">Table of Contents</h2>
+<h1 id="deploying-migrations-to-remote-environments">🚀 Deploying Migrations to Remote Environments</h1>
+<p>Iko runs inside a container, so to deploy migrations to a remote environment
+(like staging or production), you’ll need to include your migration scripts
+inside a custom Docker image.</p>
+<p>This guide explains how to build and use that image.</p>
+<hr />
+<h2 id="why-use-a-custom-image">✅ Why use a custom image?</h2>
+<p>The standard Iko CLI uses <code>docker run</code> with a local <code>migrations/</code> directory mounted into the container. This works great locally, but in remote environments:</p>
 <ul>
-<li><a href="installation/">Installation</a></li>
-<li><a href="usage/">Usage</a></li>
-<li><a href="commands/">Commands</a></li>
-<li><a href="scripting/">Scripting</a></li>
-<li><a href="deploy/">Deploy</a></li>
+<li>There's no local <code>migrations/</code> directory to mount.</li>
+<li>There’s no Git repository cloned.</li>
+<li>You want repeatable, portable deploys — not manual file copying.</li>
 </ul>
+<p>By building a Docker image that <em>includes</em> your migrations, you ensure the container is fully self-contained and deployable anywhere.</p>
+<hr />
+<h2 id="step-by-step-build-and-deploy">🧱 Step-by-Step: Build and Deploy</h2>
+<h3 id="1-create-a-dockerfile">1. Create a Dockerfile</h3>
+<p>In the root of your project, add a <code>Dockerfile</code> like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">ghcr.io/explodinglabs/iko:0.1.0</span>
+<span class="k">COPY</span><span class="w"> </span>migrations<span class="w"> </span>/repo
+</code></pre></div>
+<p>This copies your migrations into the image at /repo, where Iko expects them.</p>
+<h3 id="2-build-the-image">2. Build the image</h3>
+<p>Give it a meaningful tag, e.g. for production:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ghcr.io/your-org/iko-with-migrations<span class="w"> </span>.
+</code></pre></div>
+<p>Then push it to your container registry:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>push<span class="w"> </span>ghcr.io/your-org/iko-with-migrations
+</code></pre></div>
+<h3 id="3-run-the-deploy-on-the-remote-environment">3. Run the deploy on the remote environment</h3>
+<p>On the target server or inside your CI/CD pipeline, run:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_USER</span><span class="o">=</span>youruser<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_PASS</span><span class="o">=</span>yourpass<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_HOST</span><span class="o">=</span>postgres<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-e<span class="w"> </span><span class="nv">PG_DB</span><span class="o">=</span>app<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>ghcr.io/your-org/iko-with-migrations<span class="w"> </span>deploy<span class="w"> </span>--verify
+</code></pre></div>
 
 
 
@@ -519,13 +623,8 @@ schema migrations.</em></p>
 
 
 
-  
-  
 
 
-
-
-  
 
 
 
@@ -543,26 +642,24 @@ schema migrations.</em></p>
   
     
       
-        
-      
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
-        
           
-          <a href="installation/" class="md-footer__link md-footer__link--next" aria-label="Next: Installation">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Installation
-              </div>
-            </div>
+          <a href="../scripting/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Scripting">
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Scripting
+              </div>
             </div>
           </a>
+        
         
       </nav>
     
@@ -591,10 +688,10 @@ schema migrations.</em></p>
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
     
   </body>
