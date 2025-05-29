@@ -22,7 +22,7 @@
     
     
       
-        <title>Commands - iko</title>
+        <title>Command Reference - iko</title>
       
     
     
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Commands
+              Command Reference
             
           </span>
         </div>
@@ -346,7 +346,7 @@
   
   
   <span class="md-ellipsis">
-    Commands
+    Command Reference
     
   </span>
   
@@ -359,7 +359,7 @@
   
   
   <span class="md-ellipsis">
-    Commands
+    Command Reference
     
   </span>
   
@@ -674,7 +674,7 @@
   
   
   <span class="md-ellipsis">
-    Scripting
+    Scripting Migrations
     
   </span>
   
@@ -696,7 +696,7 @@
   
   
   <span class="md-ellipsis">
-    Deploying
+    Deploying to Remote Environments
     
   </span>
   
@@ -1099,13 +1099,13 @@ FUNCTION</a>.</p>
 <h4>Example</h4>
 
 <p>To define a function named <code>square</code>:</p>
-<div class="highlight"><pre><span></span><code>create_function_as<span class="w"> </span>square<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<div class="highlight"><pre><span></span><code>create_function_as<span class="w"> </span>square<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
 <span class="s">create function square(number int) returns int as $$</span>
 <span class="s">begin</span>
 <span class="s">    return number * number;</span>
 <span class="s">end;</span>
 <span class="s">$$ language plpgsql;</span>
-<span class="s">EOF</span>
+<span class="s">SQL</span>
 </code></pre></div>
 <h2 id="grants">Grants</h2>
 <blockquote>
@@ -1211,13 +1211,13 @@ TABLE</a>.</p>
 <h4>Example</h4>
 
 <p>To create a table named <code>customer</code>:</p>
-<div class="highlight"><pre><span></span><code>create_table_as<span class="w"> </span>customer<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<div class="highlight"><pre><span></span><code>create_table_as<span class="w"> </span>customer<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
 <span class="s">create table customer (</span>
 <span class="s">  id bigint generated always as identity primary key,</span>
 <span class="s">  created_at timestamp not null default now(),</span>
 <span class="s">  name text not null</span>
 <span class="s">);</span>
-<span class="s">EOF</span>
+<span class="s">SQL</span>
 </code></pre></div>
 <h2 id="triggers">Triggers</h2>
 <blockquote>
@@ -1248,11 +1248,11 @@ in <code>customer</code>, calling <code>customer_updated</code>:</p>
 <h4>Example</h4>
 
 <p>Create a trigger <code>modify</code> on table <code>contact</code> calling <code>modify_record</code>:</p>
-<div class="highlight"><pre><span></span><code>create_trigger_as<span class="w"> </span>modify<span class="w"> </span>contact<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<div class="highlight"><pre><span></span><code>create_trigger_as<span class="w"> </span>modify<span class="w"> </span>contact<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
 <span class="s">create trigger modify</span>
 <span class="s">  after insert or update on contact</span>
 <span class="s">  for each row execute function modify_record();</span>
-<span class="s">EOF</span>
+<span class="s">SQL</span>
 </code></pre></div>
 
 
@@ -1300,13 +1300,13 @@ in <code>customer</code>, calling <code>customer_updated</code>:</p>
         
         
           
-          <a href="../scripting/" class="md-footer__link md-footer__link--next" aria-label="Next: Scripting">
+          <a href="../scripting/" class="md-footer__link md-footer__link--next" aria-label="Next: Scripting Migrations">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Scripting
+                Scripting Migrations
               </div>
             </div>
             <div class="md-footer__button md-icon">
