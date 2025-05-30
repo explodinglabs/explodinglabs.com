@@ -1087,7 +1087,7 @@ iko<span class="w"> </span>status
 </code></pre></div>
 <hr />
 <h2 id="ad-hoc-migrations">🧩 Ad-Hoc Migrations</h2>
-<h4 id="add"><code>add</code></h4>
+<h3 id="add">add</h3>
 <p>If your change doesn’t match one of the built-in commands, you can use <code>add</code> to
 create a named migration manually:</p>
 <div class="highlight"><pre><span></span><code>add<span class="w"> </span>create_customer_view
@@ -1099,7 +1099,7 @@ files yourself.</p>
 optional.</p>
 </blockquote>
 <p>More details: <a href="https://sqitch.org/docs/manual/sqitch-add/">sqitch-add docs</a></p>
-<h3 id="add_as"><code>add_as</code></h3>
+<h3 id="add_as">add_as</h3>
 <p>Create a custom migration with inline deploy SQL.</p>
 <p>This is useful in scripts when your change isn’t covered by a built-in command
 but you want to define the deploy step inline (instead of editing manually like
@@ -1121,7 +1121,7 @@ SQL
 </code></pre></div>
 <hr />
 <h2 id="comments">🗨️ Comments</h2>
-<h4 id="comment"><code>comment</code></h4>
+<h3 id="comment">comment</h3>
 <p>Add or update a comment on a Postgres object.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>comment<span class="w"> </span>&lt;object&gt;<span class="w"> </span>&lt;comment&gt;
@@ -1131,7 +1131,7 @@ SQL
 </code></pre></div>
 <hr />
 <h2 id="extensions">🧩 Extensions</h2>
-<h4 id="create_extension"><code>create_extension</code></h4>
+<h3 id="create_extension">create_extension</h3>
 <p>Install a Postgres extension.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_extension<span class="w"> </span>&lt;extension&gt;
@@ -1141,7 +1141,7 @@ SQL
 </code></pre></div>
 <hr />
 <h2 id="functions">🧠 Functions</h2>
-<h3 id="create_function"><code>create_function</code></h3>
+<h3 id="create_function">create_function</h3>
 <p>Create a function using your editor.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_function<span class="w"> </span>&lt;<span class="k">function</span>&gt;
@@ -1150,7 +1150,7 @@ SQL
 <div class="highlight"><pre><span></span><code>create_function<span class="w"> </span>create_user
 </code></pre></div>
 <hr />
-<h3 id="create_function_as"><code>create_function_as</code></h3>
+<h3 id="create_function_as">create_function_as</h3>
 <p>Define a function inline — useful in scripts.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_function_as<span class="w"> </span>&lt;<span class="k">function</span>&gt;<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
@@ -1168,7 +1168,7 @@ SQL
 </code></pre></div>
 <hr />
 <h2 id="grants">🔐 Grants</h2>
-<h3 id="grant_execute"><code>grant_execute</code></h3>
+<h3 id="grant_execute">grant_execute</h3>
 <p>Grant execute permission on a function.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_execute<span class="w"> </span>&lt;<span class="k">function</span>&gt;<span class="w"> </span>&lt;signature&gt;<span class="w"> </span>&lt;role&gt;
@@ -1177,7 +1177,7 @@ SQL
 <div class="highlight"><pre><span></span><code>grant_execute<span class="w"> </span>login<span class="w"> </span><span class="s1">&#39;(text,text)&#39;</span><span class="w"> </span>dbuser
 </code></pre></div>
 <hr />
-<h3 id="grant_schema_usage"><code>grant_schema_usage</code></h3>
+<h3 id="grant_schema_usage">grant_schema_usage</h3>
 <p>Grant usage on a schema.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_schema_usage<span class="w"> </span>&lt;schema&gt;<span class="w"> </span>&lt;role&gt;
@@ -1186,7 +1186,7 @@ SQL
 <div class="highlight"><pre><span></span><code>grant_schema_usage<span class="w"> </span>api<span class="w"> </span>dbuser
 </code></pre></div>
 <hr />
-<h3 id="grant_role_membership"><code>grant_role_membership</code></h3>
+<h3 id="grant_role_membership">grant_role_membership</h3>
 <p>Grant membership in a role.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_role_membership<span class="w"> </span>&lt;role_specification&gt;<span class="w"> </span>&lt;role&gt;
@@ -1195,7 +1195,7 @@ SQL
 <div class="highlight"><pre><span></span><code>grant_role_membership<span class="w"> </span>authenticator<span class="w"> </span>dbuser
 </code></pre></div>
 <hr />
-<h3 id="grant_table_privilege"><code>grant_table_privilege</code></h3>
+<h3 id="grant_table_privilege">grant_table_privilege</h3>
 <p>Grant privileges on a table.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_table_privilege<span class="w"> </span>&lt;type&gt;<span class="w"> </span>&lt;table&gt;<span class="w"> </span>&lt;role&gt;
@@ -1205,7 +1205,7 @@ SQL
 </code></pre></div>
 <hr />
 <h2 id="roles">👤 Roles</h2>
-<h3 id="create_role"><code>create_role</code></h3>
+<h3 id="create_role">create_role</h3>
 <p>Create a nologin role.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_role<span class="w"> </span>&lt;role&gt;
@@ -1214,7 +1214,7 @@ SQL
 <div class="highlight"><pre><span></span><code>create_role<span class="w"> </span>dbuser
 </code></pre></div>
 <hr />
-<h3 id="create_login_role"><code>create_login_role</code></h3>
+<h3 id="create_login_role">create_login_role</h3>
 <p>Create a login role with password.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_login_role<span class="w"> </span>&lt;role&gt;<span class="w"> </span>&lt;password&gt;
@@ -1232,7 +1232,7 @@ SQL
 </code></pre></div>
 <hr />
 <h2 id="tables">🧱 Tables</h2>
-<h3 id="create_table"><code>create_table</code></h3>
+<h3 id="create_table">create_table</h3>
 <p>Create a table using your editor.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_table<span class="w"> </span>&lt;table&gt;
@@ -1241,7 +1241,7 @@ SQL
 <div class="highlight"><pre><span></span><code>create_table<span class="w"> </span>customer
 </code></pre></div>
 <hr />
-<h3 id="create_table_as"><code>create_table_as</code></h3>
+<h3 id="create_table_as">create_table_as</h3>
 <p>Define a table inline — ideal for scripts.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_table_as<span class="w"> </span>&lt;table&gt;<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
@@ -1259,7 +1259,7 @@ SQL
 </code></pre></div>
 <hr />
 <h2 id="triggers">🔁 Triggers</h2>
-<h3 id="create_trigger"><code>create_trigger</code></h3>
+<h3 id="create_trigger">create_trigger</h3>
 <p>Create a trigger linked to a function.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_trigger<span class="w"> </span>&lt;trigger&gt;<span class="w"> </span>&lt;table&gt;<span class="w"> </span>&lt;<span class="k">function</span>&gt;
@@ -1271,7 +1271,7 @@ SQL
 <p>Note: Trigger names cannot be schema-qualified — they inherit the table's schema.</p>
 </blockquote>
 <hr />
-<h3 id="create_trigger_as"><code>create_trigger_as</code></h3>
+<h3 id="create_trigger_as">create_trigger_as</h3>
 <p>Define a trigger inline.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_trigger_as<span class="w"> </span>&lt;trigger&gt;<span class="w"> </span>&lt;table&gt;<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
