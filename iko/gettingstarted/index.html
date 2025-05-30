@@ -8,10 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/iko/usage/">
+        <link rel="canonical" href="https://explodinglabs.com/iko/gettingstarted/">
       
       
-        <link rel="prev" href="../installation/">
+        <link rel="prev" href="..">
       
       
         <link rel="next" href="../commands/">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Usage - iko</title>
+        <title>Getting Started - iko</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#usage" class="md-skip">
+        <a href="#getting-started" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Usage
+              Getting Started
             
           </span>
         </div>
@@ -285,28 +285,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Installation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -324,7 +302,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Getting Started
     
   </span>
   
@@ -337,7 +315,7 @@
   
   
   <span class="md-ellipsis">
-    Usage
+    Getting Started
     
   </span>
   
@@ -360,9 +338,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-initialise-a-project" class="md-nav__link">
+  <a href="#1-install-iko" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Initialise a project
+      1. Install Iko
     </span>
   </a>
   
@@ -375,29 +353,14 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Create a .env file">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#if-postgres-is-running-inside-docker" class="md-nav__link">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-initialise-a-project" class="md-nav__link">
     <span class="md-ellipsis">
-      If Postgres is running inside Docker:
+      3. Initialise a project
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-postgres-is-installed-directly-on-your-system" class="md-nav__link">
-    <span class="md-ellipsis">
-      If Postgres is installed directly on your system:
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -520,9 +483,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-initialise-a-project" class="md-nav__link">
+  <a href="#1-install-iko" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Initialise a project
+      1. Install Iko
     </span>
   </a>
   
@@ -535,29 +498,14 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Create a .env file">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#if-postgres-is-running-inside-docker" class="md-nav__link">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-initialise-a-project" class="md-nav__link">
     <span class="md-ellipsis">
-      If Postgres is running inside Docker:
+      3. Initialise a project
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-postgres-is-installed-directly-on-your-system" class="md-nav__link">
-    <span class="md-ellipsis">
-      If Postgres is installed directly on your system:
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -598,30 +546,37 @@
   
 
 
-<h1 id="usage">🛠️ Usage</h1>
+<h1 id="getting-started">🛠️ Getting Started</h1>
+<p>This guide walks you through installing Iko and creating your first migration.</p>
+<p>📁 It's recommended to start in a new directory or fresh Git repository:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>myapp<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>myapp
+git<span class="w"> </span>init
+</code></pre></div>
+<p>This keeps your migration files organized and version-controlled.</p>
+<h2 id="1-install-iko">1. Install Iko</h2>
 <blockquote>
-<p>🧪 This covers <strong>local development</strong>.</p>
-<p>For production or CI/CD usage, see <a href="../deploying/">Deploying to Remote
-Environments</a>.</p>
+<p>⚠️ <strong>Iko runs inside a container,</strong> so you'll need <a href="https://docs.docker.com/get-docker/">Docker
+installed</a>.</p>
 </blockquote>
-<h2 id="1-initialise-a-project">1. Initialise a project</h2>
-<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>myapp
+<p>Install the Iko CLI (for development use):</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://explodinglabs.com/iko/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
 </code></pre></div>
-<p>This creates a new Sqitch project in a <code>migrations</code> directory.</p>
+<p>Verify it's working:</p>
+<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>version
+</code></pre></div>
 <h2 id="2-create-a-env-file">2. Create a .env file</h2>
-<p>Create a <code>.env</code> file with the appropriate settings based on your Postgres setup:</p>
-<h3 id="if-postgres-is-running-inside-docker">If Postgres is running inside Docker:</h3>
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;SQITCH_TARGET=db:pg://postgres:postgres@&lt;your_service_name&gt;/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;DOCKER_NETWORK=&lt;your_docker_network&gt;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.env
+<p>If Postgres is running inside Docker:</p>
+<div class="highlight"><pre><span></span><code>SQITCH_TARGET=db:pg://postgres:postgres@postgres/app
+DOCKER_NETWORK=your_docker_network
 </code></pre></div>
-<h3 id="if-postgres-is-installed-directly-on-your-system">If Postgres is installed directly on your system:</h3>
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;SQITCH_TARGET=db:pg://postgres:postgres@localhost/app&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+<p>If Postgres is installed on your system (e.g. Linux):</p>
+<div class="highlight"><pre><span></span><code>SQITCH_TARGET=db:pg://postgres:postgres@localhost/app
 </code></pre></div>
 <p>On Mac or WSL2, use <code>host.docker.internal</code> instead of <code>localhost</code>.</p>
-<blockquote>
-<p>⚠️ Don't set <code>SQITCH_TARGET</code> before running <code>iko init</code>, or you'll get an error
-like "Missing required arguments: name".</p>
-</blockquote>
+<h2 id="3-initialise-a-project">3. Initialise a project</h2>
+<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>myapp
+</code></pre></div>
+<p>This creates a new Sqitch project in a <code>migrations/</code> directory.</p>
 <h2 id="3-create-a-migration">3. Create a migration</h2>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>create_schema<span class="w"> </span>api
 </code></pre></div>
@@ -638,7 +593,6 @@ create schema api;
 <li>The deploy script was output for your review.</li>
 </ul>
 <h2 id="4-deploy-it">4. Deploy it</h2>
-<p>Ensure your Postgres server is running, then:</p>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>deploy
 </code></pre></div>
 
@@ -670,7 +624,7 @@ create schema api;
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation">
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -680,7 +634,7 @@ create schema api;
                 Previous
               </span>
               <div class="md-ellipsis">
-                Installation
+                Home
               </div>
             </div>
           </a>

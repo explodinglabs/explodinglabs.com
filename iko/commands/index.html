@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://explodinglabs.com/iko/commands/">
       
       
-        <link rel="prev" href="../usage/">
+        <link rel="prev" href="../gettingstarted/">
       
       
         <link rel="next" href="../scripting/">
@@ -288,34 +288,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../gettingstarted/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Installation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Usage
+    Getting Started
     
   </span>
   
@@ -1025,17 +1003,20 @@
 
 
 <h1 id="commands">Commands</h1>
-<p>Iko provides a command-line interface for generating and managing Sqitch-based
-migrations.</p>
-<p>This page is a reference for all available commands.</p>
+<p>This page documents all available commands provided by Iko.</p>
+<p>Iko commands are used to define database migrations. They can be run
+interactively via the command line, or embedded inside reusable Bash scripts.</p>
+<p>Most commands generate a deploy/revert/verify triple of Sqitch migrations using
+built-in templates. For commands that aren't covered, you can always fall back
+to ad-hoc <code>add</code> migrations.</p>
+<p>For an overview of how scripting works, see <a href="../scripting/">Scripting
+Migrations</a>.</p>
 <h2 id="sqitch-commands">Sqitch commands</h2>
 <p>Iko aliases all of <a href="https://sqitch.org/docs/manual/">Sqitch's commands</a>.</p>
 <p>For example, <code>sqitch check</code> becomes <code>iko check</code>.</p>
 <p>You can also access <code>sqitch</code> directly, for example:</p>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>sqitch<span class="w"> </span>--version
 </code></pre></div>
-<p>When scripting, the <code>iko</code> part is left out. For example, <code>iko create_schema api</code> becomes simply <code>create_schema api</code>. In this document the <code>iko</code> command is
-left out.</p>
 <h2 id="ad-hoc-migrations">Ad-hoc migrations</h2>
 <blockquote>
 <p>📖 Refer to <a href="https://sqitch.org/docs/manual/sqitch-add/">sqitch-add</a>.</p>
@@ -1283,7 +1264,7 @@ in <code>customer</code>, calling <code>customer_updated</code>:</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../usage/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Usage">
+          <a href="../gettingstarted/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1293,7 +1274,7 @@ in <code>customer</code>, calling <code>customer_updated</code>:</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Usage
+                Getting Started
               </div>
             </div>
           </a>

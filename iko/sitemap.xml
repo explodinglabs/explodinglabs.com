@@ -2,26 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://explodinglabs.com/iko/</loc>
-         <lastmod>2025-05-28</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://explodinglabs.com/iko/commands/</loc>
-         <lastmod>2025-05-28</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://explodinglabs.com/iko/deploying/</loc>
-         <lastmod>2025-05-28</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
-         <loc>https://explodinglabs.com/iko/installation/</loc>
-         <lastmod>2025-05-28</lastmod>
+         <loc>https://explodinglabs.com/iko/gettingstarted/</loc>
+         <lastmod>2025-05-30</lastmod>
     </url>
     <url>
          <loc>https://explodinglabs.com/iko/scripting/</loc>
-         <lastmod>2025-05-28</lastmod>
-    </url>
-    <url>
-         <loc>https://explodinglabs.com/iko/usage/</loc>
-         <lastmod>2025-05-28</lastmod>
+         <lastmod>2025-05-30</lastmod>
     </url>
 </urlset>
