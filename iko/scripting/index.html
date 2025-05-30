@@ -310,6 +310,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../running/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Running Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../commands/" class="md-nav__link">
         
   
@@ -341,6 +363,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Scripting Migrations
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -352,6 +387,61 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-scripts-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Where Scripts Go
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Example Script
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Tips
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧭 What's Next?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -369,7 +459,7 @@
   
   
   <span class="md-ellipsis">
-    Deploying to Remote Environments
+    Deploying Migrations to Remote Environments
     
   </span>
   
@@ -399,6 +489,50 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-scripts-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Where Scripts Go
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Example Script
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Tips
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧭 What's Next?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -417,37 +551,53 @@
 
 
 <h1 id="scripting-migrations">✨ Scripting Migrations</h1>
-<p>Write reusable Bash scripts to define database changes:</p>
-<p><strong>scripts/auth.sh</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Create an auth schema</span>
+<p>Iko’s scripting model lets you define migrations in plain Bash — using the same
+DSL commands you’d use in CLI or shell mode.</p>
+<hr />
+<h2 id="where-scripts-go">📁 Where Scripts Go</h2>
+<p>Place your scripts in a <code>scripts/</code> directory in your project:</p>
+<div class="highlight"><pre><span></span><code>myapp/
+├── migrations/
+└── scripts/
+    ├── auth.sh
+    └── roles.sh
+</code></pre></div>
+<hr />
+<h2 id="example-script">🧪 Example Script</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># scripts/auth.sh</span>
+
 create_schema<span class="w"> </span>auth
 
-<span class="c1"># Create a user table</span>
 create_table_as<span class="w"> </span>auth.user<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
 <span class="s">create table auth.user (</span>
-<span class="s">  username text primary key check (length(username) &gt;= 3),</span>
-<span class="s">  password text not null check (length(password) &lt; 512),</span>
-<span class="s">  role name not null check (length(role) &lt; 512)</span>
+<span class="s">  username text primary key,</span>
+<span class="s">  password text not null,</span>
+<span class="s">  role name not null</span>
 <span class="s">);</span>
 <span class="s">SQL</span>
 
-<span class="c1"># Add a function to hash passwords</span>
 create_function_as<span class="w"> </span>auth.encrypt_pass<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
 <span class="s">create function auth.encrypt_pass () returns trigger language plpgsql as $$</span>
 <span class="s">begin</span>
+<span class="s">  -- hash password before insert/update</span>
 <span class="s">  if tg_op = &#39;INSERT&#39; or new.password &lt;&gt; old.password then</span>
 <span class="s">    new.password = crypt(new.password, gen_salt(&#39;bf&#39;));</span>
 <span class="s">  end if;</span>
 <span class="s">  return new;</span>
 <span class="s">end; $$</span>
 <span class="s">SQL</span>
-
-<span class="c1"># Trigger it on insert/update</span>
-create_trigger<span class="w"> </span>encrypt_pass<span class="w"> </span>auth.user<span class="w"> </span>auth.encrypt_pass
 </code></pre></div>
-<p>Run the script to generate migrations:</p>
+<p>Run with:</p>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>bash<span class="w"> </span>auth.sh
 </code></pre></div>
+<h2 id="tips">🧠 Tips</h2>
+<ul>
+<li>Use <code>&lt;&lt;'SQL'</code> to safely embed SQL blocks</li>
+<li>Break large scripts into smaller ones per concern (e.g. auth.sh, roles.sh, audit.sh)</li>
+<li>Scripts are regular Bash: loops, conditionals, and functions all work</li>
+</ul>
+<h2 id="whats-next">🧭 What's Next?</h2>
+<p>👉 <a href="../deploying/">See how to deploy migrations to remote environments</a></p>
 
 
 
@@ -494,13 +644,13 @@ create_trigger<span class="w"> </span>encrypt_pass<span class="w"> </span>auth.u
         
         
           
-          <a href="../deploying/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploying to Remote Environments">
+          <a href="../deploying/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploying Migrations to Remote Environments">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Deploying to Remote Environments
+                Deploying Migrations to Remote Environments
               </div>
             </div>
             <div class="md-footer__button md-icon">

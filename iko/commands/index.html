@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://explodinglabs.com/iko/commands/">
       
       
-        <link rel="prev" href="../gettingstarted/">
+        <link rel="prev" href="../running/">
       
       
         <link rel="next" href="../scripting/">
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#commands" class="md-skip">
+        <a href="#command-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -307,6 +307,28 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../running/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Running Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -362,7 +384,7 @@
         <li class="md-nav__item">
   <a href="#sqitch-commands" class="md-nav__link">
     <span class="md-ellipsis">
-      Sqitch commands
+      🔁 Sqitch Commands
     </span>
   </a>
   
@@ -371,20 +393,44 @@
         <li class="md-nav__item">
   <a href="#ad-hoc-migrations" class="md-nav__link">
     <span class="md-ellipsis">
-      Ad-hoc migrations
+      🧩 Ad-Hoc Migrations
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="🧩 Ad-Hoc Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    <span class="md-ellipsis">
+      add
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_as" class="md-nav__link">
+    <span class="md-ellipsis">
+      add_as
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#comments" class="md-nav__link">
     <span class="md-ellipsis">
-      Comments
+      🗨️ Comments
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Comments">
+    <nav class="md-nav" aria-label="🗨️ Comments">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -404,11 +450,11 @@
         <li class="md-nav__item">
   <a href="#extensions" class="md-nav__link">
     <span class="md-ellipsis">
-      Extensions
+      🧩 Extensions
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Extensions">
+    <nav class="md-nav" aria-label="🧩 Extensions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -428,11 +474,11 @@
         <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Functions
+      🧠 Functions
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Functions">
+    <nav class="md-nav" aria-label="🧠 Functions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -461,11 +507,11 @@
         <li class="md-nav__item">
   <a href="#grants" class="md-nav__link">
     <span class="md-ellipsis">
-      Grants
+      🔐 Grants
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Grants">
+    <nav class="md-nav" aria-label="🔐 Grants">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -512,11 +558,11 @@
         <li class="md-nav__item">
   <a href="#roles" class="md-nav__link">
     <span class="md-ellipsis">
-      Roles
+      👤 Roles
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Roles">
+    <nav class="md-nav" aria-label="👤 Roles">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -545,35 +591,20 @@
         <li class="md-nav__item">
   <a href="#schemas" class="md-nav__link">
     <span class="md-ellipsis">
-      Schemas
+      🏗️ Schemas
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Schemas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create_schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      create_schema
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#tables" class="md-nav__link">
     <span class="md-ellipsis">
-      Tables
+      🧱 Tables
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Tables">
+    <nav class="md-nav" aria-label="🧱 Tables">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -602,11 +633,11 @@
         <li class="md-nav__item">
   <a href="#triggers" class="md-nav__link">
     <span class="md-ellipsis">
-      Triggers
+      🔁 Triggers
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Triggers">
+    <nav class="md-nav" aria-label="🔁 Triggers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -629,6 +660,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏭️ Next Steps
+    </span>
+  </a>
   
 </li>
       
@@ -674,7 +714,7 @@
   
   
   <span class="md-ellipsis">
-    Deploying to Remote Environments
+    Deploying Migrations to Remote Environments
     
   </span>
   
@@ -713,7 +753,7 @@
         <li class="md-nav__item">
   <a href="#sqitch-commands" class="md-nav__link">
     <span class="md-ellipsis">
-      Sqitch commands
+      🔁 Sqitch Commands
     </span>
   </a>
   
@@ -722,20 +762,44 @@
         <li class="md-nav__item">
   <a href="#ad-hoc-migrations" class="md-nav__link">
     <span class="md-ellipsis">
-      Ad-hoc migrations
+      🧩 Ad-Hoc Migrations
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="🧩 Ad-Hoc Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    <span class="md-ellipsis">
+      add
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_as" class="md-nav__link">
+    <span class="md-ellipsis">
+      add_as
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#comments" class="md-nav__link">
     <span class="md-ellipsis">
-      Comments
+      🗨️ Comments
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Comments">
+    <nav class="md-nav" aria-label="🗨️ Comments">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -755,11 +819,11 @@
         <li class="md-nav__item">
   <a href="#extensions" class="md-nav__link">
     <span class="md-ellipsis">
-      Extensions
+      🧩 Extensions
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Extensions">
+    <nav class="md-nav" aria-label="🧩 Extensions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -779,11 +843,11 @@
         <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Functions
+      🧠 Functions
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Functions">
+    <nav class="md-nav" aria-label="🧠 Functions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -812,11 +876,11 @@
         <li class="md-nav__item">
   <a href="#grants" class="md-nav__link">
     <span class="md-ellipsis">
-      Grants
+      🔐 Grants
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Grants">
+    <nav class="md-nav" aria-label="🔐 Grants">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -863,11 +927,11 @@
         <li class="md-nav__item">
   <a href="#roles" class="md-nav__link">
     <span class="md-ellipsis">
-      Roles
+      👤 Roles
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Roles">
+    <nav class="md-nav" aria-label="👤 Roles">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -896,35 +960,20 @@
         <li class="md-nav__item">
   <a href="#schemas" class="md-nav__link">
     <span class="md-ellipsis">
-      Schemas
+      🏗️ Schemas
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Schemas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create_schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      create_schema
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#tables" class="md-nav__link">
     <span class="md-ellipsis">
-      Tables
+      🧱 Tables
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Tables">
+    <nav class="md-nav" aria-label="🧱 Tables">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -953,11 +1002,11 @@
         <li class="md-nav__item">
   <a href="#triggers" class="md-nav__link">
     <span class="md-ellipsis">
-      Triggers
+      🔁 Triggers
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Triggers">
+    <nav class="md-nav" aria-label="🔁 Triggers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -983,6 +1032,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⏭️ Next Steps
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1002,239 +1060,235 @@
   
 
 
-<h1 id="commands">Commands</h1>
-<p>This page documents all available commands provided by Iko.</p>
-<p>Iko commands are used to define database migrations. They can be run
-interactively via the command line, or embedded inside reusable Bash scripts.</p>
-<p>Most commands generate a deploy/revert/verify triple of Sqitch migrations using
-built-in templates. For commands that aren't covered, you can always fall back
-to ad-hoc <code>add</code> migrations.</p>
-<p>For an overview of how scripting works, see <a href="../scripting/">Scripting
-Migrations</a>.</p>
-<h2 id="sqitch-commands">Sqitch commands</h2>
-<p>Iko aliases all of <a href="https://sqitch.org/docs/manual/">Sqitch's commands</a>.</p>
-<p>For example, <code>sqitch check</code> becomes <code>iko check</code>.</p>
-<p>You can also access <code>sqitch</code> directly, for example:</p>
+<h1 id="command-reference">Command Reference</h1>
+<p>This page lists all the commands provided by Iko.</p>
+<p>Iko provides a developer-friendly DSL for defining database migrations. These
+commands generate <code>deploy</code>, <code>revert</code>, and <code>verify</code> scripts using built-in
+templates and follow a consistent pattern.</p>
+<p>You can run commands:</p>
+<ul>
+<li>Directly from the command line</li>
+<li>Inside an interactive Iko shell</li>
+<li>From reusable Bash scripts</li>
+</ul>
+<p>👉 For a breakdown of these options, see <a href="../running/">Running Commands</a>.<br />
+👉 For tips on writing migration scripts, see <a href="../scripting/">Scripting</a>.</p>
+<hr />
+<h2 id="sqitch-commands">🔁 Sqitch Commands</h2>
+<p>Iko wraps and aliases all core <a href="https://sqitch.org/docs/manual/">Sqitch
+commands</a>.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>deploy
+iko<span class="w"> </span>revert
+iko<span class="w"> </span>status
+</code></pre></div>
+<p>You can also access Sqitch directly:</p>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>sqitch<span class="w"> </span>--version
 </code></pre></div>
-<h2 id="ad-hoc-migrations">Ad-hoc migrations</h2>
-<blockquote>
-<p>📖 Refer to <a href="https://sqitch.org/docs/manual/sqitch-add/">sqitch-add</a>.</p>
-</blockquote>
-<p>If your change is not covered by the below commands, use <code>add</code> to crate an
-ad-hoc migration, for example:</p>
+<hr />
+<h2 id="ad-hoc-migrations">🧩 Ad-Hoc Migrations</h2>
+<h4 id="add"><code>add</code></h4>
+<p>If your change doesn’t match one of the built-in commands, you can use <code>add</code> to
+create a named migration manually:</p>
 <div class="highlight"><pre><span></span><code>add<span class="w"> </span>create_customer_view
 </code></pre></div>
-<p>You'll be required to set a note, and then write the deploy, verify and revert
-scripts yourself.</p>
-<h2 id="comments">Comments</h2>
+<p>You’ll be prompted to enter a note, and then edit the deploy/revert/verify SQL
+files yourself.</p>
 <blockquote>
-<p>📖 Refer to Postgres
-<a href="https://www.postgresql.org/docs/current/sql-comment.html">COMMENT</a>.</p>
+<p>Only the deploy script is required. The verify and revert scripts are
+optional.</p>
 </blockquote>
-<h3 id="comment">comment</h3>
-<p>Define or change the comment of an object.</p>
+<p>More details: <a href="https://sqitch.org/docs/manual/sqitch-add/">sqitch-add docs</a></p>
+<h3 id="add_as"><code>add_as</code></h3>
+<p>Create a custom migration with inline deploy SQL.</p>
+<p>This is useful in scripts when your change isn’t covered by a built-in command
+but you want to define the deploy step inline (instead of editing manually like
+with <code>add</code>).</p>
+<blockquote>
+<p>⚠️ <code>add_as</code> creates empty verify and revert scripts. So the change won't be
+verified or reverted (unless you write these manually later).</p>
+</blockquote>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre><span></span><code>add_as &lt;change&gt; &lt;&lt;&#39;SQL&#39;
+&lt;sql&gt;
+SQL
+</code></pre></div>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code>add_as create_customer_view &lt;&lt;&#39;SQL&#39;
+create view customer_view as
+select id, name from customer;
+SQL
+</code></pre></div>
+<hr />
+<h2 id="comments">🗨️ Comments</h2>
+<h4 id="comment"><code>comment</code></h4>
+<p>Add or update a comment on a Postgres object.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>comment<span class="w"> </span>&lt;object&gt;<span class="w"> </span>&lt;comment&gt;
 </code></pre></div>
-<p>The last argument is taken as the comment; everything before that is considered
-the object.</p>
-<h4>Example</h4>
-
-<p>To set a comment on the <code>api</code> schema:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>comment<span class="w"> </span>schema<span class="w"> </span>api<span class="w"> </span><span class="s1">&#39;Schema for the API endpoints&#39;</span>
 </code></pre></div>
-<h2 id="extensions">Extensions</h2>
-<blockquote>
-<p>📖 Refer to Postgres <a href="https://www.postgresql.org/docs/current/sql-comment.html">CREATE
-EXTENSION</a>.</p>
-</blockquote>
-<h3 id="create_extension">create_extension</h3>
-<p>Install an extension.</p>
+<hr />
+<h2 id="extensions">🧩 Extensions</h2>
+<h4 id="create_extension"><code>create_extension</code></h4>
+<p>Install a Postgres extension.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_extension<span class="w"> </span>&lt;extension&gt;
 </code></pre></div>
-<h4>Example</h4>
-
-<p>To create an extension named <code>pgcrypto</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_extension<span class="w"> </span>pgcrypto
 </code></pre></div>
-<h2 id="functions">Functions</h2>
-<blockquote>
-<p>📖 Refer to Postgres <a href="https://www.postgresql.org/docs/current/sql-createfunction.html">CREATE
-FUNCTION</a>.</p>
-</blockquote>
-<h3 id="create_function">create_function</h3>
-<p>Define a new function. Use with <code>--edit</code>.</p>
+<hr />
+<h2 id="functions">🧠 Functions</h2>
+<h3 id="create_function"><code>create_function</code></h3>
+<p>Create a function using your editor.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_function<span class="w"> </span>&lt;<span class="k">function</span>&gt;
 </code></pre></div>
-<p><code>&lt;function&gt;</code> can be schema-qualified.</p>
-<h4>Example</h4>
-
-<p>To create a function named <code>create_user</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_function<span class="w"> </span>create_user
 </code></pre></div>
-<h3 id="create_function_as">create_function_as</h3>
-<p>Define a new function inline. Useful in scripts.</p>
-<div class="highlight"><pre><span></span><code>create_function_as<span class="w"> </span>&lt;<span class="k">function</span>&gt;<span class="w"> </span>&lt;sql&gt;
+<hr />
+<h3 id="create_function_as"><code>create_function_as</code></h3>
+<p>Define a function inline — useful in scripts.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre><span></span><code>create_function_as<span class="w"> </span>&lt;<span class="k">function</span>&gt;<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
+<span class="s">&lt;sql&gt;</span>
+<span class="s">SQL</span>
 </code></pre></div>
-<p><code>&lt;function&gt;</code> can be schema-qualified.</p>
-<h4>Example</h4>
-
-<p>To define a function named <code>square</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_function_as<span class="w"> </span>square<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
-<span class="s">create function square(number int) returns int as $$</span>
+<span class="s">create function square(n int) returns int as $$</span>
 <span class="s">begin</span>
-<span class="s">    return number * number;</span>
+<span class="s">  return n * n;</span>
 <span class="s">end;</span>
 <span class="s">$$ language plpgsql;</span>
 <span class="s">SQL</span>
 </code></pre></div>
-<h2 id="grants">Grants</h2>
-<blockquote>
-<p>📖 Refer to Postgres
-<a href="https://www.postgresql.org/docs/current/sql-grant.html">GRANT</a>.</p>
-</blockquote>
-<h3 id="grant_execute">grant_execute</h3>
-<p>Grants execute permission on a function to a role.</p>
+<hr />
+<h2 id="grants">🔐 Grants</h2>
+<h3 id="grant_execute"><code>grant_execute</code></h3>
+<p>Grant execute permission on a function.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_execute<span class="w"> </span>&lt;<span class="k">function</span>&gt;<span class="w"> </span>&lt;signature&gt;<span class="w"> </span>&lt;role&gt;
 </code></pre></div>
-<p><code>&lt;function&gt;</code> can be schema-qualified.</p>
-<h4>Example</h4>
-
-<p>To grant execute permission on <code>login</code> to <code>dbuser</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_execute<span class="w"> </span>login<span class="w"> </span><span class="s1">&#39;(text,text)&#39;</span><span class="w"> </span>dbuser
 </code></pre></div>
-<h3 id="grant_schema_usage">grant_schema_usage</h3>
-<p>Grant schema usage to a role.</p>
+<hr />
+<h3 id="grant_schema_usage"><code>grant_schema_usage</code></h3>
+<p>Grant usage on a schema.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_schema_usage<span class="w"> </span>&lt;schema&gt;<span class="w"> </span>&lt;role&gt;
 </code></pre></div>
-<h4>Example</h4>
-
-<p>To grant usage of the <code>api</code> schema to <code>dbuser</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_schema_usage<span class="w"> </span>api<span class="w"> </span>dbuser
 </code></pre></div>
-<h3 id="grant_role_membership">grant_role_membership</h3>
+<hr />
+<h3 id="grant_role_membership"><code>grant_role_membership</code></h3>
 <p>Grant membership in a role.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_role_membership<span class="w"> </span>&lt;role_specification&gt;<span class="w"> </span>&lt;role&gt;
 </code></pre></div>
-<h4>Example</h4>
-
-<p>To grant membership in <code>authenticator</code> to <code>dbuser</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_role_membership<span class="w"> </span>authenticator<span class="w"> </span>dbuser
 </code></pre></div>
-<h3 id="grant_table_privilege">grant_table_privilege</h3>
+<hr />
+<h3 id="grant_table_privilege"><code>grant_table_privilege</code></h3>
 <p>Grant privileges on a table.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>grant_table_privilege<span class="w"> </span>&lt;type&gt;<span class="w"> </span>&lt;table&gt;<span class="w"> </span>&lt;role&gt;
 </code></pre></div>
-<p><code>&lt;table&gt;</code> can be schema-qualified.</p>
-<h4>Example</h4>
-
-<p>To allow an <code>dbuser</code> to insert into the <code>asset</code> table:</p>
-<div class="highlight"><pre><span></span><code>grant_privilege<span class="w"> </span>insert<span class="w"> </span>asset<span class="w"> </span>dbuser
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code>grant_table_privilege<span class="w"> </span>insert<span class="w"> </span>asset<span class="w"> </span>dbuser
 </code></pre></div>
-<h2 id="roles">Roles</h2>
-<blockquote>
-<p>📖 Refer to Postgres <a href="https://www.postgresql.org/docs/current/sql-createrole.html">CREATE
-ROLE</a>.</p>
-</blockquote>
-<h3 id="create_role">create_role</h3>
-<p>Creates a <code>nologin</code> role.</p>
+<hr />
+<h2 id="roles">👤 Roles</h2>
+<h3 id="create_role"><code>create_role</code></h3>
+<p>Create a nologin role.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_role<span class="w"> </span>&lt;role&gt;
 </code></pre></div>
-<h4>Example</h4>
-
-<p>To create a <code>dbuser</code> role:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_role<span class="w"> </span>dbuser
 </code></pre></div>
-<h3 id="create_login_role">create_login_role</h3>
-<p>Creates a login role with a password.</p>
+<hr />
+<h3 id="create_login_role"><code>create_login_role</code></h3>
+<p>Create a login role with password.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_login_role<span class="w"> </span>&lt;role&gt;<span class="w"> </span>&lt;password&gt;
 </code></pre></div>
-<h4>Example</h4>
-
-<p>To create a <code>dbuser</code> role with password, <code>securepass123</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_login_role<span class="w"> </span>dbuser<span class="w"> </span><span class="s1">&#39;securepass123&#39;</span>
 </code></pre></div>
-<h2 id="schemas">Schemas</h2>
-<blockquote>
-<p>📖 Refer to Postgres <a href="https://www.postgresql.org/docs/current/sql-createschema.html">CREATE
-SCHEMA</a>.</p>
-</blockquote>
-<h3 id="create_schema">create_schema</h3>
-<p>Enter a new schema into the database.</p>
+<hr />
+<h2 id="schemas">🏗️ Schemas</h2>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_schema<span class="w"> </span>&lt;schema&gt;
 </code></pre></div>
-<h4>Example</h4>
-
-<p>To create a schema named <code>api</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_schema<span class="w"> </span>api
 </code></pre></div>
-<h2 id="tables">Tables</h2>
-<blockquote>
-<p>📖 Refer to Postgres <a href="https://www.postgresql.org/docs/current/sql-createtable.html">CREATE
-TABLE</a>.</p>
-</blockquote>
-<h3 id="create_table">create_table</h3>
-<p>Generates a migration to create a table. Use with <code>--edit</code>.</p>
+<hr />
+<h2 id="tables">🧱 Tables</h2>
+<h3 id="create_table"><code>create_table</code></h3>
+<p>Create a table using your editor.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_table<span class="w"> </span>&lt;table&gt;
 </code></pre></div>
-<p><code>&lt;table&gt;</code> can be schema-qualified.</p>
-<h4>Example</h4>
-
-<p>To create a table named <code>customer</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_table<span class="w"> </span>customer
 </code></pre></div>
-<p>The editor is launched for you to edit the function.</p>
-<h3 id="create_table_as">create_table_as</h3>
-<p>Create a new table in the database, inline. Useful in scripts.</p>
-<div class="highlight"><pre><span></span><code>create_table_as<span class="w"> </span>&lt;table&gt;<span class="w"> </span>&lt;sql&gt;
+<hr />
+<h3 id="create_table_as"><code>create_table_as</code></h3>
+<p>Define a table inline — ideal for scripts.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre><span></span><code>create_table_as<span class="w"> </span>&lt;table&gt;<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
+<span class="s">&lt;sql&gt;</span>
+<span class="s">SQL</span>
 </code></pre></div>
-<p><code>&lt;table&gt;</code> can be schema-qualified.</p>
-<h4>Example</h4>
-
-<p>To create a table named <code>customer</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_table_as<span class="w"> </span>customer<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
 <span class="s">create table customer (</span>
 <span class="s">  id bigint generated always as identity primary key,</span>
-<span class="s">  created_at timestamp not null default now(),</span>
-<span class="s">  name text not null</span>
+<span class="s">  name text not null,</span>
+<span class="s">  created_at timestamp not null default now()</span>
 <span class="s">);</span>
 <span class="s">SQL</span>
 </code></pre></div>
-<h2 id="triggers">Triggers</h2>
-<blockquote>
-<p>📖 Refer to Postgres <a href="https://www.postgresql.org/docs/current/sql-createtrigger.html">CREATE
-TRIGGER</a>.</p>
-</blockquote>
-<h3 id="create_trigger">create_trigger</h3>
-<p>Create a trigger on a table.</p>
+<hr />
+<h2 id="triggers">🔁 Triggers</h2>
+<h3 id="create_trigger"><code>create_trigger</code></h3>
+<p>Create a trigger linked to a function.</p>
+<p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>create_trigger<span class="w"> </span>&lt;trigger&gt;<span class="w"> </span>&lt;table&gt;<span class="w"> </span>&lt;<span class="k">function</span>&gt;
 </code></pre></div>
-<p><code>&lt;table&gt;</code> and <code>&lt;function&gt;</code> can be schema-qualified.</p>
-<p>Note: Don't schema-qualify the <code>&lt;trigger&gt;</code>. From the Postgres docs:</p>
-<blockquote>
-<p>The name cannot be schema-qualified — the trigger inherits the schema of its
-table.</p>
-</blockquote>
-<h4>Example</h4>
-
-<p>To create a trigger named <code>customer_updated</code> that fires before updating a row
-in <code>customer</code>, calling <code>customer_updated</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_trigger<span class="w"> </span>customer_updated<span class="w"> </span>customer<span class="w"> </span>customer_updated
 </code></pre></div>
-<h3 id="create_trigger_as">create_trigger_as</h3>
-<p>Create a trigger on a table, inline.</p>
-<div class="highlight"><pre><span></span><code>create_trigger_as<span class="w"> </span>&lt;trigger&gt;<span class="w"> </span>&lt;table&gt;<span class="w"> </span>&lt;sql&gt;
+<blockquote>
+<p>Note: Trigger names cannot be schema-qualified — they inherit the table's schema.</p>
+</blockquote>
+<hr />
+<h3 id="create_trigger_as"><code>create_trigger_as</code></h3>
+<p>Define a trigger inline.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre><span></span><code>create_trigger_as<span class="w"> </span>&lt;trigger&gt;<span class="w"> </span>&lt;table&gt;<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
+<span class="s">&lt;sql&gt;</span>
+<span class="s">SQL</span>
 </code></pre></div>
-<p><code>&lt;table&gt;</code> can be schema-qualified.</p>
-<h4>Example</h4>
-
-<p>Create a trigger <code>modify</code> on table <code>contact</code> calling <code>modify_record</code>:</p>
+<p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code>create_trigger_as<span class="w"> </span>modify<span class="w"> </span>contact<span class="w"> </span><span class="s">&lt;&lt;&#39;SQL&#39;</span>
 <span class="s">create trigger modify</span>
 <span class="s">  after insert or update on contact</span>
 <span class="s">  for each row execute function modify_record();</span>
 <span class="s">SQL</span>
 </code></pre></div>
+<hr />
+<h2 id="next-steps">⏭️ Next Steps</h2>
+<p>👉 Learn the <a href="../running/">different ways to run commands</a><br />
+👉 Or go deeper into <a href="../scripting/">writing reusable scripts</a></p>
 
 
 
@@ -1264,7 +1318,7 @@ in <code>customer</code>, calling <code>customer_updated</code>:</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../gettingstarted/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started">
+          <a href="../running/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Running Commands">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1274,7 +1328,7 @@ in <code>customer</code>, calling <code>customer_updated</code>:</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Getting Started
+                Running Commands
               </div>
             </div>
           </a>
