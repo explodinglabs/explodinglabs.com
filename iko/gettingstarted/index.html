@@ -613,6 +613,13 @@ DOCKER_NETWORK=your_docker_network
 <div class="highlight"><pre><span></span><code>SQITCH_TARGET=db:pg://postgres:postgres@localhost/app
 </code></pre></div>
 <p>On Mac or WSL2, use <code>host.docker.internal</code> instead of <code>localhost</code>.</p>
+<p>Verify your connection:</p>
+<div class="highlight"><pre><span></span><code>iko<span class="w"> </span>check
+</code></pre></div>
+<p>You should get:</p>
+<div class="highlight"><pre><span></span><code>No registry found in db:pg://postgres@postgres/app. Have you ever deployed?
+</code></pre></div>
+<p>This means your connection is working.</p>
 <h2 id="3-initialise-a-project">3. Initialise a project</h2>
 <div class="highlight"><pre><span></span><code>iko<span class="w"> </span>init<span class="w"> </span>myapp
 </code></pre></div>
