@@ -1150,12 +1150,20 @@ SQL
 <hr />
 <h2 id="comments">🗨️ Comments</h2>
 <h3 id="comment">comment</h3>
+<blockquote>
+<p>⚠️ Note only commenting on schemas, tables, columns and functions are
+supported currently.</p>
+</blockquote>
 <p>Add or update a comment on a Postgres object.</p>
 <p><strong>Syntax:</strong></p>
 <div class="highlight"><pre><span></span><code>comment<span class="w"> </span>&lt;object&gt;<span class="w"> </span>&lt;comment&gt;
 </code></pre></div>
-<p><strong>Example:</strong></p>
+<p><strong>Examples:</strong></p>
 <div class="highlight"><pre><span></span><code>comment<span class="w"> </span>schema<span class="w"> </span>api<span class="w"> </span><span class="s1">&#39;Schema for the API endpoints&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>comment<span class="w"> </span><span class="k">function</span><span class="w"> </span>api.encrypt_pass<span class="o">()</span><span class="w"> </span><span class="s1">&#39;Hashes passwords&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>comment<span class="w"> </span><span class="k">function</span><span class="w"> </span>api.do_thing<span class="o">(</span>integer,<span class="w"> </span>text<span class="o">)</span><span class="w"> </span><span class="s1">&#39;Does something&#39;</span>
 </code></pre></div>
 <hr />
 <h2 id="extensions">🧩 Extensions</h2>
