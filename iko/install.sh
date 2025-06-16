@@ -7,7 +7,7 @@ WRAPPER="$INSTALL_DIR/iko"
 
 mkdir -p "$INSTALL_DIR"
 
-cat > "$WRAPPER" <<'SQL'
+cat > "$WRAPPER" <<'EOF'
 #!/bin/sh
 set -euo pipefail
 
@@ -16,13 +16,17 @@ set -euo pipefail
 ENV_ARG=""
 [ -f .env ] && ENV_ARG="--env-file .env"
 
+IKORC_ARG=""
+[ -f .ikorc ] && IKORC_ARG="-v ${PWD}/.ikorc:/home/.ikorc:ro"
+
 docker run --rm -it \
   $ENV_ARG \
+  $IKORC_ARG \
   --network "${DOCKER_NETWORK:-bridge}" \
   -v "${PWD}/migrations:/repo:rw" \
-  -v "${PWD}/scripts:/scripts:ro" \
+  -v "${PWD}/scripts:/iko/scripts:ro" \
   ghcr.io/explodinglabs/iko:0.1.0 "$@"
-SQL
+EOF
 
 chmod +x "$WRAPPER"
 
