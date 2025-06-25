@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://explodinglabs.com/superstack/psql/">
       
       
-        <link rel="prev" href="../rabbitmq/">
+        <link rel="prev" href="../migrations/">
       
       
         <link rel="next" href="../deploying/">
@@ -329,72 +329,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../extensions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Postgres Extensions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../authentication/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Authentication
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    RabbitMQ
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -562,17 +496,131 @@
   
   
     <li class="md-nav__item">
-      <a href="../update_superstack/" class="md-nav__link">
+      <a href="../upgrading/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Update SuperStack
+    Upgrade SuperStack
     
   </span>
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Add to your Stack
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Add to your Stack
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Postgres Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -716,13 +764,7 @@ app=#
 </code></pre></div>
 <h2 id="run-inline-sql-commands">🔹 Run Inline SQL Commands</h2>
 <p>You can also run SQL directly from the command line:</p>
-<div class="highlight"><pre><span></span><code>bin/postgres psql -c &#39;select version()&#39;
-</code></pre></div>
-<p>Example output:</p>
-<div class="highlight"><pre><span></span><code>                                                       version
----------------------------------------------------------------------------------------------------------------------
- PostgreSQL 17.5 (Debian 17.5-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-(1 row)
+<div class="highlight"><pre><span></span><code>bin/postgres psql -c &#39;select * from api.movie;&#39;
 </code></pre></div>
 <h2 id="customize-psql-behavior">⚙️ Customize psql Behavior</h2>
 <p>You can persist your preferences using <code>.psqlrc</code> and <code>.inputrc</code>.</p>
@@ -742,7 +784,8 @@ available options.</p>
 <div class="highlight"><pre><span></span><code>set editing-mode vi
 </code></pre></div>
 <h2 id="step-2-mount-and-apply-the-configs">🔗 Step 2: Mount and apply the configs</h2>
-<p>Add to your <code>compose.override.yaml</code>:</p>
+<p>Add to your <code>compose.override.yaml</code> (this file is for development-only
+overriding of <code>compose.yaml</code>):</p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
@@ -784,7 +827,7 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../rabbitmq/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RabbitMQ">
+          <a href="../migrations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Migrations">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -794,7 +837,7 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
                 Previous
               </span>
               <div class="md-ellipsis">
-                RabbitMQ
+                Migrations
               </div>
             </div>
           </a>

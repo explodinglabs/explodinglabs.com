@@ -14,7 +14,7 @@
         <link rel="prev" href="../psql/">
       
       
-        <link rel="next" href="../update_superstack/">
+        <link rel="next" href="../upgrading/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -332,72 +332,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../extensions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Postgres Extensions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../authentication/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Authentication
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    RabbitMQ
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../psql/" class="md-nav__link">
         
   
@@ -479,9 +413,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-build-and-push-the-images" class="md-nav__link">
+  <a href="#2-build-and-push-your-images" class="md-nav__link">
     <span class="md-ellipsis">
-      🛠️ 2. Build and Push the Images
+      🛠️ 2. Build and Push your Images
     </span>
   </a>
   
@@ -497,62 +431,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-launch-superstack-on-the-server" class="md-nav__link">
+  <a href="#4-launch-your-stack" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 4. Launch SuperStack on the Server
+      🚀 4. Launch your Stack
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔐 Environment Variables
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#upgrading-remote-environments" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔄 Upgrading Remote Environments
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔄 Upgrading Remote Environments">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-pull-the-latest-images" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Pull the Latest Images
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-apply-any-new-migrations" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Apply Any New Migrations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-restart-the-stack-if-needed" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Restart the Stack (if needed)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -571,17 +454,131 @@
   
   
     <li class="md-nav__item">
-      <a href="../update_superstack/" class="md-nav__link">
+      <a href="../upgrading/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Update SuperStack
+    Upgrade SuperStack
     
   </span>
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Add to your Stack
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Add to your Stack
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Postgres Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -622,9 +619,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-build-and-push-the-images" class="md-nav__link">
+  <a href="#2-build-and-push-your-images" class="md-nav__link">
     <span class="md-ellipsis">
-      🛠️ 2. Build and Push the Images
+      🛠️ 2. Build and Push your Images
     </span>
   </a>
   
@@ -640,62 +637,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-launch-superstack-on-the-server" class="md-nav__link">
+  <a href="#4-launch-your-stack" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 4. Launch SuperStack on the Server
+      🚀 4. Launch your Stack
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔐 Environment Variables
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#upgrading-remote-environments" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔄 Upgrading Remote Environments
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔄 Upgrading Remote Environments">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-pull-the-latest-images" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Pull the Latest Images
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-apply-any-new-migrations" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Apply Any New Migrations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-restart-the-stack-if-needed" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Restart the Stack (if needed)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -722,27 +668,26 @@
 <p>SuperStack is Docker-native, so deployment is simple and portable. Here's
 how to deploy it to a remote server.</p>
 <h2 id="1-set-your-image-names">✅ 1. Set Your Image Names</h2>
-<p>In <code>compose.yaml</code>, change the image names to your own (e.g. using your
-Docker Hub or GitHub Container Registry account):</p>
-<p>For example:</p>
+<p>Change the image names to your own (e.g. using your Docker Hub or GitHub
+Container Registry account) in <code>compose.yaml</code>, for example:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">postgres</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres</span>
+<span class="nt">caddy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy</span>
 </code></pre></div>
-<h2 id="2-build-and-push-the-images">🛠️ 2. Build and Push the Images</h2>
-<p>Build locally and push to your registry:</p>
+<h2 id="2-build-and-push-your-images">🛠️ 2. Build and Push your Images</h2>
+<p>Build your images locally and push to your registry:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build
 docker<span class="w"> </span>compose<span class="w"> </span>push
 </code></pre></div>
 <h2 id="3-deploy-the-compose-file">📦 3. Deploy the Compose File</h2>
-<p>Only <code>compose.yaml</code> is required on the server. Copy it over:</p>
+<p>The only file needed for SuperStack to work on the remote server is
+<code>compose.yaml</code>.</p>
+<p>Copy it to your server:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
-<h2 id="4-launch-superstack-on-the-server">🚀 4. Launch SuperStack on the Server</h2>
-<p>SSH into your server and run:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
-</code></pre></div>
-<p>That’s it — your backend is live.</p>
-<h2 id="environment-variables">🔐 Environment Variables</h2>
+<h2 id="4-launch-your-stack">🚀 4. Launch your Stack</h2>
+<p>SSH into your server and bring up the stack.</p>
 <p>For production, avoid using <code>.env</code> files. Instead, set secrets directly:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CADDY_PORT</span><span class="o">=</span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
 <span class="nv">PG_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
@@ -752,28 +697,17 @@ docker<span class="w"> </span>compose<span class="w"> </span>push
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <blockquote>
-<p>💡 Avoid leaking secrets by disabling shell history. Alternatively, use
-environment injection in your CI/CD.</p>
+<p>💡 Avoid leaking secrets by disabling shell history.</p>
 </blockquote>
-<h2 id="upgrading-remote-environments">🔄 Upgrading Remote Environments</h2>
-<p>When you release changes — like new migrations or updated images — you can
-upgrade your remote stack in two simple steps.</p>
-<h3 id="1-pull-the-latest-images">1. Pull the Latest Images</h3>
-<p>On the remote server, run:</p>
+<p>Alternatively, use environment injection in your CI/CD.</p>
+<hr />
+<p>That’s it — your backend is live.</p>
+<p>If this is the first time bringing up your stack, the migrations will run
+automatically. Subsequently, to upgrade your app you should:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres<span class="w"> </span>migrate
 </code></pre></div>
-<p>This fetches the latest versions of your tagged images (as defined in
-<code>compose.yaml</code>).</p>
-<h3 id="2-apply-any-new-migrations">2. Apply Any New Migrations</h3>
-<p>Then run your migration script inside the running Postgres container:</p>
-<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
-</code></pre></div>
-<p>This ensures your database schema is up to date.</p>
-<h3 id="3-restart-the-stack-if-needed">3. Restart the Stack (if needed)</h3>
-<p>If you’ve made changes to service definitions or image tags:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
-</code></pre></div>
-<p>Docker Compose will only restart containers if something changed.</p>
 
 
 
@@ -820,13 +754,13 @@ upgrade your remote stack in two simple steps.</p>
         
         
           
-          <a href="../update_superstack/" class="md-footer__link md-footer__link--next" aria-label="Next: Update SuperStack">
+          <a href="../upgrading/" class="md-footer__link md-footer__link--next" aria-label="Next: Upgrade SuperStack">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Update SuperStack
+                Upgrade SuperStack
               </div>
             </div>
             <div class="md-footer__button md-icon">

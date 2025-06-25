@@ -164,30 +164,23 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-create-a-new-project-from-the-template">
+<a class="md-nav__link" href="#1-clone-superstack">
 <span class="md-ellipsis">
-      1. Create a New Project from the Template
+      1. Clone SuperStack
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-clone-your-new-repository">
+<a class="md-nav__link" href="#2-configure-environment-variables">
 <span class="md-ellipsis">
-      2. Clone Your New Repository
+      2. Configure Environment Variables
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-configure-environment-variables">
+<a class="md-nav__link" href="#3-start-the-stack">
 <span class="md-ellipsis">
-      3. Configure Environment Variables
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#4-start-the-stack">
-<span class="md-ellipsis">
-      4. Start the Stack
+      3. Start the Stack
     </span>
 </a>
 </li>
@@ -224,6 +217,45 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../psql/">
+<span class="md-ellipsis">
+    Psql
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../deploying/">
+<span class="md-ellipsis">
+    Deploying to Remote Environments
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../upgrading/">
+<span class="md-ellipsis">
+    Upgrade SuperStack
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+<span class="md-ellipsis">
+    Add to your Stack
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+            Add to your Stack
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
 <a class="md-nav__link" href="../extensions/">
 <span class="md-ellipsis">
     Postgres Extensions
@@ -247,29 +279,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../psql/">
-<span class="md-ellipsis">
-    Psql
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../deploying/">
-<span class="md-ellipsis">
-    Deploying to Remote Environments
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../update_superstack/">
-<span class="md-ellipsis">
-    Update SuperStack
-    
-  </span>
-</a>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -286,30 +297,23 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-create-a-new-project-from-the-template">
+<a class="md-nav__link" href="#1-clone-superstack">
 <span class="md-ellipsis">
-      1. Create a New Project from the Template
+      1. Clone SuperStack
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-clone-your-new-repository">
+<a class="md-nav__link" href="#2-configure-environment-variables">
 <span class="md-ellipsis">
-      2. Clone Your New Repository
+      2. Configure Environment Variables
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-configure-environment-variables">
+<a class="md-nav__link" href="#3-start-the-stack">
 <span class="md-ellipsis">
-      3. Configure Environment Variables
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#4-start-the-stack">
-<span class="md-ellipsis">
-      4. Start the Stack
+      3. Start the Stack
     </span>
 </a>
 </li>
@@ -344,22 +348,36 @@
 <h1 id="getting-started">🚀 Getting Started</h1>
 <p>SuperStack uses Docker, so make sure <a href="https://docs.docker.com/get-docker/">Docker is
 installed</a> before you begin.</p>
-<h2 id="1-create-a-new-project-from-the-template">1. Create a New Project from the Template</h2>
-<p>Click <a href="https://github.com/explodinglabs/superstack/generate">Use this template</a> to create your own repository.</p>
-<h2 id="2-clone-your-new-repository">2. Clone Your New Repository</h2>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yourname/myapp
+<h2 id="1-clone-superstack">1. Clone SuperStack</h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/explodinglabs/superstack<span class="w"> </span>myapp
 <span class="nb">cd</span><span class="w"> </span>myapp
 </code></pre></div>
-<h2 id="3-configure-environment-variables">3. Configure Environment Variables</h2>
+<details>
+<summary>Recommended: Click here to see how to change this clone to point "origin" to your own hosted repository</summary>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>rename<span class="w"> </span>origin<span class="w"> </span>upstream
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/yourname/myapp
+</code></pre></div>
+
+Now you can push/pull to your own repo as normal:
+
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>head
+git<span class="w"> </span>pull
+</code></pre></div>
+
+Or upgrade to a more recent SuperStack:
+
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
+</code></pre></div>
+</details>
+<h2 id="2-configure-environment-variables">2. Configure Environment Variables</h2>
 <p>Copy the example file:</p>
 <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>example.env<span class="w"> </span>.env
 </code></pre></div>
 <blockquote>
-<p>💡 The .env file is for local development only. For remote deployments, set
-secrets using CI/CD or inline environment variables (avoid saving secrets in
-shell history).</p>
+<p>⚠️ The .env file is for local development only. For remote deployments,
+set environment variables using CI/CD or inline in the <code>docker compose up</code> command (be sure to avoid saving secrets in shell history).</p>
 </blockquote>
-<h2 id="4-start-the-stack">4. Start the Stack</h2>
+<h2 id="3-start-the-stack">3. Start the Stack</h2>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>That's it – your backend is live.</p>
@@ -372,7 +390,7 @@ to explore your API.</p>
 <li>Starts a fresh <strong>Postgres</strong> database</li>
 <li>Applies initial <strong>migrations</strong></li>
 <li>Launches <strong>PostgREST</strong> and <strong>Swagger UI</strong></li>
-<li>Serves everything through <strong>Caddy</strong> on http://localhost:8000</li>
+<li>Serves everything through <strong>Caddy</strong></li>
 </ul>
 <pre class="mermaid"><code>flowchart TD
     Caddy["Caddy (API Gateway)"]
@@ -387,7 +405,7 @@ to explore your API.</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
 </code></pre></div>
 <h2 id="whats-next">➕ What's Next?</h2>
-<p>👉 <a href="../migrations/">Create your database schema and migrations</a><br/>
+<p>👉 <a href="../migrations/">Create your database schema with migrations</a><br/>
 👉 <a href="../deploying/">Deploy to a remote environment</a></p>
 </article>
 </div>

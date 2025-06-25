@@ -14,7 +14,7 @@
         <link rel="prev" href="../gettingstarted/">
       
       
-        <link rel="next" href="../extensions/">
+        <link rel="next" href="../psql/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -369,27 +369,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#transactions" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔁 Transactions
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#applying-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       ▶️ Applying Migrations
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#first-time-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧪 First-Time Setup
     </span>
   </a>
   
@@ -404,76 +386,19 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔁 Transactions
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../extensions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Postgres Extensions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../authentication/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Authentication
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    RabbitMQ
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -529,17 +454,131 @@
   
   
     <li class="md-nav__item">
-      <a href="../update_superstack/" class="md-nav__link">
+      <a href="../upgrading/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Update SuperStack
+    Upgrade SuperStack
     
   </span>
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Add to your Stack
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Add to your Stack
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Postgres Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -580,15 +619,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#transactions" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔁 Transactions
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#applying-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       ▶️ Applying Migrations
@@ -598,18 +628,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#first-time-setup" class="md-nav__link">
+  <a href="#resetting" class="md-nav__link">
     <span class="md-ellipsis">
-      🧪 First-Time Setup
+      🔄 Resetting
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#resetting" class="md-nav__link">
+  <a href="#transactions" class="md-nav__link">
     <span class="md-ellipsis">
-      🔄 Resetting
+      🔁 Transactions
     </span>
   </a>
   
@@ -648,9 +678,33 @@ migrations.</p>
 <li>Written in plain SQL</li>
 <li>But can include environment variables.</li>
 </ul>
+<h2 id="applying-migrations">▶️ Applying Migrations</h2>
+<p>When the Postgres container starts with no existing data, SuperStack will
+automatically run migrations once.</p>
+<p>After the first <code>docker compose up</code>, migrations will only run if you
+manually apply them.</p>
+<p>To apply your migrations, run:</p>
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
+</code></pre></div>
+<p>This will:</p>
+<ol>
+<li>Run any migration files that haven’t been applied yet (in filename order)</li>
+<li>Record each successfully applied file in <code>.applied_migrations</code></li>
+</ol>
+<p>Already-applied scripts are skipped on subsequent runs.</p>
+<blockquote>
+<p>💡 <code>bin/postgres</code> is short for <code>docker compose exec postgres</code></p>
+</blockquote>
+<h2 id="resetting">🔄 Resetting</h2>
+<p>If you want to start fresh:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>This will wipe your database and re-run all migrations from scratch.</p>
 <h2 id="transactions">🔁 Transactions</h2>
-<p>Use BEGIN; and COMMIT; to wrap migration files when all included statements are
-transactional. This ensures that all changes are applied atomically.</p>
+<p>Use <code>BEGIN;</code> and <code>COMMIT;</code> to wrap migration files when all included
+statements are transactional. This ensures that all changes are applied
+atomically.</p>
 <p>For example:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- File: postgres/migrations/03-create_table_example.sql</span>
 <span class="k">begin</span><span class="p">;</span>
@@ -668,36 +722,27 @@ transactional. This ensures that all changes are applied atomically.</p>
 
 <span class="k">commit</span><span class="p">;</span>
 </code></pre></div>
-<p>Avoid wrapping CREATE ROLE, DROP DATABASE, or other non-transactional
-operations in a transaction — these will cause errors if used inside BEGIN ...
-COMMIT.</p>
-<h2 id="applying-migrations">▶️ Applying Migrations</h2>
-<p>To apply your migrations, run:</p>
-<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
-</code></pre></div>
-<p>This will:</p>
-<ul>
-<li>Check for a <code>.applied_migrations</code> file inside the container</li>
-<li>Run any migration files that haven’t been applied yet (in filename order)</li>
-<li>Record each successfully applied file in <code>.applied_migrations</code></li>
-</ul>
 <blockquote>
-<p>💡 Already-applied scripts are skipped on subsequent runs.</p>
+<p>💡 If your migration script only contains one statement, there's no need
+to use a transaction, the statement will be auto-committed.</p>
 </blockquote>
-<h2 id="first-time-setup">🧪 First-Time Setup</h2>
-<p>When the Postgres container starts with no existing data, SuperStack will
-automatically run migrations once.</p>
-<p>This happens during initial startup — no manual step needed.</p>
-<p>After the first <code>docker compose up</code>, migrations will only run if you run
-<code>bin/postgres migrate</code>.</p>
-<h2 id="resetting">🔄 Resetting</h2>
-<p>If you want to start fresh:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
+<p>Avoid wrapping non-transactional operations in a transaction — these will
+cause errors if used inside <code>BEGIN ... COMMIT</code>.</p>
+<p>Examples of non-transactional statements include:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span>
+<span class="k">DROP</span><span class="w"> </span><span class="n">EXTENSION</span>
+<span class="k">VACUUM</span>
+<span class="k">REINDEX</span>
+<span class="k">CLUSTER</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span>
+<span class="k">DROP</span><span class="w"> </span><span class="n">TABLESPACE</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span>
+<span class="n">DISCARD</span><span class="w"> </span><span class="k">ALL</span>
+<span class="k">LOAD</span>
 </code></pre></div>
-<p>Then:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up
-</code></pre></div>
-<p>This will wipe your database and re-run all migrations from scratch.</p>
 
 
 
@@ -744,13 +789,13 @@ automatically run migrations once.</p>
         
         
           
-          <a href="../extensions/" class="md-footer__link md-footer__link--next" aria-label="Next: Postgres Extensions">
+          <a href="../psql/" class="md-footer__link md-footer__link--next" aria-label="Next: Psql">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Postgres Extensions
+                Psql
               </div>
             </div>
             <div class="md-footer__button md-icon">
