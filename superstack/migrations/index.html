@@ -378,15 +378,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#non-transactional-migrations" class="md-nav__link">
-    <span class="md-ellipsis">
-      ⚠️ Non-Transactional Migrations
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#applying-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       ▶️ Applying Migrations
@@ -472,6 +463,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../psql/" class="md-nav__link">
         
   
@@ -500,6 +513,28 @@
   
   <span class="md-ellipsis">
     Deploying to Remote Environments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../update_superstack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Update SuperStack
     
   </span>
   
@@ -548,15 +583,6 @@
   <a href="#transactions" class="md-nav__link">
     <span class="md-ellipsis">
       🔁 Transactions
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#non-transactional-migrations" class="md-nav__link">
-    <span class="md-ellipsis">
-      ⚠️ Non-Transactional Migrations
     </span>
   </a>
   
@@ -623,24 +649,28 @@ migrations.</p>
 <li>But can include environment variables.</li>
 </ul>
 <h2 id="transactions">🔁 Transactions</h2>
-<p>Each migration file should start with <code>BEGIN</code> and end with <code>COMMIT</code>, like
-this:</p>
+<p>Use BEGIN; and COMMIT; to wrap migration files when all included statements are
+transactional. This ensures that all changes are applied atomically.</p>
+<p>For example:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- File: postgres/migrations/03-create_table_example.sql</span>
 <span class="k">begin</span><span class="p">;</span>
 
-<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="p">(</span>
+<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">director</span><span class="w"> </span><span class="p">(</span>
 <span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
 <span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
 
+<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">movie</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">  </span><span class="n">director_id</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">references</span><span class="w"> </span><span class="n">director</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+
 <span class="k">commit</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="non-transactional-migrations">⚠️ Non-Transactional Migrations</h2>
-<p>Some statements (like create extension) cannot be wrapped in a transaction.
-In those cases, skip the <code>BEGIN/COMMIT</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- File: postgres/migrations/02-extensions.sql</span>
-<span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
-</code></pre></div>
+<p>Avoid wrapping CREATE ROLE, DROP DATABASE, or other non-transactional
+operations in a transaction — these will cause errors if used inside BEGIN ...
+COMMIT.</p>
 <h2 id="applying-migrations">▶️ Applying Migrations</h2>
 <p>To apply your migrations, run:</p>
 <div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate

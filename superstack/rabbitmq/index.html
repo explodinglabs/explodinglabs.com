@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/superstack/extensions/">
+        <link rel="canonical" href="https://explodinglabs.com/superstack/rabbitmq/">
       
       
-        <link rel="prev" href="../migrations/">
+        <link rel="prev" href="../authentication/">
       
       
-        <link rel="next" href="../authentication/">
+        <link rel="next" href="../psql/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Postgres Extensions - SuperStack</title>
+        <title>RabbitMQ - SuperStack</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#postgres-extensions" class="md-skip">
+        <a href="#rabbitmq" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Postgres Extensions
+              RabbitMQ
             
           </span>
         </div>
@@ -329,32 +329,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Postgres Extensions
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../extensions/" class="md-nav__link">
         
   
   
@@ -365,77 +343,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#loading-a-built-in-extension" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔌 Loading a Built-In Extension
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#building-an-extension-from-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      🛠️ Building an Extension from Source
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🛠️ Building an Extension from Source">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-clone-the-extension-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Clone the Extension Source
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-modify-the-postgres-dockerfile" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Modify the Postgres Dockerfile
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-rebuild-the-container" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Rebuild the Container
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -466,10 +373,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -480,6 +409,101 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-install-pg_amqp" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 1. Install pg_amqp
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 1. Install pg_amqp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone the Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-your-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Your Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-add-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ➡️ 2. Add Migrations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="➡️ 2. Add Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-required-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Load Required Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-pg_amqp" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗 Use pg_amqp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-run-the-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ▶️ 3. Run the Migrations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -577,46 +601,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#loading-a-built-in-extension" class="md-nav__link">
+  <a href="#1-install-pg_amqp" class="md-nav__link">
     <span class="md-ellipsis">
-      🔌 Loading a Built-In Extension
+      📦 1. Install pg_amqp
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#building-an-extension-from-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      🛠️ Building an Extension from Source
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🛠️ Building an Extension from Source">
+    <nav class="md-nav" aria-label="📦 1. Install pg_amqp">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-clone-the-extension-source" class="md-nav__link">
+  <a href="#clone-the-repository" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Clone the Extension Source
+      Clone the Repository
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-modify-the-postgres-dockerfile" class="md-nav__link">
+  <a href="#update-your-dockerfile" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Modify the Postgres Dockerfile
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-rebuild-the-container" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Rebuild the Container
+      Update Your Dockerfile
     </span>
   </a>
   
@@ -624,6 +630,48 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-add-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ➡️ 2. Add Migrations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="➡️ 2. Add Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-required-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Load Required Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-pg_amqp" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗 Use pg_amqp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-run-the-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ▶️ 3. Run the Migrations
+    </span>
+  </a>
   
 </li>
       
@@ -646,48 +694,78 @@
   
 
 
-<h1 id="postgres-extensions">🧩 Postgres Extensions</h1>
-<p>SuperStack supports PostgreSQL extensions, letting you add powerful
-features like cryptographic functions or JWT handling.</p>
-<h2 id="loading-a-built-in-extension">🔌 Loading a Built-In Extension</h2>
-<p>To load a standard extension (like pgcrypto), create a migration file such
-as:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- File: postgres/migrations/01-extensions.sql</span>
+<h1 id="rabbitmq">🐰 RabbitMQ</h1>
+<h2 id="1-install-pg_amqp">📦 1. Install pg_amqp</h2>
+<h3 id="clone-the-repository">Clone the Repository</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/omniti-labs/pg_amqp<span class="w"> </span>postgres/pg_amqp
+</code></pre></div>
+<h3 id="update-your-dockerfile">Update Your Dockerfile</h3>
+<p>Edit <code>postgres/Dockerfile</code> to build and install the extension:</p>
+<div class="highlight"><pre><span></span><code>RUN<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>postgresql-server-dev-17
 
-<span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
+<span class="c1"># pg_amqp - Used by api schema</span>
+COPY<span class="w"> </span>./pg_amqp<span class="w"> </span>/pg_amqp
+WORKDIR<span class="w"> </span>/pg_amqp
+RUN<span class="w"> </span>make
+RUN<span class="w"> </span>make<span class="w"> </span>install
+
+WORKDIR<span class="w"> </span>/var/lib/postgresql
 </code></pre></div>
 <blockquote>
-<p>⚠️ <code>create extension</code> is non-transactional, so don’t wrap this file in
-<code>BEGIN/COMMIT</code>.</p>
+<p>You may need to fix "implicit int" errors in pg_amqp, which were reported
+<a href="https://github.com/omniti-labs/pg_amqp/issues/41">here</a>, and <a href="https://github.com/omniti-labs/pg_amqp/pull/43">fixed but not
+yet merged</a>.</p>
 </blockquote>
-<h2 id="building-an-extension-from-source">🛠️ Building an Extension from Source</h2>
-<p>Some extensions (like <a href="https://github.com/michelp/pgjwt">pgjwt</a>) must be
-compiled manually.</p>
-<h3 id="1-clone-the-extension-source">1. Clone the Extension Source</h3>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/michelp/pgjwt<span class="w"> </span>postgres/pgjwt
-</code></pre></div>
-<h3 id="2-modify-the-postgres-dockerfile">2. Modify the Postgres Dockerfile</h3>
-<p>Edit <code>postgres/Dockerfile</code> to install build tools and compile the
-extension:</p>
-<div class="highlight"><pre><span></span><code>RUN apt-get update &amp;&amp; apt-get install -y \
-    build-essential \
-    postgresql-server-dev-17
-
-# pgjwt - used by the auth schema
-COPY ./pgjwt /pgjwt
-WORKDIR /pgjwt
-RUN make &amp;&amp; make install
-
-# Reset workdir
-WORKDIR /var/lib/postgresql
-</code></pre></div>
-<blockquote>
-<p>🧼 Set <code>WORKDIR</code> back to the default to avoid unintended effects.</p>
-</blockquote>
-<h3 id="3-rebuild-the-container">3. Rebuild the Container</h3>
+<p>Then rebuild:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>postgres
 </code></pre></div>
-<p>That’s it — the extension is now available to load in your migrations.</p>
+<h2 id="2-add-migrations">➡️ 2. Add Migrations</h2>
+<h3 id="load-required-extensions">📚 Load Required Extensions</h3>
+<p>Add this to a migration file like <code>01-extensions.sql</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- amqp extension for rabbitmq connection</span>
+<span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">amqp</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>⚠️ Do not wrap this file in a <code>BEGIN/COMMIT</code> block — <code>create extension</code> is
+non-transactional.</p>
+</blockquote>
+<h3 id="use-pg_amqp">🏗 Use pg_amqp</h3>
+<p>Add to a migration file, e.g. <code>10-create_api_schema.sql</code>.</p>
+<details>
+<summary>Click to view file</summary>
+
+<div class="highlight"><pre><span></span><code><span class="c1">-- 10-create_api_schema.sql</span>
+<span class="k">begin</span><span class="p">;</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
+<span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
+<span class="p">);</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task_updated</span><span class="p">()</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="n">void</span>
+<span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">perform</span><span class="w"> </span><span class="n">amqp</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;amq.topic&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;tasks&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">json_build_object</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;task_updated&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;command&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">command</span><span class="p">)::</span><span class="nb">text</span><span class="p">);</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="err">$$</span><span class="p">;</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">task_updated</span>
+<span class="k">before</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task</span>
+<span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task_updated</span><span class="p">();</span>
+
+<span class="k">commit</span><span class="p">;</span>
+</code></pre></div>
+
+</details>
+
+<h2 id="3-run-the-migrations">▶️ 3. Run the Migrations</h2>
+<p>Once your migrations are ready:</p>
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
+</code></pre></div>
+<p>SuperStack will execute the new migration files, skipping those already
+applied.</p>
 
 
 
@@ -717,7 +795,7 @@ WORKDIR /var/lib/postgresql
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../migrations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Migrations">
+          <a href="../authentication/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Authentication">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -727,20 +805,20 @@ WORKDIR /var/lib/postgresql
                 Previous
               </span>
               <div class="md-ellipsis">
-                Migrations
+                Authentication
               </div>
             </div>
           </a>
         
         
           
-          <a href="../authentication/" class="md-footer__link md-footer__link--next" aria-label="Next: Authentication">
+          <a href="../psql/" class="md-footer__link md-footer__link--next" aria-label="Next: Psql">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Authentication
+                Psql
               </div>
             </div>
             <div class="md-footer__button md-icon">
