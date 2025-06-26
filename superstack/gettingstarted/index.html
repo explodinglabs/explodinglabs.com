@@ -208,6 +208,21 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    Build your App
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            Build your App
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../migrations/">
 <span class="md-ellipsis">
@@ -216,45 +231,6 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../psql/">
-<span class="md-ellipsis">
-    Psql
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../deploying/">
-<span class="md-ellipsis">
-    Deploying to Remote Environments
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../upgrading/">
-<span class="md-ellipsis">
-    Upgrade SuperStack
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
-<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-<span class="md-ellipsis">
-    Add to your Stack
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_7">
-<span class="md-nav__icon md-icon"></span>
-            Add to your Stack
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../extensions/">
 <span class="md-ellipsis">
@@ -281,6 +257,30 @@
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../psql/">
+<span class="md-ellipsis">
+    Psql
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../deploying/">
+<span class="md-ellipsis">
+    Deploying to Remote Environments
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../upgrading/">
+<span class="md-ellipsis">
+    Upgrading SuperStack
+    
+  </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -353,21 +353,36 @@ installed</a> before you begin.</p>
 <span class="nb">cd</span><span class="w"> </span>myapp
 </code></pre></div>
 <details>
-<summary>Recommended: Click here to see how to change this clone to point "origin" to your own hosted repository</summary>
+<summary>Click here to see how to change this clone to point "origin" to your own hosted repository (Recommended)</summary>
+
+Rename "origin" to "upstream":
+
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>rename<span class="w"> </span>origin<span class="w"> </span>upstream
-git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/yourname/myapp
 </code></pre></div>
 
-Now you can push/pull to your own repo as normal:
-
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>head
-git<span class="w"> </span>pull
-</code></pre></div>
-
-Or upgrade to a more recent SuperStack:
+This way you can still upgrade to a more recent SuperStack with:
 
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
 </code></pre></div>
+
+Add your own code repository:
+
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/yourname/myapp
+</code></pre></div>
+
+Now you can pull/push to your own repo as normal:
+
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>head
+</code></pre></div>
+<h3>Why not just fork SuperStack?</h3>
+
+Because you can't make a fork private.
+
+<h3>Why not make SuperStack a template repo?</h3>
+
+Because then you can't pull from upstream SuperStack.
+
 </details>
 <h2 id="2-configure-environment-variables">2. Configure Environment Variables</h2>
 <p>Copy the example file:</p>
