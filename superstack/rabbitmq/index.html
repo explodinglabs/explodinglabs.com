@@ -783,18 +783,17 @@ yet merged</a>.</p>
 non-transactional.</p>
 </blockquote>
 <h3 id="use-pg_amqp">🏗 Use pg_amqp</h3>
-<p>Add to a migration file, e.g. <code>10-create_api_schema.sql</code>.</p>
-<details>
-<summary>Click to view file</summary>
-
+<p>Publish messages in a migration script, e.g. <code>03-create_api_schema.sql</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- 10-create_api_schema.sql</span>
 <span class="k">begin</span><span class="p">;</span>
 
+<span class="c1">-- Create task table</span>
 <span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task</span><span class="w"> </span><span class="p">(</span>
 <span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
 <span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span>
 <span class="p">);</span>
 
+<span class="c1">-- Publish changes to the task table</span>
 <span class="k">create</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task_updated</span><span class="p">()</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="n">void</span>
 <span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span>
 <span class="k">begin</span>
@@ -802,15 +801,13 @@ non-transactional.</p>
 <span class="k">end</span><span class="p">;</span>
 <span class="err">$$</span><span class="p">;</span>
 
+<span class="c1">-- Trigger the task_updated function on update</span>
 <span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">task_updated</span>
-<span class="k">before</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task</span>
+<span class="k">before</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task</span>
 <span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">api</span><span class="p">.</span><span class="n">task_updated</span><span class="p">();</span>
 
 <span class="k">commit</span><span class="p">;</span>
 </code></pre></div>
-
-</details>
-
 <h2 id="3-run-the-migrations">▶️ 3. Run the Migrations</h2>
 <p>Once your migrations are ready:</p>
 <div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
