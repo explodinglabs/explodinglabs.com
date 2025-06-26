@@ -409,15 +409,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-inline-sql-commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔹 Run Inline SQL Commands
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#customize-psql-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       ⚙️ Customize psql Behavior
@@ -712,15 +703,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-inline-sql-commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔹 Run Inline SQL Commands
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#customize-psql-behavior" class="md-nav__link">
     <span class="md-ellipsis">
       ⚙️ Customize psql Behavior
@@ -800,20 +782,17 @@
 
 
 <h1 id="using-psql">🖥️ Using psql</h1>
-<p><code>psql</code> is the command-line tool for interacting with your PostgreSQL
-database. SuperStack makes it easy to run psql inside the container using a
-helper script.</p>
+<p><code>psql</code> is the command-line tool for interacting with your PostgreSQL database.
+SuperStack makes it easy to run psql inside the container using a helper
+script.</p>
 <h2 id="open-a-psql-shell">📟 Open a psql Shell</h2>
 <p>To connect interactively:</p>
-<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>psql
-</code></pre></div>
-<p>Example output:</p>
-<div class="highlight"><pre><span></span><code>psql (17.5 (Debian 17.5-1.pgdg120+1))
-Type &quot;help&quot; for help.
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>bin/postgres<span class="w"> </span>psql
+psql<span class="w"> </span><span class="o">(</span><span class="m">17</span>.5<span class="w"> </span><span class="o">(</span>Debian<span class="w"> </span><span class="m">17</span>.5-1.pgdg120+1<span class="o">))</span>
+Type<span class="w"> </span><span class="s2">&quot;help&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>help.
 
-app=#
+<span class="nv">app</span><span class="o">=</span><span class="c1">#</span>
 </code></pre></div>
-<h2 id="run-inline-sql-commands">🔹 Run Inline SQL Commands</h2>
 <p>You can also run SQL directly from the command line:</p>
 <div class="highlight"><pre><span></span><code>bin/postgres psql -c &#39;select * from api.movie;&#39;
 </code></pre></div>
