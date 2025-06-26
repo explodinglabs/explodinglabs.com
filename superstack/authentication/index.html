@@ -793,8 +793,8 @@ extension.</p>
 <h3 id="update-your-dockerfile">Update Your Dockerfile</h3>
 <p>Edit <code>postgres/Dockerfile</code> to build and install the extension:</p>
 <div class="highlight"><pre><span></span><code>RUN<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>build-essential<span class="w"> </span><span class="se">\</span>
-<span class="w"> </span>postgresql-server-dev-17
+<span class="w">  </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>postgresql-server-dev-17
 
 <span class="c1"># pgjwt - used by auth schema</span>
 COPY<span class="w"> </span>./pgjwt<span class="w"> </span>/pgjwt
@@ -806,10 +806,15 @@ WORKDIR<span class="w"> </span>/var/lib/postgresql
 <p>Then rebuild:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>postgres
 </code></pre></div>
+<p>And recreate the running container:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgres
+</code></pre></div>
 <h2 id="2-add-migrations">➡️ 2. Add Migrations</h2>
 <h3 id="load-required-extensions">📚 Load Required Extensions</h3>
 <p>Add this to a migration file like <code>01-extensions.sql</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- pgcrypto adds public.crypt used in auth.encrypt_pass</span>
+<div class="highlight"><pre><span></span><code><span class="cm">/* pgcrypto adds public.crypt used in auth.encrypt_pass pgjwt also needs this</span>
+<span class="cm">so it must be loaded first. pgcrypto is built into Postgres, so no need to</span>
+<span class="cm">install it. */</span>
 <span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
 
 <span class="c1">-- pgjwt adds public.sign used in auth.generate_access_token</span>
@@ -973,7 +978,7 @@ non-transactional.</p>
 </details>
 
 <h3 id="grant-permissions">👮 Grant Permissions</h3>
-<p>Add another migration such as <code>99-roles_and_grants.sql</code>:</p>
+<p>Add another migration such as <code>99-grants.sql</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">begin</span><span class="p">;</span>
 
 <span class="k">grant</span><span class="w"> </span><span class="k">usage</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">auth</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">anon</span><span class="p">;</span>
