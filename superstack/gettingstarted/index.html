@@ -192,16 +192,16 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#resetting">
+<a class="md-nav__link" href="#project-structure">
 <span class="md-ellipsis">
-      🔄 Resetting
+      Project Structure
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#project-structure">
+<a class="md-nav__link" href="#resetting">
 <span class="md-ellipsis">
-      Project Structure
+      🔄 Resetting
     </span>
 </a>
 </li>
@@ -350,16 +350,16 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#resetting">
+<a class="md-nav__link" href="#project-structure">
 <span class="md-ellipsis">
-      🔄 Resetting
+      Project Structure
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#project-structure">
+<a class="md-nav__link" href="#resetting">
 <span class="md-ellipsis">
-      Project Structure
+      🔄 Resetting
     </span>
 </a>
 </li>
@@ -447,12 +447,6 @@ your API.</p>
 <blockquote>
 <p>💡 Only Caddy exposes a port – all services are routed through it.</p>
 </blockquote>
-<h2 id="resetting">🔄 Resetting</h2>
-<p>If you want to start fresh:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
-docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
-</code></pre></div>
-<p>This will wipe your database and re-run all migrations from scratch.</p>
 <h2 id="project-structure">Project Structure</h2>
 <div class="highlight"><pre><span></span><code>📁 bin/                  → Helper scripts (e.g. wrappers for CLI tools)
 📁 caddy/                → Custom Caddy configuration and certificates
@@ -466,6 +460,12 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 📄 mkdocs.yml            → MkDocs configuration for documentation site
 📄 README.md             → Overview and quick start for the repository
 </code></pre></div>
+<h2 id="resetting">🔄 Resetting</h2>
+<p>If you want to start fresh:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>This will wipe your database and re-run all migrations from scratch.</p>
 <h2 id="whats-next">➕ What's Next?</h2>
 <p>👉 <a href="../migrations/">Create your database schema with migrations</a><br/>
 👉 <a href="../deploying/">Deploy to a remote environment</a></p>
