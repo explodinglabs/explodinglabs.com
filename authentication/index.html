@@ -1,0 +1,1100 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://explodinglabs.com/superstack/authentication/">
+      
+      
+        <link rel="prev" href="../extensions/">
+      
+      
+        <link rel="next" href="../rabbitmq/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Authentication - SuperStack</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#authentication" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SuperStack" class="md-header__button md-logo" aria-label="SuperStack" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SuperStack
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Authentication
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/explodinglabs/superstack" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SuperStack" class="md-nav__button md-logo" aria-label="SuperStack" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SuperStack
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/explodinglabs/superstack" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gettingstarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Build your App
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Build your App
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migrations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Postgres Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Authentication
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-install-pgjwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 1. Install pgjwt
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 1. Install pgjwt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone the Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-your-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Your Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-add-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ➡️ 2. Add Migrations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="➡️ 2. Add Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-required-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Load Required Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-auth-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗 Create the Auth Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grant-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      👮 Grant Permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-run-the-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ▶️ 3. Run the Migrations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-add-the-auth-schema-to-postgrest" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Add the Auth Schema to PostgREST
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../psql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Psql
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploying/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploying to Remote Environments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upgrading SuperStack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-install-pgjwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 1. Install pgjwt
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 1. Install pgjwt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone the Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-your-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Your Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-add-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ➡️ 2. Add Migrations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="➡️ 2. Add Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-required-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Load Required Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-auth-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗 Create the Auth Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grant-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      👮 Grant Permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-run-the-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ▶️ 3. Run the Migrations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-add-the-auth-schema-to-postgrest" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Add the Auth Schema to PostgREST
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="authentication">🔐 Authentication</h1>
+<p>Here's how to implement secure, JWT-based authentication using PostgreSQL
+functions.</p>
+<h2 id="1-install-pgjwt">📦 1. Install pgjwt</h2>
+<p>To enable JWT signing inside Postgres, you’ll need to install the pgjwt
+extension.</p>
+<h3 id="clone-the-repository">Clone the Repository</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/michelp/pgjwt<span class="w"> </span>postgres/pgjwt
+</code></pre></div>
+<h3 id="update-your-dockerfile">Update Your Dockerfile</h3>
+<p>Edit <code>postgres/Dockerfile</code> to build and install the extension:</p>
+<div class="highlight"><pre><span></span><code>RUN<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>postgresql-server-dev-17
+
+<span class="c1"># pgjwt - used by auth schema</span>
+COPY<span class="w"> </span>./pgjwt<span class="w"> </span>/pgjwt
+WORKDIR<span class="w"> </span>/pgjwt
+RUN<span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+
+WORKDIR<span class="w"> </span>/var/lib/postgresql
+</code></pre></div>
+<p>Then rebuild:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>postgres
+</code></pre></div>
+<h2 id="2-add-migrations">➡️ 2. Add Migrations</h2>
+<h3 id="load-required-extensions">📚 Load Required Extensions</h3>
+<p>Add this to a migration file like <code>01-extensions.sql</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- pgcrypto adds public.crypt used in auth.encrypt_pass</span>
+<span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
+
+<span class="c1">-- pgjwt adds public.sign used in auth.generate_access_token</span>
+<span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgjwt</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>⚠️ Do not wrap this file in a <code>BEGIN/COMMIT</code> block — <code>create extension</code> is
+non-transactional.</p>
+</blockquote>
+<h3 id="create-the-auth-schema">🏗 Create the Auth Schema</h3>
+<p>Create a new migration file, e.g. <code>02-create_auth_schema.sql</code>.</p>
+<details>
+<summary>Click to view file</summary>
+
+<div class="highlight"><pre><span></span><code><span class="c1">-- 02-create_auth_schema.sql</span>
+<span class="k">begin</span><span class="p">;</span>
+
+<span class="c1">-- Create auth schema and tables</span>
+<span class="k">create</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">auth</span><span class="p">;</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">username</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="k">length</span><span class="p">(</span><span class="n">username</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span>
+<span class="w">  </span><span class="n">password</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="k">length</span><span class="p">(</span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">512</span><span class="p">),</span>
+<span class="w">  </span><span class="k">role</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="k">length</span><span class="p">(</span><span class="k">role</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">512</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">refresh_token</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">bigint</span><span class="w"> </span><span class="k">generated</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">identity</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">token</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">  </span><span class="n">username</span><span class="w"> </span><span class="nb">text</span>
+<span class="p">);</span>
+
+<span class="c1">-- Enforce that roles exist in pg_roles</span>
+<span class="k">create</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">check_role_exists</span><span class="p">()</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="k">trigger</span>
+<span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pg_roles</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">rolname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">.</span><span class="k">role</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="n">raise</span><span class="w"> </span><span class="n">foreign_key_violation</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;unknown database role: &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">new</span><span class="p">.</span><span class="k">role</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="err">$$</span><span class="p">;</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">constraint</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">ensure_user_role_exists</span>
+<span class="k">after</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="k">user</span>
+<span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">check_role_exists</span><span class="p">();</span>
+
+<span class="c1">-- Encrypt passwords on insert/update</span>
+<span class="k">create</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">encrypt_pass</span><span class="p">()</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="k">trigger</span>
+<span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">tg_op</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;INSERT&#39;</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">new</span><span class="p">.</span><span class="n">password</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">old</span><span class="p">.</span><span class="n">password</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">new</span><span class="p">.</span><span class="n">password</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">crypt</span><span class="p">(</span><span class="k">new</span><span class="p">.</span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">gen_salt</span><span class="p">(</span><span class="s1">&#39;bf&#39;</span><span class="p">));</span>
+<span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="err">$$</span><span class="p">;</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">encrypt_pass</span>
+<span class="k">before</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="k">user</span>
+<span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">procedure</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">encrypt_pass</span><span class="p">();</span>
+
+<span class="c1">-- Generate JWT access tokens</span>
+<span class="k">create</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">generate_access_token</span><span class="p">(</span>
+<span class="w">  </span><span class="n">role_</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="n">user_</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="n">secret</span><span class="w"> </span><span class="nb">text</span>
+<span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="nb">text</span>
+<span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">declare</span>
+<span class="w">  </span><span class="n">access_token</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="n">row_to_json</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="n">secret</span><span class="p">)</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">access_token</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">role_</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">role</span><span class="p">,</span><span class="w"> </span><span class="n">user_</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">username</span><span class="p">,</span>
+<span class="w">      </span><span class="k">extract</span><span class="p">(</span><span class="n">epoch</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">now</span><span class="p">())::</span><span class="nb">integer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">exp</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">access_token</span><span class="p">;</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="err">$$</span><span class="p">;</span>
+
+<span class="c1">-- Login endpoint</span>
+<span class="k">create</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">login</span><span class="p">(</span><span class="n">user_</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="nb">text</span><span class="p">)</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="n">void</span>
+<span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="w"> </span><span class="k">security</span><span class="w"> </span><span class="k">definer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">declare</span>
+<span class="w">  </span><span class="n">access_token</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="w">  </span><span class="n">headers</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="w">  </span><span class="n">refresh_token</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="w">  </span><span class="n">role_</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">role_</span>
+<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="k">user</span>
+<span class="w">  </span><span class="k">where</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_</span>
+<span class="w">    </span><span class="k">and</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">crypt</span><span class="p">(</span><span class="n">pass</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">role_</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="n">raise</span><span class="w"> </span><span class="k">sqlstate</span><span class="w"> </span><span class="s1">&#39;PT401&#39;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Invalid user or password&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">generate_access_token</span><span class="p">(</span><span class="n">role_</span><span class="p">,</span><span class="w"> </span><span class="n">user_</span><span class="p">,</span><span class="w"> </span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;pgrst.jwt_secret&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">access_token</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">refresh_token</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">gen_random_uuid</span><span class="p">();</span>
+<span class="w">  </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">refresh_token</span><span class="w"> </span><span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="n">refresh_token</span><span class="p">,</span><span class="w"> </span><span class="n">user_</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">headers</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;[&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="s1">&#39;{&quot;Set-Cookie&quot;: &quot;access_token=&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">access_token</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;; Path=/; HttpOnly;&quot;},&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="s1">&#39;{&quot;Set-Cookie&quot;: &quot;refresh_token=&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">refresh_token</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;; Path=/rpc/refresh_token; HttpOnly;&quot;}&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="w">  </span><span class="s1">&#39;]&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">perform</span><span class="w"> </span><span class="n">set_config</span><span class="p">(</span><span class="s1">&#39;response.headers&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="err">$$</span><span class="p">;</span>
+
+<span class="c1">-- Logout endpoint</span>
+<span class="k">create</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">logout</span><span class="p">()</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="n">void</span>
+<span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="w"> </span><span class="k">security</span><span class="w"> </span><span class="k">definer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">declare</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">headers</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;[&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="s1">&#39;{&quot;Set-Cookie&quot;: &quot;access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;&quot;},&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="w">    </span><span class="s1">&#39;{&quot;Set-Cookie&quot;: &quot;refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;&quot;}&#39;</span><span class="w"> </span><span class="o">||</span>
+<span class="w">  </span><span class="s1">&#39;]&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">perform</span><span class="w"> </span><span class="n">set_config</span><span class="p">(</span><span class="s1">&#39;response.headers&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="err">$$</span><span class="p">;</span>
+
+<span class="c1">-- Refresh token endpoint</span>
+<span class="k">create</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">refresh_token</span><span class="p">()</span><span class="w"> </span><span class="k">returns</span><span class="w"> </span><span class="n">void</span>
+<span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="w"> </span><span class="k">security</span><span class="w"> </span><span class="k">definer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">declare</span>
+<span class="w">  </span><span class="n">user_</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="w">  </span><span class="n">access_token</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="w">  </span><span class="n">headers</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="w">  </span><span class="n">refresh_token_</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="w">  </span><span class="n">role_</span><span class="w"> </span><span class="nb">text</span><span class="p">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">refresh_token_</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;request.cookies&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">)::</span><span class="n">json</span><span class="o">-&gt;&gt;</span><span class="s1">&#39;refresh_token&#39;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">user_</span>
+<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">refresh_token</span>
+<span class="w">  </span><span class="k">where</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">refresh_token_</span>
+<span class="w">    </span><span class="k">and</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;30 days&#39;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">user_</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="n">raise</span><span class="w"> </span><span class="k">sqlstate</span><span class="w"> </span><span class="s1">&#39;PT401&#39;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Invalid or expired refresh token&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">role_</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="k">user</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">role_</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="n">raise</span><span class="w"> </span><span class="k">sqlstate</span><span class="w"> </span><span class="s1">&#39;PT401&#39;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Unknown user&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">generate_access_token</span><span class="p">(</span><span class="n">role_</span><span class="p">,</span><span class="w"> </span><span class="n">user_</span><span class="p">,</span><span class="w"> </span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;pgrst.jwt_secret&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">access_token</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">headers</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;[{&quot;Set-Cookie&quot;: &quot;access_token=&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">access_token</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;; Path=/; HttpOnly;&quot;}]&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">perform</span><span class="w"> </span><span class="n">set_config</span><span class="p">(</span><span class="s1">&#39;response.headers&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="err">$$</span><span class="p">;</span>
+
+<span class="k">commit</span><span class="p">;</span>
+</code></pre></div>
+
+</details>
+
+<h3 id="grant-permissions">👮 Grant Permissions</h3>
+<p>Add another migration such as <code>99-roles_and_grants.sql</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">begin</span><span class="p">;</span>
+
+<span class="k">grant</span><span class="w"> </span><span class="k">usage</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">auth</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">anon</span><span class="p">;</span>
+<span class="k">grant</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">login</span><span class="p">(</span><span class="nb">text</span><span class="p">,</span><span class="w"> </span><span class="nb">text</span><span class="p">)</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">anon</span><span class="p">;</span>
+<span class="k">grant</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">logout</span><span class="p">()</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">anon</span><span class="p">;</span>
+<span class="k">grant</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">refresh_token</span><span class="p">()</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">anon</span><span class="p">;</span>
+
+<span class="k">commit</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="3-run-the-migrations">▶️ 3. Run the Migrations</h2>
+<p>Once your migrations are ready:</p>
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
+</code></pre></div>
+<p>SuperStack will execute the new migration files and skip those already
+applied.</p>
+<h2 id="4-add-the-auth-schema-to-postgrest">4. Add the Auth Schema to PostgREST</h2>
+<p>Add the auth schema to Postgres in <code>compose.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">PGRST_DB_SCHEMAS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api,auth</span>
+</code></pre></div>
+<p>✅ Usage</p>
+<p>Explain that all auth endpoints must have a certain header.</p>
+<p>Show example of using each endpoint.</p>
+<ul>
+<li>POST-ing a user.</li>
+<li><code>/rpc/login</code></li>
+<li><code>/rpc/logout</code></li>
+<li><code>/rpc/refresh_token</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../extensions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Postgres Extensions">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Postgres Extensions
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../rabbitmq/" class="md-footer__link md-footer__link--next" aria-label="Next: RabbitMQ">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                RabbitMQ
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

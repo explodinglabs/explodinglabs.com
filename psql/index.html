@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/superstack/">
+        <link rel="canonical" href="https://explodinglabs.com/superstack/psql/">
       
       
+        <link rel="prev" href="../rabbitmq/">
       
-        <link rel="next" href="gettingstarted/">
+      
+        <link rel="next" href="../deploying/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>SuperStack</title>
+        <title>Psql - SuperStack</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#superstack" class="md-skip">
+        <a href="#using-psql" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="SuperStack" class="md-header__button md-logo" aria-label="SuperStack" data-md-component="logo">
+    <a href=".." title="SuperStack" class="md-header__button md-logo" aria-label="SuperStack" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Psql
             
           </span>
         </div>
@@ -234,7 +236,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="SuperStack" class="md-nav__button md-logo" aria-label="SuperStack" data-md-component="logo">
+    <a href=".." title="SuperStack" class="md-nav__button md-logo" aria-label="SuperStack" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -261,32 +263,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Home
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -297,44 +277,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-can-i-do-with-superstack" class="md-nav__link">
-    <span class="md-ellipsis">
-      🚀 What Can I Do with SuperStack?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      📚 Documentation
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -346,7 +288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="gettingstarted/" class="md-nav__link">
+      <a href="../gettingstarted/" class="md-nav__link">
         
   
   
@@ -406,7 +348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="migrations/" class="md-nav__link">
+      <a href="../migrations/" class="md-nav__link">
         
   
   
@@ -429,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extensions/" class="md-nav__link">
+      <a href="../extensions/" class="md-nav__link">
         
   
   
@@ -452,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="authentication/" class="md-nav__link">
+      <a href="../authentication/" class="md-nav__link">
         
   
   
@@ -475,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="rabbitmq/" class="md-nav__link">
+      <a href="../rabbitmq/" class="md-nav__link">
         
   
   
@@ -502,10 +444,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="psql/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Psql
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -516,6 +480,104 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#open-a-psql-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      📟 Open a psql Shell
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-inline-sql-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Run Inline SQL Commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customize-psql-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Customize psql Behavior
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Customize psql Behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-a-config-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Step 1: Create a config directory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psqlrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 .psqlrc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 .inputrc
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-mount-and-apply-the-configs" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 Step 2: Mount and apply the configs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-restart-the-postgres-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔁 Step 3: Restart the Postgres container
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -527,7 +589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="deploying/" class="md-nav__link">
+      <a href="../deploying/" class="md-nav__link">
         
   
   
@@ -549,7 +611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="upgrading/" class="md-nav__link">
+      <a href="../upgrading/" class="md-nav__link">
         
   
   
@@ -591,18 +653,78 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-can-i-do-with-superstack" class="md-nav__link">
+  <a href="#open-a-psql-shell" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 What Can I Do with SuperStack?
+      📟 Open a psql Shell
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+  <a href="#run-inline-sql-commands" class="md-nav__link">
     <span class="md-ellipsis">
-      📚 Documentation
+      🔹 Run Inline SQL Commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customize-psql-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Customize psql Behavior
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Customize psql Behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-a-config-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Step 1: Create a config directory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psqlrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 .psqlrc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 .inputrc
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-mount-and-apply-the-configs" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 Step 2: Mount and apply the configs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-restart-the-postgres-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔁 Step 3: Restart the Postgres container
     </span>
   </a>
   
@@ -627,34 +749,56 @@
   
 
 
-<p><img alt="SuperStack" src="assets/logo.png" /></p>
-<h1 id="superstack">SuperStack</h1>
-<p><em>SuperStack</em> is a lightweight, modular backend powered by PostgreSQL —
-perfect for indie developers, SaaS builders, and teams who want full
-rontrol without the bloat.</p>
-<p>Spin up a fully working backend in seconds, with zero setup. Just clone and
-run.</p>
-<hr />
-<h2 id="what-can-i-do-with-superstack">🚀 What Can I Do with SuperStack?</h2>
-<p>It's perfect for:</p>
-<ul>
-<li>🧱 Building SaaS apps</li>
-<li>💻 Running multiple stacks locally</li>
-<li>📦 Easy database migrations</li>
-<li>🔧 Customizing your toolchain</li>
-</ul>
-<p>Everything runs inside Docker and routes through a single exposed port (via
-Caddy), making it easy to develop locally or deploy remotely.</p>
-<hr />
-<h2 id="documentation">📚 Documentation</h2>
-<ul>
-<li><a href="gettingstarted/">Getting Started</a></li>
-<li><a href="migrations/">Migrations</a></li>
-<li><a href="extensions/">Postgres Extensions</a></li>
-<li><a href="authentication/">Authentication</a></li>
-<li><a href="psql/">Psql</a></li>
-<li><a href="deploying/">Deploying to Remote Environments</a></li>
-</ul>
+<h1 id="using-psql">🖥️ Using psql</h1>
+<p><code>psql</code> is the command-line tool for interacting with your PostgreSQL
+database. SuperStack makes it easy to run psql inside the container using a
+helper script.</p>
+<h2 id="open-a-psql-shell">📟 Open a psql Shell</h2>
+<p>To connect interactively:</p>
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>psql
+</code></pre></div>
+<p>Example output:</p>
+<div class="highlight"><pre><span></span><code>psql (17.5 (Debian 17.5-1.pgdg120+1))
+Type &quot;help&quot; for help.
+
+app=#
+</code></pre></div>
+<h2 id="run-inline-sql-commands">🔹 Run Inline SQL Commands</h2>
+<p>You can also run SQL directly from the command line:</p>
+<div class="highlight"><pre><span></span><code>bin/postgres psql -c &#39;select * from api.movie;&#39;
+</code></pre></div>
+<h2 id="customize-psql-behavior">⚙️ Customize psql Behavior</h2>
+<p>You can persist your preferences using <code>.psqlrc</code> and <code>.inputrc</code>.</p>
+<h3 id="step-1-create-a-config-directory">🔧 Step 1: Create a config directory</h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>postgres/rc
+</code></pre></div>
+<h3 id="psqlrc">📄 .psqlrc</h3>
+<p>Create <code>postgres/rc/.psqlrc</code> with your preferred settings:</p>
+<div class="highlight"><pre><span></span><code>\pset pager off
+\setenv PAGER &#39;less -S&#39;
+</code></pre></div>
+<p>See the <a href="https://www.postgresql.org/docs/current/app-psql.html">official psql
+reference</a> for all
+available options.</p>
+<h3 id="inputrc">📄 .inputrc</h3>
+<p>Create <code>postgres/rc/.inputrc</code> to set readline behavior:</p>
+<div class="highlight"><pre><span></span><code>set editing-mode vi
+</code></pre></div>
+<h2 id="step-2-mount-and-apply-the-configs">🔗 Step 2: Mount and apply the configs</h2>
+<p>Add to your <code>compose.override.yaml</code> (this file is for development-only
+overriding of <code>compose.yaml</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./postgres/rc:/rc:ro</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">PSQLRC</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/rc/.psqlrc</span>
+<span class="w">      </span><span class="nt">INPUTRC</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/rc/.inputrc</span>
+</code></pre></div>
+<h2 id="step-3-restart-the-postgres-container">🔁 Step 3: Restart the Postgres container</h2>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>postgres
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgres
+</code></pre></div>
 
 
 
@@ -683,15 +827,31 @@ Caddy), making it easy to develop locally or deploy remotely.</p>
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../rabbitmq/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RabbitMQ">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                RabbitMQ
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="gettingstarted/" class="md-footer__link md-footer__link--next" aria-label="Next: Getting Started">
+          <a href="../deploying/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploying to Remote Environments">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Getting Started
+                Deploying to Remote Environments
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -727,10 +887,10 @@ Caddy), making it easy to develop locally or deploy remotely.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
     
   </body>

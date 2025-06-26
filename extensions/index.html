@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/superstack/">
+        <link rel="canonical" href="https://explodinglabs.com/superstack/extensions/">
       
       
+        <link rel="prev" href="../migrations/">
       
-        <link rel="next" href="gettingstarted/">
+      
+        <link rel="next" href="../authentication/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>SuperStack</title>
+        <title>Postgres Extensions - SuperStack</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#superstack" class="md-skip">
+        <a href="#postgres-extensions" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="SuperStack" class="md-header__button md-logo" aria-label="SuperStack" data-md-component="logo">
+    <a href=".." title="SuperStack" class="md-header__button md-logo" aria-label="SuperStack" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Postgres Extensions
             
           </span>
         </div>
@@ -234,7 +236,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="SuperStack" class="md-nav__button md-logo" aria-label="SuperStack" data-md-component="logo">
+    <a href=".." title="SuperStack" class="md-nav__button md-logo" aria-label="SuperStack" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -261,6 +263,113 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gettingstarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Build your App
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Build your App
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migrations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -278,7 +387,7 @@
   
   
   <span class="md-ellipsis">
-    Home
+    Postgres Extensions
     
   </span>
   
@@ -286,12 +395,12 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Postgres Extensions
     
   </span>
   
@@ -314,20 +423,53 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-can-i-do-with-superstack" class="md-nav__link">
+  <a href="#loading-a-built-in-extension" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 What Can I Do with SuperStack?
+      🔌 Loading a Built-In Extension
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+  <a href="#building-an-extension-from-source" class="md-nav__link">
     <span class="md-ellipsis">
-      📚 Documentation
+      🛠️ Building an Extension from Source
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Building an Extension from Source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clone-the-extension-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Clone the Extension Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-modify-the-postgres-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Modify the Postgres Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rebuild-the-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Rebuild the Container
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -338,88 +480,6 @@
     </li>
   
 
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="gettingstarted/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Getting Started
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Build your App
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Build your App
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="migrations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Migrations
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -429,30 +489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extensions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Postgres Extensions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="authentication/" class="md-nav__link">
+      <a href="../authentication/" class="md-nav__link">
         
   
   
@@ -475,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="rabbitmq/" class="md-nav__link">
+      <a href="../rabbitmq/" class="md-nav__link">
         
   
   
@@ -505,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="psql/" class="md-nav__link">
+      <a href="../psql/" class="md-nav__link">
         
   
   
@@ -527,7 +564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="deploying/" class="md-nav__link">
+      <a href="../deploying/" class="md-nav__link">
         
   
   
@@ -549,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="upgrading/" class="md-nav__link">
+      <a href="../upgrading/" class="md-nav__link">
         
   
   
@@ -591,20 +628,53 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-can-i-do-with-superstack" class="md-nav__link">
+  <a href="#loading-a-built-in-extension" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 What Can I Do with SuperStack?
+      🔌 Loading a Built-In Extension
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+  <a href="#building-an-extension-from-source" class="md-nav__link">
     <span class="md-ellipsis">
-      📚 Documentation
+      🛠️ Building an Extension from Source
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Building an Extension from Source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clone-the-extension-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Clone the Extension Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-modify-the-postgres-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Modify the Postgres Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rebuild-the-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Rebuild the Container
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -627,34 +697,48 @@
   
 
 
-<p><img alt="SuperStack" src="assets/logo.png" /></p>
-<h1 id="superstack">SuperStack</h1>
-<p><em>SuperStack</em> is a lightweight, modular backend powered by PostgreSQL —
-perfect for indie developers, SaaS builders, and teams who want full
-rontrol without the bloat.</p>
-<p>Spin up a fully working backend in seconds, with zero setup. Just clone and
-run.</p>
-<hr />
-<h2 id="what-can-i-do-with-superstack">🚀 What Can I Do with SuperStack?</h2>
-<p>It's perfect for:</p>
-<ul>
-<li>🧱 Building SaaS apps</li>
-<li>💻 Running multiple stacks locally</li>
-<li>📦 Easy database migrations</li>
-<li>🔧 Customizing your toolchain</li>
-</ul>
-<p>Everything runs inside Docker and routes through a single exposed port (via
-Caddy), making it easy to develop locally or deploy remotely.</p>
-<hr />
-<h2 id="documentation">📚 Documentation</h2>
-<ul>
-<li><a href="gettingstarted/">Getting Started</a></li>
-<li><a href="migrations/">Migrations</a></li>
-<li><a href="extensions/">Postgres Extensions</a></li>
-<li><a href="authentication/">Authentication</a></li>
-<li><a href="psql/">Psql</a></li>
-<li><a href="deploying/">Deploying to Remote Environments</a></li>
-</ul>
+<h1 id="postgres-extensions">🧩 Postgres Extensions</h1>
+<p>SuperStack supports PostgreSQL extensions, letting you add powerful
+features like cryptographic functions or JWT handling.</p>
+<h2 id="loading-a-built-in-extension">🔌 Loading a Built-In Extension</h2>
+<p>To load a standard extension (like pgcrypto), create a migration file such
+as:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- File: postgres/migrations/01-extensions.sql</span>
+
+<span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>⚠️ <code>create extension</code> is non-transactional, so don’t wrap this file in
+<code>BEGIN/COMMIT</code>.</p>
+</blockquote>
+<h2 id="building-an-extension-from-source">🛠️ Building an Extension from Source</h2>
+<p>Some extensions (like <a href="https://github.com/michelp/pgjwt">pgjwt</a>) must be
+compiled manually.</p>
+<h3 id="1-clone-the-extension-source">1. Clone the Extension Source</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/michelp/pgjwt<span class="w"> </span>postgres/pgjwt
+</code></pre></div>
+<h3 id="2-modify-the-postgres-dockerfile">2. Modify the Postgres Dockerfile</h3>
+<p>Edit <code>postgres/Dockerfile</code> to install build tools and compile the
+extension:</p>
+<div class="highlight"><pre><span></span><code>RUN apt-get update &amp;&amp; apt-get install -y \
+    build-essential \
+    postgresql-server-dev-17
+
+# pgjwt - used by the auth schema
+COPY ./pgjwt /pgjwt
+WORKDIR /pgjwt
+RUN make &amp;&amp; make install
+
+# Reset workdir
+WORKDIR /var/lib/postgresql
+</code></pre></div>
+<blockquote>
+<p>🧼 Set <code>WORKDIR</code> back to the default to avoid unintended effects.</p>
+</blockquote>
+<h3 id="3-rebuild-the-container">3. Rebuild the Container</h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>postgres
+</code></pre></div>
+<p>That’s it — the extension is now available to load in your migrations.</p>
 
 
 
@@ -683,15 +767,31 @@ Caddy), making it easy to develop locally or deploy remotely.</p>
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../migrations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Migrations">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Migrations
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="gettingstarted/" class="md-footer__link md-footer__link--next" aria-label="Next: Getting Started">
+          <a href="../authentication/" class="md-footer__link md-footer__link--next" aria-label="Next: Authentication">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Getting Started
+                Authentication
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -727,10 +827,10 @@ Caddy), making it easy to develop locally or deploy remotely.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
     
   </body>
