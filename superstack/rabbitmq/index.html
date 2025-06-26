@@ -759,10 +759,13 @@
 <span class="c1"># pg_amqp - Used by api schema</span>
 COPY<span class="w"> </span>./pg_amqp<span class="w"> </span>/pg_amqp
 WORKDIR<span class="w"> </span>/pg_amqp
-RUN<span class="w"> </span>make
-RUN<span class="w"> </span>make<span class="w"> </span>install
+RUN<span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
 
 WORKDIR<span class="w"> </span>/var/lib/postgresql
+</code></pre></div>
+<p>Then rebuild the Postgres imageand recreate the container:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>postgres
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgres
 </code></pre></div>
 <blockquote>
 <p>You may need to fix "implicit int" errors in pg_amqp, which were reported

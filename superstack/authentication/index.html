@@ -538,6 +538,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -762,6 +786,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -803,11 +851,9 @@ RUN<span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp
 
 WORKDIR<span class="w"> </span>/var/lib/postgresql
 </code></pre></div>
-<p>Then rebuild:</p>
+<p>Then rebuild the Postgres imageand recreate the container:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>postgres
-</code></pre></div>
-<p>And recreate the running container:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgres
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgres
 </code></pre></div>
 <h2 id="2-add-migrations">➡️ 2. Add Migrations</h2>
 <h3 id="load-required-extensions">📚 Load Required Extensions</h3>
@@ -996,11 +1042,36 @@ non-transactional.</p>
 applied.</p>
 <h2 id="4-add-the-auth-schema-to-postgrest">4. Add the Auth Schema to PostgREST</h2>
 <p>Add the auth schema to Postgres in <code>compose.yaml</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">PGRST_DB_SCHEMAS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api,auth</span>
+<div class="highlight"><pre><span></span><code><span class="nt">postgrest</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">PGRST_DB_SCHEMAS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api,auth</span>
 </code></pre></div>
-<p>✅ Usage</p>
-<p>Explain that all auth endpoints must have a certain header.</p>
-<p>Show example of using each endpoint.</p>
+<p>And recreate the PostgREST container:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgrest
+</code></pre></div>
+<h2 id="usage">✅ Usage</h2>
+<p>To use the <code>auth</code> schema, requests <a href="https://docs.postgrest.org/en/stable/references/api/schemas.html#multiple-schemas">must include a
+header</a>.</p>
+<p>GET and HEAD requests should include the header:</p>
+<div class="highlight"><pre><span></span><code>Accept-Profile: auth
+</code></pre></div>
+<p>Other methods (POST, PATCH, PUT and DELETE) should include:</p>
+<div class="highlight"><pre><span></span><code>Content-Profile: auth
+</code></pre></div>
+<h3 id="examples">Examples</h3>
+<p>Login:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Profile: auth&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--data<span class="w"> </span><span class="s1">&#39;{&quot;user_&quot;: &quot;demo&quot;, &quot;pass&quot;: &quot;demo&quot;}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>http://localhost/rpc/login
+</code></pre></div>
+<p>Get the refresh token inserted when logged in:</p>
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>psql<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;select token from auth.refresh_token order by created_at desc limit 1&#39;</span>
+</code></pre></div>
+<p>Refresh the access token and extract the new token from the Set-Cookie header:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">ACCESS_TOKEN</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>--silent<span class="w"> </span>-i<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Cookie: refresh_token=&#39;</span><span class="nv">$REFRESH_TOKEN</span><span class="s1">&#39;; HttpOnly&#39;</span><span class="w"> </span>http://localhost/rpc/refresh_token<span class="w"> </span><span class="p">|</span>sed<span class="w"> </span>-nE<span class="w"> </span><span class="s1">&#39;s/^Set-Cookie: access_token=([^;]*).*/\1/p&#39;</span><span class="k">)</span>
+</code></pre></div>
 <ul>
 <li>POST-ing a user.</li>
 <li><code>/rpc/login</code></li>
