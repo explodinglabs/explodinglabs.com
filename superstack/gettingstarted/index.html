@@ -422,12 +422,20 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
 </code></pre></div>
 <h2 id="2-configure-environment-variables">2. Configure Environment Variables</h2>
-<p>Copy the example file:</p>
+<p>Copy the example environment file:</p>
 <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>example.env<span class="w"> </span>.env
 </code></pre></div>
+<p>This <code>.env</code> file is used to configure:</p>
+<ul>
+<li><strong>Secrets</strong> – Passwords, keys, etc.</li>
+<li><strong>Ports</strong> – Configured with env vars so you can adjust the exposed ports
+  (specifically, Caddy's) depending on application (you may bring up multiple
+  for development) or environment.</li>
+</ul>
 <blockquote>
-<p>⚠️ <strong>The .env file is for local development only.</strong> Don't store real secrets
-in production — use CI/CD environment variables or a secrets manager.</p>
+<p>⚠️ Important: This file is for local development only. Never store real
+secrets in version control or production. Use CI/CD environment variables or
+a secrets manager instead.</p>
 </blockquote>
 <h2 id="3-start-the-stack">3. Start the Stack</h2>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
