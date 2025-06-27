@@ -164,11 +164,29 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-clone-superstack">
+<a class="md-nav__link" href="#get-superstack">
 <span class="md-ellipsis">
-      1. Clone SuperStack
+      Get SuperStack
     </span>
 </a>
+<nav aria-label="Get SuperStack" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#option-1-use-the-template-recommended">
+<span class="md-ellipsis">
+      Option 1: Use the Template (Recommended)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#option-2-clone-and-track-upstream-advanced">
+<span class="md-ellipsis">
+      Option 2: Clone and Track Upstream (Advanced)
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#2-configure-environment-variables">
@@ -297,11 +315,29 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-clone-superstack">
+<a class="md-nav__link" href="#get-superstack">
 <span class="md-ellipsis">
-      1. Clone SuperStack
+      Get SuperStack
     </span>
 </a>
+<nav aria-label="Get SuperStack" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#option-1-use-the-template-recommended">
+<span class="md-ellipsis">
+      Option 1: Use the Template (Recommended)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#option-2-clone-and-track-upstream-advanced">
+<span class="md-ellipsis">
+      Option 2: Clone and Track Upstream (Advanced)
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#2-configure-environment-variables">
@@ -348,42 +384,28 @@
 <h1 id="getting-started">🚀 Getting Started</h1>
 <p>SuperStack uses Docker, so make sure <a href="https://docs.docker.com/get-docker/">Docker is
 installed</a> before you begin.</p>
-<h2 id="1-clone-superstack">1. Clone SuperStack</h2>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/explodinglabs/superstack<span class="w"> </span>myapp
+<h2 id="get-superstack">Get SuperStack</h2>
+<h3 id="option-1-use-the-template-recommended">Option 1: Use the Template (Recommended)</h3>
+<p>The easiest way to get started:</p>
+<p>Click <a href="https://github.com/explodinglabs/superstack/generate">Use this template</a>
+and create a new repository (e.g. <code>myapp</code>) on GitHub.</p>
+<p>Clone your new repository:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yourname/myapp.git
 <span class="nb">cd</span><span class="w"> </span>myapp
 </code></pre></div>
-<details>
-<summary>Click here to see how to change this clone to point "origin" to your own hosted repository (Recommended)</summary>
-
-Rename "origin" to "upstream":
-
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>rename<span class="w"> </span>origin<span class="w"> </span>upstream
+<h3 id="option-2-clone-and-track-upstream-advanced">Option 2: Clone and Track Upstream (Advanced)</h3>
+<p>If you want to keep SuperStack’s Git history and pull upstream changes later:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/explodinglabs/superstack.git<span class="w"> </span>myapp
+<span class="nb">cd</span><span class="w"> </span>myapp
 </code></pre></div>
-
-This way you can still upgrade to a more recent SuperStack with:
-
+<p>Create your own repo at <a href="https://github.com/new">https://github.com/new</a>, then:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>rename<span class="w"> </span>origin<span class="w"> </span>upstream
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/yourname/myapp.git
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<p>You can now pull upstream changes with:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
 </code></pre></div>
-
-Add your own code repository:
-
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/yourname/myapp
-</code></pre></div>
-
-Now you can pull/push to your own repo as normal:
-
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull
-git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>head
-</code></pre></div>
-<h3>Why not just fork SuperStack?</h3>
-
-Because you can't make a fork private.
-
-<h3>Why not make SuperStack a template repo?</h3>
-
-Because then you can't pull from upstream SuperStack.
-
-</details>
 <h2 id="2-configure-environment-variables">2. Configure Environment Variables</h2>
 <p>Copy the example file:</p>
 <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>example.env<span class="w"> </span>.env
@@ -396,8 +418,9 @@ set environment variables using CI/CD or inline in the <code>docker compose up</
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>That's it – your backend is live.</p>
-<p>You can now open <a href="http://localhost:8000/openapi/">localhost:8000/openapi/</a>
-to explore your API.</p>
+<p>You can now open
+<a href="http://localhost:8000/openapi/">https://localhost:8000/openapi/</a> to explore
+your API.</p>
 <hr/>
 <h2 id="what-just-happened">🧩 What Just Happened?</h2>
 <p>SuperStack automatically:</p>
