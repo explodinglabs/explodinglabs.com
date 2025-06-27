@@ -164,12 +164,12 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#get-superstack">
+<a class="md-nav__link" href="#1-get-superstack">
 <span class="md-ellipsis">
-      Get SuperStack
+      1. Get SuperStack
     </span>
 </a>
-<nav aria-label="Get SuperStack" class="md-nav">
+<nav aria-label="1. Get SuperStack" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#option-1-use-the-template-recommended">
@@ -210,9 +210,16 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#nuke-everything">
+<a class="md-nav__link" href="#project-structure">
 <span class="md-ellipsis">
-      Nuke everything
+      Project Structure
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#resetting">
+<span class="md-ellipsis">
+      🔄 Resetting
     </span>
 </a>
 </li>
@@ -315,12 +322,12 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#get-superstack">
+<a class="md-nav__link" href="#1-get-superstack">
 <span class="md-ellipsis">
-      Get SuperStack
+      1. Get SuperStack
     </span>
 </a>
-<nav aria-label="Get SuperStack" class="md-nav">
+<nav aria-label="1. Get SuperStack" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#option-1-use-the-template-recommended">
@@ -361,9 +368,16 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#nuke-everything">
+<a class="md-nav__link" href="#project-structure">
 <span class="md-ellipsis">
-      Nuke everything
+      Project Structure
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#resetting">
+<span class="md-ellipsis">
+      🔄 Resetting
     </span>
 </a>
 </li>
@@ -384,22 +398,22 @@
 <h1 id="getting-started">🚀 Getting Started</h1>
 <p>SuperStack uses Docker, so make sure <a href="https://docs.docker.com/get-docker/">Docker is
 installed</a> before you begin.</p>
-<h2 id="get-superstack">Get SuperStack</h2>
+<h2 id="1-get-superstack">1. Get SuperStack</h2>
 <h3 id="option-1-use-the-template-recommended">Option 1: Use the Template (Recommended)</h3>
 <p>The easiest way to get started:</p>
 <p>Click <a href="https://github.com/explodinglabs/superstack/generate">Use this template</a>
 and create a new repository (e.g. <code>myapp</code>) on GitHub.</p>
-<p>Clone your new repository:</p>
+<p>Clone it to your machine:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yourname/myapp.git
 <span class="nb">cd</span><span class="w"> </span>myapp
 </code></pre></div>
 <h3 id="option-2-clone-and-track-upstream-advanced">Option 2: Clone and Track Upstream (Advanced)</h3>
-<p>If you want to keep SuperStack’s Git history and pull upstream SuperStack
-changes later, clone SuperStack:</p>
+<p>If you want to keep SuperStack’s Git history and pull upstream changes later,
+clone SuperStack:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/explodinglabs/superstack.git<span class="w"> </span>myapp
 <span class="nb">cd</span><span class="w"> </span>myapp
 </code></pre></div>
-<p>Create your own repo at <a href="https://github.com/new">https://github.com/new</a>, then:</p>
+<p><a href="https://github.com/new">Create your own repo</a>, then:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>rename<span class="w"> </span>origin<span class="w"> </span>upstream
 git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/yourname/myapp.git
 git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
@@ -412,25 +426,25 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
 <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>example.env<span class="w"> </span>.env
 </code></pre></div>
 <blockquote>
-<p>⚠️ The .env file is for local development only. For remote deployments,
-set environment variables using CI/CD or inline in the <code>docker compose up</code> command (be sure to avoid saving secrets in shell history).</p>
+<p>⚠️ <strong>The .env file is for local development only.</strong> Don't store real secrets
+in production — use CI/CD environment variables or a secrets manager.</p>
 </blockquote>
 <h2 id="3-start-the-stack">3. Start the Stack</h2>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>That's it – your backend is live.</p>
 <p>You can now open
-<a href="http://localhost:8000/openapi/">https://localhost:8000/openapi/</a> to explore
+<a href="http://localhost:8000/openapi/">http://localhost:8000/openapi/</a> to explore
 your API.</p>
 <hr/>
 <h2 id="what-just-happened">🧩 What Just Happened?</h2>
 <p>SuperStack automatically:</p>
-<ul>
-<li>Starts a fresh <strong>Postgres</strong> database</li>
-<li>Applies initial <strong>migrations</strong></li>
-<li>Launches <strong>PostgREST</strong> and <strong>Swagger UI</strong></li>
-<li>Serves everything through <strong>Caddy</strong></li>
-</ul>
+<ol>
+<li>Starts a fresh Postgres database</li>
+<li>Applies initial migrations</li>
+<li>Launches PostgREST and Swagger UI</li>
+<li>Serves everything through Caddy</li>
+</ol>
 <pre class="mermaid"><code>flowchart TD
     Caddy["Caddy (API Gateway)"]
     Caddy --&gt; Services["Services (PostgREST, Swagger UI + more)"]
@@ -439,10 +453,25 @@ your API.</p>
 <blockquote>
 <p>💡 Only Caddy exposes a port – all services are routed through it.</p>
 </blockquote>
-<h2 id="nuke-everything">Nuke everything</h2>
-<p>To wipe your stack and start clean:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
+<h2 id="project-structure">Project Structure</h2>
+<div class="highlight"><pre><span></span><code>📁 bin/                  → Helper scripts (e.g. wrappers for CLI tools)
+📁 caddy/                → Custom Caddy configuration and certificates
+📁 docs/                 → Markdown files for SuperStack documentation
+📁 postgres/             → SQL migrations and configuration of the postgres container
+📄 compose.yaml          → Main Docker Compose config
+📄 compose.override.yaml → Optional local overrides (development only)
+📄 example.env           → Example environment variables — copy to `.env`
+📄 LICENSE               → License file (MIT)
+📄 logo.png              → SuperStack logo for README/docs
+📄 mkdocs.yml            → MkDocs configuration for documentation site
+📄 README.md             → Overview and quick start for the repository
 </code></pre></div>
+<h2 id="resetting">🔄 Resetting</h2>
+<p>If you want to start fresh:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>This will wipe your database and re-run all migrations from scratch.</p>
 <h2 id="whats-next">➕ What's Next?</h2>
 <p>👉 <a href="../migrations/">Create your database schema with migrations</a><br/>
 👉 <a href="../deploying/">Deploy to a remote environment</a></p>
