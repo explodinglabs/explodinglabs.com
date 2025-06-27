@@ -543,6 +543,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-add-rabbitmq-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Add RabbitMQ Service
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -726,6 +735,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-add-rabbitmq-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Add RabbitMQ Service
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -817,6 +835,16 @@ non-transactional.</p>
 </code></pre></div>
 <p>SuperStack will execute the new migration files, skipping those already
 applied.</p>
+<h2 id="4-add-rabbitmq-service">4. Add RabbitMQ Service</h2>
+<p>Add to <code>compose.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rabbitmq</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rabbitmq:3</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5672:5672</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;-rabbit</span><span class="nv"> </span><span class="s">channel_max</span><span class="nv"> </span><span class="s">0&quot;</span>
+</code></pre></div>
 
 
 
