@@ -432,17 +432,19 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
   environment or application (you may bring up multiple for development).</li>
 </ul>
 <blockquote>
-<p>⚠️ Important: This file is for local development only. Never store real
+<p>⚠️ Important: The .env file is for local development only. Never store real
 secrets in version control or production. Use CI/CD environment variables or
 a secrets manager instead.</p>
 </blockquote>
+<p>To start multiple applications, be sure to configure different Caddy ports for
+each.</p>
 <h2 id="3-start-the-stack">3. Start the Stack</h2>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>That's it – your backend is live.</p>
 <p>You can now open
 <a href="http://localhost:8000/openapi/">http://localhost:8000/openapi/</a> to explore
-your API.</p>
+your API (assuming 8000 is your Caddy port).</p>
 <hr/>
 <h2 id="what-just-happened">🧩 What Just Happened?</h2>
 <p>SuperStack automatically:</p>
