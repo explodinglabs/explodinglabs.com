@@ -424,25 +424,25 @@ into a nice namedtuple.</p>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">parse</span><span class="p">({</span><span class="s2">&quot;jsonrpc&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;There was an error&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 <span class="n">Error</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;There was an error&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div>
-<p>If you have a string, use <code>parse_json</code>.
+<p>If you have a string, use <code>parse_json</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">parse_json</span><span class="p">(</span><span class="s1">&#39;{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;result&quot;: &quot;pong&quot;, &quot;id&quot;: 1}&#39;</span><span class="p">)</span>
 <span class="n">Ok</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="s1">&#39;pong&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div></p>
-<p>To use the result, in Python versions prior to 3.10:
+</code></pre></div>
+<p>To use the result, in Python versions prior to 3.10:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">jsonrpcclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">Error</span><span class="p">,</span> <span class="n">Ok</span>
 <span class="n">parsed</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span> <span class="n">Ok</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parse</span><span class="p">,</span> <span class="n">Error</span><span class="p">):</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">parsed</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-</code></pre></div></p>
-<p>In Python 3.10+, use pattern matching:
+</code></pre></div>
+<p>In Python 3.10+, use pattern matching:</p>
 <div class="highlight"><pre><span></span><code><span class="k">match</span> <span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
     <span class="k">case</span> <span class="n">Ok</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">case</span> <span class="n">Error</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
 
 
 
