@@ -361,19 +361,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Examples
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -385,61 +372,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#aiohttp" class="md-nav__link">
-    <span class="md-ellipsis">
-      aiohttp
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requests" class="md-nav__link">
-    <span class="md-ellipsis">
-      Requests
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#websockets" class="md-nav__link">
-    <span class="md-ellipsis">
-      Websockets
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#zeromq" class="md-nav__link">
-    <span class="md-ellipsis">
-      ZeroMQ
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -465,50 +397,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#aiohttp" class="md-nav__link">
-    <span class="md-ellipsis">
-      aiohttp
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requests" class="md-nav__link">
-    <span class="md-ellipsis">
-      Requests
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#websockets" class="md-nav__link">
-    <span class="md-ellipsis">
-      Websockets
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#zeromq" class="md-nav__link">
-    <span class="md-ellipsis">
-      ZeroMQ
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -527,86 +415,7 @@
 
 
 <h1 id="examples">Examples</h1>
-<h2 id="aiohttp">aiohttp</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">aiohttp</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientSession</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">jsonrpcclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">Error</span><span class="p">,</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">parse</span><span class="p">,</span> <span class="n">request</span>
-
-
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle async request&quot;&quot;&quot;</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-            <span class="s2">&quot;http://localhost:5000&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;ping&quot;</span><span class="p">)</span>
-        <span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-            <span class="n">parsed</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span> <span class="n">Ok</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parse</span><span class="p">,</span> <span class="n">Error</span><span class="p">):</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">parsed</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-
-
-<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
-<p>See <a href="https://explodinglabs.github.io/jsonrpc/aiohttp">blog post</a>.</p>
-<h2 id="requests">Requests</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">jsonrpcclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">Error</span><span class="p">,</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">parse</span><span class="p">,</span> <span class="n">request</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:5000/&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;ping&quot;</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">parsed</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span> <span class="n">Ok</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">parsed</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
-<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span> <span class="n">Error</span><span class="p">):</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">parsed</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="websockets">Websockets</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">websockets.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">connect</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">jsonrpcclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">Error</span><span class="p">,</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">parse_json</span><span class="p">,</span> <span class="n">request_json</span>
-
-
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle request&quot;&quot;&quot;</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">connect</span><span class="p">(</span><span class="s2">&quot;ws://localhost:5000&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">socket</span><span class="p">:</span>
-        <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request_json</span><span class="p">(</span><span class="s2">&quot;ping&quot;</span><span class="p">))</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">parse_json</span><span class="p">(</span><span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">recv</span><span class="p">())</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">Ok</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">Error</span><span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-
-
-<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
-<p>See <a href="https://explodinglabs.github.io/jsonrpc/websockets">blog post</a>.</p>
-<h2 id="zeromq">ZeroMQ</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">zmq</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">jsonrpcclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">parse_json</span><span class="p">,</span> <span class="n">request_json</span>
-
-<span class="n">socket</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REQ</span><span class="p">)</span>
-<span class="n">socket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;tcp://localhost:5000&quot;</span><span class="p">)</span>
-<span class="n">socket</span><span class="o">.</span><span class="n">send_string</span><span class="p">(</span><span class="n">request_json</span><span class="p">(</span><span class="s2">&quot;ping&quot;</span><span class="p">))</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">parse_json</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">Ok</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-</code></pre></div>
-<p>See <a href="https://explodinglabs.github.io/jsonrpc/zeromq">blog post</a>.</p>
+<p>Examples have moved to the <a href="https://github.com/explodinglabs/jsonrpcclient/wiki">Community Wiki</a>.</p>
 
 
 
