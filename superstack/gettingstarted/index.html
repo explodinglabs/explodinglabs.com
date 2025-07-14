@@ -720,6 +720,9 @@ your API (assuming 8000 is your Caddy port).</p>
 <li>Launches PostgREST and Swagger UI</li>
 <li>Serves everything through Caddy</li>
 </ol>
+<blockquote>
+<p>💡 Only Caddy exposes a port – all services are routed through it.</p>
+</blockquote>
 <h2 id="change-the-docker-images-to-your-own-recommended">Change the Docker images to your own (Recommended)</h2>
 <p>In <code>compose.yaml</code>, change the <code>explodinglabs</code> images to your own:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">postgres</span><span class="p">:</span>
