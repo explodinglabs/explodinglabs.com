@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:title" content="How to convert a Python sequence to postfix notation?" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://explodinglabs.github.io/" />
+        <meta property="og:image" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Composition in architecture" />
+
+        <link rel="stylesheet" href="/posts/main.css">
+        <link rel="alternate" type="application/rss+xml" title="Exploding Labs Blog" href="https://explodinglabs.com/posts/feed.xml">
+        <link rel="author" href="https://plus.google.com/u/0/110235318020270619650?rel=author" />
+
+        <link rel="icon" type="image/png" href="/assets/favicon-16x16.png?v=2" sizes="16x16">
+        <link rel="icon" type="image/png" href="/assets/favicon-32x32.png?v=2" sizes="32x32">
+        <link rel="icon" type="image/png" href="/assets/favicon-96x96.png?v=2" sizes="96x96">
+
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png?v=2">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png?v=2">
+        <link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png?v=2">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png?v=2">
+
+        
+
+        <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>How to convert a Python sequence to postfix notation? | Exploding Labs Blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="How to convert a Python sequence to postfix notation?" />
+<meta name="author" content="Beau Barker" />
+<meta property="og:locale" content="en_AU" />
+<meta name="description" content="A programming blog." />
+<meta property="og:description" content="A programming blog." />
+<link rel="canonical" href="https://explodinglabs.com/posts/python/convert-sequence-to-postfix-notation" />
+<meta property="og:url" content="https://explodinglabs.com/posts/python/convert-sequence-to-postfix-notation" />
+<meta property="og:site_name" content="Exploding Labs Blog" />
+<meta property="og:image" content="https://explodinglabs.com/posts/assets/python-wide.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-05-30T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://explodinglabs.com/posts/assets/python-wide.png" />
+<meta property="twitter:title" content="How to convert a Python sequence to postfix notation?" />
+<script type="application/ld+json">
+{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/convert-sequence-to-postfix-notation"},"image":"https://explodinglabs.com/posts/assets/python-wide.png","headline":"How to convert a Python sequence to postfix notation?","dateModified":"2025-07-15T23:00:51+00:00","datePublished":"2018-05-30T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/convert-sequence-to-postfix-notation","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    </head>
+    <body>
+        
+
+
+
+<nav>
+    <div id="logo">
+        <a href="/">Exploding Labs Blog<!--img src="/assets/composed.png" /--></a>
+    </div>
+    <div id="categories">
+        <!--a href="/">All</a> <span>(73)</span-->
+        <a href="/haskell/">Haskell</a> <span>(2)</span>
+        <a href="/jsonrpc/">JSON-RPC</a> <span>(16)</span>
+        <a href="/python/">Python</a> <span>(19)</span>
+        <a href="/airflow/">Airflow</a> <span>(6)</span>
+    </div>
+</nav>
+
+<main>
+
+    <article itemscope itemtype="http://schema.org/BlogPosting">
+        <header>
+            <h1>How to convert a Python sequence to postfix notation?</h1>
+            <div class="post-meta">
+                <time datetime="2018-05-30T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>May 30, 2018</time>.
+                    
+                        Updated <time>Jul 15, 2025</time>.
+                    
+                    <a href="https://github.com/explodinglabs/explodinglabs.github.io/edit/main/docs/_posts/python/2018-05-30-convert-sequence-to-postfix-notation.markdown">
+                        &#9998;
+                    </a>
+                </time>
+            </div>
+        </header>
+        <div class="wide-logos">
+  <p><img src="/assets/python.png" alt="python" /></p>
+</div>
+
+<div id="intro">
+  <p>We have a sequence such as a tuple or list, and want to convert it to a an
+object with named attributes in postfix notation (‘obj.name’).</p>
+</div>
+
+<h2 id="convert-to-an-immutable-object">Convert to an immutable object</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">collections.namedtuple</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Obj'</span><span class="p">,</span> <span class="p">[</span><span class="s">'id'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">])(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span><span class="p">.</span><span class="n">name</span>
+<span class="s">'foo'</span>
+</code></pre></div></div>
+
+<h2 id="convert-to-a-mutable-object">Convert to a mutable object</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">types.SimpleNamespace</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">SimpleNamespace</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">SimpleNamespace</span><span class="p">(</span><span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="s">'id'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">],</span> <span class="n">data</span><span class="p">)))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span><span class="p">.</span><span class="n">name</span>
+<span class="s">'foo'</span>
+</code></pre></div></div>
+
+<p>See also: <a href="/python/convert-dict-to-postfix-notation">Convert a dictionary to postfix notation</a></p>
+
+        <footer>
+            <a href="/python">More Python posts</a>
+        </footer>
+    </article>
+
+    
+
+</main>
+
+    </body>
+</html>

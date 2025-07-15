@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:title" content="How to use Python virtual environments?" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://explodinglabs.github.io/" />
+        <meta property="og:image" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Composition in architecture" />
+
+        <link rel="stylesheet" href="/posts/main.css">
+        <link rel="alternate" type="application/rss+xml" title="Exploding Labs Blog" href="https://explodinglabs.com/posts/feed.xml">
+        <link rel="author" href="https://plus.google.com/u/0/110235318020270619650?rel=author" />
+
+        <link rel="icon" type="image/png" href="/assets/favicon-16x16.png?v=2" sizes="16x16">
+        <link rel="icon" type="image/png" href="/assets/favicon-32x32.png?v=2" sizes="32x32">
+        <link rel="icon" type="image/png" href="/assets/favicon-96x96.png?v=2" sizes="96x96">
+
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png?v=2">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png?v=2">
+        <link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png?v=2">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png?v=2">
+
+        
+
+        <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>How to use Python virtual environments? | Exploding Labs Blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="How to use Python virtual environments?" />
+<meta name="author" content="Beau Barker" />
+<meta property="og:locale" content="en_AU" />
+<meta name="description" content="A programming blog." />
+<meta property="og:description" content="A programming blog." />
+<link rel="canonical" href="https://explodinglabs.com/posts/python/virtualenv" />
+<meta property="og:url" content="https://explodinglabs.com/posts/python/virtualenv" />
+<meta property="og:site_name" content="Exploding Labs Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How to use Python virtual environments?" />
+<script type="application/ld+json">
+{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/virtualenv"},"headline":"How to use Python virtual environments?","dateModified":"2025-07-15T23:00:51+00:00","datePublished":"2021-01-25T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/virtualenv","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    </head>
+    <body>
+        
+
+
+
+<nav>
+    <div id="logo">
+        <a href="/">Exploding Labs Blog<!--img src="/assets/composed.png" /--></a>
+    </div>
+    <div id="categories">
+        <!--a href="/">All</a> <span>(73)</span-->
+        <a href="/haskell/">Haskell</a> <span>(2)</span>
+        <a href="/jsonrpc/">JSON-RPC</a> <span>(16)</span>
+        <a href="/python/">Python</a> <span>(19)</span>
+        <a href="/airflow/">Airflow</a> <span>(6)</span>
+    </div>
+</nav>
+
+<main>
+
+    <article itemscope itemtype="http://schema.org/BlogPosting">
+        <header>
+            <h1>How to use Python virtual environments?</h1>
+            <div class="post-meta">
+                <time datetime="2021-01-25T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Jan 25, 2021</time>.
+                    
+                        Updated <time>Jul 15, 2025</time>.
+                    
+                    <a href="https://github.com/explodinglabs/explodinglabs.github.io/edit/main/docs/_posts/python/2021-01-25-virtualenv.markdown">
+                        &#9998;
+                    </a>
+                </time>
+            </div>
+        </header>
+        <div class="wide-logos">
+  <p><img src="/assets/python.png" alt="python" /></p>
+</div>
+
+<p>Install
+<a href="https://virtualenvwrapper.readthedocs.io/en/latest/">Virtualenvwrapper</a>.</p>
+
+<p>Here’s how I install it on Mac:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">PIP_REQUIRE_VIRTUALENV</span><span class="o">=</span><span class="nb">false </span>pip3 <span class="nb">install</span> <span class="nt">--user</span> <span class="nt">--upgrade</span> virtualenvwrapper
+</code></pre></div></div>
+
+<p>Add the following to your startup script (e.g. <code class="language-plaintext highlighter-rouge">~/.zshenv</code>, <code class="language-plaintext highlighter-rouge">~/.bashrc</code>):</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PIP_REQUIRE_VIRTUALENV</span><span class="o">=</span><span class="nb">true
+export </span><span class="nv">WORKON_HOME</span><span class="o">=</span>~/.virtualenvs
+<span class="nb">export </span><span class="nv">VIRTUALENVWRAPPER_PYTHON</span><span class="o">=</span>/opt/local/bin/python3.8
+<span class="nb">export </span><span class="nv">VIRTUALENVWRAPPER_VIRTUALENV</span><span class="o">=</span>~/Library/Python/3.8/bin/virtualenv
+<span class="nb">source</span> ~/Library/Python/3.8/bin/virtualenvwrapper.sh
+</code></pre></div></div>
+
+<p>Source your startup script to bring the changes into your environment:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.zshenv
+</code></pre></div></div>
+
+<h2 id="usage">Usage</h2>
+
+<p>The main two commands you need are <code class="language-plaintext highlighter-rouge">mkvirtualenv</code> and <code class="language-plaintext highlighter-rouge">workon</code>.</p>
+
+<p>To create a virtualenv:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkvirtualenv <span class="nt">-p</span> <span class="si">$(</span>which python3.6<span class="si">)</span> my_virtualenv
+</code></pre></div></div>
+
+<p>It’s important to specify the specific Python version to use for your specific
+project. Install multiple versions of Python into your system to use for
+different projects.</p>
+
+<p>The virtualenv is created and activated.
+You can install packages into it with <code class="language-plaintext highlighter-rouge">pip install</code>.</p>
+
+<p>After creating the env, always follow with <code class="language-plaintext highlighter-rouge">setvirtualenvproject</code>, which tells the virtualenv to change into the current directory next time you work on this project.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setvirtualenvproject
+</code></pre></div></div>
+
+<p>Next time you want to work on the project:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>workon my_virtualenv
+</code></pre></div></div>
+
+<p>To delete the virtualenv (must be inactive):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deactivate
+rmvirtualenv my_virtualenv
+</code></pre></div></div>
+
+        <footer>
+            <a href="/python">More Python posts</a>
+        </footer>
+    </article>
+
+    
+
+</main>
+
+    </body>
+</html>

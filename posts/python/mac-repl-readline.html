@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:title" content="How to use Readline in the Python REPL on MacOS?" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://explodinglabs.github.io/" />
+        <meta property="og:image" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Composition in architecture" />
+
+        <link rel="stylesheet" href="/posts/main.css">
+        <link rel="alternate" type="application/rss+xml" title="Exploding Labs Blog" href="https://explodinglabs.com/posts/feed.xml">
+        <link rel="author" href="https://plus.google.com/u/0/110235318020270619650?rel=author" />
+
+        <link rel="icon" type="image/png" href="/assets/favicon-16x16.png?v=2" sizes="16x16">
+        <link rel="icon" type="image/png" href="/assets/favicon-32x32.png?v=2" sizes="32x32">
+        <link rel="icon" type="image/png" href="/assets/favicon-96x96.png?v=2" sizes="96x96">
+
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png?v=2">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png?v=2">
+        <link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png?v=2">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png?v=2">
+
+        
+
+        <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>How to use Readline in the Python REPL on MacOS? | Exploding Labs Blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="How to use Readline in the Python REPL on MacOS?" />
+<meta name="author" content="Beau Barker" />
+<meta property="og:locale" content="en_AU" />
+<meta name="description" content="A programming blog." />
+<meta property="og:description" content="A programming blog." />
+<link rel="canonical" href="https://explodinglabs.com/posts/python/mac-repl-readline" />
+<meta property="og:url" content="https://explodinglabs.com/posts/python/mac-repl-readline" />
+<meta property="og:site_name" content="Exploding Labs Blog" />
+<meta property="og:image" content="https://explodinglabs.com/posts/assets/python-wide.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-06-20T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://explodinglabs.com/posts/assets/python-wide.png" />
+<meta property="twitter:title" content="How to use Readline in the Python REPL on MacOS?" />
+<script type="application/ld+json">
+{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/mac-repl-readline"},"image":"https://explodinglabs.com/posts/assets/python-wide.png","headline":"How to use Readline in the Python REPL on MacOS?","dateModified":"2025-07-15T23:00:51+00:00","datePublished":"2018-06-20T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/mac-repl-readline","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    </head>
+    <body>
+        
+
+
+
+<nav>
+    <div id="logo">
+        <a href="/">Exploding Labs Blog<!--img src="/assets/composed.png" /--></a>
+    </div>
+    <div id="categories">
+        <!--a href="/">All</a> <span>(73)</span-->
+        <a href="/haskell/">Haskell</a> <span>(2)</span>
+        <a href="/jsonrpc/">JSON-RPC</a> <span>(16)</span>
+        <a href="/python/">Python</a> <span>(19)</span>
+        <a href="/airflow/">Airflow</a> <span>(6)</span>
+    </div>
+</nav>
+
+<main>
+
+    <article itemscope itemtype="http://schema.org/BlogPosting">
+        <header>
+            <h1>How to use Readline in the Python REPL on MacOS?</h1>
+            <div class="post-meta">
+                <time datetime="2018-06-20T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Jun 20, 2018</time>.
+                    
+                        Updated <time>Jul 15, 2025</time>.
+                    
+                    <a href="https://github.com/explodinglabs/explodinglabs.github.io/edit/main/docs/_posts/python/2018-06-20-mac-repl-readline.markdown">
+                        &#9998;
+                    </a>
+                </time>
+            </div>
+        </header>
+        <div class="wide-logos">
+  <p><img src="/assets/python.png" alt="python" /></p>
+</div>
+
+<div id="intro">
+  <p>How to use readline in the Python interactive interpreter on Mac.</p>
+</div>
+
+<p>Install the gnureadline Python package:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>gnureadline
+</code></pre></div></div>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">~/.pythonstartup.py</code> script:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">atexit</span>
+<span class="kn">import</span> <span class="nn">gnureadline</span> <span class="k">as</span> <span class="n">readline</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span><span class="p">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="p">.</span><span class="n">StreamHandler</span><span class="p">())</span>
+<span class="n">logger</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="p">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="c1"># Enable Tab Completion. OSX's bind should only be applied with legacy readline.
+</span><span class="n">readline</span><span class="p">.</span><span class="n">parse_and_bind</span><span class="p">(</span>
+    <span class="s">"bind ^I rl_complete"</span>
+    <span class="k">if</span> <span class="n">sys</span><span class="p">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s">"darwin"</span> <span class="ow">and</span> <span class="s">"libedit"</span> <span class="ow">in</span> <span class="n">readline</span><span class="p">.</span><span class="n">__doc__</span>
+    <span class="k">else</span> <span class="s">"tab: complete"</span>
+<span class="p">)</span>
+
+<span class="c1"># Enable History File
+</span><span class="n">history_file</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">"PYTHON_HISTORY_FILE"</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"HOME"</span><span class="p">],</span> <span class="s">".pythonhistory"</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">history_file</span><span class="p">):</span>
+    <span class="n">readline</span><span class="p">.</span><span class="n">read_history_file</span><span class="p">(</span><span class="n">history_file</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">open</span><span class="p">(</span><span class="n">history_file</span><span class="p">,</span> <span class="s">"a"</span><span class="p">).</span><span class="n">close</span><span class="p">()</span>
+<span class="n">atexit</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">readline</span><span class="p">.</span><span class="n">write_history_file</span><span class="p">,</span> <span class="n">history_file</span><span class="p">)</span>
+
+<span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"Booted ~/.pythonstartup.py."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Set the <code class="language-plaintext highlighter-rouge">PYTHONSTARTUP</code> env var:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PYTHONSTARTUP</span><span class="o">=</span><span class="nv">$HOME</span>/.pythonstartup.py
+</code></pre></div></div>
+
+<p>Start the Python REPL.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python
+Python 3.6.5 <span class="o">(</span>default, Mar 29 2018, 15:37:32<span class="o">)</span>
+<span class="o">[</span>GCC 4.2.1 Compatible Apple LLVM 9.0.0 <span class="o">(</span>clang-900.0.39.2<span class="o">)]</span> on darwin
+Type <span class="s2">"help"</span>, <span class="s2">"copyright"</span>, <span class="s2">"credits"</span> or <span class="s2">"license"</span> <span class="k">for </span>more information.
+Booted pythonstartup.py.
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div></div>
+
+        <footer>
+            <a href="/python">More Python posts</a>
+        </footer>
+    </article>
+
+    
+
+</main>
+
+    </body>
+</html>

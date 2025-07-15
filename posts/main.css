@@ -1,0 +1,218 @@
+@charset "UTF-8";
+@import url(css/tango.css);
+.highlight { color: #111; }
+
+.highlight .p { color: #666666; }
+
+/* ??? */
+.highlight .il { color: #009999; }
+
+.highlight .hll { background-color: #ffffcc; }
+
+/* Error */
+.highlight .err { color: #a61717; background-color: #e3d2d2; }
+
+/* Text.Whitespace */
+.highlight .w { color: #bbbbbb; }
+
+/* Comment */
+/* Comment.Multiline */
+/* Comment.Preproc */
+/* Comment.Single */
+/* Comment.Special */
+.highlight .c, .highlight .cm, .highlight .cp, .highlight .c1, .highlight .cs { color: #999999; font-style: italic; }
+
+/* Generic.Deleted */
+/* Generic.Emph */
+/* Generic.Error */
+/* Generic.Heading */
+/* Generic.Inserted */
+/* Generic.Output */
+/* Generic.Strong */
+/* Generic.Subheading */
+/* Generic.Traceback */
+/* Rare */
+.highlight .gd, .highlight .ge, .highlight .gr, .highlight .gh, .highlight .gi, .highlight .go, .highlight .gs, .highlight .gu, .highlight .gt { color: #777777; }
+
+/* Generic.Prompt */
+.highlight .gp { color: #777777; }
+
+/* Keyword */
+/* Keyword.Constant */
+/* Keyword.Declaration */
+/* Keyword.Namespace */
+/* Keyword.Reserved */
+/* Keyword.Pseudo */
+/* Keyword.Type */
+/* e.g. from, with, import */
+/* Name.Attribute */
+/* Name.Builtin */
+/* Name.Class */
+/* Name.Constant */
+/* Name.Entity */
+/* Name.Exception */
+/* Name.Function */
+/* Name.Label */
+/* Name.Namespace */
+/* Name.Tag */
+/* Name.Variable */
+/* Name.Builtin.Pseudo */
+/* Name.Variable.Class */
+/* Name.Variable.Global */
+/* Name.Variable.Instance */
+/* e.g. main(), module names */
+.highlight .bp, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .na, .highlight .nb, .highlight .nc, .highlight .no, .highlight .ni, .highlight .ne, .highlight .nf, .highlight .nl, .highlight .nn, .highlight .nt, .highlight .nv { color: #6622cc; }
+
+/* Name.Decorator */
+.highlight .nd { color: #cc0044; }
+
+/* Number.Float */
+/* Number.Hex */
+/* Number.Integer */
+/* Number.Oct */
+/* Number */
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mo, .highlight .mi { color: #2266cc; }
+
+/* Operator */
+/* Operator.Word */
+/* =, + */
+.highlight .o, .highlight .ow { color: #777777; }
+
+/* String.Backtick */
+/* String.Char */
+/* String.Doc */
+/* String.Double */
+/* String.Escape */
+/* String.Heredoc */
+/* String.Interpol */
+/* String.Other */
+/* String.Regex */
+/* String.Single */
+/* String.Symbol */
+/* String */
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss { color: #ff007f; }
+
+.wrapper, main { margin-left: auto; margin-right: auto; max-width: 80ch; padding: 0 1.2rem; }
+
+@media screen and (max-width: 600px) { .wrapper, main { padding: 0; } }
+
+/* Reset some basic elements */
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { margin: 0; padding: 0; }
+
+body { background-color: #fefefe; }
+
+.titletext, main #post-list h1, main article h1, main article h2, main article h3 { font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif; font-style: normal; letter-spacing: -0.5px; line-height: 130%; }
+
+.bodytext, nav, main #post-list, main article header .post-meta, main article #intro, main article p, main article ul, main article ol, main article footer { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif; line-height: 170%; text-align: start; width: auto; word-break: break-word; }
+
+@media screen and (max-width: 600px) { .bodytext, nav, main #post-list, main article header .post-meta, main article #intro, main article p, main article ul, main article ol, main article footer { font-size: 105%; } }
+
+.linktext, main #post-list .link a, main article a, main article footer a { color: #ff0080; text-decoration: none; }
+
+.linktext:visited, main #post-list .link a:visited, main article a:visited { color: #bf4080; }
+
+.linktext:hover, main #post-list .link a:hover, main article a:hover { color: orange; }
+
+nav { background-color: black; margin-bottom: 1.4rem; padding: 10px 1.2rem; font-size: smaller; }
+
+nav #logo { float: left; }
+
+nav #logo a { color: white; text-decoration: none; }
+
+nav #logo img { height: 30px; }
+
+nav #categories { text-align: right; color: black; }
+
+nav #categories a { color: white; margin-left: 0.5em; text-decoration: none; }
+
+nav #categories span { display: none; }
+
+main #post-list { border-collapse: collapse; padding: 0; margin: 0 1.2rem; }
+
+@media screen and (max-width: 600px) { main #post-list { margin: 0 0.6rem; } }
+
+main #post-list #category-logo { display: block; margin: auto; }
+
+main #post-list h1 { margin-bottom: 2.1rem; text-align: center; }
+
+main #post-list .date { text-align: center; font-size: smaller; color: #666666; }
+
+main #post-list .link { text-align: center; margin-bottom: 1.5em; line-height: 1.4em; }
+
+main #post-list .link a { text-decoration: none; }
+
+main article { /* Inline code using single backticks */ }
+
+main article h1 { margin: 2.8rem 1.2rem 0.7rem; }
+
+@media screen and (max-width: 600px) { main article h1 { margin-top: 2.1rem; } }
+
+main article h2 { margin: 2.1rem 1.2rem 1.4rem 1.2rem; font-size: 120%; line-height: 100%; }
+
+main article h3 { margin: 2.1rem 0 1.4rem 0; font-size: 110%; line-height: 100%; }
+
+main article header .post-meta { font-size: smaller; color: #444; margin: 0 1.2rem 2.1rem 1.2rem; }
+
+main article header .post-meta a { color: #444; text-decoration: none; }
+
+@media screen and (max-width: 600px) { main article header .post-meta { margin-bottom: 1.4rem; } }
+
+main article #intro { margin-bottom: 1.4rem; }
+
+main article #intro p { margin: 0; background: linear-gradient(104deg, rgba(130, 255, 173, 0) 0.9%, #82ffad 2.4%, rgba(130, 255, 173, 0.5) 5.8%, rgba(130, 255, 173, 0.1) 93%, rgba(130, 255, 173, 0.7) 96%, rgba(130, 255, 255, 0) 98%), linear-gradient(183deg, rgba(130, 255, 173, 0) 0%, rgba(130, 255, 173, 0.3) 7.9%, rgba(130, 255, 173, 0) 15%); padding: 0.6em 1.2rem; }
+
+main article a { text-decoration: underline; }
+
+main article p { margin: 0 1.2rem 1.4rem 1.2rem; -webkit-font-smoothing: antialiased; }
+
+main article ul, main article ol { margin: 0 1.2rem 1.4rem 3rem; }
+
+@media screen and (max-width: 600px) { main article ul, main article ol { margin-left: 2.4rem; } }
+
+main article ul li, main article ol li { margin-bottom: 0; }
+
+main article ul :last-child, main article ol :last-child { margin-bottom: 0; }
+
+main article img { max-width: 100%; vertical-align: middle; }
+
+main article script + p { padding: 0; margin: 0 0 1.4rem 0; border: 1px solid #ccc; }
+
+main article .warning { margin: 0 1.2rem 1.4rem 1.2rem; }
+
+main article .warning p { font-style: italic; }
+
+main article .warning p:last-child { margin: 0; }
+
+main article .warning p:first-child:before { content: "⚠️  "; margin-right: 5px; }
+
+main article pre, main article code { font-family: "SF Mono", SFMono-Regular, ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace; font-size: 95%; }
+
+main article p code, main article li code { background-color: #fff8c7; border: 1px solid #f5b038; border-radius: 3px; padding: 3px 3px; }
+
+main article .highlight { border-radius: 5px; background-color: #ededed; /* color: #1e1e1e; .bp, .vc, .vg, .vi, .na, .nb, .nc, .no, .ni, .ne, .nf, .nl, .nn, .nt, .nv { color: #cc2266; text-decoration: none; } */ }
+
+main article pre.highlight { line-height: 160%; margin-bottom: 1.4rem; overflow-x: auto; padding: 0.7rem 1.2rem; }
+
+main article blockquote { border-radius: 5px; background-color: #ffd; padding: 1.4rem 1.2rem; margin-bottom: 1.4rem; }
+
+main article blockquote p { font-style: italic; margin-bottom: 1.4rem; margin: 0; }
+
+main article blockquote p:first-child:before { content: "\201C  "; font-size: 60px; position: relative; top: 20px; line-height: 0%; color: #184e31; }
+
+main article blockquote cite { margin-top: 0.7rem; font-size: smaller; font-style: normal; color: #666; text-align: right; display: block; line-height: 150%; }
+
+main article .video-container { background-color: black; position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden; margin-top: 1.4rem; margin-bottom: 1.4rem; }
+
+main article .video-container iframe, main article .video-container object, main article .video-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+main article .icon > svg { display: inline-block; width: 16px; height: 16px; vertical-align: middle; }
+
+main article .icon > svg path { fill: #444; }
+
+main article .wide-logos { float: right; margin-left: 1.2rem; }
+
+@media screen and (max-width: 600px) { main article .wide-logos { /* It's not wide enough to show these */ display: none; } }
+
+main article footer { font-size: smaller; margin: 2.8rem 1.2rem 1.4rem 1.2rem; text-align: left; }
+
+/*# sourceMappingURL=main.css.map */
