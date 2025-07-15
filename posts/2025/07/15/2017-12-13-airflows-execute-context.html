@@ -1,0 +1,52 @@
+<div class="wide-logos">
+  <p><img src="/posts/assets/airflow.png" alt="airflow" /></p>
+</div>
+
+<p>Airflow’s context dictionary can be found in the <code class="language-plaintext highlighter-rouge">get_template_context</code> method,
+in Airflow’s
+<a href="https://github.com/databricks/incubator-airflow/blob/master/airflow/models.py">models.py</a>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s">'dag'</span><span class="p">:</span> <span class="n">task</span><span class="p">.</span><span class="n">dag</span><span class="p">,</span>
+    <span class="s">'ds'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
+    <span class="s">'ds_nodash'</span><span class="p">:</span> <span class="n">ds_nodash</span><span class="p">,</span>
+    <span class="s">'ts'</span><span class="p">:</span> <span class="n">ts</span><span class="p">,</span>
+    <span class="s">'ts_nodash'</span><span class="p">:</span> <span class="n">ts_nodash</span><span class="p">,</span>
+    <span class="s">'yesterday_ds'</span><span class="p">:</span> <span class="n">yesterday_ds</span><span class="p">,</span>
+    <span class="s">'yesterday_ds_nodash'</span><span class="p">:</span> <span class="n">yesterday_ds_nodash</span><span class="p">,</span>
+    <span class="s">'tomorrow_ds'</span><span class="p">:</span> <span class="n">tomorrow_ds</span><span class="p">,</span>
+    <span class="s">'tomorrow_ds_nodash'</span><span class="p">:</span> <span class="n">tomorrow_ds_nodash</span><span class="p">,</span>
+    <span class="s">'END_DATE'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
+    <span class="s">'end_date'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
+    <span class="s">'dag_run'</span><span class="p">:</span> <span class="n">dag_run</span><span class="p">,</span>
+    <span class="s">'run_id'</span><span class="p">:</span> <span class="n">run_id</span><span class="p">,</span>
+    <span class="s">'execution_date'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">execution_date</span><span class="p">,</span>
+    <span class="s">'prev_execution_date'</span><span class="p">:</span> <span class="n">prev_execution_date</span><span class="p">,</span>
+    <span class="s">'next_execution_date'</span><span class="p">:</span> <span class="n">next_execution_date</span><span class="p">,</span>
+    <span class="s">'latest_date'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
+    <span class="s">'macros'</span><span class="p">:</span> <span class="n">macros</span><span class="p">,</span>
+    <span class="s">'params'</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+    <span class="s">'tables'</span><span class="p">:</span> <span class="n">tables</span><span class="p">,</span>
+    <span class="s">'task'</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span>
+    <span class="s">'task_instance'</span><span class="p">:</span> <span class="bp">self</span><span class="p">,</span>
+    <span class="s">'ti'</span><span class="p">:</span> <span class="bp">self</span><span class="p">,</span>
+    <span class="s">'task_instance_key_str'</span><span class="p">:</span> <span class="n">ti_key_str</span><span class="p">,</span>
+    <span class="s">'conf'</span><span class="p">:</span> <span class="n">configuration</span><span class="p">,</span>
+    <span class="s">'test_mode'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">test_mode</span><span class="p">,</span>
+    <span class="s">'var'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'value'</span><span class="p">:</span> <span class="n">VariableAccessor</span><span class="p">(),</span>
+        <span class="s">'json'</span><span class="p">:</span> <span class="n">VariableJsonAccessor</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>An explanation of each item is found in the documentation under
+<a href="https://airflow.apache.org/docs/stable/macros-ref.html">Macros</a>.</p>
+
+<p>Incidentally, you can generate the context from a TaskInstance.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">context</span> <span class="o">=</span> <span class="n">TaskInstance</span><span class="p">(</span>
+    <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+    <span class="n">execution_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+<span class="p">).</span><span class="n">get_template_context</span><span class="p">()</span>
+</code></pre></div></div>
