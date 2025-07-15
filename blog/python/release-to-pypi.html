@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:title" content="How to release a new Python package version to PyPI?" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://explodinglabs.github.io/" />
+        <meta property="og:image" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Composition in architecture" />
+
+        <link rel="stylesheet" href="/blog/main.css">
+        <link rel="alternate" type="application/rss+xml" title="Exploding Labs Blog" href="https://explodinglabs.com/blog/feed.xml">
+        <link rel="author" href="https://plus.google.com/u/0/110235318020270619650?rel=author" />
+
+        <link rel="icon" type="image/png" href="/assets/favicon-16x16.png?v=2" sizes="16x16">
+        <link rel="icon" type="image/png" href="/assets/favicon-32x32.png?v=2" sizes="32x32">
+        <link rel="icon" type="image/png" href="/assets/favicon-96x96.png?v=2" sizes="96x96">
+
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png?v=2">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png?v=2">
+        <link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png?v=2">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png?v=2">
+
+        
+
+        <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>How to release a new Python package version to PyPI? | Exploding Labs Blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="How to release a new Python package version to PyPI?" />
+<meta name="author" content="Beau Barker" />
+<meta property="og:locale" content="en_AU" />
+<meta name="description" content="A programming blog." />
+<meta property="og:description" content="A programming blog." />
+<link rel="canonical" href="https://explodinglabs.com/blog/python/release-to-pypi" />
+<meta property="og:url" content="https://explodinglabs.com/blog/python/release-to-pypi" />
+<meta property="og:site_name" content="Exploding Labs Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How to release a new Python package version to PyPI?" />
+<script type="application/ld+json">
+{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/blog/python/release-to-pypi"},"headline":"How to release a new Python package version to PyPI?","dateModified":"2025-07-15T22:47:43+00:00","datePublished":"2018-10-01T00:00:00+00:00","url":"https://explodinglabs.com/blog/python/release-to-pypi","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    </head>
+    <body>
+        
+
+
+
+<nav>
+    <div id="logo">
+        <a href="/">Exploding Labs Blog<!--img src="/assets/composed.png" /--></a>
+    </div>
+    <div id="categories">
+        <!--a href="/">All</a> <span>(73)</span-->
+        <a href="/haskell/">Haskell</a> <span>(2)</span>
+        <a href="/jsonrpc/">JSON-RPC</a> <span>(16)</span>
+        <a href="/python/">Python</a> <span>(19)</span>
+        <a href="/airflow/">Airflow</a> <span>(6)</span>
+    </div>
+</nav>
+
+<main>
+
+    <article itemscope itemtype="http://schema.org/BlogPosting">
+        <header>
+            <h1>How to release a new Python package version to PyPI?</h1>
+            <div class="post-meta">
+                <time datetime="2018-10-01T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Oct 1, 2018</time>.
+                    
+                        Updated <time>Jul 15, 2025</time>.
+                    
+                    <a href="https://github.com/explodinglabs/explodinglabs.github.io/edit/main/docs/_posts/python/2018-10-01-release-new-version-to-pypi.markdown">
+                        &#9998;
+                    </a>
+                </time>
+            </div>
+        </header>
+        <div class="wide-logos">
+  <p><img src="/assets/python.png" alt="python" /></p>
+</div>
+
+<div id="intro">
+  <p>These are the steps I take when releasing a version of my Python package to
+PyPI.</p>
+</div>
+
+<p>First run your checks/cleaning. I have a post about this
+<a href="/python/checks">here</a>. If any fail, start again.</p>
+
+<p>Run tests.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytest
+<span class="nb">rm</span> <span class="nt">-r</span> .tox<span class="p">;</span> tox  <span class="c"># Continue below while this is running</span>
+</code></pre></div></div>
+
+<p>In a new branch (such as <code class="language-plaintext highlighter-rouge">release/x.x.x</code>):</p>
+<ul>
+  <li>Update version in <code class="language-plaintext highlighter-rouge">pyproject.toml</code> or <code class="language-plaintext highlighter-rouge">setup.py</code>:</li>
+  <li>Update <code class="language-plaintext highlighter-rouge">CHANGELOG.md</code> (stable releases only).</li>
+  <li>Update <code class="language-plaintext highlighter-rouge">README.md</code>, if any.</li>
+  <li>Update documentation.</li>
+</ul>
+
+<div class="warning">
+  <p>Once the release is uploaded, there’s no way to change the <code class="language-plaintext highlighter-rouge">README.md</code> on PyPI,
+or the documentation on Readthedocs, without releasing another version. So take
+care with these in stable releases.</p>
+</div>
+
+<p>Commit, push and merge into main.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-a</span>
+git push origin <span class="nb">head</span>
+</code></pre></div></div>
+
+<p>Pull main, tag the commit and push the tag.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout main
+git pull
+git tag x.x.x
+git push <span class="nt">--tags</span>
+</code></pre></div></div>
+
+<p>Create the package.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">--upgrade</span> pip twine build
+python <span class="nt">-m</span> build <span class="nt">--wheel</span>
+</code></pre></div></div>
+
+<p>Upload the package.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>twine check dist/mypackage-x.x.x.whl
+twine upload dist/mypackage-x.x.x.tar.gz
+</code></pre></div></div>
+
+<p>Update coverage badge.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">--upgrade</span> pytest-cov coveralls pyyaml
+pytest <span class="nt">--cov-branch</span> <span class="nt">--cov-report</span> term-missing <span class="nt">--cov</span> mypackage tests
+coveralls
+</code></pre></div></div>
+
+<p><a href="https://explodinglabs.github.io/trigger-rtd-build">Build readthedocs</a> if there were any
+documentation changes.</p>
+
+<p>Update related blog posts/Stack Overflow posts.</p>
+
+        <footer>
+            <a href="/python">More Python posts</a>
+        </footer>
+    </article>
+
+    
+
+</main>
+
+    </body>
+</html>

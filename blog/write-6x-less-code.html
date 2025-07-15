@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:title" content="Write 6x less code" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://explodinglabs.github.io/" />
+        <meta property="og:image" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Composition in architecture" />
+
+        <link rel="stylesheet" href="/blog/main.css">
+        <link rel="alternate" type="application/rss+xml" title="Exploding Labs Blog" href="https://explodinglabs.com/blog/feed.xml">
+        <link rel="author" href="https://plus.google.com/u/0/110235318020270619650?rel=author" />
+
+        <link rel="icon" type="image/png" href="/assets/favicon-16x16.png?v=2" sizes="16x16">
+        <link rel="icon" type="image/png" href="/assets/favicon-32x32.png?v=2" sizes="32x32">
+        <link rel="icon" type="image/png" href="/assets/favicon-96x96.png?v=2" sizes="96x96">
+
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png?v=2">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png?v=2">
+        <link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png?v=2">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png?v=2">
+
+        
+
+        <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Write 6x less code | Exploding Labs Blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Write 6x less code" />
+<meta name="author" content="Beau Barker" />
+<meta property="og:locale" content="en_AU" />
+<meta name="description" content="I see this repeatedly in my job as a software engineer (using impure imperative languages):" />
+<meta property="og:description" content="I see this repeatedly in my job as a software engineer (using impure imperative languages):" />
+<link rel="canonical" href="https://explodinglabs.com/blog/write-6x-less-code" />
+<meta property="og:url" content="https://explodinglabs.com/blog/write-6x-less-code" />
+<meta property="og:site_name" content="Exploding Labs Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-11T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Write 6x less code" />
+<script type="application/ld+json">
+{"description":"I see this repeatedly in my job as a software engineer (using impure imperative languages):","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/blog/write-6x-less-code"},"headline":"Write 6x less code","dateModified":"2025-07-15T22:47:43+00:00","datePublished":"2021-01-11T00:00:00+00:00","url":"https://explodinglabs.com/blog/write-6x-less-code","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    </head>
+    <body>
+        
+
+
+
+<nav>
+    <div id="logo">
+        <a href="/">Exploding Labs Blog<!--img src="/assets/composed.png" /--></a>
+    </div>
+    <div id="categories">
+        <!--a href="/">All</a> <span>(73)</span-->
+        <a href="/haskell/">Haskell</a> <span>(2)</span>
+        <a href="/jsonrpc/">JSON-RPC</a> <span>(16)</span>
+        <a href="/python/">Python</a> <span>(19)</span>
+        <a href="/airflow/">Airflow</a> <span>(6)</span>
+    </div>
+</nav>
+
+<main>
+
+    <article itemscope itemtype="http://schema.org/BlogPosting">
+        <header>
+            <h1>Write 6x less code</h1>
+            <div class="post-meta">
+                <time datetime="2021-01-11T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Jan 11, 2021</time>.
+                    
+                        Updated <time>Jul 15, 2025</time>.
+                    
+                    <a href="https://github.com/explodinglabs/explodinglabs.github.io/edit/main/docs/_posts/2021-01-11-write-6x-less-code.markdown">
+                        &#9998;
+                    </a>
+                </time>
+            </div>
+        </header>
+        <p>I see this repeatedly in my job as a software engineer (using impure imperative
+languages):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">log</span><span class="p">(</span><span class="s">"Doing something"</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">do_something</span><span class="p">()</span>
+    <span class="n">log</span><span class="p">(</span><span class="s">"Did something"</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">log</span><span class="p">(</span><span class="s">"There was an error"</span><span class="p">)</span>
+</code></pre></div></div>
+<p><em>Followed by the same again ad infinitum.</em></p>
+
+<h2 id="logging-before-and-after-everything">Logging before and after everything</h2>
+
+<p><em>You don’t need to log before doing everything.</em> “Get ready, here it comes!”
+Who cares! Just do the thing!</p>
+
+<p><em>You don’t need to log after doing everything.</em> “We succeeded, yay!” Who cares?</p>
+
+<p><em>You’re only adding noise to the logs, and noise to the code.</em></p>
+
+<h2 id="trying-to-catch-every-exception">Trying to catch every exception</h2>
+
+<p>This is the tendency of the paranoid programmer, every line of code brings
+fear. “Something could go wrong here, I’d better handle it and log a nice
+message. At least it’ll show we foresaw the problem happening.”</p>
+
+<p>The interpreter will log the exception, so you don’t need to do it yourself.</p>
+
+<p>Maybe you’re catching the exception to ignore it, this is usually a bad idea as
+well.</p>
+
+<p>There are untold number of exceptions that could occur. Just let them be. Stop
+wrapping everything in little nets.</p>
+
+<p><em>You’re only adding noise to the code.</em></p>
+
+<h2 id="whats-left-after-all-the-noise-is-removed">What’s left after all the noise is removed</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">do_something</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Worth adding: Logging and exceptions are side effects, so they come with all
+the issues related to them; you lose referential transparency, more difficult
+testability, etc. Use with care.</p>
+
+        <footer>
+            <a href="/">More  posts</a>
+        </footer>
+    </article>
+
+    
+
+</main>
+
+    </body>
+</html>

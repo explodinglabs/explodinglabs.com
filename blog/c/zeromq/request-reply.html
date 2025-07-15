@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:title" content="How to implement ZeroMQ Request/Reply in C?" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://explodinglabs.github.io/" />
+        <meta property="og:image" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Composition in architecture" />
+
+        <link rel="stylesheet" href="/blog/main.css">
+        <link rel="alternate" type="application/rss+xml" title="Exploding Labs Blog" href="https://explodinglabs.com/blog/feed.xml">
+        <link rel="author" href="https://plus.google.com/u/0/110235318020270619650?rel=author" />
+
+        <link rel="icon" type="image/png" href="/assets/favicon-16x16.png?v=2" sizes="16x16">
+        <link rel="icon" type="image/png" href="/assets/favicon-32x32.png?v=2" sizes="32x32">
+        <link rel="icon" type="image/png" href="/assets/favicon-96x96.png?v=2" sizes="96x96">
+
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png?v=2">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png?v=2">
+        <link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png?v=2">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png?v=2">
+
+        
+
+        <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>How to implement ZeroMQ Request/Reply in C? | Exploding Labs Blog</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="How to implement ZeroMQ Request/Reply in C?" />
+<meta name="author" content="Beau Barker" />
+<meta property="og:locale" content="en_AU" />
+<meta name="description" content="Server" />
+<meta property="og:description" content="Server" />
+<link rel="canonical" href="https://explodinglabs.com/blog/c/zeromq/request-reply" />
+<meta property="og:url" content="https://explodinglabs.com/blog/c/zeromq/request-reply" />
+<meta property="og:site_name" content="Exploding Labs Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-07-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How to implement ZeroMQ Request/Reply in C?" />
+<script type="application/ld+json">
+{"description":"Server","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/blog/c/zeromq/request-reply"},"headline":"How to implement ZeroMQ Request/Reply in C?","dateModified":"2025-07-15T22:47:43+00:00","datePublished":"2016-07-17T00:00:00+00:00","url":"https://explodinglabs.com/blog/c/zeromq/request-reply","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    </head>
+    <body>
+        
+
+
+
+<nav>
+    <div id="logo">
+        <a href="/">Exploding Labs Blog<!--img src="/assets/composed.png" /--></a>
+    </div>
+    <div id="categories">
+        <!--a href="/">All</a> <span>(73)</span-->
+        <a href="/haskell/">Haskell</a> <span>(2)</span>
+        <a href="/jsonrpc/">JSON-RPC</a> <span>(16)</span>
+        <a href="/python/">Python</a> <span>(19)</span>
+        <a href="/airflow/">Airflow</a> <span>(6)</span>
+    </div>
+</nav>
+
+<main>
+
+    <article itemscope itemtype="http://schema.org/BlogPosting">
+        <header>
+            <h1>How to implement ZeroMQ Request/Reply in C?</h1>
+            <div class="post-meta">
+                <time datetime="2016-07-17T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Jul 17, 2016</time>.
+                    
+                        Updated <time>Jul 15, 2025</time>.
+                    
+                    <a href="https://github.com/explodinglabs/explodinglabs.github.io/edit/main/docs/_posts/2016-07-17-zeromq-request-reply-in-c.markdown">
+                        &#9998;
+                    </a>
+                </time>
+            </div>
+        </header>
+        <h2 id="server">Server</h2>
+
+<p>The server should handle incoming JSON-RPC requests on port 5000.</p>
+
+<p>Install the <a href="https://github.com/zeromq/czmq">czmq</a> library.</p>
+
+<p>Write a server script, <code class="language-plaintext highlighter-rouge">server.c</code>:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;czmq.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Connect</span>
+    <span class="n">zsock_t</span> <span class="o">*</span><span class="n">responder</span> <span class="o">=</span> <span class="n">zsock_new_rep</span><span class="p">(</span><span class="s">"tcp://*:5000"</span><span class="p">);</span>
+    <span class="c1">// Recv</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">string</span> <span class="o">=</span> <span class="n">zstr_recv</span><span class="p">(</span><span class="n">responder</span><span class="p">);</span>
+    <span class="n">puts</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
+    <span class="n">zstr_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">string</span><span class="p">);</span>
+    <span class="c1">// Send</span>
+    <span class="n">zstr_send</span><span class="p">(</span><span class="n">responder</span><span class="p">,</span> <span class="s">"Pong"</span><span class="p">);</span>
+    <span class="c1">// Disconnect</span>
+    <span class="n">zsock_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">responder</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Build and start the server:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-lczmq</span> server.c <span class="nt">-o</span> server
+<span class="nv">$ </span>./server
+</code></pre></div></div>
+
+<h2 id="client">Client</h2>
+
+<p>Write client script:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;czmq.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Connect</span>
+    <span class="n">zsock_t</span> <span class="o">*</span><span class="n">requester</span> <span class="o">=</span> <span class="n">zsock_new_req</span><span class="p">(</span><span class="s">"tcp://127.0.0.1:5000"</span><span class="p">);</span>
+    <span class="c1">// Send</span>
+    <span class="n">zstr_send</span><span class="p">(</span><span class="n">requester</span><span class="p">,</span> <span class="s">"Ping"</span><span class="p">);</span>
+    <span class="c1">// Recv</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">string</span> <span class="o">=</span> <span class="n">zstr_recv</span><span class="p">(</span><span class="n">requester</span><span class="p">);</span>
+    <span class="n">puts</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
+    <span class="n">zstr_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">string</span><span class="p">);</span>
+    <span class="c1">// Disconnect</span>
+    <span class="n">zsock_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">requester</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Build and run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-lczmq</span> client.c <span class="nt">-o</span> client
+<span class="nv">$ </span>./client
+Pong
+</code></pre></div></div>
+
+        <footer>
+            <a href="/">More  posts</a>
+        </footer>
+    </article>
+
+    
+
+</main>
+
+    </body>
+</html>
