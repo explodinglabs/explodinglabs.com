@@ -1,0 +1,29 @@
+<div class="wide-logos">
+  <p><img src="/posts/assets/python.png" alt="python" /></p>
+</div>
+
+<div id="intro">
+  <p>We have a dictionary, and want to convert it to a an object with postfix
+notation like <code class="language-plaintext highlighter-rouge">obj.name</code>.</p>
+</div>
+
+<h2 id="convert-to-an-immutable-object">Convert to an immutable object</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">collections.namedtuple</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"name"</span><span class="p">:</span> <span class="s">"foo"</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">"Obj"</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">keys</span><span class="p">())(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="n">Obj</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'foo'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="convert-to-a-mutable-object">Convert to a mutable object</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">types.SimpleNamespace</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">SimpleNamespace</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">SimpleNamespace</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"name"</span><span class="p">:</span> <span class="s">"foo"</span><span class="p">})</span>
+<span class="n">namespace</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>See also: <a href="/convert-sequence-to-postfix-notation">Convert a sequence to postfix notation</a></p>

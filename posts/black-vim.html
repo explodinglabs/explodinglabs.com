@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to install or upgrade Black in Vim 8?" />
 <script type="application/ld+json">
-{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/black-vim"},"headline":"How to install or upgrade Black in Vim 8?","dateModified":"2025-07-15T23:16:53+00:00","datePublished":"2021-07-01T00:00:00+00:00","url":"https://explodinglabs.com/posts/black-vim","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/black-vim"},"headline":"How to install or upgrade Black in Vim 8?","dateModified":"2025-07-15T23:32:02+00:00","datePublished":"2021-07-01T00:00:00+00:00","url":"https://explodinglabs.com/posts/black-vim","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -59,11 +59,11 @@
 
 <nav>
   <div id="logo">
-    <a href="/posts/">Exploding Labs Posts<!--img src="/posts/assets/composed.png" /--></a>
+    <a href="https://www.explodinglabs.com/">Exploding Labs</a>
   </div>
   <div id="categories">
-    <!--a href="/posts/">All</a> 
-    <span>(73)</span-->
+    <a href="/posts/">Posts</a> 
+    <span>(73)</span>
     
     <a href="/posts/haskell/">Haskell</a>
     <span>(2)</span>
@@ -72,7 +72,7 @@
     <span>(16)</span>
     
     <a href="/posts/python/">Python</a>
-    <span>(19)</span>
+    <span>(16)</span>
     
     <a href="/posts/airflow/">Airflow</a>
     <span>(6)</span>
@@ -97,7 +97,7 @@
             </div>
         </header>
         <div class="wide-logos">
-  <p><img src="/assets/python.png" alt="python" /></p>
+  <p><img src="/posts/assets/python.png" alt="python" /></p>
 </div>
 
 <p>This method of installing Black uses the built-in plugin management in Vim 8+.</p>
@@ -109,20 +109,24 @@ curl https://raw.githubusercontent.com/psf/black/stable/autoload/black.vim <span
 </code></pre></div></div>
 
 <p>Open Vim and format your code with:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:Black
 </code></pre></div></div>
 
 <p>To format when saving, add the following to <code class="language-plaintext highlighter-rouge">~/.vimrc</code>:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>autocmd BufWritePre *.py execute ':Black'
 </code></pre></div></div>
 
 <h2 id="upgrading">Upgrading</h2>
 
 <p>To upgrade, remove the old Black installation:</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-r</span> ~/.vim/black
 </code></pre></div></div>
 
 <p>Pull in the new versions of the plugins</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://raw.githubusercontent.com/psf/black/stable/plugin/black.vim <span class="nt">-o</span> ~/.vim/pack/python/start/black/plugin/black.vim
 curl https://raw.githubusercontent.com/psf/black/stable/autoload/black.vim <span class="nt">-o</span> ~/.vim/pack/python/start/black/autoload/black.vim
 </code></pre></div></div>

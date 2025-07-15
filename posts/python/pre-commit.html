@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to use Ruff, Mypy, Black and Isort in Pre-commit?" />
 <script type="application/ld+json">
-{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/pre-commit"},"headline":"How to use Ruff, Mypy, Black and Isort in Pre-commit?","dateModified":"2025-07-15T23:16:53+00:00","datePublished":"2021-07-01T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/pre-commit","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/pre-commit"},"headline":"How to use Ruff, Mypy, Black and Isort in Pre-commit?","dateModified":"2025-07-15T23:32:02+00:00","datePublished":"2021-07-01T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/pre-commit","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -59,11 +59,11 @@
 
 <nav>
   <div id="logo">
-    <a href="/posts/">Exploding Labs Posts<!--img src="/posts/assets/composed.png" /--></a>
+    <a href="https://www.explodinglabs.com/">Exploding Labs</a>
   </div>
   <div id="categories">
-    <!--a href="/posts/">All</a> 
-    <span>(73)</span-->
+    <a href="/posts/">Posts</a> 
+    <span>(73)</span>
     
     <a href="/posts/haskell/">Haskell</a>
     <span>(2)</span>
@@ -72,7 +72,7 @@
     <span>(16)</span>
     
     <a href="/posts/python/">Python</a>
-    <span>(19)</span>
+    <span>(16)</span>
     
     <a href="/posts/airflow/">Airflow</a>
     <span>(6)</span>
@@ -97,7 +97,7 @@
             </div>
         </header>
         <div class="wide-logos">
-  <p><img src="/assets/python.png" alt="python" /></p>
+  <p><img src="/posts/assets/python.png" alt="python" /></p>
 </div>
 
 <div id="intro">
@@ -153,10 +153,11 @@ repository.</p>
         <span class="na">entry</span><span class="pi">:</span> <span class="s">isort</span>
         <span class="na">language</span><span class="pi">:</span> <span class="s">system</span>
         <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">python</span><span class="pi">]</span>
-        <span class="na">args</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">--check</span><span class="pi">,</span><span class="nv">--profile=black</span><span class="pi">]</span>
+        <span class="na">args</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">--check</span><span class="pi">,</span> <span class="nv">--profile=black</span><span class="pi">]</span>
 </code></pre></div></div>
 
 <p>Install <a href="https://pre-commit.com">Pre-commit</a> and add the git hooks:</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>precommit
 pre-commit <span class="nb">install</span>
 </code></pre></div></div>

@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to launch an ECS Container Instance and run a container?" />
 <script type="application/ld+json">
-{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/aws/ecs"},"headline":"How to launch an ECS Container Instance and run a container?","dateModified":"2025-07-15T23:16:53+00:00","datePublished":"2016-07-13T00:00:00+00:00","url":"https://explodinglabs.com/posts/aws/ecs","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/aws/ecs"},"headline":"How to launch an ECS Container Instance and run a container?","dateModified":"2025-07-15T23:32:02+00:00","datePublished":"2016-07-13T00:00:00+00:00","url":"https://explodinglabs.com/posts/aws/ecs","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -59,11 +59,11 @@
 
 <nav>
   <div id="logo">
-    <a href="/posts/">Exploding Labs Posts<!--img src="/posts/assets/composed.png" /--></a>
+    <a href="https://www.explodinglabs.com/">Exploding Labs</a>
   </div>
   <div id="categories">
-    <!--a href="/posts/">All</a> 
-    <span>(73)</span-->
+    <a href="/posts/">Posts</a> 
+    <span>(73)</span>
     
     <a href="/posts/haskell/">Haskell</a>
     <span>(2)</span>
@@ -72,7 +72,7 @@
     <span>(16)</span>
     
     <a href="/posts/python/">Python</a>
-    <span>(19)</span>
+    <span>(16)</span>
     
     <a href="/posts/airflow/">Airflow</a>
     <span>(6)</span>
@@ -98,7 +98,7 @@
         </header>
         
 <div style="float: right">
-  <p><img src="/assets/aws.png" alt="aws" /></p>
+  <p><img src="/posts/assets/aws.png" alt="aws" /></p>
 </div>
 
 <p>Amazon ECS is a highly scalable, fast, container management service that makes
@@ -108,22 +108,8 @@ instances.</p>
 <p>An ECS Container Instance is an EC2 instance that is running the ECS container
 agent, and has been registered into an ECS cluster.</p>
 
-<ul id="markdown-toc">
-  <li><a href="#create-an-instance-profile" id="markdown-toc-create-an-instance-profile">Create an Instance Profile</a>    <ul>
-      <li><a href="#create-a-role-for-the-profile" id="markdown-toc-create-a-role-for-the-profile">Create a role for the profile</a></li>
-      <li><a href="#create-the-instance-profile" id="markdown-toc-create-the-instance-profile">Create the instance profile</a></li>
-    </ul>
-  </li>
-  <li><a href="#launch-an-ec2-instance" id="markdown-toc-launch-an-ec2-instance">Launch an EC2 Instance</a>    <ul>
-      <li><a href="#create-a-security-group-for-the-instance" id="markdown-toc-create-a-security-group-for-the-instance">Create a security group for the Instance</a></li>
-      <li><a href="#launch-an-instance" id="markdown-toc-launch-an-instance">Launch an instance</a></li>
-    </ul>
-  </li>
-  <li><a href="#start-a-container" id="markdown-toc-start-a-container">Start a container</a>    <ul>
-      <li><a href="#register-a-task" id="markdown-toc-register-a-task">Register a task</a></li>
-      <li><a href="#run-the-task" id="markdown-toc-run-the-task">Run the task</a></li>
-    </ul>
-  </li>
+<ul>
+  <li>TOC</li>
 </ul>
 
 <h2 id="create-an-instance-profile">Create an Instance Profile</h2>
@@ -177,9 +163,7 @@ agent, and has been registered into an ECS cluster.</p>
         </span><span class="s2">"ecs:SubmitContainerStateChange"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"ecs:SubmitTaskStateChange"</span><span class="w">
       </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"*"</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"*"</span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">

@@ -1,0 +1,32 @@
+<div class="wide-logos">
+  <p><img src="/posts/assets/python.png" alt="python" /></p>
+</div>
+
+<div id="intro">
+  <p>We have a sequence such as a tuple or list, and want to convert it to a an
+object with named attributes in postfix notation (‘obj.name’).</p>
+</div>
+
+<h2 id="convert-to-an-immutable-object">Convert to an immutable object</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">collections.namedtuple</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Obj'</span><span class="p">,</span> <span class="p">[</span><span class="s">'id'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">])(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span><span class="p">.</span><span class="n">name</span>
+<span class="s">'foo'</span>
+</code></pre></div></div>
+
+<h2 id="convert-to-a-mutable-object">Convert to a mutable object</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">types.SimpleNamespace</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">SimpleNamespace</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">SimpleNamespace</span><span class="p">(</span><span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="s">'id'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">],</span> <span class="n">data</span><span class="p">)))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span><span class="p">.</span><span class="n">name</span>
+<span class="s">'foo'</span>
+</code></pre></div></div>
+
+<p>See also: <a href="/python/convert-dict-to-postfix-notation">Convert a dictionary to postfix notation</a></p>
