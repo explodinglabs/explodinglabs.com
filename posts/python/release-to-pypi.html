@@ -9,9 +9,9 @@
 
         <meta property="og:title" content="How to release a new Python package version to PyPI?" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://explodinglabs.github.io/" />
-        <meta property="og:image" content="https://explodinglabs.github.io/assets/opengraph.png" />
-        <meta property="og:image:secure_url" content="https://explodinglabs.github.io/assets/opengraph.png" />
+        <meta property="og:url" content="https://www.explodinglabs.com/posts/" />
+        <meta property="og:image" content="https://www.explodinglabs.com/posts/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://www.explodinglabs.com/posts/assets/opengraph.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to release a new Python package version to PyPI?" />
 <script type="application/ld+json">
-{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/release-to-pypi"},"headline":"How to release a new Python package version to PyPI?","dateModified":"2025-07-15T23:00:51+00:00","datePublished":"2018-10-01T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/release-to-pypi","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"A programming blog.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/release-to-pypi"},"headline":"How to release a new Python package version to PyPI?","dateModified":"2025-07-15T23:12:36+00:00","datePublished":"2018-10-01T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/release-to-pypi","author":{"@type":"Person","name":"Beau Barker"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -58,16 +58,25 @@
 
 
 <nav>
-    <div id="logo">
-        <a href="/">Exploding Labs Blog<!--img src="/assets/composed.png" /--></a>
-    </div>
-    <div id="categories">
-        <!--a href="/">All</a> <span>(73)</span-->
-        <a href="/haskell/">Haskell</a> <span>(2)</span>
-        <a href="/jsonrpc/">JSON-RPC</a> <span>(16)</span>
-        <a href="/python/">Python</a> <span>(19)</span>
-        <a href="/airflow/">Airflow</a> <span>(6)</span>
-    </div>
+  <div id="logo">
+    <a href="/posts/">Exploding Labs Posts<!--img src="/posts/assets/composed.png" /--></a>
+  </div>
+  <div id="categories">
+    <!--a href="/posts/">All</a> 
+    <span>(73)</span-->
+    
+    <a href="/posts/haskell/">Haskell</a>
+    <span>(2)</span>
+    
+    <a href="/posts/jsonrpc/">JSON-RPC</a>
+    <span>(16)</span>
+    
+    <a href="/posts/python/">Python</a>
+    <span>(19)</span>
+    
+    <a href="/posts/airflow/">Airflow</a>
+    <span>(6)</span>
+  </div>
 </nav>
 
 <main>
@@ -81,7 +90,7 @@
                     
                         Updated <time>Jul 15, 2025</time>.
                     
-                    <a href="https://github.com/explodinglabs/explodinglabs.github.io/edit/main/docs/_posts/python/2018-10-01-release-new-version-to-pypi.markdown">
+                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/python/2018-10-01-release-new-version-to-pypi.markdown">
                         &#9998;
                     </a>
                 </time>
@@ -100,11 +109,13 @@ PyPI.</p>
 <a href="/python/checks">here</a>. If any fail, start again.</p>
 
 <p>Run tests.</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytest
 <span class="nb">rm</span> <span class="nt">-r</span> .tox<span class="p">;</span> tox  <span class="c"># Continue below while this is running</span>
 </code></pre></div></div>
 
 <p>In a new branch (such as <code class="language-plaintext highlighter-rouge">release/x.x.x</code>):</p>
+
 <ul>
   <li>Update version in <code class="language-plaintext highlighter-rouge">pyproject.toml</code> or <code class="language-plaintext highlighter-rouge">setup.py</code>:</li>
   <li>Update <code class="language-plaintext highlighter-rouge">CHANGELOG.md</code> (stable releases only).</li>
@@ -119,11 +130,13 @@ care with these in stable releases.</p>
 </div>
 
 <p>Commit, push and merge into main.</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-a</span>
 git push origin <span class="nb">head</span>
 </code></pre></div></div>
 
 <p>Pull main, tag the commit and push the tag.</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout main
 git pull
 git tag x.x.x
@@ -131,22 +144,25 @@ git push <span class="nt">--tags</span>
 </code></pre></div></div>
 
 <p>Create the package.</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">--upgrade</span> pip twine build
 python <span class="nt">-m</span> build <span class="nt">--wheel</span>
 </code></pre></div></div>
 
 <p>Upload the package.</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>twine check dist/mypackage-x.x.x.whl
 twine upload dist/mypackage-x.x.x.tar.gz
 </code></pre></div></div>
 
 <p>Update coverage badge.</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">--upgrade</span> pytest-cov coveralls pyyaml
 pytest <span class="nt">--cov-branch</span> <span class="nt">--cov-report</span> term-missing <span class="nt">--cov</span> mypackage tests
 coveralls
 </code></pre></div></div>
 
-<p><a href="https://explodinglabs.github.io/trigger-rtd-build">Build readthedocs</a> if there were any
+<p><a href="https://www.explodinglabs.com/posts/trigger-rtd-build">Build readthedocs</a> if there were any
 documentation changes.</p>
 
 <p>Update related blog posts/Stack Overflow posts.</p>
