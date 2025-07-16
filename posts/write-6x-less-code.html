@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Write 6x less code | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="Write 6x less code" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Write 6x less code" />
 <script type="application/ld+json">
-{"description":"I see this repeatedly in my job as a software engineer (using impure imperative languages):","headline":"Write 6x less code","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2021-01-11T00:00:00+00:00","url":"https://explodinglabs.com/posts/write-6x-less-code","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/write-6x-less-code"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2021-01-11T00:00:00+00:00","description":"I see this repeatedly in my job as a software engineer (using impure imperative languages):","headline":"Write 6x less code","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/write-6x-less-code"},"url":"https://explodinglabs.com/posts/write-6x-less-code"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -101,12 +101,12 @@
         <p>I see this repeatedly in my job as a software engineer (using impure imperative
 languages):</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">log</span><span class="p">(</span><span class="s">"Doing something"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">log</span><span class="p">(</span><span class="sh">"</span><span class="s">Doing something</span><span class="sh">"</span><span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">do_something</span><span class="p">()</span>
-    <span class="n">log</span><span class="p">(</span><span class="s">"Did something"</span><span class="p">)</span>
+    <span class="nf">do_something</span><span class="p">()</span>
+    <span class="nf">log</span><span class="p">(</span><span class="sh">"</span><span class="s">Did something</span><span class="sh">"</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="n">log</span><span class="p">(</span><span class="s">"There was an error"</span><span class="p">)</span>
+    <span class="nf">log</span><span class="p">(</span><span class="sh">"</span><span class="s">There was an error</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 <p><em>Followed by the same again ad infinitum.</em></p>
 
@@ -137,7 +137,7 @@ wrapping everything in little nets.</p>
 
 <h2 id="whats-left-after-all-the-noise-is-removed">What’s left after all the noise is removed</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">do_something</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">do_something</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Worth adding: Logging and exceptions are side effects, so they come with all

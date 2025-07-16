@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to expect a specific exception with Pytest’s xfail? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to expect a specific exception with Pytest’s xfail?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to expect a specific exception with Pytest’s xfail?" />
 <script type="application/ld+json">
-{"description":"Use xfail with the raises param.","headline":"How to expect a specific exception with Pytest’s xfail?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2023-02-03T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/pytest-xfail-on-specific-exception","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/pytest-xfail-on-specific-exception"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2023-02-03T00:00:00+00:00","description":"Use xfail with the raises param.","headline":"How to expect a specific exception with Pytest’s xfail?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/pytest-xfail-on-specific-exception"},"url":"https://explodinglabs.com/posts/python/pytest-xfail-on-specific-exception"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -100,11 +100,11 @@
         </header>
         <p>Use <code class="language-plaintext highlighter-rouge">xfail</code> with the <code class="language-plaintext highlighter-rouge">raises</code> param.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">mark</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pytest</span> <span class="kn">import</span> <span class="n">mark</span>
 
-<span class="o">@</span><span class="n">mark</span><span class="p">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">raises</span><span class="o">=</span><span class="nb">RuntimeError</span><span class="p">)</span>
+<span class="nd">@mark.xfail</span><span class="p">(</span><span class="n">raises</span><span class="o">=</span><span class="nb">RuntimeError</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_func</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="n">func</span><span class="p">()</span>
+    <span class="nf">func</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>While this works, unfortunately it won’t let you say exactly <em>where</em> it’s expected to be raised in the test.</p>

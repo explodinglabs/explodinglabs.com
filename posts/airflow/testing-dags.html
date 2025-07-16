@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to Unit Test an Airflow DAG? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to Unit Test an Airflow DAG?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to Unit Test an Airflow DAG?" />
 <script type="application/ld+json">
-{"description":"How to test an Airflow DAG by writing unit tests for individual operators.","headline":"How to Unit Test an Airflow DAG?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2017-10-20T00:00:00+00:00","url":"https://explodinglabs.com/posts/airflow/testing-dags","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/airflow/testing-dags"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2017-10-20T00:00:00+00:00","description":"How to test an Airflow DAG by writing unit tests for individual operators.","headline":"How to Unit Test an Airflow DAG?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/airflow/testing-dags"},"url":"https://explodinglabs.com/posts/airflow/testing-dags"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -108,8 +108,8 @@ and then manually running the whole dag from start to finish.</p>
 <p>Here’s a simple operator for testing:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MyOperator</span><span class="p">(</span><span class="n">BaseOperator</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">'foo'</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">'</span><span class="s">foo</span><span class="sh">'</span>
 </code></pre></div></div>
 
 <p>To test the operator, first instantiate three objects:</p>
@@ -125,20 +125,20 @@ and then manually running the whole dag from start to finish.</p>
 <h2 id="the-test">The Test</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestMyOperator</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">dag</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="s">'foo'</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">())</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="n">MyOperator</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="s">'foo'</span><span class="p">)</span>
-        <span class="n">ti</span> <span class="o">=</span> <span class="n">TaskInstance</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">execution_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">())</span>
-        <span class="n">task</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ti</span><span class="p">.</span><span class="n">get_template_context</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">test_execute</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">dag</span> <span class="o">=</span> <span class="nc">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">())</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="nc">MyOperator</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">ti</span> <span class="o">=</span> <span class="nc">TaskInstance</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">execution_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">())</span>
+        <span class="n">task</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">ti</span><span class="p">.</span><span class="nf">get_template_context</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>Or in Pytest:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_my_operator</span><span class="p">():</span>
-    <span class="n">dag</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="s">'foo'</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">())</span>
-    <span class="n">task</span> <span class="o">=</span> <span class="n">MyOperator</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="s">'foo'</span><span class="p">)</span>
-    <span class="n">ti</span> <span class="o">=</span> <span class="n">TaskInstance</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">execution_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">())</span>
-    <span class="n">task</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">ti</span><span class="p">.</span><span class="n">get_template_context</span><span class="p">())</span>
+    <span class="n">dag</span> <span class="o">=</span> <span class="nc">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">())</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="nc">MyOperator</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">ti</span> <span class="o">=</span> <span class="nc">TaskInstance</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">execution_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">())</span>
+    <span class="n">task</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">ti</span><span class="p">.</span><span class="nf">get_template_context</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>Be sure to <a href="/airflow/hide-globals-in-dag-definition-file">hide the globals

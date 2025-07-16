@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>What’s in Airflow’s context dictionary? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="What’s in Airflow’s context dictionary?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="What’s in Airflow’s context dictionary?" />
 <script type="application/ld+json">
-{"description":"Showing the contents of the “context” object, which is available in an Operator’s execute method, or a PythonOperator’s function definition.","headline":"What’s in Airflow’s context dictionary?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2017-12-13T00:00:00+00:00","url":"https://explodinglabs.com/posts/airflow/execute-context","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/airflow/execute-context"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2017-12-13T00:00:00+00:00","description":"Showing the contents of the “context” object, which is available in an Operator’s execute method, or a PythonOperator’s function definition.","headline":"What’s in Airflow’s context dictionary?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/airflow/execute-context"},"url":"https://explodinglabs.com/posts/airflow/execute-context"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -107,35 +107,35 @@ in Airflow’s
 <a href="https://github.com/databricks/incubator-airflow/blob/master/airflow/models.py">models.py</a>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-    <span class="s">'dag'</span><span class="p">:</span> <span class="n">task</span><span class="p">.</span><span class="n">dag</span><span class="p">,</span>
-    <span class="s">'ds'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
-    <span class="s">'ds_nodash'</span><span class="p">:</span> <span class="n">ds_nodash</span><span class="p">,</span>
-    <span class="s">'ts'</span><span class="p">:</span> <span class="n">ts</span><span class="p">,</span>
-    <span class="s">'ts_nodash'</span><span class="p">:</span> <span class="n">ts_nodash</span><span class="p">,</span>
-    <span class="s">'yesterday_ds'</span><span class="p">:</span> <span class="n">yesterday_ds</span><span class="p">,</span>
-    <span class="s">'yesterday_ds_nodash'</span><span class="p">:</span> <span class="n">yesterday_ds_nodash</span><span class="p">,</span>
-    <span class="s">'tomorrow_ds'</span><span class="p">:</span> <span class="n">tomorrow_ds</span><span class="p">,</span>
-    <span class="s">'tomorrow_ds_nodash'</span><span class="p">:</span> <span class="n">tomorrow_ds_nodash</span><span class="p">,</span>
-    <span class="s">'END_DATE'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
-    <span class="s">'end_date'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
-    <span class="s">'dag_run'</span><span class="p">:</span> <span class="n">dag_run</span><span class="p">,</span>
-    <span class="s">'run_id'</span><span class="p">:</span> <span class="n">run_id</span><span class="p">,</span>
-    <span class="s">'execution_date'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">execution_date</span><span class="p">,</span>
-    <span class="s">'prev_execution_date'</span><span class="p">:</span> <span class="n">prev_execution_date</span><span class="p">,</span>
-    <span class="s">'next_execution_date'</span><span class="p">:</span> <span class="n">next_execution_date</span><span class="p">,</span>
-    <span class="s">'latest_date'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
-    <span class="s">'macros'</span><span class="p">:</span> <span class="n">macros</span><span class="p">,</span>
-    <span class="s">'params'</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
-    <span class="s">'tables'</span><span class="p">:</span> <span class="n">tables</span><span class="p">,</span>
-    <span class="s">'task'</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span>
-    <span class="s">'task_instance'</span><span class="p">:</span> <span class="bp">self</span><span class="p">,</span>
-    <span class="s">'ti'</span><span class="p">:</span> <span class="bp">self</span><span class="p">,</span>
-    <span class="s">'task_instance_key_str'</span><span class="p">:</span> <span class="n">ti_key_str</span><span class="p">,</span>
-    <span class="s">'conf'</span><span class="p">:</span> <span class="n">configuration</span><span class="p">,</span>
-    <span class="s">'test_mode'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">test_mode</span><span class="p">,</span>
-    <span class="s">'var'</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">'value'</span><span class="p">:</span> <span class="n">VariableAccessor</span><span class="p">(),</span>
-        <span class="s">'json'</span><span class="p">:</span> <span class="n">VariableJsonAccessor</span><span class="p">()</span>
+    <span class="sh">'</span><span class="s">dag</span><span class="sh">'</span><span class="p">:</span> <span class="n">task</span><span class="p">.</span><span class="n">dag</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">ds</span><span class="sh">'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">ds_nodash</span><span class="sh">'</span><span class="p">:</span> <span class="n">ds_nodash</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">ts</span><span class="sh">'</span><span class="p">:</span> <span class="n">ts</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">ts_nodash</span><span class="sh">'</span><span class="p">:</span> <span class="n">ts_nodash</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">yesterday_ds</span><span class="sh">'</span><span class="p">:</span> <span class="n">yesterday_ds</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">yesterday_ds_nodash</span><span class="sh">'</span><span class="p">:</span> <span class="n">yesterday_ds_nodash</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">tomorrow_ds</span><span class="sh">'</span><span class="p">:</span> <span class="n">tomorrow_ds</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">tomorrow_ds_nodash</span><span class="sh">'</span><span class="p">:</span> <span class="n">tomorrow_ds_nodash</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">END_DATE</span><span class="sh">'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">end_date</span><span class="sh">'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">dag_run</span><span class="sh">'</span><span class="p">:</span> <span class="n">dag_run</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">run_id</span><span class="sh">'</span><span class="p">:</span> <span class="n">run_id</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">execution_date</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">execution_date</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">prev_execution_date</span><span class="sh">'</span><span class="p">:</span> <span class="n">prev_execution_date</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">next_execution_date</span><span class="sh">'</span><span class="p">:</span> <span class="n">next_execution_date</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">latest_date</span><span class="sh">'</span><span class="p">:</span> <span class="n">ds</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">macros</span><span class="sh">'</span><span class="p">:</span> <span class="n">macros</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">params</span><span class="sh">'</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">tables</span><span class="sh">'</span><span class="p">:</span> <span class="n">tables</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">task</span><span class="sh">'</span><span class="p">:</span> <span class="n">task</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">task_instance</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">ti</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">task_instance_key_str</span><span class="sh">'</span><span class="p">:</span> <span class="n">ti_key_str</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">conf</span><span class="sh">'</span><span class="p">:</span> <span class="n">configuration</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">test_mode</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">test_mode</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">var</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">:</span> <span class="nc">VariableAccessor</span><span class="p">(),</span>
+        <span class="sh">'</span><span class="s">json</span><span class="sh">'</span><span class="p">:</span> <span class="nc">VariableJsonAccessor</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -145,10 +145,10 @@ in Airflow’s
 
 <p>Incidentally, you can generate the context from a TaskInstance.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">context</span> <span class="o">=</span> <span class="n">TaskInstance</span><span class="p">(</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">context</span> <span class="o">=</span> <span class="nc">TaskInstance</span><span class="p">(</span>
     <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
-    <span class="n">execution_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
-<span class="p">).</span><span class="n">get_template_context</span><span class="p">()</span>
+    <span class="n">execution_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+<span class="p">).</span><span class="nf">get_template_context</span><span class="p">()</span>
 </code></pre></div></div>
 
         <footer>

@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to implement ZeroMQ Request/Reply in C? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to implement ZeroMQ Request/Reply in C?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to implement ZeroMQ Request/Reply in C?" />
 <script type="application/ld+json">
-{"description":"Server","headline":"How to implement ZeroMQ Request/Reply in C?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2016-07-17T00:00:00+00:00","url":"https://explodinglabs.com/posts/c/zeromq/request-reply","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/c/zeromq/request-reply"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2016-07-17T00:00:00+00:00","description":"Server","headline":"How to implement ZeroMQ Request/Reply in C?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/c/zeromq/request-reply"},"url":"https://explodinglabs.com/posts/c/zeromq/request-reply"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -106,7 +106,7 @@
 
 <p>Write a server script, <code class="language-plaintext highlighter-rouge">server.c</code>:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;czmq.h&gt;
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;czmq.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Connect</span>
@@ -133,7 +133,7 @@
 
 <p>Write client script:</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;czmq.h&gt;
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;czmq.h&gt;</span><span class="cp">
 </span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Connect</span>

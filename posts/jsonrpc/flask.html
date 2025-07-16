@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to use JSON-RPC with Flask? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to use JSON-RPC with Flask?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to use JSON-RPC with Flask?" />
 <script type="application/ld+json">
-{"description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Flask?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2016-08-01T00:00:00+00:00","url":"https://explodinglabs.com/posts/jsonrpc/flask","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/flask"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2016-08-01T00:00:00+00:00","description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Flask?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/flask"},"url":"https://explodinglabs.com/posts/jsonrpc/flask"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -116,26 +116,26 @@
 
 <p>Create a <code class="language-plaintext highlighter-rouge">server.py</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">request</span>
-<span class="kn">from</span> <span class="nn">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">dispatch</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="n">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">dispatch</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="nc">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 
-<span class="o">@</span><span class="n">method</span>
+<span class="nd">@method</span>
 <span class="k">def</span> <span class="nf">ping</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Success</span><span class="p">(</span><span class="s">"pong"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nc">Success</span><span class="p">(</span><span class="sh">"</span><span class="s">pong</span><span class="sh">"</span><span class="p">)</span>
 
 
-<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">"POST"</span><span class="p">])</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="sh">"</span><span class="s">/</span><span class="sh">"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">POST</span><span class="sh">"</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-        <span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">get_data</span><span class="p">().</span><span class="n">decode</span><span class="p">()),</span> <span class="n">content_type</span><span class="o">=</span><span class="s">"application/json"</span>
+    <span class="k">return</span> <span class="nc">Response</span><span class="p">(</span>
+        <span class="nf">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="nf">get_data</span><span class="p">().</span><span class="nf">decode</span><span class="p">()),</span> <span class="n">content_type</span><span class="o">=</span><span class="sh">"</span><span class="s">application/json</span><span class="sh">"</span>
     <span class="p">)</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">.</span><span class="nf">run</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Start the server:</p>

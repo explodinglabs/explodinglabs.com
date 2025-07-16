@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to use JSON-RPC with Python’s HTTPServer? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to use JSON-RPC with Python’s HTTPServer?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to use JSON-RPC with Python’s HTTPServer?" />
 <script type="application/ld+json">
-{"description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Python’s HTTPServer?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2016-08-01T00:00:00+00:00","url":"https://explodinglabs.com/posts/jsonrpc/httpserver","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/httpserver"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2016-08-01T00:00:00+00:00","description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Python’s HTTPServer?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/httpserver"},"url":"https://explodinglabs.com/posts/jsonrpc/httpserver"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -119,30 +119,30 @@ messages:</p>
 
 <p>Create a <code class="language-plaintext highlighter-rouge">server.py</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">http.server</span> <span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
 
-<span class="kn">from</span> <span class="nn">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">dispatch</span>
+<span class="kn">from</span> <span class="n">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">dispatch</span>
 
 
-<span class="o">@</span><span class="n">method</span>
+<span class="nd">@method</span>
 <span class="k">def</span> <span class="nf">ping</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Success</span><span class="p">(</span><span class="s">"pong"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nc">Success</span><span class="p">(</span><span class="sh">"</span><span class="s">pong</span><span class="sh">"</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">TestHttpServer</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">do_POST</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">do_POST</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># Process request
-</span>        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">rfile</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">headers</span><span class="p">[</span><span class="s">"Content-Length"</span><span class="p">])).</span><span class="n">decode</span><span class="p">()</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span>        <span class="n">request</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">rfile</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">headers</span><span class="p">[</span><span class="sh">"</span><span class="s">Content-Length</span><span class="sh">"</span><span class="p">])).</span><span class="nf">decode</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
         <span class="c1"># Return response
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">send_header</span><span class="p">(</span><span class="s">"Content-type"</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">end_headers</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">send_header</span><span class="p">(</span><span class="sh">"</span><span class="s">Content-type</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">application/json</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">end_headers</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">encode</span><span class="p">())</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">HTTPServer</span><span class="p">((</span><span class="s">"localhost"</span><span class="p">,</span> <span class="mi">5000</span><span class="p">),</span> <span class="n">TestHttpServer</span><span class="p">).</span><span class="n">serve_forever</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="nc">HTTPServer</span><span class="p">((</span><span class="sh">"</span><span class="s">localhost</span><span class="sh">"</span><span class="p">,</span> <span class="mi">5000</span><span class="p">),</span> <span class="n">TestHttpServer</span><span class="p">).</span><span class="nf">serve_forever</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Start the server:</p>

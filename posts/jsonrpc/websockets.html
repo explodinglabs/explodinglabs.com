@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to use JSON-RPC with Websockets in Python? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to use JSON-RPC with Websockets in Python?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to use JSON-RPC with Websockets in Python?" />
 <script type="application/ld+json">
-{"description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Websockets in Python?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2016-09-23T00:00:00+00:00","url":"https://explodinglabs.com/posts/jsonrpc/websockets","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/websockets"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2016-09-23T00:00:00+00:00","description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Websockets in Python?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/websockets"},"url":"https://explodinglabs.com/posts/jsonrpc/websockets"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -116,25 +116,25 @@ with “pong”.</p>
 
 <p>Create a <code class="language-plaintext highlighter-rouge">server.py</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">asyncio</span>
 
-<span class="kn">from</span> <span class="nn">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">async_dispatch</span>
-<span class="kn">import</span> <span class="nn">websockets</span>
+<span class="kn">from</span> <span class="n">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">async_dispatch</span>
+<span class="kn">import</span> <span class="n">websockets</span>
 
 
-<span class="o">@</span><span class="n">method</span>
+<span class="nd">@method</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">ping</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Success</span><span class="p">(</span><span class="s">"pong"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nc">Success</span><span class="p">(</span><span class="sh">"</span><span class="s">pong</span><span class="sh">"</span><span class="p">)</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">websocket</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">response</span> <span class="p">:</span><span class="o">=</span> <span class="k">await</span> <span class="n">async_dispatch</span><span class="p">(</span><span class="k">await</span> <span class="n">websocket</span><span class="p">.</span><span class="n">recv</span><span class="p">()):</span>
-        <span class="k">await</span> <span class="n">websocket</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="p">:</span><span class="o">=</span> <span class="k">await</span> <span class="nf">async_dispatch</span><span class="p">(</span><span class="k">await</span> <span class="n">websocket</span><span class="p">.</span><span class="nf">recv</span><span class="p">()):</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 
 
-<span class="n">start_server</span> <span class="o">=</span> <span class="n">websockets</span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="s">"localhost"</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
-<span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">().</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">start_server</span><span class="p">)</span>
-<span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">().</span><span class="n">run_forever</span><span class="p">()</span>
+<span class="n">start_server</span> <span class="o">=</span> <span class="n">websockets</span><span class="p">.</span><span class="nf">serve</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="sh">"</span><span class="s">localhost</span><span class="sh">"</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+<span class="n">asyncio</span><span class="p">.</span><span class="nf">get_event_loop</span><span class="p">().</span><span class="nf">run_until_complete</span><span class="p">(</span><span class="n">start_server</span><span class="p">)</span>
+<span class="n">asyncio</span><span class="p">.</span><span class="nf">get_event_loop</span><span class="p">().</span><span class="nf">run_forever</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Start the server:</p>
@@ -152,25 +152,25 @@ requests:</p>
 
 <p>Create a <code class="language-plaintext highlighter-rouge">client.py</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">asyncio</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">asyncio</span>
+<span class="kn">import</span> <span class="n">logging</span>
 
-<span class="kn">from</span> <span class="nn">jsonrpcclient</span> <span class="kn">import</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">parse_json</span><span class="p">,</span> <span class="n">request_json</span>
-<span class="kn">import</span> <span class="nn">websockets</span>
+<span class="kn">from</span> <span class="n">jsonrpcclient</span> <span class="kn">import</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">parse_json</span><span class="p">,</span> <span class="n">request_json</span>
+<span class="kn">import</span> <span class="n">websockets</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">websockets</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"ws://localhost:5000"</span><span class="p">)</span> <span class="k">as</span> <span class="n">ws</span><span class="p">:</span>
-        <span class="k">await</span> <span class="n">ws</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">request_json</span><span class="p">(</span><span class="s">"ping"</span><span class="p">))</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">parse_json</span><span class="p">(</span><span class="k">await</span> <span class="n">ws</span><span class="p">.</span><span class="n">recv</span><span class="p">())</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">websockets</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="sh">"</span><span class="s">ws://localhost:5000</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">ws</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">ws</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="nf">request_json</span><span class="p">(</span><span class="sh">"</span><span class="s">ping</span><span class="sh">"</span><span class="p">))</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="nf">parse_json</span><span class="p">(</span><span class="k">await</span> <span class="n">ws</span><span class="p">.</span><span class="nf">recv</span><span class="p">())</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">Ok</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">Ok</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">logging</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">message</span><span class="p">)</span>
 
 
-<span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">().</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<span class="n">asyncio</span><span class="p">.</span><span class="nf">get_event_loop</span><span class="p">().</span><span class="nf">run_until_complete</span><span class="p">(</span><span class="nf">main</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>Run the client:</p>

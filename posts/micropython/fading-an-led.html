@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Fading an LED with Micropython | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="Fading an LED with Micropython" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Fading an LED with Micropython" />
 <script type="application/ld+json">
-{"description":"Posts about Exploding Labs projects and other interests.","headline":"Fading an LED with Micropython","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2016-09-06T00:00:00+00:00","url":"https://explodinglabs.com/posts/micropython/fading-an-led","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/micropython/fading-an-led"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2016-09-06T00:00:00+00:00","description":"Posts about Exploding Labs projects and other interests.","headline":"Fading an LED with Micropython","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/micropython/fading-an-led"},"url":"https://explodinglabs.com/posts/micropython/fading-an-led"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -102,26 +102,26 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GFwwPe4uO34" frameborder="0" allowfullscreen=""></iframe>
 </div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep_ms</span>
-<span class="kn">import</span> <span class="nn">machine</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+<span class="kn">from</span> <span class="n">time</span> <span class="kn">import</span> <span class="n">sleep_ms</span>
+<span class="kn">import</span> <span class="n">machine</span>
 
-<span class="n">pin</span> <span class="o">=</span> <span class="n">machine</span><span class="p">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">machine</span><span class="p">.</span><span class="n">Pin</span><span class="p">.</span><span class="n">OUT</span><span class="p">)</span>
-<span class="n">led</span> <span class="o">=</span> <span class="n">machine</span><span class="p">.</span><span class="n">PWM</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">pin</span> <span class="o">=</span> <span class="n">machine</span><span class="p">.</span><span class="nc">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">machine</span><span class="p">.</span><span class="n">Pin</span><span class="p">.</span><span class="n">OUT</span><span class="p">)</span>
+<span class="n">led</span> <span class="o">=</span> <span class="n">machine</span><span class="p">.</span><span class="nc">PWM</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">set_duty</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="n">l</span><span class="p">.</span><span class="n">duty</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="n">sleep_ms</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">l</span><span class="p">.</span><span class="nf">duty</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="nf">sleep_ms</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">pulse</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1023</span> <span class="o">-</span> <span class="n">math</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1023</span><span class="p">)</span>
-        <span class="n">set_duty</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-    <span class="n">set_duty</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="mi">1023</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="mi">1023</span> <span class="o">-</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1023</span><span class="p">)</span>
+        <span class="nf">set_duty</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="nf">set_duty</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="mi">1023</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">pulse</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-    <span class="n">sleep_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+    <span class="nf">pulse</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nf">sleep_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 </code></pre></div></div>
 
         <footer>

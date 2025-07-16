@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to use JSON-RPC with Tornado? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to use JSON-RPC with Tornado?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to use JSON-RPC with Tornado?" />
 <script type="application/ld+json">
-{"description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Tornado?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2016-08-13T00:00:00+00:00","url":"https://explodinglabs.com/posts/jsonrpc/tornado","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/tornado"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2016-08-13T00:00:00+00:00","description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Tornado?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/tornado"},"url":"https://explodinglabs.com/posts/jsonrpc/tornado"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -116,27 +116,27 @@
 
 <p>Create a <code class="language-plaintext highlighter-rouge">server.py</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">async_dispatch</span>
-<span class="kn">from</span> <span class="nn">tornado</span> <span class="kn">import</span> <span class="n">ioloop</span><span class="p">,</span> <span class="n">web</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">async_dispatch</span>
+<span class="kn">from</span> <span class="n">tornado</span> <span class="kn">import</span> <span class="n">ioloop</span><span class="p">,</span> <span class="n">web</span>
 
 
-<span class="o">@</span><span class="n">method</span>
+<span class="nd">@method</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">ping</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Success</span><span class="p">(</span><span class="s">"pong"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nc">Success</span><span class="p">(</span><span class="sh">"</span><span class="s">pong</span><span class="sh">"</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">MainHandler</span><span class="p">(</span><span class="n">web</span><span class="p">.</span><span class="n">RequestHandler</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">response</span> <span class="p">:</span><span class="o">=</span> <span class="k">await</span> <span class="n">async_dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="nf">decode</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">response</span> <span class="p">:</span><span class="o">=</span> <span class="k">await</span> <span class="nf">async_dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="p">.</span><span class="n">Application</span><span class="p">([(</span><span class="sa">r</span><span class="s">"/"</span><span class="p">,</span> <span class="n">MainHandler</span><span class="p">)])</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">web</span><span class="p">.</span><span class="nc">Application</span><span class="p">([(</span><span class="sa">r</span><span class="sh">"</span><span class="s">/</span><span class="sh">"</span><span class="p">,</span> <span class="n">MainHandler</span><span class="p">)])</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">app</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
-    <span class="n">ioloop</span><span class="p">.</span><span class="n">IOLoop</span><span class="p">.</span><span class="n">current</span><span class="p">().</span><span class="n">start</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">.</span><span class="nf">listen</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+    <span class="n">ioloop</span><span class="p">.</span><span class="n">IOLoop</span><span class="p">.</span><span class="nf">current</span><span class="p">().</span><span class="nf">start</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Start the server:</p>

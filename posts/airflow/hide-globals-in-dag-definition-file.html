@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to hide globals in an Airflow DAG definition file? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to hide globals in an Airflow DAG definition file?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to hide globals in an Airflow DAG definition file?" />
 <script type="application/ld+json">
-{"description":"Don’t instantiate the DAG and operators when importing your DAG definition file.","headline":"How to hide globals in an Airflow DAG definition file?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2018-03-06T00:00:00+00:00","url":"https://explodinglabs.com/posts/airflow/hide-globals-in-dag-definition-file","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/airflow/hide-globals-in-dag-definition-file"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2018-03-06T00:00:00+00:00","description":"Don’t instantiate the DAG and operators when importing your DAG definition file.","headline":"How to hide globals in an Airflow DAG definition file?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/airflow/hide-globals-in-dag-definition-file"},"url":"https://explodinglabs.com/posts/airflow/hide-globals-in-dag-definition-file"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -105,8 +105,8 @@
 <p>Airflow has a fairly strange way of registering DAGs and tasks. They’re put
 into the global namespace of the DAG definition file.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dag</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="s">'foo'</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">)</span>
-<span class="n">MyOperator</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="s">'foo'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dag</span> <span class="o">=</span> <span class="nc">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">)</span>
+<span class="nc">MyOperator</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Airflow then comes along and finds them.</p>
@@ -116,9 +116,9 @@ to have those global objects created.</p>
 
 <p>The solution is to protect that code with an <code class="language-plaintext highlighter-rouge">if</code> statement:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'unusual_prefix'</span><span class="p">):</span>
-    <span class="n">dag</span> <span class="o">=</span> <span class="n">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="s">'foo'</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">)</span>
-    <span class="n">MyOperator</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="s">'foo'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">unusual_prefix</span><span class="sh">'</span><span class="p">):</span>
+    <span class="n">dag</span> <span class="o">=</span> <span class="nc">DAG</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">)</span>
+    <span class="nc">MyOperator</span><span class="p">(</span><span class="n">dag</span><span class="o">=</span><span class="n">dag</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>This is Airflow’s equivalent of <a href="http://effbot.org/pyfaq/tutor-what-is-if-name-main-for.htm"><code class="language-plaintext highlighter-rouge">if __name__ == "__main__"</code></a>.</p>

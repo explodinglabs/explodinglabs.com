@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to use JSON-RPC with Django? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to use JSON-RPC with Django?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to use JSON-RPC with Django?" />
 <script type="application/ld+json">
-{"description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Django?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2016-10-29T00:00:00+00:00","url":"https://explodinglabs.com/posts/jsonrpc/django","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/django"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2016-10-29T00:00:00+00:00","description":"Posts about Exploding Labs projects and other interests.","headline":"How to use JSON-RPC with Django?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpc/django"},"url":"https://explodinglabs.com/posts/jsonrpc/django"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -117,20 +117,20 @@ JSON-RPC requests:</p>
 
 <p>Create a <code class="language-plaintext highlighter-rouge">views.py</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
-<span class="kn">from</span> <span class="nn">django.views.decorators.csrf</span> <span class="kn">import</span> <span class="n">csrf_exempt</span>
-<span class="kn">from</span> <span class="nn">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">dispatch</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="n">django.views.decorators.csrf</span> <span class="kn">import</span> <span class="n">csrf_exempt</span>
+<span class="kn">from</span> <span class="n">jsonrpcserver</span> <span class="kn">import</span> <span class="n">method</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Success</span><span class="p">,</span> <span class="n">dispatch</span>
 
 
-<span class="o">@</span><span class="n">method</span>
+<span class="nd">@method</span>
 <span class="k">def</span> <span class="nf">ping</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Success</span><span class="p">(</span><span class="s">"pong"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nc">Success</span><span class="p">(</span><span class="sh">"</span><span class="s">pong</span><span class="sh">"</span><span class="p">)</span>
 
 
-<span class="o">@</span><span class="n">csrf_exempt</span>
+<span class="nd">@csrf_exempt</span>
 <span class="k">def</span> <span class="nf">jsonrpc</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span>
-        <span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">decode</span><span class="p">()),</span> <span class="n">content_type</span><span class="o">=</span><span class="s">"application/json"</span>
+    <span class="k">return</span> <span class="nc">HttpResponse</span><span class="p">(</span>
+        <span class="nf">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="nf">decode</span><span class="p">()),</span> <span class="n">content_type</span><span class="o">=</span><span class="sh">"</span><span class="s">application/json</span><span class="sh">"</span>
     <span class="p">)</span>
 </code></pre></div></div>
 

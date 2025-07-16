@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>How to convert a Python sequence to postfix notation? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="How to convert a Python sequence to postfix notation?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to convert a Python sequence to postfix notation?" />
 <script type="application/ld+json">
-{"description":"Posts about Exploding Labs projects and other interests.","headline":"How to convert a Python sequence to postfix notation?","dateModified":"2025-07-16T05:43:26+00:00","datePublished":"2018-05-30T00:00:00+00:00","url":"https://explodinglabs.com/posts/python/convert-sequence-to-postfix-notation","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/convert-sequence-to-postfix-notation"},"@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-16T05:48:26+00:00","datePublished":"2018-05-30T00:00:00+00:00","description":"Posts about Exploding Labs projects and other interests.","headline":"How to convert a Python sequence to postfix notation?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/convert-sequence-to-postfix-notation"},"url":"https://explodinglabs.com/posts/python/convert-sequence-to-postfix-notation"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -111,22 +111,22 @@ object with named attributes in postfix notation (‘obj.name’).</p>
 
 <p>Use <code class="language-plaintext highlighter-rouge">collections.namedtuple</code>.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'Obj'</span><span class="p">,</span> <span class="p">[</span><span class="s">'id'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">])(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="nf">namedtuple</span><span class="p">(</span><span class="sh">'</span><span class="s">Obj</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">])(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span><span class="p">.</span><span class="n">name</span>
-<span class="s">'foo'</span>
+<span class="sh">'</span><span class="s">foo</span><span class="sh">'</span>
 </code></pre></div></div>
 
 <h2 id="convert-to-a-mutable-object">Convert to a mutable object</h2>
 
 <p>Use <code class="language-plaintext highlighter-rouge">types.SimpleNamespace</code>.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">SimpleNamespace</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">SimpleNamespace</span><span class="p">(</span><span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="s">'id'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">],</span> <span class="n">data</span><span class="p">)))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="n">types</span> <span class="kn">import</span> <span class="n">SimpleNamespace</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">foo</span><span class="sh">'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="nc">SimpleNamespace</span><span class="p">(</span><span class="o">**</span><span class="nf">dict</span><span class="p">(</span><span class="nf">zip</span><span class="p">([</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">],</span> <span class="n">data</span><span class="p">)))</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span><span class="p">.</span><span class="n">name</span>
-<span class="s">'foo'</span>
+<span class="sh">'</span><span class="s">foo</span><span class="sh">'</span>
 </code></pre></div></div>
 
 <p>See also: <a href="/python/convert-dict-to-postfix-notation">Convert a dictionary to postfix notation</a></p>
