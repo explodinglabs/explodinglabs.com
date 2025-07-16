@@ -100,30 +100,28 @@ nav {
 
   #logo {
     float: left;
-  }
+    a {
+      color: white;
+      text-decoration: none;
+    }
 
-  #logo a {
-    color: white;
-    text-decoration: none;
-  }
-
-  #logo img {
-    height: 30px;
+    img {
+      height: 30px;
+    }
   }
 
   #categories {
     text-align: right;
     color: black;
-  }
+     a {
+      color: white;
+      margin-left: 0.5em;
+      text-decoration: none;
+    }
 
-  #categories a {
-    color: white;
-    margin-left: 0.5em;
-    text-decoration: none;
-  }
-
-  #categories span {
-    display: none;
+    span {
+      display: none;
+    }
   }
 }
 
