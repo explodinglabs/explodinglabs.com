@@ -107,7 +107,7 @@ body { background-color: #fefefe; }
 
 @media screen and (max-width: 600px) { .bodytext, nav, main #post-list, main article header .post-meta, main article #intro, main article p, main article ul, main article ol, main article footer { font-size: 105%; } }
 
-.linktext, main #post-list .link a, main article a, main article footer a { color: #ff0080; text-decoration: none; }
+.linktext, main #post-list .link a, main article a, main article footer a { color: black; text-decoration: none; text-decoration: underline; }
 
 .linktext:visited, main #post-list .link a:visited, main article a:visited { color: #bf4080; }
 
@@ -135,11 +135,9 @@ main #post-list #category-logo { display: block; margin: auto; }
 
 main #post-list h1 { margin-bottom: 2.1rem; text-align: center; }
 
-main #post-list .date { text-align: center; font-size: smaller; color: #666666; }
+main #post-list .date { font-size: smaller; color: #666666; }
 
-main #post-list .link { text-align: center; margin-bottom: 1.5em; line-height: 1.4em; }
-
-main #post-list .link a { text-decoration: none; }
+main #post-list .link { font-size: 1.5em; margin-bottom: 1.5em; line-height: 1.4em; }
 
 main article { /* Inline code using single backticks */ }
 
