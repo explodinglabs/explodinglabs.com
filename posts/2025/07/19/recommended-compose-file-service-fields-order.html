@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Recommended Docker Compose service field-order" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-19T00:01:18+00:00","datePublished":"2025-07-19T00:00:00+00:00","description":"Recommended sequence (most common in official Compose examples and production teams):","headline":"Recommended Docker Compose service field-order","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/2025/07/19/recommended-compose-file-service-fields-order.html"},"url":"https://explodinglabs.com/posts/2025/07/19/recommended-compose-file-service-fields-order.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-19T00:06:07+00:00","datePublished":"2025-07-19T00:00:00+00:00","description":"Recommended sequence (most common in official Compose examples and production teams):","headline":"Recommended Docker Compose service field-order","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/2025/07/19/recommended-compose-file-service-fields-order.html"},"url":"https://explodinglabs.com/posts/2025/07/19/recommended-compose-file-service-fields-order.html"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -100,14 +100,14 @@
 teams):</p>
 
 <ol>
-  <li>image / build → What the service is</li>
-  <li>command → How it runs (if overridden)</li>
-  <li>ports → External access (if any)</li>
-  <li>volumes → Data persistence</li>
-  <li>environment → Configuration</li>
-  <li>depends_on / links / networks → Dependencies and networking</li>
-  <li>healthcheck → Readiness/liveness probes</li>
-  <li>restart → Restart policy (if used)</li>
+  <li><strong>image / build</strong> → What the service is</li>
+  <li><strong>command</strong> → How it runs (if overridden)</li>
+  <li><strong>ports</strong> → External access (if any)</li>
+  <li><strong>volumes</strong> → Data persistence</li>
+  <li><strong>environment</strong> → Configuration</li>
+  <li><strong>depends_on</strong> / links / networks → Dependencies and networking</li>
+  <li><strong>healthcheck</strong> → Readiness/liveness probes</li>
+  <li><strong>restart</strong> → Restart policy (if used)</li>
 </ol>
 
         <footer>
