@@ -377,31 +377,32 @@ main {
       background-color: #ffd;
       padding: var(--vspace) var(--hspace);
       margin-bottom: var(--vspace);
-    }
 
-    blockquote p {
-      font-style: italic;
-      margin-bottom: var(--vspace);
-      margin: 0;
-    }
+      p {
+        font-style: italic;
+        margin-bottom: var(--vspace);
+        margin: 0;
+      }
 
-    blockquote p:first-child:before {
-      content: "\201C  ";
-      font-size: 60px;
-      position: relative;
-      top: 20px;
-      line-height: 0%;
-      color: #1f4d33; /* Precomputed darken(...) */
-    }
+      p:first-child:before {
+        content: "\201C  ";
+        font-size: 60px;
+        position: relative;
+        top: 20px;
+        line-height: 0%;
+        color: #1f4d33; /* Precomputed darken(...) */
+      }
 
-    blockquote cite {
-      margin-top: calc(var(--vspace) / 2);
-      font-size: smaller;
-      font-style: normal;
-      color: #666;
-      text-align: right;
-      display: block;
-      line-height: 150%;
+      cite {
+        margin-top: calc(var(--vspace) / 2);
+        font-size: smaller;
+        font-style: normal;
+        color: #666;
+        text-align: right;
+        display: block;
+        line-height: 150%;
+      }
+
     }
 
     /* VIDEO CONTAINER */

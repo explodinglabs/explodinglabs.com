@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta property="og:title" content="ImportError: cannot import name HTTPSHandler" />
+        <meta property="og:title" content="Recommended Docker Compose service field-order" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.explodinglabs.com/posts/" />
         <meta property="og:image" content="https://www.explodinglabs.com/posts/posts/assets/opengraph.png" />
@@ -33,22 +33,22 @@
         
 
         <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>ImportError: cannot import name HTTPSHandler | Exploding Labs</title>
+<title>Recommended Docker Compose service field-order | Exploding Labs</title>
 <meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="ImportError: cannot import name HTTPSHandler" />
+<meta property="og:title" content="Recommended Docker Compose service field-order" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
-<meta name="description" content="Running tox tests tonight, had some failures on some Python 3.x versions:" />
-<meta property="og:description" content="Running tox tests tonight, had some failures on some Python 3.x versions:" />
-<link rel="canonical" href="https://explodinglabs.com/posts/python/importerror-httpshandler" />
-<meta property="og:url" content="https://explodinglabs.com/posts/python/importerror-httpshandler" />
+<meta name="description" content="Recommended sequence (most common in official Compose examples and production teams):" />
+<meta property="og:description" content="Recommended sequence (most common in official Compose examples and production teams):" />
+<link rel="canonical" href="https://explodinglabs.com/posts/2025/07/19/recommended-compose-file-service-fields-order.html" />
+<meta property="og:url" content="https://explodinglabs.com/posts/2025/07/19/recommended-compose-file-service-fields-order.html" />
 <meta property="og:site_name" content="Exploding Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-07-22T00:00:00+00:00" />
+<meta property="article:published_time" content="2025-07-19T00:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="ImportError: cannot import name HTTPSHandler" />
+<meta property="twitter:title" content="Recommended Docker Compose service field-order" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-19T00:01:18+00:00","datePublished":"2016-07-22T00:00:00+00:00","description":"Running tox tests tonight, had some failures on some Python 3.x versions:","headline":"ImportError: cannot import name HTTPSHandler","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/python/importerror-httpshandler"},"url":"https://explodinglabs.com/posts/python/importerror-httpshandler"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-19T00:01:18+00:00","datePublished":"2025-07-19T00:00:00+00:00","description":"Recommended sequence (most common in official Compose examples and production teams):","headline":"Recommended Docker Compose service field-order","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/2025/07/19/recommended-compose-file-service-fields-order.html"},"url":"https://explodinglabs.com/posts/2025/07/19/recommended-compose-file-service-fields-order.html"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -85,31 +85,33 @@
 
     <article itemscope itemtype="http://schema.org/BlogPosting">
         <header>
-            <h1>ImportError: cannot import name HTTPSHandler</h1>
+            <h1>Recommended Docker Compose service field-order</h1>
             <div class="post-meta">
-                <time datetime="2016-07-22T00:00:00+00:00" itemprop="datePublished">
-                    Beau Barker, <time>Jul 22, 2016</time>.
+                <time datetime="2025-07-19T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Jul 19, 2025</time>.
                     
-                        Updated <time>Jul 19, 2025</time>.
-                    
-                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/python/2016-07-22-importerror-httpshandler.markdown">
+                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2025-07-19-recommended-compose-file-service-fields-order.markdown">
                         &#9998;
                     </a>
                 </time>
             </div>
         </header>
-        <p>Running tox tests tonight, had some failures on some Python 3.x versions:</p>
+        <p>Recommended sequence (most common in official Compose examples and production
+teams):</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ImportError: cannot import name HTTPSHandler
-</code></pre></div></div>
-
-<p>Solution was to re-install those Python versions. In Arch:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># packer -S python33 python34 python35
-</code></pre></div></div>
+<ol>
+  <li>image / build → What the service is</li>
+  <li>command → How it runs (if overridden)</li>
+  <li>ports → External access (if any)</li>
+  <li>volumes → Data persistence</li>
+  <li>environment → Configuration</li>
+  <li>depends_on / links / networks → Dependencies and networking</li>
+  <li>healthcheck → Readiness/liveness probes</li>
+  <li>restart → Restart policy (if used)</li>
+</ol>
 
         <footer>
-          <a href="/posts/python">More Python posts</a>
+          <a href="/posts/">More  posts</a>
         </footer>
     </article>
 
