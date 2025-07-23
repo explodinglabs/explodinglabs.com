@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/superstack/extensions/">
+        <link rel="canonical" href="https://www.explodinglabs.com/superstack/extensions/">
       
       
         <link rel="prev" href="../migrations/">
@@ -47,6 +47,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../assets/extra.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -611,7 +613,7 @@ as:</p>
 <span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
-<p>⚠️ <code>create extension</code> is non-transactional, so don’t wrap this file in
+<p>⚠️ <code>create extension</code> is non-transactional, so don’t wrap this in
 <code>BEGIN/COMMIT</code>.</p>
 </blockquote>
 <h2 id="building-an-extension-from-source">🛠️ Building an Extension from Source</h2>

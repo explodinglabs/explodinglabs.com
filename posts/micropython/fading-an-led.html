@@ -9,15 +9,15 @@
 
         <meta property="og:title" content="Fading an LED with Micropython" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.explodinglabs.com/posts/" />
-        <meta property="og:image" content="https://www.explodinglabs.com/posts/posts/assets/opengraph.png" />
-        <meta property="og:image:secure_url" content="https://www.explodinglabs.com/posts/posts/assets/opengraph.png" />
+        <meta property="og:url" content="https://explodinglabs.com/posts/" />
+        <meta property="og:image" content="https://explodinglabs.com/posts/posts/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://explodinglabs.com/posts/posts/assets/opengraph.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Composition in architecture" />
 
-        <link rel="stylesheet" href="/posts/main.css">
+        <link rel="stylesheet" href="/posts/index.css">
         <link rel="alternate" type="application/rss+xml" title="Exploding Labs" href="https://explodinglabs.com/posts/feed.xml">
         <link rel="author" href="https://plus.google.com/u/0/110235318020270619650?rel=author" />
 
@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Fading an LED with Micropython | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="Fading an LED with Micropython" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Fading an LED with Micropython" />
 <script type="application/ld+json">
-{"description":"Posts about Exploding Labs projects and other interests.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/micropython/fading-an-led"},"headline":"Fading an LED with Micropython","dateModified":"2025-07-16T00:01:42+00:00","datePublished":"2016-09-06T00:00:00+00:00","url":"https://explodinglabs.com/posts/micropython/fading-an-led","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-23T10:47:23+00:00","datePublished":"2016-09-06T00:00:00+00:00","description":"Posts about Exploding Labs projects and other interests.","headline":"Fading an LED with Micropython","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/micropython/fading-an-led"},"url":"https://explodinglabs.com/posts/micropython/fading-an-led"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -59,15 +59,16 @@
 
 <nav>
   <div id="logo">
-    <a href="https://www.explodinglabs.com/">Exploding Labs</a>
+    <a href="https://explodinglabs.com/">Exploding Labs</a>
   </div>
   <div id="categories">
-    <a href="/posts/">Posts</a> 
-    <span>(73)</span>
+    <a href="/posts/">All Posts</a> 
+    <span>(74)</span>
 
     <a href="/posts/jsonrpc/">JSON-RPC</a>
     <span>(16)</span>
 
+<!--
     <a href="/posts/haskell/">Haskell</a>
     <span>(2)</span>
     
@@ -76,6 +77,7 @@
 
     <a href="/posts/airflow/">Airflow</a>
     <span>(6)</span>
+-->
   </div>
 </nav>
 
@@ -88,7 +90,7 @@
                 <time datetime="2016-09-06T00:00:00+00:00" itemprop="datePublished">
                     Beau Barker, <time>Sep 6, 2016</time>.
                     
-                        Updated <time>Jul 16, 2025</time>.
+                        Updated <time>Jul 23, 2025</time>.
                     
                     <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2016-09-06-fading-an-led-with-micropython.markdown">
                         &#9998;
@@ -100,30 +102,30 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GFwwPe4uO34" frameborder="0" allowfullscreen=""></iframe>
 </div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep_ms</span>
-<span class="kn">import</span> <span class="nn">machine</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+<span class="kn">from</span> <span class="n">time</span> <span class="kn">import</span> <span class="n">sleep_ms</span>
+<span class="kn">import</span> <span class="n">machine</span>
 
-<span class="n">pin</span> <span class="o">=</span> <span class="n">machine</span><span class="p">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">machine</span><span class="p">.</span><span class="n">Pin</span><span class="p">.</span><span class="n">OUT</span><span class="p">)</span>
-<span class="n">led</span> <span class="o">=</span> <span class="n">machine</span><span class="p">.</span><span class="n">PWM</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">pin</span> <span class="o">=</span> <span class="n">machine</span><span class="p">.</span><span class="nc">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">machine</span><span class="p">.</span><span class="n">Pin</span><span class="p">.</span><span class="n">OUT</span><span class="p">)</span>
+<span class="n">led</span> <span class="o">=</span> <span class="n">machine</span><span class="p">.</span><span class="nc">PWM</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">set_duty</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="n">l</span><span class="p">.</span><span class="n">duty</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="n">sleep_ms</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">l</span><span class="p">.</span><span class="nf">duty</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="nf">sleep_ms</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">pulse</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1023</span> <span class="o">-</span> <span class="n">math</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1023</span><span class="p">)</span>
-        <span class="n">set_duty</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-    <span class="n">set_duty</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="mi">1023</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="mi">1023</span> <span class="o">-</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1023</span><span class="p">)</span>
+        <span class="nf">set_duty</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="nf">set_duty</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="mi">1023</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">pulse</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-    <span class="n">sleep_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+    <span class="nf">pulse</span><span class="p">(</span><span class="n">led</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nf">sleep_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 </code></pre></div></div>
 
         <footer>
-            <a href="/">More  posts</a>
+          <a href="/posts/">More  posts</a>
         </footer>
     </article>
 

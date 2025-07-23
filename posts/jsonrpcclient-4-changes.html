@@ -9,15 +9,15 @@
 
         <meta property="og:title" content="What are the changes in Jsonrpcclient 4?" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.explodinglabs.com/posts/" />
-        <meta property="og:image" content="https://www.explodinglabs.com/posts/posts/assets/opengraph.png" />
-        <meta property="og:image:secure_url" content="https://www.explodinglabs.com/posts/posts/assets/opengraph.png" />
+        <meta property="og:url" content="https://explodinglabs.com/posts/" />
+        <meta property="og:image" content="https://explodinglabs.com/posts/posts/assets/opengraph.png" />
+        <meta property="og:image:secure_url" content="https://explodinglabs.com/posts/posts/assets/opengraph.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Composition in architecture" />
 
-        <link rel="stylesheet" href="/posts/main.css">
+        <link rel="stylesheet" href="/posts/index.css">
         <link rel="alternate" type="application/rss+xml" title="Exploding Labs" href="https://explodinglabs.com/posts/feed.xml">
         <link rel="author" href="https://plus.google.com/u/0/110235318020270619650?rel=author" />
 
@@ -32,9 +32,9 @@
 
         
 
-        <!-- Begin Jekyll SEO tag v2.7.1 -->
+        <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>What are the changes in Jsonrpcclient 4? | Exploding Labs</title>
-<meta name="generator" content="Jekyll v4.2.0" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="What are the changes in Jsonrpcclient 4?" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="What are the changes in Jsonrpcclient 4?" />
 <script type="application/ld+json">
-{"description":"Jsonrpcclient is a Python library that creates JSON-RPC requests for sending, and parses responses. Version 4 is a complete rebuild.","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpcclient-4-changes"},"headline":"What are the changes in Jsonrpcclient 4?","dateModified":"2025-07-16T00:01:42+00:00","datePublished":"2021-08-24T00:00:00+00:00","url":"https://explodinglabs.com/posts/jsonrpcclient-4-changes","author":{"@type":"Person","name":"Exploding Labs"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-23T10:47:23+00:00","datePublished":"2021-08-24T00:00:00+00:00","description":"Jsonrpcclient is a Python library that creates JSON-RPC requests for sending, and parses responses. Version 4 is a complete rebuild.","headline":"What are the changes in Jsonrpcclient 4?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/jsonrpcclient-4-changes"},"url":"https://explodinglabs.com/posts/jsonrpcclient-4-changes"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -59,15 +59,16 @@
 
 <nav>
   <div id="logo">
-    <a href="https://www.explodinglabs.com/">Exploding Labs</a>
+    <a href="https://explodinglabs.com/">Exploding Labs</a>
   </div>
   <div id="categories">
-    <a href="/posts/">Posts</a> 
-    <span>(73)</span>
+    <a href="/posts/">All Posts</a> 
+    <span>(74)</span>
 
     <a href="/posts/jsonrpc/">JSON-RPC</a>
     <span>(16)</span>
 
+<!--
     <a href="/posts/haskell/">Haskell</a>
     <span>(2)</span>
     
@@ -76,6 +77,7 @@
 
     <a href="/posts/airflow/">Airflow</a>
     <span>(6)</span>
+-->
   </div>
 </nav>
 
@@ -88,7 +90,7 @@
                 <time datetime="2021-08-24T00:00:00+00:00" itemprop="datePublished">
                     Beau Barker, <time>Aug 24, 2021</time>.
                     
-                        Updated <time>Jul 16, 2025</time>.
+                        Updated <time>Jul 23, 2025</time>.
                     
                     <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/jsonrpc/2021-08-24-jsonrpcclient-4-changes.markdown">
                         &#9998;
@@ -144,21 +146,21 @@ JSON-RPC messages, not the transport of them.</li>
 
 <p>Previously (using <a href="https://docs.python-requests.org/en/master/">requests</a>):</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">jsonrpcclient.clients.http_client</span> <span class="kn">import</span> <span class="n">HTTPClient</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">jsonrpcclient.clients.http_client</span> <span class="kn">import</span> <span class="n">HTTPClient</span>
 
-<span class="n">client</span> <span class="o">=</span> <span class="n">HTTPClient</span><span class="p">(</span><span class="s">"http://localhost:5000"</span><span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"ping"</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="nc">HTTPClient</span><span class="p">(</span><span class="sh">"</span><span class="s">http://localhost:5000</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="sh">"</span><span class="s">ping</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Now:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">jsonrpcclient</span> <span class="kn">import</span> <span class="n">parse</span><span class="p">,</span> <span class="n">request</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">jsonrpcclient</span> <span class="kn">import</span> <span class="n">parse</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">import</span> <span class="n">requests</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">"http://localhost:5000/"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">request</span><span class="p">(</span><span class="s">"ping"</span><span class="p">))</span>
-<span class="n">parsed</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="sh">"</span><span class="s">http://localhost:5000/</span><span class="sh">"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="nf">request</span><span class="p">(</span><span class="sh">"</span><span class="s">ping</span><span class="sh">"</span><span class="p">))</span>
+<span class="n">parsed</span> <span class="o">=</span> <span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">parsed</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Keep in mind the response may be an error, so in production code you should do
@@ -168,11 +170,11 @@ matching.</p>
 <p><a href="https://github.com/explodinglabs/jsonrpcclient/tree/main/examples">See examples in various
 frameworks.</a></p>
 
-<p><a href="https://www.explodinglabs.com/jsonrpcclient/">Full version 4 documentation is
+<p><a href="https://explodinglabs.com/jsonrpcclient/">Full version 4 documentation is
 here.</a></p>
 
         <footer>
-            <a href="/jsonrpc">More Jsonrpc posts</a>
+          <a href="/posts/jsonrpc">More Jsonrpc posts</a>
         </footer>
     </article>
 

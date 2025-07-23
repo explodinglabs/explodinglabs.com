@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/superstack/migrations/">
+        <link rel="canonical" href="https://www.explodinglabs.com/superstack/migrations/">
       
       
         <link rel="prev" href="../gettingstarted/">
@@ -48,6 +48,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#build-your-app" class="md-skip">
+        <a href="#migrations" class="md-skip">
           Skip to content
         </a>
       
@@ -358,25 +360,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#project-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project Structure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migrations" class="md-nav__link">
-    <span class="md-ellipsis">
-      📜 Migrations
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📜 Migrations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#writing-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       ✍️ Writing Migrations
@@ -384,8 +367,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#applying-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       ▶️ Applying Migrations
@@ -393,8 +376,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#transactions" class="md-nav__link">
     <span class="md-ellipsis">
       🔁 Transactions
@@ -402,18 +385,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#nuke-everything" class="md-nav__link">
     <span class="md-ellipsis">
       🔄 Nuke Everything
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -540,25 +518,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#project-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project Structure
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migrations" class="md-nav__link">
-    <span class="md-ellipsis">
-      📜 Migrations
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📜 Migrations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#writing-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       ✍️ Writing Migrations
@@ -566,8 +525,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#applying-migrations" class="md-nav__link">
     <span class="md-ellipsis">
       ▶️ Applying Migrations
@@ -575,8 +534,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#transactions" class="md-nav__link">
     <span class="md-ellipsis">
       🔁 Transactions
@@ -584,18 +543,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#nuke-everything" class="md-nav__link">
     <span class="md-ellipsis">
       🔄 Nuke Everything
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -618,58 +572,40 @@
   
 
 
-<h1 id="build-your-app">Build your App</h1>
-<h2 id="project-structure">Project Structure</h2>
-<div class="highlight"><pre><span></span><code>📁 bin/                  → Helper scripts (e.g. wrappers for CLI tools)
-📁 caddy/                → Custom Caddy configuration and certificates
-📁 docs/                 → Markdown files for SuperStack documentation
-📁 postgres/             → SQL migrations and configuration of the postgres container
-📄 compose.yaml          → Main Docker Compose config
-📄 compose.override.yaml → Optional local overrides (development only)
-📄 example.env           → Example environment variables — copy to `.env`
-📄 LICENSE               → License file (MIT)
-📄 logo.png              → SuperStack logo for README/docs
-📄 mkdocs.yml            → MkDocs configuration for documentation site
-📄 README.md             → Overview and quick start for the repository
-</code></pre></div>
-<h2 id="migrations">📜 Migrations</h2>
+<h1 id="migrations">📜 Migrations</h1>
 <p>SuperStack includes a simple built-in system for managing database schema
 migrations.</p>
-<h3 id="writing-migrations">✍️ Writing Migrations</h3>
+<h2 id="writing-migrations">✍️ Writing Migrations</h2>
 <p>Place your migration scripts in:</p>
 <div class="highlight"><pre><span></span><code>postgres/migrations/
 </code></pre></div>
 <p>Each file should be:</p>
 <ul>
-<li>A <code>.sql</code> file</li>
+<li>An <code>.sql</code> file</li>
 <li>Numbered in order (e.g. <code>00-init.sql</code>, <code>01-extensions.sql</code>, <code>02-auth.sql</code>)</li>
 <li>Written in plain SQL</li>
 <li>But can include environment variables.</li>
 </ul>
-<h3 id="applying-migrations">▶️ Applying Migrations</h3>
+<h2 id="applying-migrations">▶️ Applying Migrations</h2>
 <p>When the Postgres container starts with no existing data, SuperStack will
 automatically run migrations once.</p>
-<p>After the first <code>docker compose up</code>, migrations will only run if you
-manually apply them.</p>
+<p>After the first startup, migrations will only run if you manually apply
+them.</p>
 <p>To apply your migrations, run:</p>
 <div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
 </code></pre></div>
 <p>This will:</p>
 <ol>
 <li>Run any migration files that haven’t been applied yet (in filename order)</li>
-<li>Record each successfully applied file in <code>.applied_migrations</code></li>
+<li>Record each successfully applied file in <code>.applied_migrations</code> (this
+   file lives in the postgres data volume)</li>
 </ol>
 <p>Already-applied scripts are skipped on subsequent runs.</p>
 <blockquote>
-<p>💡 <code>bin/postgres</code> is short for <code>docker compose exec postgres</code></p>
+<p>💡 <code>bin/postgres</code> is a small script that basically aliases <code>docker compose exec postgres</code></p>
 </blockquote>
-<h3 id="transactions">🔁 Transactions</h3>
-<p>Use <code>BEGIN;</code> and <code>COMMIT;</code> to wrap migration files when all included
-statements are transactional. This ensures that all changes are applied
-atomically.</p>
-<p>For example:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- File: postgres/migrations/03-create_table_example.sql</span>
-<span class="k">begin</span><span class="p">;</span>
+<p>Here's an example migration script:</p>
+<div class="highlight"><span class="filename">postgres/migrations/02-create_table_example.sql</span><pre><span></span><code><span class="k">begin</span><span class="p">;</span>
 
 <span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">director</span><span class="w"> </span><span class="p">(</span>
 <span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
@@ -684,13 +620,13 @@ atomically.</p>
 
 <span class="k">commit</span><span class="p">;</span>
 </code></pre></div>
-<blockquote>
-<p>💡 If your migration script only contains one statement, there's no need
-to use a transaction, the statement will be auto-committed.</p>
-</blockquote>
+<h2 id="transactions">🔁 Transactions</h2>
+<p>Use <code>begin;</code> and <code>commit;</code> to wrap statements in a transaction. This
+ensures that all changes are applied atomically. Any statements outside of
+transactions will be auto-committed.</p>
 <p>Avoid wrapping non-transactional operations in a transaction — these will
-cause errors if used inside <code>BEGIN ... COMMIT</code>.</p>
-<p>Examples of non-transactional statements include:</p>
+cause errors if used inside <code>begin ... commit</code>. Examples of
+non-transactional statements include:</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span>
 <span class="k">DROP</span><span class="w"> </span><span class="n">EXTENSION</span>
 <span class="k">VACUUM</span>
@@ -705,7 +641,7 @@ cause errors if used inside <code>BEGIN ... COMMIT</code>.</p>
 <span class="n">DISCARD</span><span class="w"> </span><span class="k">ALL</span>
 <span class="k">LOAD</span>
 </code></pre></div>
-<h3 id="nuke-everything">🔄 Nuke Everything</h3>
+<h2 id="nuke-everything">🔄 Nuke Everything</h2>
 <p>If you want to start fresh, wipe your database and re-run all migrations from
 scratch:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
