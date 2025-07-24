@@ -710,16 +710,13 @@ manager instead.</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>That's it – your backend is live.</p>
-<p>You can now open
-<a href="http://localhost:8000/openapi/">http://localhost:8000/openapi/</a> to explore
-your API (assuming 8000 is your Caddy port).</p>
 <hr />
 <h2 id="what-just-happened">🧩 What Just Happened?</h2>
 <p>SuperStack automatically:</p>
 <ol>
 <li>Starts a fresh Postgres database</li>
 <li>Applies initial migrations</li>
-<li>Launches PostgREST and Swagger UI</li>
+<li>Launches PostgREST</li>
 <li>Serves everything through Caddy</li>
 </ol>
 <blockquote>

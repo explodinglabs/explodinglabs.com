@@ -307,9 +307,9 @@ Caddy), making it easy to develop locally or deploy remotely.</p>
 <hr/>
 <h2 id="architecture">🏛️ Architecture</h2>
 <pre class="mermaid"><code>flowchart TD
-    Caddy["Caddy (API Gateway)"]
+    APIGateway["API Gateway (Caddy)"]
     Caddy --&gt; Services["Services (PostgREST, + add more)"]
-    Services --&gt; Postgres
+    Services --&gt; Database["Database (Postgres)"]
 </code></pre>
 <hr/>
 <h2 id="whats-next">📚 What's next?</h2>
