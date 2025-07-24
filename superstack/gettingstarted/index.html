@@ -398,15 +398,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#change-the-docker-images-to-your-own-recommended" class="md-nav__link">
-    <span class="md-ellipsis">
-      Change the Docker images to your own (Recommended)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       ➕ What's Next?
@@ -620,15 +611,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#change-the-docker-images-to-your-own-recommended" class="md-nav__link">
-    <span class="md-ellipsis">
-      Change the Docker images to your own (Recommended)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       ➕ What's Next?
@@ -722,14 +704,6 @@ manager instead.</p>
 <blockquote>
 <p>💡 Only Caddy exposes a port – all services are routed through it.</p>
 </blockquote>
-<h2 id="change-the-docker-images-to-your-own-recommended">Change the Docker images to your own (Recommended)</h2>
-<p>In <code>compose.yaml</code>, change the <code>explodinglabs</code> images to your own:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">postgres</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/myapp-postgres:0.1.0</span>
-
-<span class="nt">caddy</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/myapp-caddy:0.1.0</span>
-</code></pre></div>
 <h2 id="whats-next">➕ What's Next?</h2>
 <p>👉 <a href="../migrations/">Create your database schema with migrations</a><br />
 👉 <a href="../deploying/">Deploy to a remote environment</a></p>
