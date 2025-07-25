@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta property="og:title" content="Server-Sent Events not working with Webpack's Dev Server" />
+        <meta property="og:title" content="SuperStack is Live" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://explodinglabs.com/posts/" />
         <meta property="og:image" content="https://explodinglabs.com/posts/posts/assets/opengraph.png" />
@@ -33,22 +33,22 @@
         
 
         <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Server-Sent Events not working with Webpack’s Dev Server | Exploding Labs</title>
+<title>SuperStack is Live | Exploding Labs</title>
 <meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="Server-Sent Events not working with Webpack’s Dev Server" />
+<meta property="og:title" content="SuperStack is Live" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
-<meta name="description" content="Using Webpack Dev Server, Server-Sent-Events aren’t picked up by the Javascript EventSource. The EventSource onopen fires, but not any listeners." />
-<meta property="og:description" content="Using Webpack Dev Server, Server-Sent-Events aren’t picked up by the Javascript EventSource. The EventSource onopen fires, but not any listeners." />
-<link rel="canonical" href="https://explodinglabs.com/posts/sse-webpack-dev-server" />
-<meta property="og:url" content="https://explodinglabs.com/posts/sse-webpack-dev-server" />
+<meta name="description" content="I built SuperStack for devs who want a minimal backend to start with, and full control to build it up as they go." />
+<meta property="og:description" content="I built SuperStack for devs who want a minimal backend to start with, and full control to build it up as they go." />
+<link rel="canonical" href="https://explodinglabs.com/posts/superstack/superstack-is-live" />
+<meta property="og:url" content="https://explodinglabs.com/posts/superstack/superstack-is-live" />
 <meta property="og:site_name" content="Exploding Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-09-05T00:00:00+00:00" />
+<meta property="article:published_time" content="2025-07-25T00:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Server-Sent Events not working with Webpack’s Dev Server" />
+<meta property="twitter:title" content="SuperStack is Live" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-25T01:07:49+00:00","datePublished":"2020-09-05T00:00:00+00:00","description":"Using Webpack Dev Server, Server-Sent-Events aren’t picked up by the Javascript EventSource. The EventSource onopen fires, but not any listeners.","headline":"Server-Sent Events not working with Webpack’s Dev Server","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/sse-webpack-dev-server"},"url":"https://explodinglabs.com/posts/sse-webpack-dev-server"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-25T01:07:49+00:00","datePublished":"2025-07-25T00:00:00+00:00","description":"I built SuperStack for devs who want a minimal backend to start with, and full control to build it up as they go.","headline":"SuperStack is Live","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/superstack/superstack-is-live"},"url":"https://explodinglabs.com/posts/superstack/superstack-is-live"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -88,31 +88,47 @@
 
     <article itemscope itemtype="http://schema.org/BlogPosting">
         <header>
-            <h1>Server-Sent Events not working with Webpack's Dev Server</h1>
+            <h1>SuperStack is Live</h1>
             <div class="post-meta">
-                <time datetime="2020-09-05T00:00:00+00:00" itemprop="datePublished">
-                    Beau Barker, <time>Sep 5, 2020</time>.
+                <time datetime="2025-07-25T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Jul 25, 2025</time>.
                     
-                        Updated <time>Jul 25, 2025</time>.
-                    
-                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2020-09-05-sse-webpack-dev-server.markdown">
+                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/superstack/2025-07-25-superstack-is-live.markdown">
                         &#9998;
                     </a>
                 </time>
             </div>
         </header>
-        <p>Using Webpack Dev Server, Server-Sent-Events aren’t picked up by the Javascript
-EventSource. The EventSource <code class="language-plaintext highlighter-rouge">onopen</code> fires, but not any listeners.</p>
+        <div id="intro">
+  <p>I built SuperStack for devs who want a minimal backend to start with, and full
+control to build it up as they go.</p>
+</div>
 
-<p>There are two options to fix this:</p>
+<p>It comes with just the essentials:</p>
+
+<ul>
+  <li><strong>Caddy</strong> — API gateway</li>
+  <li><strong>PostgREST</strong> — REST API (and RPC)</li>
+  <li><strong>Postgres</strong> — database</li>
+</ul>
+
+<p>It’s a minimal stack. It’s not “all batteries included.” No mystery containers
+you’ll never touch. <em>Zero bloat</em>.</p>
+
+<p>The idea is:</p>
 
 <ol>
-  <li>Disable compression in the webpack devserver config.</li>
-  <li>Send <code class="language-plaintext highlighter-rouge">Content-Type: no-transform</code> in the response header.</li>
+  <li>Start lean – no heavy services you don’t need.</li>
+  <li>Build as you grow – add authentication, messaging, Stripe, by following the Wiki.</li>
 </ol>
 
+<p>I chose Caddy after years of running nginx and it was the right move.</p>
+
+<p>If you’re a SaaS founder, indie hacker or backend engineer who values control,
+I’d love your feedback.</p>
+
         <footer>
-          <a href="/posts/">More  posts</a>
+          <a href="/posts/superstack">More Superstack posts</a>
         </footer>
     </article>
 
