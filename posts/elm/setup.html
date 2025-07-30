@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Setup an Elm project" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-30T23:42:47+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-30T23:48:42+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -118,17 +118,25 @@ and directory to <code class="language-plaintext highlighter-rouge">/docs</code>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm init
 </code></pre></div></div>
 
-<p>Update global npm:</p>
+<p>Copy <code class="language-plaintext highlighter-rouge">caddy</code> directory from another frontend app, and start Caddy.</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm update <span class="nt">-g</span> npm
-</code></pre></div></div>
+<h2 id="create-app">Create App</h2>
 
 <p>Create a src/Main.elm.</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm make src/Main.elm <span class="nt">--optimize</span> <span class="nt">--output</span> static/elm.js
 </code></pre></div></div>
 
+<p>To build for prod:</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node_modules/.bin/uglifyjs static/elm.js <span class="nt">--compress</span> <span class="s1">'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe'</span> | ./node_modules/.bin/uglifyjs <span class="nt">--mangle</span> <span class="nt">--output</span> static/elm.js
+</code></pre></div></div>
+
+<h2 id="dev-tools">Dev Tools</h2>
+
+<p>Update global npm:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm update <span class="nt">-g</span> npm
 </code></pre></div></div>
 
 <p>Install dev packages:</p>
@@ -138,6 +146,8 @@ and directory to <code class="language-plaintext highlighter-rouge">/docs</code>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node_modules/.bin/elm-review <span class="nt">--template</span> jfmengels/elm-review-unused/example
 </code></pre></div></div>
+
+<h3 id="pre-commit">Pre-commit</h3>
 
 <p>Add to package.json:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
