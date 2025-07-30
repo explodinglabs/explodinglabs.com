@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Setup an Elm project" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-30T23:35:41+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-30T23:42:47+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -105,31 +105,22 @@
   <p>This is how I setup a new Elm project for development.</p>
 </div>
 
-<p><a href="https://github.com/new">Create a GitHub repository.</a></p>
-
 <p>For a Github Pages app, go to Settings &gt; Pages, change Source to Branch: <code class="language-plaintext highlighter-rouge">main</code>
 and directory to <code class="language-plaintext highlighter-rouge">/docs</code>.</p>
 
 <p>Clone the repository:</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone ssh://git@github.com/explodinglabs/myapp
-<span class="nb">cd </span>myapp
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone ssh://git@github.com/explodinglabs/myapp-frontend
+<span class="nb">cd </span>myapp-frontend
 </code></pre></div></div>
 
-<p>Replace “myapp” with the name of your app, in the <code class="language-plaintext highlighter-rouge">README.md</code>.
-Commit and push that change.</p>
-
-<p>Update global npm:</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm update <span class="nt">-g</span> npm
-</code></pre></div></div>
-
-<p>Install dev packages:</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save-dev</span> elm-format elm-review sass
-</code></pre></div></div>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm-review <span class="nt">--template</span> jfmengels/elm-review-unused/example
-</code></pre></div></div>
+<p>Initialize an elm project:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm init
+</code></pre></div></div>
+
+<p>Update global npm:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm update <span class="nt">-g</span> npm
 </code></pre></div></div>
 
 <p>Create a src/Main.elm.</p>
@@ -137,55 +128,37 @@ Commit and push that change.</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm make src/Main.elm <span class="nt">--optimize</span> <span class="nt">--output</span> static/elm.js
 </code></pre></div></div>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./node_modules/.bin/uglifyjs static/elm.js <span class="nt">--compress</span> <span class="s1">'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe'</span> | ./node_modules/.bin/uglifyjs <span class="nt">--mangle</span> <span class="nt">--output</span> static/elm.js
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node_modules/.bin/uglifyjs static/elm.js <span class="nt">--compress</span> <span class="s1">'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe'</span> | ./node_modules/.bin/uglifyjs <span class="nt">--mangle</span> <span class="nt">--output</span> static/elm.js
+</code></pre></div></div>
+
+<p>Install dev packages:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save-dev</span> elm-format elm-review
+</code></pre></div></div>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node_modules/.bin/elm-review <span class="nt">--template</span> jfmengels/elm-review-unused/example
 </code></pre></div></div>
 
 <p>Add to package.json:</p>
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
-  ...
-  <span class="s2">"husky"</span>: <span class="o">{</span>
-    <span class="s2">"hooks"</span>: <span class="o">{</span>
-      <span class="s2">"pre-commit"</span>: <span class="s2">"lint-staged"</span>
-    <span class="o">}</span>
-  <span class="o">}</span>,
-  <span class="s2">"lint-staged"</span>: <span class="o">{</span>
-    <span class="s2">"**/*.elm"</span>: <span class="o">[</span>
-      <span class="s2">"elm-format --validate"</span>,
-      <span class="s2">"elm-review"</span>
-    <span class="o">]</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="nl">"husky"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"pre-commit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lint-staged"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"lint-staged"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"**/*.elm"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"elm-format --validate"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"elm-review"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
-<p>Copy index.html from another project into static/.
-Bring up the development container.
-Visit http://localhost:80.</p>
+<p>Copy <code class="language-plaintext highlighter-rouge">index.html</code> from another project into static/.</p>
 
-<p>To hot-reload, put this in the static/index.html</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"https://livejs.com/live.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div></div>
-
-<h1 id="old-instructions">Old instructions</h1>
-<p><a href="https://github.com/organizations/explodinglabs/repositories/new">Create a new Github
-repository</a>,
-using the template:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>explodinglabs/elm-template
-</code></pre></div></div>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save-dev</span> husky lint-staged elm-format elm-review elm-test sass
-npx husky init
-npx husky add .husky/pre-commit <span class="s2">"npx elm-review"</span>
-npx husky <span class="nb">install</span> .husky/pre-commit
-</code></pre></div></div>
-
-<p>Set the title in <code class="language-plaintext highlighter-rouge">docs/index.html</code>.
-Create a favicon.
-Create an opengraph image.</p>
-
-<p>Add the new files to the repository, commit and push.</p>
-
-<p>Follow the instructions in the README to bring up the container.</p>
+<p>Bring up the development container: http://localhost/</p>
 
         <footer>
           <a href="/posts/">More  posts</a>
