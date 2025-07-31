@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Setup an Elm project" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-31T00:09:11+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-31T00:14:02+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -147,13 +147,7 @@ handle {
 
 <p>Start Caddy:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="se">\</span>
-  <span class="nt">--name</span> sp-frontend <span class="se">\</span>
-  <span class="nt">--network</span> sp-backend_default <span class="se">\</span>
-  <span class="nt">-p</span> 8001:80 <span class="se">\</span>
-  <span class="nt">-v</span> <span class="nv">$PWD</span>/caddy/Caddyfile:/etc/caddy/Caddyfile <span class="se">\</span>
-  <span class="nt">-v</span> <span class="nv">$PWD</span>/out:/usr/share/caddy <span class="se">\</span>
-  caddy:2
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">--name</span> sku-frontend <span class="nt">-p</span> 8001:80 <span class="nt">-v</span> <span class="nv">$PWD</span>/site:/usr/share/caddy caddy:2
 </code></pre></div></div>
 
 <h2 id="create-app">Create App</h2>
