@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Setup an Elm project" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-30T23:48:42+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-31T00:03:53+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -93,7 +93,7 @@
                 <time datetime="2020-09-30T00:00:00+00:00" itemprop="datePublished">
                     Beau Barker, <time>Sep 30, 2020</time>.
                     
-                        Updated <time>Jul 30, 2025</time>.
+                        Updated <time>Jul 31, 2025</time>.
                     
                     <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2020-09-30-setup-elm-project.markdown">
                         &#9998;
@@ -105,26 +105,54 @@
   <p>This is how I setup a new Elm project for development.</p>
 </div>
 
+<p><a href="https://github.com/new">Create a repository.</a></p>
+
 <p>For a Github Pages app, go to Settings &gt; Pages, change Source to Branch: <code class="language-plaintext highlighter-rouge">main</code>
 and directory to <code class="language-plaintext highlighter-rouge">/docs</code>.</p>
 
 <p>Clone the repository:</p>
+
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone ssh://git@github.com/explodinglabs/myapp-frontend
 <span class="nb">cd </span>myapp-frontend
 </code></pre></div></div>
 
-<p>Initialize an elm project:</p>
+<p><a href="https://guide.elm-lang.org/install/elm.html">Install Elm.</a></p>
+
+<p>Initialize a project:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm init
 </code></pre></div></div>
 
-<p>Copy <code class="language-plaintext highlighter-rouge">caddy</code> directory from another frontend app, and start Caddy.</p>
+<p>Create a Caddyfile like:</p>
+
+<p><strong>caddy/Caddyfile</strong></p>
+
+<pre><code class="language-caddyfile"># This is the frontend's Caddyfile, which serves frontend files, and proxies
+# requests to the backend.
+
+:80, :443
+
+file_server
+root * /usr/share/caddy
+
+@proxy path /rest/* /rpc/* /upload/*
+handle @proxy {
+  reverse_proxy http://caddy:80
+}
+
+handle {
+  try_files {path} /index.html
+}
+</code></pre>
 
 <h2 id="create-app">Create App</h2>
 
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>src out
+</code></pre></div></div>
+
 <p>Create a src/Main.elm.</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm make src/Main.elm <span class="nt">--optimize</span> <span class="nt">--output</span> static/elm.js
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm make src/Main.elm <span class="nt">--output</span> out/elm.js
 </code></pre></div></div>
 
 <p>To build for prod:</p>
