@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Setup an Elm project" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-31T00:14:02+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-07-31T00:15:10+00:00","datePublished":"2020-09-30T00:00:00+00:00","description":"This is how I setup a new Elm project for development.","headline":"Setup an Elm project","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/elm/setup"},"url":"https://explodinglabs.com/posts/elm/setup"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -152,12 +152,12 @@ handle {
 
 <h2 id="create-app">Create App</h2>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>src out
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>src site
 </code></pre></div></div>
 
 <p>Create a src/Main.elm.</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm make src/Main.elm <span class="nt">--output</span> out/elm.js
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elm make src/Main.elm <span class="nt">--output</span> site/elm.js
 </code></pre></div></div>
 
 <p>To build for prod:</p>
