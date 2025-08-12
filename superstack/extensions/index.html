@@ -612,19 +612,18 @@ compiled manually.</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/michelp/pgjwt<span class="w"> </span>postgres/pgjwt
 </code></pre></div>
 <h3 id="2-modify-the-postgres-dockerfile">2. Modify the Postgres Dockerfile</h3>
-<p>Edit <code>postgres/Dockerfile</code> to install build tools and compile the
-extension:</p>
-<div class="highlight"><pre><span></span><code>RUN apt-get update &amp;&amp; apt-get install -y \
-    build-essential \
-    postgresql-server-dev-17
+<p>Edit the Postgres Dockerfile to install build tools and compile the extension:</p>
+<div class="highlight"><span class="filename">postgres/Dockerfile</span><pre><span></span><code><span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>build-essential<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>postgresql-server-dev-17
 
-# pgjwt - used by the auth schema
-COPY ./pgjwt /pgjwt
-WORKDIR /pgjwt
-RUN make &amp;&amp; make install
+<span class="c"># pgjwt - used by the auth schema</span>
+<span class="k">COPY</span><span class="w"> </span>./pgjwt<span class="w"> </span>/pgjwt
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/pgjwt</span>
+<span class="k">RUN</span><span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
 
-# Reset workdir
-WORKDIR /var/lib/postgresql
+<span class="c"># Reset workdir</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/var/lib/postgresql</span>
 </code></pre></div>
 <blockquote>
 <p>🧼 Set <code>WORKDIR</code> back to the default to avoid unintended effects.</p>

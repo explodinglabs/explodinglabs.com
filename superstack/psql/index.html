@@ -677,7 +677,7 @@ explicitly with <code>bin/postgres psql</code>.</p>
 </blockquote>
 <h2 id="run-inline-sql-commands">🔹 Run Inline SQL Commands</h2>
 <p>You can also run SQL directly without opening an interactive shell:</p>
-<div class="highlight"><pre><span></span><code>bin/postgres -c &#39;select * from movie;&#39;
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;select * from movie;&#39;</span>
 </code></pre></div>
 <p>✅ Because <code>bin/postgres</code> defaults to <code>psql</code>, you don’t need to type <code>psql</code>
 explicitly.</p>
@@ -701,7 +701,7 @@ available options.</p>
 <h2 id="step-2-mount-and-apply-the-configs">🔗 Step 2: Mount and apply the configs</h2>
 <p>Add to your <code>compose.override.yaml</code> (this file is for development-only
 overriding of <code>compose.yaml</code>):</p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<div class="highlight"><span class="filename">compose.override.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./postgres/rc:/rc:ro</span>
