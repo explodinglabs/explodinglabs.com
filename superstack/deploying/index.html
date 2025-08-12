@@ -426,9 +426,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-set-your-image-names" class="md-nav__link">
+  <a href="#1-prepare-your-images" class="md-nav__link">
     <span class="md-ellipsis">
-      ✅ 1. Set Your Image Names
+      ✅ 1. Prepare your Images
     </span>
   </a>
   
@@ -518,9 +518,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-set-your-image-names" class="md-nav__link">
+  <a href="#1-prepare-your-images" class="md-nav__link">
     <span class="md-ellipsis">
-      ✅ 1. Set Your Image Names
+      ✅ 1. Prepare your Images
     </span>
   </a>
   
@@ -573,15 +573,18 @@
 
 
 <h1 id="deploying-to-remote-environments">☁️ Deploying to Remote Environments</h1>
-<p>SuperStack is Docker-native, so deployment is simple and portable. Here's
-how to deploy it to a remote server.</p>
-<h2 id="1-set-your-image-names">✅ 1. Set Your Image Names</h2>
-<p>Change the image names to your own (e.g. using your Docker Hub or GitHub
-Container Registry account) in <code>compose.yaml</code>, for example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">postgres</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres</span>
-<span class="nt">caddy</span><span class="p">:</span>
+<p>SuperStack is Docker-native, so deployment is simple and portable. Here's how
+to deploy it to a remote server.</p>
+<p>A clear goal of SuperStack is that <strong>only <code>compose.yaml</code> should be required on
+the remote server</strong>. No other file should need to be copied there.</p>
+<h2 id="1-prepare-your-images">✅ 1. Prepare your Images</h2>
+<p>For services that are built, add <code>image:</code> URIs to your own container repository
+(e.g. your Docker Hub or GitHub Container Registry account), for example:</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy</span>
+
+<span class="nt">postgres</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres</span>
 </code></pre></div>
 <h2 id="2-build-and-push-your-images">🛠️ 2. Build and Push your Images</h2>
 <p>Build your images locally and push to your registry:</p>
@@ -589,24 +592,23 @@ Container Registry account) in <code>compose.yaml</code>, for example:</p>
 docker<span class="w"> </span>compose<span class="w"> </span>push
 </code></pre></div>
 <h2 id="3-deploy-the-compose-file">📦 3. Deploy the Compose File</h2>
-<p>The only file needed for SuperStack to work on the remote server is
-<code>compose.yaml</code>.</p>
+<p>Only <code>compose.yaml</code> is required on the remote server.</p>
 <p>Copy it to your server:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
 <h2 id="4-launch-your-stack">🚀 4. Launch your Stack</h2>
 <p>SSH into your server and bring up the stack.</p>
 <p>For production, avoid using <code>.env</code> files. Instead, set secrets directly:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CADDY_PORT</span><span class="o">=</span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
-<span class="nv">PG_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
-<span class="nv">PG_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
-<span class="nv">POSTGREST_AUTHENTICATOR_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
-<span class="nv">JWT_SECRET</span><span class="o">=</span>your-secret<span class="w"> </span><span class="se">\</span>
-docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
-</code></pre></div>
 <blockquote>
 <p>💡 Avoid leaking secrets by disabling shell history.</p>
 </blockquote>
+<div class="highlight"><span class="filename">.env</span><pre><span></span><code><span class="nv">JWT_SECRET</span><span class="o">=</span>your-secret<span class="w"> </span><span class="se">\</span>
+<span class="nv">CADDY_PORT</span><span class="o">=</span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">PG_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
+<span class="nv">PG_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
+<span class="nv">POSTGREST_AUTHENTICATOR_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
 <p>Alternatively, use environment injection in your CI/CD.</p>
 <hr />
 <p>That’s it — your backend is live.</p>
