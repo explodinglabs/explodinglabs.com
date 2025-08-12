@@ -382,15 +382,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#loading-a-built-in-extension" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔌 Loading a Built-In Extension
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#building-an-extension-from-source" class="md-nav__link">
     <span class="md-ellipsis">
       🛠️ Building an Extension from Source
@@ -429,6 +420,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-an-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔌 Loading an Extension
+    </span>
+  </a>
   
 </li>
       
@@ -533,15 +533,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#loading-a-built-in-extension" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔌 Loading a Built-In Extension
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#building-an-extension-from-source" class="md-nav__link">
     <span class="md-ellipsis">
       🛠️ Building an Extension from Source
@@ -583,6 +574,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#loading-an-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔌 Loading an Extension
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -605,17 +605,6 @@
 <h1 id="postgres-extensions">🧩 Postgres Extensions</h1>
 <p>SuperStack supports PostgreSQL extensions, letting you add powerful
 features like cryptographic functions or JWT handling.</p>
-<h2 id="loading-a-built-in-extension">🔌 Loading a Built-In Extension</h2>
-<p>To load a standard extension (like pgcrypto), create a migration file such
-as:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- File: postgres/migrations/01-extensions.sql</span>
-
-<span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
-</code></pre></div>
-<blockquote>
-<p>⚠️ <code>create extension</code> is non-transactional, so don’t wrap this in
-<code>BEGIN/COMMIT</code>.</p>
-</blockquote>
 <h2 id="building-an-extension-from-source">🛠️ Building an Extension from Source</h2>
 <p>Some extensions (like <a href="https://github.com/michelp/pgjwt">pgjwt</a>) must be
 compiled manually.</p>
@@ -644,6 +633,14 @@ WORKDIR /var/lib/postgresql
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>postgres
 </code></pre></div>
 <p>That’s it — the extension is now available to load in your migrations.</p>
+<h2 id="loading-an-extension">🔌 Loading an Extension</h2>
+<p>To load a standard extension (like pgcrypto), create a migration file such as:</p>
+<div class="highlight"><span class="filename">postgres/migrations/01-extensions.sql</span><pre><span></span><code><span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>⚠️ <code>create extension</code> is non-transactional, so don’t wrap this in
+<code>BEGIN/COMMIT</code>.</p>
+</blockquote>
 
 
 
