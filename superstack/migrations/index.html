@@ -387,6 +387,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#suggested-file-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested File Layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#nuke-everything" class="md-nav__link">
     <span class="md-ellipsis">
       🔄 Nuke Everything
@@ -545,6 +554,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#suggested-file-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested File Layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#nuke-everything" class="md-nav__link">
     <span class="md-ellipsis">
       🔄 Nuke Everything
@@ -641,6 +659,23 @@ non-transactional statements include:</p>
 <span class="k">REINDEX</span>
 <span class="k">VACUUM</span>
 </code></pre></div>
+<h2 id="suggested-file-layout">Suggested File Layout</h2>
+<p>SuperStack doesn't require any file names or layout, that's up to you.</p>
+<p>But here's one you might use while developing (pre-production):</p>
+<div class="highlight"><pre><span></span><code>01-extensions.sql
+02-create_auth_schema.sql  (if using PostgREST for auth)
+03-create_api_schema.sql
+04-roles.sql
+05-grants.sql
+</code></pre></div>
+<p>During development, make changes and:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes<span class="p">;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>Once the app's reached production (or some other environment), you can no
+longer keep recreating the database from scratch. Add smaller migrations from
+<code>06-</code> onwards, and use <code>bin/postgres migrate</code> (that's a shortcut you can use
+locally, on other environments the <code>bin/postgres</code> script isn't there so use
+<code>docker compose exec postgres migrate</code>).</p>
 <h2 id="nuke-everything">🔄 Nuke Everything</h2>
 <p>If you want to start fresh, wipe your database and re-run all migrations from
 scratch:</p>
