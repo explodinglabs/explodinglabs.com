@@ -634,7 +634,7 @@ WORKDIR /var/lib/postgresql
 </code></pre></div>
 <p>That’s it — the extension is now available to load in your migrations.</p>
 <h2 id="loading-an-extension">🔌 Loading an Extension</h2>
-<p>To load a standard extension (like pgcrypto), create a migration file such as:</p>
+<p>To load extensions, create a migration file such as:</p>
 <div class="highlight"><span class="filename">postgres/migrations/01-extensions.sql</span><pre><span></span><code><span class="k">create</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">pgcrypto</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
