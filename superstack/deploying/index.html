@@ -599,9 +599,6 @@ docker<span class="w"> </span>compose<span class="w"> </span>push
 <h2 id="4-launch-your-stack">🚀 4. Launch your Stack</h2>
 <p>SSH into your server and bring up the stack.</p>
 <p>For production, avoid using <code>.env</code> files. Instead, set secrets directly:</p>
-<blockquote>
-<p>💡 Avoid leaking secrets by disabling shell history.</p>
-</blockquote>
 <div class="highlight"><span class="filename">.env</span><pre><span></span><code><span class="nv">JWT_SECRET</span><span class="o">=</span>your-secret<span class="w"> </span><span class="se">\</span>
 <span class="nv">CADDY_PORT</span><span class="o">=</span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
 <span class="nv">PG_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
@@ -609,6 +606,9 @@ docker<span class="w"> </span>compose<span class="w"> </span>push
 <span class="nv">POSTGREST_AUTHENTICATOR_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
+<blockquote>
+<p>💡 Avoid leaking secrets by disabling shell history.</p>
+</blockquote>
 <p>Alternatively, use environment injection in your CI/CD.</p>
 <hr />
 <p>That’s it — your backend is live.</p>
