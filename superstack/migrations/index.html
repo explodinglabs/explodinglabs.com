@@ -627,19 +627,19 @@ transactions will be auto-committed.</p>
 <p>Avoid wrapping non-transactional operations in a transaction — these will
 cause errors if used inside <code>begin ... commit</code>. Examples of
 non-transactional statements include:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span>
-<span class="k">DROP</span><span class="w"> </span><span class="n">EXTENSION</span>
-<span class="k">VACUUM</span>
-<span class="k">REINDEX</span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span>
 <span class="k">CLUSTER</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span>
-<span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span>
-<span class="k">DROP</span><span class="w"> </span><span class="n">TABLESPACE</span>
-<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span>
 <span class="n">DISCARD</span><span class="w"> </span><span class="k">ALL</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span>
+<span class="k">DROP</span><span class="w"> </span><span class="n">EXTENSION</span>
+<span class="k">DROP</span><span class="w"> </span><span class="n">TABLESPACE</span>
 <span class="k">LOAD</span>
+<span class="k">REINDEX</span>
+<span class="k">VACUUM</span>
 </code></pre></div>
 <h2 id="nuke-everything">🔄 Nuke Everything</h2>
 <p>If you want to start fresh, wipe your database and re-run all migrations from
