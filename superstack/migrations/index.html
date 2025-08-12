@@ -660,22 +660,33 @@ non-transactional statements include:</p>
 <span class="k">VACUUM</span>
 </code></pre></div>
 <h2 id="suggested-file-layout">Suggested File Layout</h2>
-<p>SuperStack doesn't require any file names or layout, that's up to you.</p>
-<p>But here's one you might use while developing (pre-production):</p>
+<p>SuperStack doesn’t enforce any particular migration file names or layout —
+you’re free to organise them however you like.</p>
+<p>Here’s a simple structure you might adopt during development (before
+production):</p>
 <div class="highlight"><pre><span></span><code>01-extensions.sql
 02-create_auth_schema.sql  (if using PostgREST for auth)
 03-create_api_schema.sql
 04-roles.sql
 05-grants.sql
 </code></pre></div>
-<p>During development, make changes and:</p>
+<p>While developing, you can reset and rebuild the database from scratch as often
+as needed:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes<span class="p">;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<p>Once the app's reached production (or some other environment), you can no
-longer keep recreating the database from scratch. Add smaller migrations from
-<code>06-</code> onwards, and use <code>bin/postgres migrate</code> (that's a shortcut you can use
-locally, on other environments the <code>bin/postgres</code> script isn't there so use
-<code>docker compose exec postgres migrate</code>).</p>
+<p>Once you’ve deployed to production (or another persistent environment), avoid
+recreating the database. Instead:</p>
+<ul>
+<li>Add new migrations starting from <code>06-...</code> onwards.</li>
+<li>Apply them with:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
+</code></pre></div>
+<p>In other environments where <code>bin/postgres</code> isn't available:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres<span class="w"> </span>migrate
+</code></pre></div>
+<p>This approach keeps early development simple while providing a clear, ordered
+history once the database must be preserved.</p>
 <h2 id="nuke-everything">🔄 Nuke Everything</h2>
 <p>If you want to start fresh, wipe your database and re-run all migrations from
 scratch:</p>
