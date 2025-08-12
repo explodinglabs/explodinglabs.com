@@ -710,8 +710,7 @@ overriding of <code>compose.yaml</code>):</p>
 <span class="w">      </span><span class="nt">INPUTRC</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/rc/.inputrc</span>
 </code></pre></div>
 <h2 id="step-3-restart-the-postgres-container">🔁 Step 3: Restart the Postgres container</h2>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>postgres
-docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgres
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate<span class="w"> </span>postgres
 </code></pre></div>
 
 
