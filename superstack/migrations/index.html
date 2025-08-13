@@ -645,18 +645,13 @@ will be auto-committed.</p>
 cause errors if used inside <code>begin ... commit</code>. Examples of
 non-transactional statements include:</p>
 <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span>
-<span class="k">CLUSTER</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span>
-<span class="n">DISCARD</span><span class="w"> </span><span class="k">ALL</span>
 <span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span>
 <span class="k">DROP</span><span class="w"> </span><span class="n">EXTENSION</span>
 <span class="k">DROP</span><span class="w"> </span><span class="n">TABLESPACE</span>
-<span class="k">LOAD</span>
-<span class="k">REINDEX</span>
-<span class="k">VACUUM</span>
 </code></pre></div>
 <h2 id="suggested-file-layout">Suggested File Layout</h2>
 <p>SuperStack doesn’t enforce any particular migration file names or layout, but here’s a simple structure you might adopt during development (before
@@ -669,7 +664,8 @@ production):</p>
 </code></pre></div>
 <p>While developing, you can reset and rebuild the database from scratch as often
 as needed:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes<span class="p">;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>Once you’ve deployed to production (or another persistent environment), avoid
 recreating the database. Instead:</p>
@@ -679,7 +675,7 @@ recreating the database. Instead:</p>
 </ul>
 <div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
 </code></pre></div>
-<p>In other environments where <code>bin/postgres</code> isn't available:</p>
+<p>Or in other environments where <code>bin/postgres</code> isn't available:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres<span class="w"> </span>migrate
 </code></pre></div>
 <p>This approach keeps early development simple while providing a clear, ordered
