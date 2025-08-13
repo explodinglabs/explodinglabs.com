@@ -612,19 +612,10 @@ them.</p>
 <p>To apply your migrations, run:</p>
 <div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
 </code></pre></div>
-<p>This command will:
-Apply new migrations – runs any migration files (in filename order) that haven’t been applied yet.
-Record applied migrations – logs each successfully applied migration in a .applied_migrations file so it won’t run again.
-Persist migration history with your database – the .applied_migrations file lives inside the postgres_data Docker volume alongside the database files.
-If the postgres_data volume is deleted or recreated, both the database and the migration history are reset, so migrations will run again from scratch.</p>
-<p>This will:</p>
+<p>This command will:</p>
 <ol>
 <li><strong>Apply new migrations,</strong> in filename order.</li>
-<li><strong>Record applied migrations</strong> in a file named <code>.applied_migrations</code>. This
-   plain-text file keeps a record of successfully applied migrations so they
-   aren't applied again next time. It lives in the same volume as the database
-   files, so when that volume is removed or recreated, the
-   <code>.applied_migrations</code> file goes with it and you start over.</li>
+<li><strong>Record applied migrations</strong> in a file named <code>.applied_migrations</code>.</li>
 </ol>
 <p>Already-applied scripts are skipped on subsequent runs.</p>
 <blockquote>
