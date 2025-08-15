@@ -387,6 +387,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#suggested-file-layout" class="md-nav__link">
     <span class="md-ellipsis">
       Suggested File Layout
@@ -554,6 +563,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#suggested-file-layout" class="md-nav__link">
     <span class="md-ellipsis">
       Suggested File Layout
@@ -652,6 +670,14 @@ non-transactional statements include:</p>
 <span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span>
 <span class="k">DROP</span><span class="w"> </span><span class="n">EXTENSION</span>
 <span class="k">DROP</span><span class="w"> </span><span class="n">TABLESPACE</span>
+</code></pre></div>
+<h2 id="environment-variables">Environment Variables</h2>
+<p>Env vars can be used in migrations:</p>
+<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="k">set</span><span class="w"> </span><span class="n">pgrst_authenticator_pass</span><span class="w"> </span><span class="s1">&#39;$PGRST_AUTHENTICATOR_PASS&#39;</span>
+</code></pre></div>
+<p>Reduce the chance of environment variables being logged by putting them into
+variables with <code>\set</code>, then use the value later:</p>
+<div class="highlight"><pre><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="n">authenticator</span><span class="w"> </span><span class="n">noinherit</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="p">:</span><span class="s1">&#39;pgrst_authenticator_pass&#39;</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="suggested-file-layout">Suggested File Layout</h2>
 <p>SuperStack doesn’t enforce any particular migration file names or layout, but here’s a simple structure you might adopt during development (before
