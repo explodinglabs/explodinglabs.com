@@ -529,11 +529,11 @@ know programming — just follow the rules below.</p>
 <h2 id="1-referencing-columns">1. Referencing Columns</h2>
 <p>Each column in your CSV can be referenced by a <strong>letter</strong>:</p>
 <ul>
-<li><code>A</code> = first column</li>
-<li><code>B</code> = second column</li>
-<li><code>C</code> = third column</li>
+<li><code>{A}</code> = first column</li>
+<li><code>{B}</code> = second column</li>
+<li><code>{C}</code> = third column</li>
 <li>…and so on.</li>
-<li>After <code>Z</code>, it continues as <code>AA</code>, <code>AB</code>, <code>AC</code>…</li>
+<li>After <code>{Z}</code>, it continues as <code>{AA}</code>, <code>{AB}</code>, <code>{AC}</code>…</li>
 </ul>
 <hr />
 <h2 id="2-basic-format">2. Basic Format</h2>
@@ -541,7 +541,7 @@ know programming — just follow the rules below.</p>
 <div class="highlight"><pre><span></span><code>{A}-{B}-{C}
 </code></pre></div>
 <ul>
-<li>If <code>A = "Shirt"</code> and <code>B = "Red"</code>, the SKU will be:</li>
+<li>If <code>A = "Shirt"</code> and <code>B = "Red"</code>, the <code>{A}-{B}</code> SKU will be:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>Shirt-Red
 </code></pre></div>
@@ -556,52 +556,90 @@ know programming — just follow the rules below.</p>
 <p>You can apply <strong>transformations</strong> to change how the column text is used. Add
 them after a colon <code>:</code> inside the braces.</p>
 <h3 id="common-transformations">Common Transformations</h3>
-<ul>
-<li>
-<p><code>U</code> → Uppercase
-  <code>{A:U}</code> → <code>SHIRT</code></p>
-</li>
-<li>
-<p><code>L</code> → Lowercase
-  <code>{A:L}</code> → <code>shirt</code></p>
-</li>
-<li>
-<p><code>I</code> → Initials (first letter of each word)
-  <code>{A:I}</code> → <code>S</code> (from “Shirt”)
-  <code>{A:I}</code> → <code>BLT</code> (from “Blue Long Trousers”)</p>
-</li>
-<li>
-<p><code>W</code> → First word only
-  <code>{A:W}</code> → <code>Blue</code> (from “Blue Long Trousers”)</p>
-</li>
-<li>
-<p><code>C</code> → Consonants only
-  <code>{A:C}</code> → <code>blngtrss</code> (from “Blue Long Trousers”)</p>
-</li>
-<li>
-<p><code>S</code> → Slug (clean up spaces and symbols with <code>_</code>)
-  <code>{A:S}</code> → <code>blue_long_trousers</code></p>
-</li>
-<li>
-<p><code>n</code> (number) → Take first <em>n</em> characters (letters/numbers only)
-  <code>{A:3}</code> → <code>Blu</code> (from “Blue”)
-  <code>{B:2}</code> → <code>Rd</code> (from “Red”)</p>
-</li>
-<li>
-<p><code>nP</code> → Pad or trim to <em>n</em> characters
-  <code>{B:5P}</code> → <code>RedXX</code> (pads with X if too short)</p>
-</li>
-<li>
-<p><code>nZ</code> → Zero-pad a number to <em>n</em> digits
-  <code>{C:4Z}</code> → <code>0042</code> (if column C = 42)</p>
-</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+<th>Example Input</th>
+<th>Example Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1-9</code></td>
+<td>Trim</td>
+<td><code>{A:3}</code> from <code>Blue Long Trousers</code></td>
+<td><code>Blu</code></td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>Consonants</td>
+<td><code>{A:C}</code> from <code>Blue Long Trousers</code></td>
+<td><code>BlLngTrsrs</code></td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>Initials</td>
+<td><code>{A:I}</code> from <code>Blue Long Trousers</code></td>
+<td><code>BLT</code></td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td>Lowercase</td>
+<td><code>{A:L}</code> from <code>Blue Long Trousers</code></td>
+<td><code>blue long trousers</code></td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>Pad to 3 chars (with 'X')</td>
+<td><code>{A:P}</code> from <code>M</code></td>
+<td><code>MXX</code></td>
+</tr>
+<tr>
+<td><code>5P</code></td>
+<td>Trim and pad to n characters (with 'X')</td>
+<td><code>{A:5P}</code> from <code>M</code></td>
+<td><code>MXXXX</code></td>
+</tr>
+<tr>
+<td><code>Z</code></td>
+<td>Zero-pad number to 3 digits</td>
+<td><code>{A:4Z}</code> from <code>42</code></td>
+<td><code>042</code></td>
+</tr>
+<tr>
+<td><code>5Z</code></td>
+<td>Zero-pad number to n digits</td>
+<td><code>{A:4Z}</code> from <code>42</code></td>
+<td><code>00042</code></td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>Slug (replace spaces/symbols with <code>_</code>)</td>
+<td><code>{A:S}</code> from <code>Blue Long Trousers</code></td>
+<td><code>blue_long_trousers</code></td>
+</tr>
+<tr>
+<td><code>U</code></td>
+<td>Uppercase</td>
+<td><code>{A:U}</code> from <code>Blue Long Trousers</code></td>
+<td><code>BLUE LONG TROUSERS</code></td>
+</tr>
+<tr>
+<td><code>W</code></td>
+<td>First word only</td>
+<td><code>{A:W}</code> from <code>Blue Long Trousers</code></td>
+<td><code>Blue</code></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="4-combining-multiple-transforms">4. Combining Multiple Transforms</h2>
 <p>You can chain multiple transformations together:</p>
-<div class="highlight"><pre><span></span><code>{A:U3} → Take first 3 letters, then uppercase
+<div class="highlight"><pre><span></span><code>{A:U3} → Uppercase, then take the first 3 letters
 </code></pre></div>
-<p>If <code>A = "trousers"</code>, result is:</p>
+<p>If <code>A = "trousers"</code>, the result is:</p>
 <div class="highlight"><pre><span></span><code>TRO
 </code></pre></div>
 <hr />
