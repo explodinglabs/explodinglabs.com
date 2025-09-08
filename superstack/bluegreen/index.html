@@ -577,7 +577,9 @@
 
 
 <h1 id="bluegreen-deployments">Blue/Green Deployments</h1>
-<p>Blue/Green deployment runs two stacks side-by-side: one live, one idle. You deploy to the idle stack, test it, and when ready, swap roles — giving near-zero downtime and easy rollback.</p>
+<p>Blue/Green deployment runs two stacks side-by-side: one live, one idle. You
+deploy to the idle stack, test it, and when ready, swap roles — giving
+near-zero downtime and easy rollback.</p>
 <h2 id="1-caddyfile">1. Caddyfile</h2>
 <p>Remove the exposed ports from Caddy by removing the <code>ports:</code> section in
 <code>compose.yaml</code>.</p>
