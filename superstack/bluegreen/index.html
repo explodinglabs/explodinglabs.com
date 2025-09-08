@@ -457,18 +457,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-start-two-stacks" class="md-nav__link">
+  <a href="#2-front-proxy" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Start two Stacks
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-front-proxy" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Front Proxy
+      2. Front Proxy
     </span>
   </a>
   
@@ -549,18 +540,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-start-two-stacks" class="md-nav__link">
+  <a href="#2-front-proxy" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Start two Stacks
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-front-proxy" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Front Proxy
+      2. Front Proxy
     </span>
   </a>
   
@@ -620,22 +602,25 @@ explicit names:</p>
 <span class="w">  </span><span class="nt">user_data</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
 </code></pre></div>
-<h2 id="2-start-two-stacks">2. Start two Stacks</h2>
-<p>On the server, bring up two stacks, <code>blue</code> and <code>green</code>:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>-p<span class="w"> </span>blue<span class="w"> </span>up<span class="w"> </span>-d
-docker<span class="w"> </span>compose<span class="w"> </span>-p<span class="w"> </span>green<span class="w"> </span>up<span class="w"> </span>-d
-</code></pre></div>
-<h2 id="3-front-proxy">3. Front Proxy</h2>
+<h2 id="2-front-proxy">2. Front Proxy</h2>
 <p>The front proxy is a single Caddy container that binds <code>:80</code> and <code>:443</code> on the
 server and routes requests into either the Blue or Green stack.</p>
 <p>On the server, create a simple <code>Caddyfile</code>:</p>
-<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com reverse_proxy blue_caddy:80
+<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
+  reverse_proxy blue_caddy:80
+}
 
 # Optionally point a second hostname to the idle stack for testing
-next.myapp.com reverse_proxy blue_caddy:80
+next.myapp.com {
+  reverse_proxy green_caddy:80
+}
 </code></pre></div>
 <p>The front proxy manages TLS, so give it a persistent volume for certificates:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
+</code></pre></div>
+<p>Create networks for the two stacks:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>blue_default
+docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>green_default
 </code></pre></div>
 <p>Start the proxy and attach it to both networks:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
@@ -653,8 +638,13 @@ next.myapp.com reverse_proxy blue_caddy:80
 docker<span class="w"> </span>compose<span class="w"> </span>-p<span class="w"> </span>green<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>Edit the front proxy's config to flip traffic:</p>
-<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com reverse_proxy green_caddy:80
-next.myapp.com reverse_proxy blue_caddy:80
+<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
+  reverse_proxy green_caddy:80
+}
+
+next.myapp.com {
+  reverse_proxy blue_caddy:80
+}
 </code></pre></div>
 <p>Restart Caddy:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>front-proxy<span class="w"> </span>caddy<span class="w"> </span>reload
