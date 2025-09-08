@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -461,6 +461,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#bluegreen-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blue/Green Deployments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blue/Green Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-caddyfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Caddyfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-start-two-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Start two Stacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-front-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Front Proxy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-deploying" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Deploying
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -553,6 +604,57 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#bluegreen-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blue/Green Deployments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blue/Green Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-caddyfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Caddyfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-start-two-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Start two Stacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-front-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Front Proxy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-deploying" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Deploying
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -578,12 +680,17 @@ to deploy it to a remote server.</p>
 <p>A clear goal of SuperStack is that <strong>only <code>compose.yaml</code> should be required on
 the remote server</strong>. No other file should need to be copied there.</p>
 <h2 id="1-prepare-your-images">✅ 1. Prepare your Images</h2>
-<p>For services that are built, add <code>image:</code> URIs to your own container repository
-(e.g. your Docker Hub or GitHub Container Registry account), for example:</p>
+<p>For services that are built (they have a <code>build:</code> section in <code>compose.yaml</code>),
+add your own container repository image URIs (e.g. your Docker Hub or GitHub
+Container Registry account), for example:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy</span>
 
 <span class="nt">postgres</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./postgres</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres</span>
 </code></pre></div>
 <h2 id="2-build-and-push-your-images">🛠️ 2. Build and Push your Images</h2>
@@ -592,8 +699,7 @@ the remote server</strong>. No other file should need to be copied there.</p>
 docker<span class="w"> </span>compose<span class="w"> </span>push
 </code></pre></div>
 <h2 id="3-deploy-the-compose-file">📦 3. Deploy the Compose File</h2>
-<p>Only <code>compose.yaml</code> is required on the remote server.</p>
-<p>Copy it to your server:</p>
+<p>Copy <code>compose.yaml</code> to your server:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
 <h2 id="4-launch-your-stack">🚀 4. Launch your Stack</h2>
@@ -618,6 +724,80 @@ automatically. Subsequently, to upgrade your app you should:</p>
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres<span class="w"> </span>migrate
 </code></pre></div>
+<h2 id="bluegreen-deployments">Blue/Green Deployments</h2>
+<p>This is a deployment method where two complete stacks are running side-by-side.
+One is serving production traffic, while the other is idle. You deploy to the
+idle stack, test it, and when you’re ready you swap roles — the idle stack
+becomes production instantly, and the old production becomes idle. This
+provides near-zero downtime and an easy rollback path.</p>
+<p>We’ll bring up two stacks, <code>blue</code> and <code>green</code>, with no ports exposed. A
+separate lightweight front proxy binds to <code>:80</code> and <code>:443</code> and routes traffic
+to whichever stack is active.</p>
+<h3 id="1-caddyfile">1. Caddyfile</h3>
+<p>Remove the exposed ports from the Caddy service. Also set <code>CADDY_SITE_ADDRESS</code>
+to only <code>:80</code> (leaving TLS termination to the front proxy):</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
+</code></pre></div>
+<p>To share data between the two stacks (database, uploads, etc.), give volumes
+explicit names:</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres_data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-data</span>
+<span class="w">  </span><span class="nt">user_data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
+</code></pre></div>
+<h3 id="2-start-two-stacks">2. Start two Stacks</h3>
+<p>On the server, bring up two stacks, <code>blue</code> and <code>green</code>:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>-p<span class="w"> </span>blue<span class="w"> </span>up<span class="w"> </span>-d
+docker<span class="w"> </span>compose<span class="w"> </span>-p<span class="w"> </span>green<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<h3 id="3-front-proxy">3. Front Proxy</h3>
+<p>The front proxy is a single Caddy container that binds <code>:80</code> and <code>:443</code> on the
+server and routes requests into either the Blue or Green stack.</p>
+<p>On the server, create a simple <code>Caddyfile</code>:</p>
+<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
+  reverse_proxy blue_caddy:80
+}
+
+# Optionally point a second hostname to the idle stack for testing
+next.myapp.com {
+  reverse_proxy blue_caddy:80
+}
+</code></pre></div>
+<p>The front proxy manages TLS, so give it a persistent volume for certificates:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
+</code></pre></div>
+<p>Start the proxy and attach it to both networks:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>front-proxy<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">443</span>:443<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>./Caddyfile:/etc/caddy/Caddyfile<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>caddy_data:/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>blue_default<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>green_default<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>caddy:2
+</code></pre></div>
+<h3 id="4-deploying">4. Deploying</h3>
+<p>Update the idle stack:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
+docker<span class="w"> </span>compose<span class="w"> </span>-p<span class="w"> </span>green<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>Edit the front proxy's config to flip traffic:</p>
+<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
+  reverse_proxy green_caddy:80
+}
+
+next.myapp.com {
+  reverse_proxy blue_caddy:80
+}
+</code></pre></div>
+<p>Restart Caddy:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>front-proxy<span class="w"> </span>caddy<span class="w"> </span>reload
+</code></pre></div>
+<p>Cutover is instant. Green is now live, and Blue is the idle stack.</p>
+<p>And rollback is simple: flip the <code>Caddyfile</code> back and <code>caddy reload</code>.</p>
 
 
 
@@ -706,10 +886,10 @@ docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">ex
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>
