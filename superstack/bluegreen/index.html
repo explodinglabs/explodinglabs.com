@@ -577,14 +577,7 @@
 
 
 <h1 id="bluegreen-deployments">Blue/Green Deployments</h1>
-<p>Blue/Green is a deployment method where two complete stacks are running
-side-by-side. One is serving production traffic, while the other is idle. You
-deploy to the idle stack, test it, and when you’re ready you swap roles — the
-idle stack becomes production, and the old production becomes idle. This
-provides near-zero downtime and an easy rollback path.</p>
-<p>We’ll bring up two stacks, <code>blue</code> and <code>green</code>, with no ports exposed. A
-separate lightweight front proxy binds to <code>:80</code> and <code>:443</code> and routes traffic
-to whichever stack is active.</p>
+<p>Blue/Green deployment runs two stacks side-by-side: one live, one idle. You deploy to the idle stack, test it, and when ready, swap roles — giving near-zero downtime and easy rollback.</p>
 <h2 id="1-caddyfile">1. Caddyfile</h2>
 <p>Remove the exposed ports from Caddy by removing the <code>ports:</code> section in
 <code>compose.yaml</code>.</p>
