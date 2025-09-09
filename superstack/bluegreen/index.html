@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-adjustments-to-the-compose-file" class="md-skip">
+        <a href="#1-adjust-the-compose-file" class="md-skip">
           Skip to content
         </a>
       
@@ -444,9 +444,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-adjustments-to-the-compose-file" class="md-nav__link">
+  <a href="#1-adjust-the-compose-file" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Adjustments to the Compose file
+      1. Adjust the Compose file
     </span>
   </a>
   
@@ -462,11 +462,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-deploying" class="md-nav__link">
+  <a href="#3-deployingupgrading" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Deploying
+      3. Deploying/Upgrading
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="3. Deploying/Upgrading">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flip-traffic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flip traffic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -525,9 +540,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-adjustments-to-the-compose-file" class="md-nav__link">
+  <a href="#1-adjust-the-compose-file" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Adjustments to the Compose file
+      1. Adjust the Compose file
     </span>
   </a>
   
@@ -543,11 +558,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-deploying" class="md-nav__link">
+  <a href="#3-deployingupgrading" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Deploying
+      3. Deploying/Upgrading
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="3. Deploying/Upgrading">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flip-traffic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flip traffic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -576,9 +606,9 @@
 deploy to the idle stack, test it, and when ready, swap roles — giving
 near-zero downtime and easy rollback.</p>
 <p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
-<h2 id="1-adjustments-to-the-compose-file">1. Adjustments to the Compose file</h2>
-<p>Remove the exposed ports by removing the Caddy <code>ports:</code> section in
-<code>compose.yaml</code>.</p>
+<h2 id="1-adjust-the-compose-file">1. Adjust the Compose file</h2>
+<p>Remove the Caddy <code>ports:</code> section in <code>compose.yaml</code>. Instead of exposing ports
+in the stacks, a "front proxy" will expose ports and proxy to the active stack.</p>
 <p>Set <code>CADDY_SITE_ADDRESS</code> to only <code>:80</code> (leaving TLS termination to the front
 proxy):</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
@@ -594,8 +624,8 @@ explicit names:</p>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
 </code></pre></div>
 <h2 id="2-add-a-front-proxy">2. Add a Front Proxy</h2>
-<p>The front proxy is a single container that binds <code>:80</code> and <code>:443</code> on the server
-and routes requests into either the Blue or Green stack.</p>
+<p>The <em>front proxy</em> is a single container that binds ports <code>80</code> and <code>443</code> on the
+server and routes requests into either the Blue or Green stack.</p>
 <p>On the server, create a simple <code>Caddyfile</code>:</p>
 <div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
   reverse_proxy blue_caddy:80
@@ -623,12 +653,23 @@ docker<span class="w"> </span>network<span class="w"> </span>create<span class="
 <span class="w">  </span>--network<span class="w"> </span>green_default<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>caddy:2
 </code></pre></div>
-<h2 id="4-deploying">4. Deploying</h2>
-<p>Update the idle stack:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
-docker<span class="w"> </span>compose<span class="w"> </span>-p<span class="w"> </span>green<span class="w"> </span>up<span class="w"> </span>-d
+<h2 id="3-deployingupgrading">3. Deploying/Upgrading</h2>
+<p>Deploying is the same as <a href="../deploying/">before</a>, but now we're deploying the
+<em>idle stack</em>. For this example, <code>green</code> is idle so that's the one we're
+deploying.</p>
+<p>Create <code>blue</code> and <code>green</code> directories on the server and deploy <code>compose.yaml</code>
+into the idle stack's directory:</p>
+<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:green/compose.yaml
 </code></pre></div>
-<p>Edit the front proxy's config to flip traffic:</p>
+<p>Shell into the server and bring up the idle stack:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>green
+docker<span class="w"> </span>compose<span class="w"> </span>pull
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>Docker will use the directory name <code>green</code> as the project name, creating
+different containers, volumes and networks than the <code>blue</code> stack.</p>
+<h3 id="flip-traffic">Flip traffic</h3>
+<p>Point traffic to the <code>green</code> stack, and make <code>blue</code> idle:</p>
 <div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
   reverse_proxy green_caddy:80
 }
@@ -637,11 +678,11 @@ next.myapp.com {
   reverse_proxy blue_caddy:80
 }
 </code></pre></div>
-<p>Restart Caddy:</p>
+<p>Reload the front proxy's config:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>front-proxy<span class="w"> </span>caddy<span class="w"> </span>reload
 </code></pre></div>
 <p>Cutover is instant. Green is now live, and Blue is the idle stack.</p>
-<p>And rollback is simple: flip the <code>Caddyfile</code> back and <code>caddy reload</code>.</p>
+<p>And rollback is simple: flip the <code>Caddyfile</code> back and <code>caddy reload</code> again.</p>
 
 
 

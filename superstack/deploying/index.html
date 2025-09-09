@@ -606,12 +606,12 @@ Container Registry account), for example:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">build</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy:0.1.0</span>
 
 <span class="nt">postgres</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">build</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./postgres</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres:0.1.0</span>
 </code></pre></div>
 <h2 id="2-build-and-push-your-images">🛠️ 2. Build and Push your Images</h2>
 <p>Build your images locally and push to your registry:</p>
@@ -619,23 +619,20 @@ Container Registry account), for example:</p>
 docker<span class="w"> </span>compose<span class="w"> </span>push
 </code></pre></div>
 <h2 id="3-deploy-the-compose-file">📦 3. Deploy the Compose File</h2>
-<p>Copy <code>compose.yaml</code> to your server:</p>
+<p>Copy <code>compose.yaml</code> to the server:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
 <h2 id="4-launch-your-stack">🚀 4. Launch your Stack</h2>
-<p>SSH into your server and bring up the stack.</p>
-<p>For production, avoid using <code>.env</code> files. Instead, set secrets directly:</p>
-<div class="highlight"><span class="filename">.env</span><pre><span></span><code><span class="nv">JWT_SECRET</span><span class="o">=</span>your-secret<span class="w"> </span><span class="se">\</span>
-<span class="nv">CADDY_PORT</span><span class="o">=</span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
-<span class="nv">PG_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
-<span class="nv">PG_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
-<span class="nv">POSTGREST_AUTHENTICATOR_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
+<p>SSH into your server and bring up the stack:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<blockquote>
-<p>💡 Avoid leaking secrets by disabling shell history.</p>
-</blockquote>
-<p>Alternatively, use environment injection in your CI/CD.</p>
+<p>Docker compose needs secrets, so you have a few options:</p>
+<ol>
+<li>Write secrets to a <code>.env</code> file in plain-text (be sure to <code>chmod 600 .env</code>).</li>
+<li>Set env vars in the docker compose command</li>
+<li>Alternatively, use environment injection in your CI/CD.</li>
+</ol>
 <hr />
 <p>That’s it — your backend is live.</p>
 <p>If this is the first time bringing up your stack, the migrations will run
