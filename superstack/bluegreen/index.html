@@ -625,8 +625,9 @@ deploy to the idle stack, test it, and when ready, swap roles — giving
 near-zero downtime and easy rollback.</p>
 <p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
 <h2 id="1-adjust-the-compose-file">1. Adjust the Compose file</h2>
-<p>Remove the Caddy <code>ports:</code> section in <code>compose.yaml</code>. Instead of exposing ports
-in the stacks, a "front proxy" will expose ports and proxy to the active stack.</p>
+<p>Remove the Caddy <code>ports:</code> section in <code>compose.yaml</code>. We'll no longer expose
+ports in the stacks – instead a simple "front proxy" will expose ports and
+proxy to the active stack.</p>
 <p>Set <code>CADDY_SITE_ADDRESS</code> to only <code>:80</code> (leaving TLS termination to the front
 proxy):</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
