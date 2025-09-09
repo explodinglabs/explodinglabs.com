@@ -450,25 +450,67 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1. Adjust the Compose file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove-exposed-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove exposed ports
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serve-http-only-in-the-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serve http-only in the stacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-volumes-between-the-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Share volumes between the stacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-the-networks-external" class="md-nav__link">
+    <span class="md-ellipsis">
+      Make the networks external
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-add-a-front-proxy" class="md-nav__link">
+  <a href="#3-add-a-front-proxy" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Add a Front Proxy
+      3. Add a Front Proxy
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-deployingupgrading" class="md-nav__link">
+  <a href="#4-deployingupgrading" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Deploying/Upgrading
+      4. Deploying/Upgrading
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Deploying/Upgrading">
+    <nav class="md-nav" aria-label="4. Deploying/Upgrading">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -555,25 +597,67 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1. Adjust the Compose file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove-exposed-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove exposed ports
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serve-http-only-in-the-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serve http-only in the stacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-volumes-between-the-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Share volumes between the stacks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-the-networks-external" class="md-nav__link">
+    <span class="md-ellipsis">
+      Make the networks external
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-add-a-front-proxy" class="md-nav__link">
+  <a href="#3-add-a-front-proxy" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Add a Front Proxy
+      3. Add a Front Proxy
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-deployingupgrading" class="md-nav__link">
+  <a href="#4-deployingupgrading" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Deploying/Upgrading
+      4. Deploying/Upgrading
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Deploying/Upgrading">
+    <nav class="md-nav" aria-label="4. Deploying/Upgrading">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -625,15 +709,18 @@ deploy to the idle stack, test it, and when ready, swap roles — giving
 near-zero downtime and easy rollback.</p>
 <p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
 <h2 id="1-adjust-the-compose-file">1. Adjust the Compose file</h2>
-<p>Remove the Caddy <code>ports:</code> section in <code>compose.yaml</code>. We'll no longer expose
-ports in the stacks – instead a simple "front proxy" will expose ports and
-proxy to the active stack.</p>
+<h3 id="remove-exposed-ports">Remove exposed ports</h3>
+<p>We'll no longer expose ports in the stacks, instead a simple "front proxy" will
+sit in front of the two stacks, exposing ports and proxying to the active
+stack. So remove the Caddy service's <code>ports:</code> section in <code>compose.yaml</code>.</p>
+<h3 id="serve-http-only-in-the-stacks">Serve http-only in the stacks</h3>
 <p>Set <code>CADDY_SITE_ADDRESS</code> to only <code>:80</code> (leaving TLS termination to the front
 proxy):</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
 </code></pre></div>
+<h3 id="share-volumes-between-the-stacks">Share volumes between the stacks</h3>
 <p>To share data between the two stacks (database, uploads, etc.), give volumes
 explicit names:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
@@ -642,7 +729,24 @@ explicit names:</p>
 <span class="w">  </span><span class="nt">user_data</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
 </code></pre></div>
-<h2 id="2-add-a-front-proxy">2. Add a Front Proxy</h2>
+<h3 id="make-the-networks-external">Make the networks external</h3>
+<p>The front proxy needs to connect to both <code>blue_default</code> and <code>green_default</code>
+networks. This makes it easier to start the front proxy regardless of whether
+the stacks are up:</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>In the override file, don't use external networks:</p>
+<div class="highlight"><span class="filename">compose.override.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+<p>Shell into the server and manually create the two networks:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>blue_default
+docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>green_default
+</code></pre></div>
+<h2 id="3-add-a-front-proxy">3. Add a Front Proxy</h2>
 <p>The <em>front proxy</em> is a single container that binds ports <code>80</code> and <code>443</code> on the
 server and routes requests into either the Blue or Green stack.</p>
 <p>On the server, create a simple <code>Caddyfile</code>:</p>
@@ -654,11 +758,7 @@ server and routes requests into either the Blue or Green stack.</p>
 <p>The front proxy manages TLS, so give it a persistent volume for certificates:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
 </code></pre></div>
-<p>Create networks for the two stacks:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>blue_default
-docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>green_default
-</code></pre></div>
-<p>Start the proxy and attach it to both networks:</p>
+<p>Start the proxy, attaching it to both networks:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="w"> </span>front-proxy<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">443</span>:443<span class="w"> </span><span class="se">\</span>
@@ -668,11 +768,11 @@ docker<span class="w"> </span>network<span class="w"> </span>create<span class="
 <span class="w">  </span>--network<span class="w"> </span>green_default<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>caddy:2
 </code></pre></div>
-<h2 id="3-deployingupgrading">3. Deploying/Upgrading</h2>
+<h2 id="4-deployingupgrading">4. Deploying/Upgrading</h2>
 <p>Deploying is the same as <a href="../deploying/">before</a>, but now we're deploying the
 <em>idle stack</em>. For this example, <code>green</code> is idle so that's the one we're
 deploying.</p>
-<p>Create <code>blue</code> and <code>green</code> directories on the server and deploy <code>compose.yaml</code>
+<p>Create <code>blue</code> and <code>green</code> directories on the server and copy <code>compose.yaml</code>
 into the idle stack's directory:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:green/compose.yaml
 </code></pre></div>
