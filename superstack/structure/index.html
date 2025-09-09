@@ -8,13 +8,9 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/superstack/bluegreen/">
+        <link rel="canonical" href="https://explodinglabs.com/superstack/structure/">
       
       
-        <link rel="prev" href="../deploying/">
-      
-      
-        <link rel="next" href="../upgrading/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +18,7 @@
     
     
       
-        <title>Blue/Green Deployments - SuperStack</title>
+        <title>Build Your App - SuperStack</title>
       
     
     
@@ -76,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-adjustments-to-the-compose-file" class="md-skip">
+        <a href="#build-your-app" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Blue/Green Deployments
+              Build Your App
             
           </span>
         </div>
@@ -395,30 +391,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Blue/Green Deployments
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../bluegreen/" class="md-nav__link">
         
   
   
@@ -429,51 +405,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-adjustments-to-the-compose-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Adjustments to the Compose file
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-add-a-front-proxy" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Add a Front Proxy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-deploying" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Deploying
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -517,6 +448,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -525,27 +458,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-adjustments-to-the-compose-file" class="md-nav__link">
+  <a href="#project-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Adjustments to the Compose file
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-add-a-front-proxy" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Add a Front Proxy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-deploying" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Deploying
+      Project Structure
     </span>
   </a>
   
@@ -570,78 +485,19 @@
   
 
 
-  <h1>Blue/Green Deployments</h1>
-
-<p>Blue/Green deployment runs two stacks side-by-side: one live, one idle. You
-deploy to the idle stack, test it, and when ready, swap roles — giving
-near-zero downtime and easy rollback.</p>
-<p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
-<h2 id="1-adjustments-to-the-compose-file">1. Adjustments to the Compose file</h2>
-<p>Remove the exposed ports by removing the Caddy <code>ports:</code> section in
-<code>compose.yaml</code>.</p>
-<p>Set <code>CADDY_SITE_ADDRESS</code> to only <code>:80</code> (leaving TLS termination to the front
-proxy):</p>
-<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
+<h1 id="build-your-app">Build Your App</h1>
+<h2 id="project-structure">Project Structure</h2>
+<div class="highlight"><pre><span></span><code>📁 bin/                  → Helper scripts (e.g. wrappers for CLI tools)
+📁 caddy/                → Caddy configuration
+📁 docs/                 → Markdown files for SuperStack documentation
+📁 postgres/             → Postgres configuration and SQL migrations
+📄 compose.yaml          → Main Docker Compose config
+📄 compose.override.yaml → Optional local overrides (development only)
+📄 example.env           → Example environment variables — copy to `.env`
+📄 LICENSE               → License file (MIT)
+📄 logo.png              → SuperStack logo for README/docs
+📄 README.md             → Overview and quick start for the repository
 </code></pre></div>
-<p>To share data between the two stacks (database, uploads, etc.), give volumes
-explicit names:</p>
-<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">postgres_data</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-data</span>
-<span class="w">  </span><span class="nt">user_data</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
-</code></pre></div>
-<h2 id="2-add-a-front-proxy">2. Add a Front Proxy</h2>
-<p>The front proxy is a single Caddy container that binds <code>:80</code> and <code>:443</code> on the
-server and routes requests into either the Blue or Green stack.</p>
-<p>On the server, create a simple <code>Caddyfile</code>:</p>
-<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
-  reverse_proxy blue_caddy:80
-}
-
-# Optionally point a second hostname to the idle stack for testing
-next.myapp.com {
-  reverse_proxy green_caddy:80
-}
-</code></pre></div>
-<p>The front proxy manages TLS, so give it a persistent volume for certificates:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
-</code></pre></div>
-<p>Create networks for the two stacks:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>blue_default
-docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>green_default
-</code></pre></div>
-<p>Start the proxy and attach it to both networks:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>front-proxy<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">443</span>:443<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>./Caddyfile:/etc/caddy/Caddyfile<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>caddy_data:/data<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>blue_default<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>green_default<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>caddy:2
-</code></pre></div>
-<h2 id="4-deploying">4. Deploying</h2>
-<p>Update the idle stack:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
-docker<span class="w"> </span>compose<span class="w"> </span>-p<span class="w"> </span>green<span class="w"> </span>up<span class="w"> </span>-d
-</code></pre></div>
-<p>Edit the front proxy's config to flip traffic:</p>
-<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
-  reverse_proxy green_caddy:80
-}
-
-next.myapp.com {
-  reverse_proxy blue_caddy:80
-}
-</code></pre></div>
-<p>Restart Caddy:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>front-proxy<span class="w"> </span>caddy<span class="w"> </span>reload
-</code></pre></div>
-<p>Cutover is instant. Green is now live, and Blue is the idle stack.</p>
-<p>And rollback is simple: flip the <code>Caddyfile</code> back and <code>caddy reload</code>.</p>
 
 
 
@@ -666,44 +522,6 @@ next.myapp.com {
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="../deploying/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deploying to Remote Environments">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                Deploying to Remote Environments
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../upgrading/" class="md-footer__link md-footer__link--next" aria-label="Next: Upgrading SuperStack">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Upgrading SuperStack
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
