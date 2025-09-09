@@ -463,6 +463,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-the-caddy-container-name-explicitly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set the Caddy container name explicitly
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#serve-http-only-in-the-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       Serve http-only in the stacks
@@ -601,6 +610,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-the-caddy-container-name-explicitly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set the Caddy container name explicitly
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#serve-http-only-in-the-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       Serve http-only in the stacks
@@ -695,6 +713,11 @@ near-zero downtime and easy rollback.</p>
 <p>We'll no longer expose ports in the stacks, instead a simple "front proxy" will
 sit in front of the two stacks, exposing ports and proxying to the active
 stack. So remove the Caddy service's <code>ports:</code> section in <code>compose.yaml</code>.</p>
+<h3 id="set-the-caddy-container-name-explicitly">Set the Caddy container name explicitly</h3>
+<p>This allows us to switch between the two stacks:</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${STACK_NAME}_caddy</span>
+</code></pre></div>
 <h3 id="serve-http-only-in-the-stacks">Serve http-only in the stacks</h3>
 <p>Set <code>CADDY_SITE_ADDRESS</code> to only <code>:80</code> (leaving TLS termination to the front
 proxy):</p>
@@ -822,7 +845,7 @@ different containers, volumes and networks than the <code>blue</code> stack.</p>
 <span class="w">            </span><span class="no">echo $GHCR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin</span>
 <span class="w">            </span><span class="no">cd ${{ steps.idle.outputs.IDLE }}</span>
 <span class="w">            </span><span class="no">docker compose pull -q</span>
-<span class="w">            </span><span class="no">docker compose up -d</span>
+<span class="w">            </span><span class="no">STACK_NAME=${{ steps.idle.outputs.IDLE }} docker compose up -d</span>
 <span class="w">            </span><span class="no">echo &quot;${{ steps.idle.outputs.ACTIVE }}&quot; &gt; active_stack</span>
 <span class="w">        </span><span class="nt">env</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">GHCR_PAT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GHCR_PAT }}</span>
