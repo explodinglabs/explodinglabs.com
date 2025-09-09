@@ -480,15 +480,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#make-the-networks-external" class="md-nav__link">
-    <span class="md-ellipsis">
-      Make the networks external
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -627,15 +618,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#make-the-networks-external" class="md-nav__link">
-    <span class="md-ellipsis">
-      Make the networks external
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -729,23 +711,6 @@ explicit names:</p>
 <span class="w">  </span><span class="nt">user_data</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
 </code></pre></div>
-<h3 id="make-the-networks-external">Make the networks external</h3>
-<p>The front proxy needs to connect to both <code>blue_default</code> and <code>green_default</code>
-networks. This makes it easier to start the front proxy regardless of whether
-the stacks are up:</p>
-<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</code></pre></div>
-<p>In the override file, don't use external networks:</p>
-<div class="highlight"><span class="filename">compose.override.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</code></pre></div>
-<p>Shell into the server and manually create the two networks:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>blue_default
-docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>green_default
-</code></pre></div>
 <h2 id="3-add-a-front-proxy">3. Add a Front Proxy</h2>
 <p>The <em>front proxy</em> is a single container that binds ports <code>80</code> and <code>443</code> on the
 server and routes requests into either the Blue or Green stack.</p>
@@ -758,7 +723,8 @@ server and routes requests into either the Blue or Green stack.</p>
 <p>The front proxy manages TLS, so give it a persistent volume for certificates:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
 </code></pre></div>
-<p>Start the proxy, attaching it to both networks:</p>
+<p>Start the proxy, attaching it to both networks – this requires both stacks to
+be up first, so the networks exist:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="w"> </span>front-proxy<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">443</span>:443<span class="w"> </span><span class="se">\</span>
