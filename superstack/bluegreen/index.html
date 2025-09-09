@@ -485,6 +485,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Github Actions
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -578,6 +587,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Github Actions
+    </span>
+  </a>
   
 </li>
       
@@ -683,6 +701,81 @@ next.myapp.com {
 </code></pre></div>
 <p>Cutover is instant. Green is now live, and Blue is the idle stack.</p>
 <p>And rollback is simple: flip the <code>Caddyfile</code> back and <code>caddy reload</code> again.</p>
+<h2 id="github-actions">Github Actions</h2>
+<p>Here's a workflow for B/G deploys:</p>
+<details>
+<summary>Click to expand</summary>
+
+<div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to VPS</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout code</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Start SSH agent</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">webfactory/ssh-agent@v0.9.0</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">ssh-private-key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_SSH_KEY }}</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get the idle stack</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">idle</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">ACTIVE=$(ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no \</span>
+<span class="w">            </span><span class="no">${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \</span>
+<span class="w">            </span><span class="no">&#39;cat active_stack 2&gt;/dev/null || echo blue&#39;)</span>
+
+<span class="w">          </span><span class="no">if [ &quot;$ACTIVE&quot; = &quot;blue&quot; ]; then</span>
+<span class="w">            </span><span class="no">echo &quot;IDLE=green&quot; &gt;&gt; $GITHUB_OUTPUT</span>
+<span class="w">          </span><span class="no">else</span>
+<span class="w">            </span><span class="no">echo &quot;IDLE=blue&quot; &gt;&gt; $GITHUB_OUTPUT</span>
+<span class="w">          </span><span class="no">fi</span>
+<span class="w">          </span><span class="no">echo &quot;ACTIVE=$ACTIVE&quot; &gt;&gt; $GITHUB_OUTPUT</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Copy compose.yaml to idle stack</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/scp-action@master</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_HOST }}</span>
+<span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_USER }}</span>
+<span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">22</span>
+<span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_SSH_KEY }}</span>
+<span class="w">          </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;compose.yaml&quot;</span>
+<span class="w">          </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${{</span><span class="nv"> </span><span class="s">steps.idle.outputs.IDLE</span><span class="nv"> </span><span class="s">}}/&quot;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy with Docker Compose</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/ssh-action@v1.0.3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_HOST }}</span>
+<span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_USER }}</span>
+<span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_SSH_KEY }}</span>
+<span class="w">          </span><span class="nt">envs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GHCR_PAT,JWT_SECRET,POSTGRES_USER,PGUSER,POSTGRES_PASSWORD,PGPASS,PGRST_AUTHENTICATOR_PASS</span>
+<span class="w">          </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">            </span><span class="no">set -euo pipefail</span>
+<span class="w">            </span><span class="no">echo $GHCR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin</span>
+<span class="w">            </span><span class="no">cd ${{ steps.idle.outputs.IDLE }}</span>
+<span class="w">            </span><span class="no">docker compose pull -q</span>
+<span class="w">            </span><span class="no">docker compose up -d</span>
+<span class="w">            </span><span class="no">echo &quot;${{ steps.idle.outputs.ACTIVE }}&quot; &gt; active_stack</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">GHCR_PAT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GHCR_PAT }}</span>
+<span class="w">          </span><span class="nt">JWT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.JWT_SECRET }}</span>
+<span class="w">          </span><span class="nt">PGRST_AUTHENTICATOR_PASS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PGRST_AUTHENTICATOR_PASS }}</span>
+<span class="w">          </span><span class="nt">PGUSER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PGUSER }}</span>
+<span class="w">          </span><span class="nt">PGPASS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PGPASS }}</span>
+<span class="w">          </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.POSTGRES_USER }}</span>
+<span class="w">          </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.POSTGRES_PASSWORD }}</span>
+</code></pre></div>
+
+</details>
 
 
 
