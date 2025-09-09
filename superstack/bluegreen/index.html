@@ -649,12 +649,8 @@ server and routes requests into either the Blue or Green stack.</p>
 <div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
   reverse_proxy blue_caddy:80
 }
-
-# Optionally point a second hostname to the idle stack for testing
-next.myapp.com {
-  reverse_proxy green_caddy:80
-}
 </code></pre></div>
+<p>Optionally, point a second hostname to the idle stack for testing.</p>
 <p>The front proxy manages TLS, so give it a persistent volume for certificates:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
 </code></pre></div>
@@ -688,13 +684,9 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 <p>Docker will use the directory name <code>green</code> as the project name, creating
 different containers, volumes and networks than the <code>blue</code> stack.</p>
 <h3 id="flip-traffic">Flip traffic</h3>
-<p>Point traffic to the <code>green</code> stack, and make <code>blue</code> idle:</p>
+<p>Point traffic to the <code>green</code> stack:</p>
 <div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
   reverse_proxy green_caddy:80
-}
-
-next.myapp.com {
-  reverse_proxy blue_caddy:80
 }
 </code></pre></div>
 <p>Reload the front proxy's config:</p>
