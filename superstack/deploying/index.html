@@ -450,12 +450,27 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="📦 3. Deploy the Compose File">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Secrets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-launch-your-stack" class="md-nav__link">
+  <a href="#5-launch-your-stack" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 4. Launch your Stack
+      🚀 5. Launch your Stack
     </span>
   </a>
   
@@ -564,12 +579,27 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="📦 3. Deploy the Compose File">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Secrets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-launch-your-stack" class="md-nav__link">
+  <a href="#5-launch-your-stack" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 4. Launch your Stack
+      🚀 5. Launch your Stack
     </span>
   </a>
   
@@ -622,17 +652,20 @@ docker<span class="w"> </span>compose<span class="w"> </span>push
 <p>Copy <code>compose.yaml</code> to the server:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
-<h2 id="4-launch-your-stack">🚀 4. Launch your Stack</h2>
+<h3 id="4-secrets">4. Secrets</h3>
+<p>Docker needs your secrets (passwords, keys, etc.). There are a few options:</p>
+<ol>
+<li>Write secrets to a <code>.env</code> file on the server (convenient but not very
+   secure).</li>
+<li>Set env vars in the the <code>docker compose</code> command (be sure to disable shell
+   history).</li>
+<li>Use environment injection in your CI/CD.</li>
+</ol>
+<h2 id="5-launch-your-stack">🚀 5. Launch your Stack</h2>
 <p>SSH into your server and bring up the stack:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<p>Docker compose needs secrets, so you have a few options:</p>
-<ol>
-<li>Write secrets to a <code>.env</code> file in plain-text (be sure to <code>chmod 600 .env</code>).</li>
-<li>Set env vars in the docker compose command</li>
-<li>Alternatively, use environment injection in your CI/CD.</li>
-</ol>
 <hr />
 <p>That’s it — your backend is live.</p>
 <p>If this is the first time bringing up your stack, the migrations will run
