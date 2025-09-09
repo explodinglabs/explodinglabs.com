@@ -594,8 +594,8 @@ explicit names:</p>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
 </code></pre></div>
 <h2 id="2-add-a-front-proxy">2. Add a Front Proxy</h2>
-<p>The front proxy is a single Caddy container that binds <code>:80</code> and <code>:443</code> on the
-server and routes requests into either the Blue or Green stack.</p>
+<p>The front proxy is a single container that binds <code>:80</code> and <code>:443</code> on the server
+and routes requests into either the Blue or Green stack.</p>
 <p>On the server, create a simple <code>Caddyfile</code>:</p>
 <div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
   reverse_proxy blue_caddy:80
