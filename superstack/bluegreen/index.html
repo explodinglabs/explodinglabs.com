@@ -481,6 +481,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#move-postgres-to-its-own-unique-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move Postgres to its own unique container
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#share-volumes-between-the-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       Share volumes between the stacks
@@ -631,6 +640,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#move-postgres-to-its-own-unique-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move Postgres to its own unique container
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#share-volumes-between-the-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       Share volumes between the stacks
@@ -731,12 +749,15 @@ proxy):</p>
 <span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
 </code></pre></div>
+<h3 id="move-postgres-to-its-own-unique-container">Move Postgres to its own unique container</h3>
+<p>Running two separate PostgreSQL instances and having them both simultaneously
+access the same data directory within that shared volume is not recommended and
+can lead to data corruption.</p>
+<p>So we need to move Postgres out of the compose file and start it separately.</p>
 <h3 id="share-volumes-between-the-stacks">Share volumes between the stacks</h3>
-<p>To share data between the two stacks (database, uploads, etc.), give volumes
-explicit names:</p>
+<p>To share data between the two stacks (uploads, etc.), give volumes explicit
+names:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">postgres_data</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-data</span>
 <span class="w">  </span><span class="nt">user_data</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
 </code></pre></div>
