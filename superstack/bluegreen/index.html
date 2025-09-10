@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-adjust-the-compose-file" class="md-skip">
+        <a href="#1-caddy" class="md-skip">
           Skip to content
         </a>
       
@@ -444,13 +444,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-adjust-the-compose-file" class="md-nav__link">
+  <a href="#1-caddy" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Adjust the Compose file
+      1. Caddy
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Adjust the Compose file">
+    <nav class="md-nav" aria-label="1. Caddy">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -480,14 +480,20 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#move-postgres-to-its-own-unique-container" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#postgres" class="md-nav__link">
     <span class="md-ellipsis">
-      Move Postgres to its own unique container
+      Postgres
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Postgres">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#share-volumes-between-the-stacks" class="md-nav__link">
@@ -603,13 +609,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-adjust-the-compose-file" class="md-nav__link">
+  <a href="#1-caddy" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Adjust the Compose file
+      1. Caddy
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Adjust the Compose file">
+    <nav class="md-nav" aria-label="1. Caddy">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -639,14 +645,20 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#move-postgres-to-its-own-unique-container" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#postgres" class="md-nav__link">
     <span class="md-ellipsis">
-      Move Postgres to its own unique container
+      Postgres
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Postgres">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#share-volumes-between-the-stacks" class="md-nav__link">
@@ -732,7 +744,7 @@
 deploy to the idle stack, test it, and when ready, swap roles — giving
 near-zero downtime and easy rollback.</p>
 <p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
-<h2 id="1-adjust-the-compose-file">1. Adjust the Compose file</h2>
+<h2 id="1-caddy">1. Caddy</h2>
 <h3 id="remove-exposed-ports">Remove exposed ports</h3>
 <p>Remove the <code>caddy</code> service's <code>ports:</code> section in <code>compose.yaml</code>.</p>
 <p>We'll no longer expose ports in the stacks, instead a simple "front proxy" will
@@ -749,7 +761,7 @@ termination to the front proxy):</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${STACK_NAME}_caddy</span>
 </code></pre></div>
-<h3 id="move-postgres-to-its-own-unique-container">Move Postgres to its own unique container</h3>
+<h2 id="postgres">Postgres</h2>
 <p>Running two separate PostgreSQL instances and having them both simultaneously
 access the same data directory within that shared volume is not recommended and
 can lead to data corruption.</p>
