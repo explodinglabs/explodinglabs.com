@@ -486,51 +486,45 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#postgres" class="md-nav__link">
+  <a href="#2-postgres" class="md-nav__link">
     <span class="md-ellipsis">
-      Postgres
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Postgres">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#share-volumes-between-the-stacks" class="md-nav__link">
-    <span class="md-ellipsis">
-      Share volumes between the stacks
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-bring-up-two-stacks" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Bring up two Stacks
+      2. Postgres
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-add-a-front-proxy" class="md-nav__link">
+  <a href="#3-volumes" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Add a Front Proxy
+      3. Volumes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-upgrading" class="md-nav__link">
+  <a href="#4-bring-up-two-stacks" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Upgrading
+      4. Bring up two Stacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-add-a-front-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Add a Front Proxy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-upgrading" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Upgrading
     </span>
   </a>
   
@@ -651,51 +645,45 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#postgres" class="md-nav__link">
+  <a href="#2-postgres" class="md-nav__link">
     <span class="md-ellipsis">
-      Postgres
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Postgres">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#share-volumes-between-the-stacks" class="md-nav__link">
-    <span class="md-ellipsis">
-      Share volumes between the stacks
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-bring-up-two-stacks" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Bring up two Stacks
+      2. Postgres
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-add-a-front-proxy" class="md-nav__link">
+  <a href="#3-volumes" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Add a Front Proxy
+      3. Volumes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-upgrading" class="md-nav__link">
+  <a href="#4-bring-up-two-stacks" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Upgrading
+      4. Bring up two Stacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-add-a-front-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Add a Front Proxy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-upgrading" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Upgrading
     </span>
   </a>
   
@@ -761,19 +749,19 @@ termination to the front proxy):</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${STACK_NAME}_caddy</span>
 </code></pre></div>
-<h2 id="postgres">Postgres</h2>
+<h2 id="2-postgres">2. Postgres</h2>
 <p>Running two separate PostgreSQL instances and having them both simultaneously
 access the same data directory within that shared volume is not recommended and
 can lead to data corruption.</p>
 <p>So we need to move Postgres out of the compose file and start it separately.</p>
-<h3 id="share-volumes-between-the-stacks">Share volumes between the stacks</h3>
+<h2 id="3-volumes">3. Volumes</h2>
 <p>To share data between the two stacks (uploads, etc.), give volumes explicit
 names:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">user_data</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
 </code></pre></div>
-<h2 id="3-bring-up-two-stacks">3. Bring up two Stacks</h2>
+<h2 id="4-bring-up-two-stacks">4. Bring up two Stacks</h2>
 <p>Deploying is the same as <a href="../deploying/">before</a>, but now we're deploying the
 <em>idle stack</em>. For this example, <code>green</code> is idle so that's the one we're
 deploying.</p>
@@ -788,7 +776,7 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 </code></pre></div>
 <p>Docker will use the directory name <code>green</code> as the project name, creating
 different containers, volumes and networks than the <code>blue</code> stack.</p>
-<h2 id="3-add-a-front-proxy">3. Add a Front Proxy</h2>
+<h2 id="5-add-a-front-proxy">5. Add a Front Proxy</h2>
 <p>The <em>front proxy</em> is a single container that binds ports <code>80</code> and <code>443</code> on the
 server and routes requests into either the Blue or Green stack.</p>
 <p>On the server, create a simple <code>Caddyfile</code>:</p>
@@ -811,7 +799,7 @@ be up first, so the networks exist:</p>
 <span class="w">  </span>--network<span class="w"> </span>green_default<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>caddy:2
 </code></pre></div>
-<h2 id="4-upgrading">4. Upgrading</h2>
+<h2 id="6-upgrading">6. Upgrading</h2>
 <h2 id="flip-traffic">Flip traffic</h2>
 <p>Point traffic to the <code>green</code> stack:</p>
 <div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
