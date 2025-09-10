@@ -495,6 +495,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#3-bring-up-two-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Bring up two Stacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#3-add-a-front-proxy" class="md-nav__link">
     <span class="md-ellipsis">
       3. Add a Front Proxy
@@ -504,26 +513,20 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-deployingupgrading" class="md-nav__link">
+  <a href="#4-upgrading" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Deploying/Upgrading
+      4. Upgrading
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Deploying/Upgrading">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#flip-traffic" class="md-nav__link">
     <span class="md-ellipsis">
       Flip traffic
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -642,6 +645,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#3-bring-up-two-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Bring up two Stacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#3-add-a-front-proxy" class="md-nav__link">
     <span class="md-ellipsis">
       3. Add a Front Proxy
@@ -651,26 +663,20 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-deployingupgrading" class="md-nav__link">
+  <a href="#4-upgrading" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Deploying/Upgrading
+      4. Upgrading
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Deploying/Upgrading">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#flip-traffic" class="md-nav__link">
     <span class="md-ellipsis">
       Flip traffic
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -710,9 +716,9 @@ near-zero downtime and easy rollback.</p>
 <p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
 <h2 id="1-adjust-the-compose-file">1. Adjust the Compose file</h2>
 <h3 id="remove-exposed-ports">Remove exposed ports</h3>
+<p>Remove the <code>caddy</code> service's <code>ports:</code> section in <code>compose.yaml</code>.</p>
 <p>We'll no longer expose ports in the stacks, instead a simple "front proxy" will
-sit in front of the two stacks, exposing ports and proxying to the active
-stack. So remove the Caddy service's <code>ports:</code> section in <code>compose.yaml</code>.</p>
+sit in front of the two stacks, proxying to the active stack.</p>
 <h3 id="set-the-caddy-container-name-explicitly">Set the Caddy container name explicitly</h3>
 <p>This allows us to switch between the two stacks:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
@@ -734,30 +740,7 @@ explicit names:</p>
 <span class="w">  </span><span class="nt">user_data</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-data</span>
 </code></pre></div>
-<h2 id="3-add-a-front-proxy">3. Add a Front Proxy</h2>
-<p>The <em>front proxy</em> is a single container that binds ports <code>80</code> and <code>443</code> on the
-server and routes requests into either the Blue or Green stack.</p>
-<p>On the server, create a simple <code>Caddyfile</code>:</p>
-<div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
-  reverse_proxy blue_caddy:80
-}
-</code></pre></div>
-<p>Optionally, point a second hostname to the idle stack for testing.</p>
-<p>The front proxy manages TLS, so give it a persistent volume for certificates:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
-</code></pre></div>
-<p>Start the proxy, attaching it to both networks – this requires both stacks to
-be up first, so the networks exist:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>front-proxy<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">443</span>:443<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>./Caddyfile:/etc/caddy/Caddyfile<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>caddy_data:/data<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>blue_default<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>green_default<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>caddy:2
-</code></pre></div>
-<h2 id="4-deployingupgrading">4. Deploying/Upgrading</h2>
+<h2 id="3-bring-up-two-stacks">3. Bring up two Stacks</h2>
 <p>Deploying is the same as <a href="../deploying/">before</a>, but now we're deploying the
 <em>idle stack</em>. For this example, <code>green</code> is idle so that's the one we're
 deploying.</p>
@@ -772,7 +755,31 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 </code></pre></div>
 <p>Docker will use the directory name <code>green</code> as the project name, creating
 different containers, volumes and networks than the <code>blue</code> stack.</p>
-<h3 id="flip-traffic">Flip traffic</h3>
+<h2 id="3-add-a-front-proxy">3. Add a Front Proxy</h2>
+<p>The <em>front proxy</em> is a single container that binds ports <code>80</code> and <code>443</code> on the
+server and routes requests into either the Blue or Green stack.</p>
+<p>On the server, create a simple <code>Caddyfile</code>:</p>
+<div class="highlight"><span class="filename">caddy/Caddyfile</span><pre><span></span><code>api.myapp.com {
+  reverse_proxy blue_caddy:80
+}
+</code></pre></div>
+<p>Optionally, point a second hostname to the idle stack for testing.</p>
+<p>The front proxy manages TLS, so give it a persistent volume for certificates:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
+</code></pre></div>
+<p>Start the proxy, attaching it to both networks – this requires both stacks to
+be up first, so the networks exist:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>front-proxy<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">443</span>:443<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>./caddy:/etc/caddy<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>caddy_data:/data<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>blue_default<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>green_default<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>caddy:2
+</code></pre></div>
+<h2 id="4-upgrading">4. Upgrading</h2>
+<h2 id="flip-traffic">Flip traffic</h2>
 <p>Point traffic to the <code>green</code> stack:</p>
 <div class="highlight"><span class="filename">Caddyfile</span><pre><span></span><code>api.myapp.com {
   reverse_proxy green_caddy:80
@@ -788,7 +795,7 @@ different containers, volumes and networks than the <code>blue</code> stack.</p>
 <details>
 <summary>Click to expand</summary>
 
-<div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to VPS</span>
+<div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
 
 <span class="nt">on</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">push</span><span class="p">:</span>
@@ -798,8 +805,6 @@ different containers, volumes and networks than the <code>blue</code> stack.</p>
 <span class="nt">jobs</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
-
 <span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout code</span>
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
@@ -833,28 +838,22 @@ different containers, volumes and networks than the <code>blue</code> stack.</p>
 <span class="w">          </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;compose.yaml&quot;</span>
 <span class="w">          </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${{</span><span class="nv"> </span><span class="s">steps.idle.outputs.IDLE</span><span class="nv"> </span><span class="s">}}/&quot;</span>
 
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy with Docker Compose</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy idle stack</span>
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/ssh-action@v1.0.3</span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_HOST }}</span>
 <span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_USER }}</span>
 <span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_SSH_KEY }}</span>
-<span class="w">          </span><span class="nt">envs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GHCR_PAT,JWT_SECRET,POSTGRES_USER,PGUSER,POSTGRES_PASSWORD,PGPASS,PGRST_AUTHENTICATOR_PASS</span>
+<span class="w">          </span><span class="nt">envs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GHCR_PAT</span>
 <span class="w">          </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">            </span><span class="no">set -euo pipefail</span>
-<span class="w">            </span><span class="no">echo $GHCR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin</span>
-<span class="w">            </span><span class="no">cd ${{ steps.idle.outputs.IDLE }}</span>
-<span class="w">            </span><span class="no">docker compose pull -q</span>
-<span class="w">            </span><span class="no">STACK_NAME=${{ steps.idle.outputs.IDLE }} docker compose up -d</span>
 <span class="w">            </span><span class="no">echo &quot;${{ steps.idle.outputs.ACTIVE }}&quot; &gt; active_stack</span>
+<span class="w">            </span><span class="no">cd ${{ steps.idle.outputs.IDLE }}</span>
+<span class="w">            </span><span class="no">echo &quot;$GHCR_PAT&quot; | docker login ghcr.io -u &quot;${{ github.actor }}&quot; --password-stdin</span>
+<span class="w">            </span><span class="no">DOCKER_CLIENT_TIMEOUT=300 COMPOSE_HTTP_TIMEOUT=300 docker compose pull -q</span>
+<span class="w">            </span><span class="no">STACK_NAME=${{ steps.idle.outputs.IDLE }} docker compose up -d</span>
 <span class="w">        </span><span class="nt">env</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">GHCR_PAT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GHCR_PAT }}</span>
-<span class="w">          </span><span class="nt">JWT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.JWT_SECRET }}</span>
-<span class="w">          </span><span class="nt">PGRST_AUTHENTICATOR_PASS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PGRST_AUTHENTICATOR_PASS }}</span>
-<span class="w">          </span><span class="nt">PGUSER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PGUSER }}</span>
-<span class="w">          </span><span class="nt">PGPASS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PGPASS }}</span>
-<span class="w">          </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.POSTGRES_USER }}</span>
-<span class="w">          </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.POSTGRES_PASSWORD }}</span>
 </code></pre></div>
 
 </details>
