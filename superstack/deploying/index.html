@@ -655,9 +655,10 @@ docker<span class="w"> </span>compose<span class="w"> </span>push
 <h3 id="4-set-secrets">4. Set Secrets</h3>
 <p>The stack needs your secrets (passwords, keys, etc.). There are a few options:</p>
 <ol>
-<li>Put secrets in a <code>.env</code> file on the server (convenient but less secure).</li>
-<li>Set environment variables in the the <code>docker compose</code> command, being sure to
-   disable shell history (inconvenient).</li>
+<li>Put secrets in a <code>.env</code> file on the server. Convenient but Less secure. Be
+   sure to <code>chmod 600 .env</code>.</li>
+<li>Set environment variables in the the <code>docker compose</code> command. Inconvenient.
+   Be sure to disable shell history.</li>
 <li>Use environment injection in your CI/CD.</li>
 </ol>
 <h2 id="5-launch-your-stack">🚀 5. Launch your Stack</h2>
