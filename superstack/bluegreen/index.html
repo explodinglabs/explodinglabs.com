@@ -513,9 +513,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-add-a-front-proxy" class="md-nav__link">
+  <a href="#5-add-a-proxy" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Add a Front Proxy
+      5. Add a Proxy
     </span>
   </a>
   
@@ -672,9 +672,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-add-a-front-proxy" class="md-nav__link">
+  <a href="#5-add-a-proxy" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Add a Front Proxy
+      5. Add a Proxy
     </span>
   </a>
   
@@ -737,23 +737,23 @@ stack", now there is:</p>
 <ol>
 <li>A <code>blue</code> stack</li>
 <li>A <code>green</code> stack</li>
-<li>A front proxy to direct traffic</li>
+<li>A proxy to direct traffic</li>
 <li>An external Postgres.</li>
 </ol>
 <h2 id="2-adjust-caddy">2. Adjust Caddy</h2>
 <h3 id="name-the-caddy-containers">Name the Caddy containers</h3>
-<p>Naming the Caddy containers <code>blue_caddy</code> and <code>green_caddy</code> allows the front
+<p>Naming the Caddy containers <code>blue_caddy</code> and <code>green_caddy</code> allows the
 proxy to direct traffic to the correct stacks:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${STACK_NAME}_caddy</span>
 </code></pre></div>
 <h3 id="remove-exposed-ports">Remove exposed ports</h3>
-<p>We'll no longer expose ports in the stacks, instead a front proxy will sit in
+<p>We'll no longer expose ports in the stacks, instead a proxy will sit in
 front of the two stacks, proxying to them.</p>
 <p>So remove the <code>caddy</code> service's <code>ports:</code> section in <code>compose.yaml</code>.</p>
 <h3 id="serve-http-only-in-the-stacks">Serve HTTP-only in the stacks</h3>
 <p>Set <code>CADDY_SITE_ADDRESS</code> to only <code>:80</code>, removing <code>:443</code> (leaving TLS
-termination to the front proxy):</p>
+termination to the proxy):</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
@@ -798,8 +798,8 @@ docker<span class="w"> </span>compose<span class="w"> </span>pull
 </code></pre></div>
 <p>Docker will use the directory name <code>green</code> as the project name, creating
 different containers, volumes and networks than the <code>blue</code> stack.</p>
-<h2 id="5-add-a-front-proxy">5. Add a Front Proxy</h2>
-<p>The <em>front proxy</em> is a single container that binds ports <code>80</code> and <code>443</code> on the
+<h2 id="5-add-a-proxy">5. Add a Proxy</h2>
+<p>The proxy is a single container that binds ports <code>80</code> and <code>443</code> on the
 server and routes requests into either the Blue or Green stack.</p>
 <p>On the server, create a simple <code>Caddyfile</code>:</p>
 <div class="highlight"><span class="filename">caddy/Caddyfile</span><pre><span></span><code>api.myapp.com {
@@ -828,7 +828,7 @@ be up first, so the networks exist:</p>
   reverse_proxy green_caddy:80
 }
 </code></pre></div>
-<p>Reload the front proxy's config:</p>
+<p>Reload the proxy's config:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>front-proxy<span class="w"> </span>caddy<span class="w"> </span>reload
 </code></pre></div>
 <p>Cutover is instant. Green is now live, and Blue is the idle stack.</p>
