@@ -750,9 +750,8 @@ termination to the front proxy):</p>
 <span class="w">    </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
 </code></pre></div>
 <h2 id="2-postgres">2. Postgres</h2>
-<p>Running two separate PostgreSQL instances and having them both simultaneously
-access the same data directory within that shared volume is not recommended and
-can lead to data corruption.</p>
+<p>It's not advised to run two separate PostgreSQL instances and having them both simultaneously
+access the same shared volume.</p>
 <p>So we need to move Postgres out of the compose file and start it separately.</p>
 <h2 id="3-volumes">3. Volumes</h2>
 <p>To share data between the two stacks (uploads, etc.), give volumes explicit
