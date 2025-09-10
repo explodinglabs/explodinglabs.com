@@ -856,6 +856,24 @@ be up first, so the networks exist:</p>
 <span class="w">          </span><span class="nt">GHCR_PAT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GHCR_PAT }}</span>
 </code></pre></div>
 
+If you want to auto-flip between blue and green, add this extra task:
+
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Flip traffic</span>
+<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/ssh-action@v1.0.3</span>
+<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_HOST }}</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_USER }}</span>
+<span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_SSH_KEY }}</span>
+<span class="w">    </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">if [ &quot;${{ steps.idle.outputs.IDLE }}&quot; = &quot;blue&quot; ]; then</span>
+<span class="w">        </span><span class="no">sed -i &#39;s/green_caddy/blue_caddy/g&#39; caddy/Caddyfile</span>
+<span class="w">      </span><span class="no">else</span>
+<span class="w">        </span><span class="no">sed -i &#39;s/blue_caddy/green_caddy/g&#39; caddy/Caddyfile</span>
+<span class="w">      </span><span class="no">fi</span>
+<span class="w">      </span><span class="no">docker exec front-proxy caddy reload --config /etc/caddy/Caddyfile</span>
+<span class="w">      </span><span class="no">echo &quot;${{ steps.idle.outputs.IDLE }}&quot; &gt; active_stack</span>
+</code></pre></div>
+
 </details>
 
 
