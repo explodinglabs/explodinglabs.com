@@ -771,11 +771,11 @@ access the same shared volume.</p>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shared</span>
 <span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-<p>then in services that need db access:</p>
+<p>Then in services that need db access:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shared</span>
 </code></pre></div>
+<p>Move Postgres out of compose.yaml into a shared-compose.yaml, adding the <code>shared</code> network:</p>
 <h2 id="3-volumes">3. Volumes</h2>
 <p>To share data between the two stacks (uploads, etc.), give volumes explicit
 names:</p>
