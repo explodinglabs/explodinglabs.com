@@ -746,11 +746,10 @@
 
   <h1>Blue/Green Deployments</h1>
 
+<p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
 <p>Blue/Green deployment runs two stacks side-by-side: one live, one idle. You
 deploy to the idle stack, test it, and when ready, swap roles — giving
 near-zero downtime and easy rollback.</p>
-<p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
-<h2 id="1-create-a-docker-network">1. Create a Docker Network</h2>
 <p>Blue/Green adds some complexity because where before there was just "the
 stack", now you have:</p>
 <ol>
@@ -759,6 +758,7 @@ stack", now you have:</p>
 <li>A front proxy to direct traffic</li>
 <li>An external Postgres.</li>
 </ol>
+<h2 id="1-create-a-docker-network">1. Create a Docker Network</h2>
 <p>Create a network to link them:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>app
 </code></pre></div>
