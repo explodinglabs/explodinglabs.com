@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-create-a-docker-network" class="md-skip">
+        <a href="#2-adjust-caddy" class="md-skip">
           Skip to content
         </a>
       
@@ -444,15 +444,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-docker-network" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Create a Docker Network
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#2-adjust-caddy" class="md-nav__link">
     <span class="md-ellipsis">
       2. Adjust Caddy
@@ -612,15 +603,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-docker-network" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Create a Docker Network
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#2-adjust-caddy" class="md-nav__link">
     <span class="md-ellipsis">
       2. Adjust Caddy
@@ -758,16 +740,6 @@ stack", now there is:</p>
 <li>A front proxy to direct traffic</li>
 <li>An external Postgres.</li>
 </ol>
-<h2 id="1-create-a-docker-network">1. Create a Docker Network</h2>
-<p>Create a network to link them:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>app
-</code></pre></div>
-<p>And add it to the Compose file:</p>
-<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
-<span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</code></pre></div>
 <h2 id="2-adjust-caddy">2. Adjust Caddy</h2>
 <h3 id="name-the-caddy-containers">Name the Caddy containers</h3>
 <p>Naming the Caddy containers <code>blue_caddy</code> and <code>green_caddy</code> allows the front
@@ -790,6 +762,20 @@ termination to the front proxy):</p>
 <p>It's not advised to run two separate PostgreSQL instances and having them both simultaneously
 access the same shared volume.</p>
 <p>So we need to move Postgres out of the compose file and start it separately.</p>
+<p>Create a network:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>shared
+</code></pre></div>
+<p>And add it to the Compose file:</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">shared</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shared</span>
+<span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>then in services that need db access:</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shared</span>
+</code></pre></div>
 <h2 id="3-volumes">3. Volumes</h2>
 <p>To share data between the two stacks (uploads, etc.), give volumes explicit
 names:</p>
