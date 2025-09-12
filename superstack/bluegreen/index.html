@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2-adjust-caddy" class="md-skip">
+        <a href="#1-caddy-adjustments" class="md-skip">
           Skip to content
         </a>
       
@@ -444,13 +444,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#2-adjust-caddy" class="md-nav__link">
+  <a href="#1-caddy-adjustments" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Adjust Caddy
+      1. Caddy Adjustments
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Adjust Caddy">
+    <nav class="md-nav" aria-label="1. Caddy Adjustments">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -603,13 +603,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#2-adjust-caddy" class="md-nav__link">
+  <a href="#1-caddy-adjustments" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Adjust Caddy
+      1. Caddy Adjustments
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Adjust Caddy">
+    <nav class="md-nav" aria-label="1. Caddy Adjustments">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -728,8 +728,11 @@
 
   <h1>Blue/Green Deployments</h1>
 
-<p>Blue/Green deployment runs two stacks side-by-side: one live, one idle. You
-deploy to the idle stack, test it, and when ready, swap roles — giving
+<blockquote>
+<p>This page is a work in progress, I'm working on it - Beau</p>
+</blockquote>
+<p><em>Blue/Green deployment</em> runs two stacks side-by-side: one live, one idle. You
+deploy to the idle stack, test it, and when ready, swap roles. It gives
 near-zero downtime and easy rollback.</p>
 <p><img alt="Blue/Green" src="../assets/bluegreen.png" /></p>
 <p>Blue/Green adds some complexity because where before there was just "the
@@ -738,42 +741,44 @@ stack", now there is:</p>
 <li>A <code>blue</code> stack</li>
 <li>A <code>green</code> stack</li>
 <li>A proxy to direct traffic</li>
-<li>An external Postgres.</li>
+<li>An external Postgres container.</li>
 </ol>
-<h2 id="2-adjust-caddy">2. Adjust Caddy</h2>
+<h2 id="1-caddy-adjustments">1. Caddy Adjustments</h2>
 <h3 id="name-the-caddy-containers">Name the Caddy containers</h3>
-<p>Naming the Caddy containers <code>blue_caddy</code> and <code>green_caddy</code> allows the
-proxy to direct traffic to the correct stacks:</p>
+<p>Naming the Caddy containers <code>blue_caddy</code> and <code>green_caddy</code> allows the proxy to
+direct traffic to the correct stacks:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${STACK_NAME}_caddy</span>
 </code></pre></div>
 <h3 id="remove-exposed-ports">Remove exposed ports</h3>
-<p>We'll no longer expose ports in the stacks, instead a proxy will sit in
-front of the two stacks, proxying to them.</p>
-<p>So remove the <code>caddy</code> service's <code>ports:</code> section in <code>compose.yaml</code>.</p>
+<p>We'll no longer expose ports in our stacks. Instead a proxy will sit in front
+of the two stacks, proxying to them.</p>
+<p>Remove the Caddy service's <code>ports:</code> section in <code>compose.yaml</code>.</p>
 <h3 id="serve-http-only-in-the-stacks">Serve HTTP-only in the stacks</h3>
-<p>Set <code>CADDY_SITE_ADDRESS</code> to only <code>:80</code>, removing <code>:443</code> (leaving TLS
-termination to the proxy):</p>
+<p>Set <code>CADDY_SITE_ADDRESS</code> to only <code>:80</code>, removing <code>:443</code>, leaving TLS
+termination to the proxy:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
 </code></pre></div>
 <h2 id="2-postgres">2. Postgres</h2>
-<p>It's not advised to run two separate PostgreSQL instances and having them both simultaneously
-access the same shared volume.</p>
-<p>So we need to move Postgres out of the compose file and start it separately.</p>
-<p>Create a network:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>shared
+<p>In regular SuperStack, Postgres comes up with the stack. But now we're bringing
+up two stacks, we can't have two Postgres containers both simultaneously
+accessing the same shared volume. We need a single Postgres container, separate
+from the stacks.</p>
+<p>Add a profile to the Postgres service:</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;db&quot;</span><span class="p p-Indicator">]</span>
 </code></pre></div>
-<p>And add it to the Compose file:</p>
+<p>Add it to the Compose file:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">shared</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shared</span>
+<span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
 <span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-<p>Then in services that need db access:</p>
+<p>Then in services that need database access (such as PostgREST):</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">networks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shared</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
 </code></pre></div>
 <p>Move Postgres out of compose.yaml into a shared-compose.yaml, adding the <code>shared</code> network:</p>
 <h2 id="3-volumes">3. Volumes</h2>
