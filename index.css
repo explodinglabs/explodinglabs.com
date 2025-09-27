@@ -13,9 +13,6 @@ body {
   text-align: start;
   width: auto;
   word-break: break-word;
-  @include media-query($on-palm) {
-    font-size: 105%;
-  }
 }
 
 h1 {
@@ -28,24 +25,30 @@ nav {
   background-color: #071039;
   padding: 0.5em 0 0.5em 0;
   text-align: right;
-  a {
-    color: white;
-    text-decoration: none;
-    padding-right: 2em;
-    &:visited {
-      color: hsl(330, 50, 50);
-    }
-    &:hover {
-      color: orange;
-    }
-  }
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding-right: 2em;
+}
+
+nav a &:visited {
+  color: hsl(330, 50, 50);
+}
+
+nav a &:hover {
+  color: orange;
 }
 
 #start {
   padding-top: 2em;
   padding-bottom: 5em;
   background-color: #071039;
-  @media only screen and (min-width: 768px) {
+}
+
+@media only screen and (min-width: 768px) {
+  #start {
     padding-top: 10rem;
     padding-bottom: 10rem;
   }
@@ -63,11 +66,8 @@ nav {
   max-width: 600px;
   line-height: 1.5;
   text-align: center;
-  font-size: 1.5em;
   padding: 0 1em;
-  @media only screen and (min-width: 768px) {
-    font-size: 1.8em;
-  }
+  font-size: 1.8em;
 }
 
 #start #campaign {
