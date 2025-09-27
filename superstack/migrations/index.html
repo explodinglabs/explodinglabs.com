@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -387,6 +387,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-file-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested File Layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#nuke-everything" class="md-nav__link">
     <span class="md-ellipsis">
       🔄 Nuke Everything
@@ -476,6 +494,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../bluegreen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blue/Green Deployments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../upgrading/" class="md-nav__link">
         
   
@@ -545,6 +585,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-file-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested File Layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#nuke-everything" class="md-nav__link">
     <span class="md-ellipsis">
       🔄 Nuke Everything
@@ -594,15 +652,14 @@ them.</p>
 <p>To apply your migrations, run:</p>
 <div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
 </code></pre></div>
-<p>This will:</p>
+<p>This command will:</p>
 <ol>
-<li>Run any migration files that haven’t been applied yet (in filename order)</li>
-<li>Record each successfully applied file in <code>.applied_migrations</code> (this
-   file lives in the postgres data volume)</li>
+<li><strong>Apply new migrations,</strong> in filename order.</li>
+<li><strong>Record applied migrations</strong> in a file named <code>.applied_migrations</code>.</li>
 </ol>
 <p>Already-applied scripts are skipped on subsequent runs.</p>
 <blockquote>
-<p>💡 <code>bin/postgres</code> is a small script that basically aliases <code>docker compose exec postgres</code></p>
+<p>💡 <code>bin/postgres</code> is a small script that effectively aliases <code>docker compose exec postgres</code></p>
 </blockquote>
 <p>Here's an example migration script:</p>
 <div class="highlight"><span class="filename">postgres/migrations/02-create_table_example.sql</span><pre><span></span><code><span class="k">begin</span><span class="p">;</span>
@@ -621,26 +678,56 @@ them.</p>
 <span class="k">commit</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="transactions">🔁 Transactions</h2>
-<p>Use <code>begin;</code> and <code>commit;</code> to wrap statements in a transaction. This
-ensures that all changes are applied atomically. Any statements outside of
-transactions will be auto-committed.</p>
+<p>Use <code>begin;</code> and <code>commit;</code> to wrap statements in a transaction. This ensures
+that all changes are applied atomically. Any statements outside of transactions
+will be auto-committed.</p>
 <p>Avoid wrapping non-transactional operations in a transaction — these will
 cause errors if used inside <code>begin ... commit</code>. Examples of
 non-transactional statements include:</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span>
-<span class="k">DROP</span><span class="w"> </span><span class="n">EXTENSION</span>
-<span class="k">VACUUM</span>
-<span class="k">REINDEX</span>
-<span class="k">CLUSTER</span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span>
-<span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span>
+<span class="k">DROP</span><span class="w"> </span><span class="n">EXTENSION</span>
 <span class="k">DROP</span><span class="w"> </span><span class="n">TABLESPACE</span>
-<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span>
-<span class="n">DISCARD</span><span class="w"> </span><span class="k">ALL</span>
-<span class="k">LOAD</span>
 </code></pre></div>
+<h2 id="environment-variables">Environment Variables</h2>
+<p>Env vars can be used in migrations:</p>
+<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="k">set</span><span class="w"> </span><span class="n">pgrst_authenticator_pass</span><span class="w"> </span><span class="s1">&#39;$PGRST_AUTHENTICATOR_PASS&#39;</span>
+</code></pre></div>
+<p>Reduce the chance of environment variables being logged by putting them into
+variables with <code>\set</code>, then use the value later:</p>
+<div class="highlight"><pre><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="n">authenticator</span><span class="w"> </span><span class="n">noinherit</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="p">:</span><span class="s1">&#39;pgrst_authenticator_pass&#39;</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="suggested-file-layout">Suggested File Layout</h2>
+<p>SuperStack doesn’t enforce any particular migration file names or layout, but here’s a simple structure you might adopt during development (before
+production):</p>
+<div class="highlight"><pre><span></span><code>01-extensions.sql
+02-auth_schema.sql  (if using PostgREST for auth)
+03-api_schema.sql
+04-roles.sql
+05-grants.sql
+</code></pre></div>
+<p>While developing, you can reset and rebuild the database from scratch as often
+as needed:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>--volumes
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>Once you’ve deployed to production (or another persistent environment), avoid
+recreating the database. Instead:</p>
+<ul>
+<li>Add new migrations starting from <code>06-...</code> onwards.</li>
+<li>Apply them with:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>migrate
+</code></pre></div>
+<p>Or in other environments where <code>bin/postgres</code> isn't available:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres<span class="w"> </span>migrate
+</code></pre></div>
+<p>This approach keeps early development simple while providing a clear, ordered
+history once the database must be preserved.</p>
 <h2 id="nuke-everything">🔄 Nuke Everything</h2>
 <p>If you want to start fresh, wipe your database and re-run all migrations from
 scratch:</p>
@@ -735,10 +822,10 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>

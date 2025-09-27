@@ -14,11 +14,11 @@
         <link rel="prev" href="../psql/">
       
       
-        <link rel="next" href="../upgrading/">
+        <link rel="next" href="../bluegreen/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -426,9 +426,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-set-your-image-names" class="md-nav__link">
+  <a href="#1-prepare-your-images" class="md-nav__link">
     <span class="md-ellipsis">
-      ✅ 1. Set Your Image Names
+      ✅ 1. Prepare your Images
     </span>
   </a>
   
@@ -450,12 +450,27 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="📦 3. Deploy the Compose File">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-set-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Set Secrets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-launch-your-stack" class="md-nav__link">
+  <a href="#5-launch-your-stack" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 4. Launch your Stack
+      🚀 5. Launch your Stack
     </span>
   </a>
   
@@ -465,6 +480,28 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bluegreen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blue/Green Deployments
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -518,9 +555,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-set-your-image-names" class="md-nav__link">
+  <a href="#1-prepare-your-images" class="md-nav__link">
     <span class="md-ellipsis">
-      ✅ 1. Set Your Image Names
+      ✅ 1. Prepare your Images
     </span>
   </a>
   
@@ -542,12 +579,27 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="📦 3. Deploy the Compose File">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-set-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Set Secrets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-launch-your-stack" class="md-nav__link">
+  <a href="#5-launch-your-stack" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 4. Launch your Stack
+      🚀 5. Launch your Stack
     </span>
   </a>
   
@@ -573,15 +625,23 @@
 
 
 <h1 id="deploying-to-remote-environments">☁️ Deploying to Remote Environments</h1>
-<p>SuperStack is Docker-native, so deployment is simple and portable. Here's
-how to deploy it to a remote server.</p>
-<h2 id="1-set-your-image-names">✅ 1. Set Your Image Names</h2>
-<p>Change the image names to your own (e.g. using your Docker Hub or GitHub
-Container Registry account) in <code>compose.yaml</code>, for example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">postgres</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres</span>
-<span class="nt">caddy</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy</span>
+<p>SuperStack is Docker-native, so deployment is simple and portable. Here's how
+to deploy it to a remote server.</p>
+<p>A goal of SuperStack is that only <code>compose.yaml</code> should be required on the
+remote server.</p>
+<h2 id="1-prepare-your-images">✅ 1. Prepare your Images</h2>
+<p>For services that are built (they have a <code>build:</code> section in <code>compose.yaml</code>),
+add your own container repository image URIs (e.g. your Docker Hub or GitHub
+Container Registry account), for example:</p>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy:0.1.0</span>
+
+<span class="nt">postgres</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./postgres</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres:0.1.0</span>
 </code></pre></div>
 <h2 id="2-build-and-push-your-images">🛠️ 2. Build and Push your Images</h2>
 <p>Build your images locally and push to your registry:</p>
@@ -589,25 +649,23 @@ Container Registry account) in <code>compose.yaml</code>, for example:</p>
 docker<span class="w"> </span>compose<span class="w"> </span>push
 </code></pre></div>
 <h2 id="3-deploy-the-compose-file">📦 3. Deploy the Compose File</h2>
-<p>The only file needed for SuperStack to work on the remote server is
-<code>compose.yaml</code>.</p>
-<p>Copy it to your server:</p>
+<p>Copy <code>compose.yaml</code> to the server:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
-<h2 id="4-launch-your-stack">🚀 4. Launch your Stack</h2>
-<p>SSH into your server and bring up the stack.</p>
-<p>For production, avoid using <code>.env</code> files. Instead, set secrets directly:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CADDY_PORT</span><span class="o">=</span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
-<span class="nv">PG_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
-<span class="nv">PG_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
-<span class="nv">POSTGREST_AUTHENTICATOR_PASS</span><span class="o">=</span>supersecret<span class="w"> </span><span class="se">\</span>
-<span class="nv">JWT_SECRET</span><span class="o">=</span>your-secret<span class="w"> </span><span class="se">\</span>
+<h3 id="4-set-secrets">4. Set Secrets</h3>
+<p>The stack needs your secrets (passwords, keys, etc.). There are a few options:</p>
+<ol>
+<li>Put secrets in a <code>.env</code> file on the server. Convenient but Less secure. Be
+   sure to <code>chmod 600 .env</code>.</li>
+<li>Set environment variables in the the <code>docker compose</code> command. Inconvenient.
+   Be sure to disable shell history.</li>
+<li>Use environment injection in your CI/CD.</li>
+</ol>
+<h2 id="5-launch-your-stack">🚀 5. Launch your Stack</h2>
+<p>SSH into your server and bring up the stack:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<blockquote>
-<p>💡 Avoid leaking secrets by disabling shell history.</p>
-</blockquote>
-<p>Alternatively, use environment injection in your CI/CD.</p>
 <hr />
 <p>That’s it — your backend is live.</p>
 <p>If this is the first time bringing up your stack, the migrations will run
@@ -662,13 +720,13 @@ docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">ex
         
         
           
-          <a href="../upgrading/" class="md-footer__link md-footer__link--next" aria-label="Next: Upgrading SuperStack">
+          <a href="../bluegreen/" class="md-footer__link md-footer__link--next" aria-label="Next: Blue/Green Deployments">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Upgrading SuperStack
+                Blue/Green Deployments
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -704,10 +762,10 @@ docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">ex
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>

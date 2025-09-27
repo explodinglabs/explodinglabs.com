@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
     
     
       
@@ -518,6 +518,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../bluegreen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blue/Green Deployments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../upgrading/" class="md-nav__link">
         
   
@@ -671,12 +693,13 @@ Type &quot;help&quot; for help.
 app=#
 </code></pre></div>
 <blockquote>
-<p>🗒️ <strong>By default, <code>bin/postgres</code> opens a <code>psql</code> shell.</strong> You can still run
-other commands (e.g., bin/postgres bash) if needed.</p>
+<p>🗒️ By default, <code>bin/postgres</code> opens a <code>psql</code> shell. You can also run other
+commands in the container like <code>bin/postgres bash</code> if needed, or psql
+explicitly with <code>bin/postgres psql</code>.</p>
 </blockquote>
 <h2 id="run-inline-sql-commands">🔹 Run Inline SQL Commands</h2>
 <p>You can also run SQL directly without opening an interactive shell:</p>
-<div class="highlight"><pre><span></span><code>bin/postgres -c &#39;select * from movie;&#39;
+<div class="highlight"><pre><span></span><code>bin/postgres<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;select * from movie;&#39;</span>
 </code></pre></div>
 <p>✅ Because <code>bin/postgres</code> defaults to <code>psql</code>, you don’t need to type <code>psql</code>
 explicitly.</p>
@@ -700,7 +723,7 @@ available options.</p>
 <h2 id="step-2-mount-and-apply-the-configs">🔗 Step 2: Mount and apply the configs</h2>
 <p>Add to your <code>compose.override.yaml</code> (this file is for development-only
 overriding of <code>compose.yaml</code>):</p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<div class="highlight"><span class="filename">compose.override.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./postgres/rc:/rc:ro</span>
@@ -709,8 +732,7 @@ overriding of <code>compose.yaml</code>):</p>
 <span class="w">      </span><span class="nt">INPUTRC</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/rc/.inputrc</span>
 </code></pre></div>
 <h2 id="step-3-restart-the-postgres-container">🔁 Step 3: Restart the Postgres container</h2>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>postgres
-docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>postgres
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate<span class="w"> </span>postgres
 </code></pre></div>
 
 
@@ -800,10 +822,10 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "palette.toggle", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>
