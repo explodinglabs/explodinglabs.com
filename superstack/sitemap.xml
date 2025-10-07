@@ -2,38 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://explodinglabs.com/superstack/</loc>
-         <lastmod>2025-10-06</lastmod>
+         <lastmod>2025-10-07</lastmod>
     </url>
     <url>
          <loc>https://explodinglabs.com/superstack/deploying/</loc>
-         <lastmod>2025-10-06</lastmod>
-    </url>
-    <url>
-         <loc>https://explodinglabs.com/superstack/extensions/</loc>
-         <lastmod>2025-10-06</lastmod>
+         <lastmod>2025-10-07</lastmod>
     </url>
     <url>
          <loc>https://explodinglabs.com/superstack/gettingstarted/</loc>
-         <lastmod>2025-10-06</lastmod>
-    </url>
-    <url>
-         <loc>https://explodinglabs.com/superstack/migrations/</loc>
-         <lastmod>2025-10-06</lastmod>
-    </url>
-    <url>
-         <loc>https://explodinglabs.com/superstack/psql/</loc>
-         <lastmod>2025-10-06</lastmod>
+         <lastmod>2025-10-07</lastmod>
     </url>
     <url>
          <loc>https://explodinglabs.com/superstack/structure/</loc>
-         <lastmod>2025-10-06</lastmod>
-    </url>
-    <url>
-         <loc>https://explodinglabs.com/superstack/upgrading/</loc>
-         <lastmod>2025-10-06</lastmod>
+         <lastmod>2025-10-07</lastmod>
     </url>
     <url>
          <loc>https://explodinglabs.com/superstack/zerodowntime/</loc>
-         <lastmod>2025-10-06</lastmod>
+         <lastmod>2025-10-07</lastmod>
     </url>
 </urlset>
