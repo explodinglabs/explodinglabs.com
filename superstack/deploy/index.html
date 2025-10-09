@@ -557,14 +557,11 @@ docker<span class="w"> </span>compose<span class="w"> </span>push
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
 <h3 id="3-set-secrets">3. Set Secrets</h3>
-<p>Your app will need credentials such as database passwords or API keys.
-Choose one of these approaches:</p>
+<p>Your app will need credentials such as database passwords or API keys. Choose
+one of these approaches:</p>
 <ol>
-<li><strong><code>.env</code> file</strong> — simplest for manual deploys.</li>
-</ol>
-<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>.env
-</code></pre></div>
-<ol>
+<li><strong><code>.env</code> file</strong> — simply place a <code>.env</code> file alongside your <code>compose.yaml</code>.
+   Be sure to <code>chmod 600 .env</code>.</li>
 <li><strong>Environment variables</strong> — pass them directly to the command line.</li>
 <li><strong>CI/CD injection</strong> — good for automated pipelines.</li>
 </ol>
