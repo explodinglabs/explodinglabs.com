@@ -194,23 +194,16 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-adjust-the-application">
+<a class="md-nav__link" href="#1-create-a-new-proxy-project">
 <span class="md-ellipsis">
-      1. Adjust the Application
+      1. Create a new proxy project
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-start-a-new-proxy-project">
+<a class="md-nav__link" href="#2-adjust-the-application">
 <span class="md-ellipsis">
-      2. Start a new proxy project
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#start-the-services">
-<span class="md-ellipsis">
-      Start the services
+      2. Adjust the Application
     </span>
 </a>
 </li>
@@ -278,23 +271,16 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-adjust-the-application">
+<a class="md-nav__link" href="#1-create-a-new-proxy-project">
 <span class="md-ellipsis">
-      1. Adjust the Application
+      1. Create a new proxy project
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-start-a-new-proxy-project">
+<a class="md-nav__link" href="#2-adjust-the-application">
 <span class="md-ellipsis">
-      2. Start a new proxy project
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#start-the-services">
-<span class="md-ellipsis">
-      Start the services
+      2. Adjust the Application
     </span>
 </a>
 </li>
@@ -372,37 +358,7 @@ that sits in front of it.</p>
 <li>Tear down the old one when ready.</li>
 </ol>
 <p>Ok, we need to make some changes to the repository.</p>
-<h2 id="1-adjust-the-application">1. Adjust the Application</h2>
-<p>Remove the app's exposed ports, and connect to the proxy's network:</p>
-<div class="highlight"><span class="filename">app/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
-<span class="hll"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-</span><span class="hll"><span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="s">":80"</span>
-</span><span class="hll"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
-</span><span class="hll"><span class="w">      </span><span class="nt">default</span><span class="p">:</span>
-</span><span class="hll"><span class="w">      </span><span class="nt">proxy_default</span><span class="p">:</span>
-</span><span class="hll"><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span>
-</span><span class="hll"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${COMPOSE_PROJECT_NAME}_caddy</span>
-</span>
-<span class="hll"><span class="nt">networks</span><span class="p">:</span>
-</span><span class="hll"><span class="w">  </span><span class="nt">proxy_default</span><span class="p">:</span>
-</span><span class="hll"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span></code></pre></div>
-<p>What's changed?</p>
-<ol>
-<li>The exposed ports were removed.</li>
-<li>Caddy's site address has changed to <code>:80</code> (The application layer no longer
-   handles TLS).</li>
-<li>We connect to the proxy's network, so the proxy can direct traffic to the
-   app.</li>
-<li>A container alias was added. This alias allows the proxy to target this
-   container, while still allowing Docker to manage the container name.</li>
-</ol>
-<p>The <code>CADDY_SITE_ADDRESS</code> environment variable can be removed from the override
-file.</p>
-<h2 id="2-start-a-new-proxy-project">2. Start a new <code>proxy</code> project</h2>
+<h2 id="1-create-a-new-proxy-project">1. Create a new <code>proxy</code> project</h2>
 <p>From the root of the repository, create a new <code>proxy</code> project:</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>proxy
 </code></pre></div>
@@ -445,11 +401,42 @@ file.</p>
 
 <span class="k">COPY</span><span class="w"> </span>Caddyfile<span class="w"> </span>/etc/caddy/Caddyfile
 </code></pre></div>
-<h2 id="start-the-services">Start the services</h2>
-<p>Start the proxy first, then the app which connects to its network.</p>
-<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">cd proxy &amp;&amp; docker compose up -d</span>
-<span class="l l-Scalar l-Scalar-Plain">cd ../app &amp;&amp; docker compose up -d</span>
+<p>Start the proxy service:</p>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">docker compose up -d</span>
 </code></pre></div>
+<h2 id="2-adjust-the-application">2. Adjust the Application</h2>
+<p>Remove the app's exposed ports, and connect to the proxy's network:</p>
+<div class="highlight"><span class="filename">app/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
+<span class="hll"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+</span><span class="hll"><span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="s">":80"</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+</span><span class="hll"><span class="w">      </span><span class="nt">default</span><span class="p">:</span>
+</span><span class="hll"><span class="w">      </span><span class="nt">proxy_default</span><span class="p">:</span>
+</span><span class="hll"><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span>
+</span><span class="hll"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${COMPOSE_PROJECT_NAME}_caddy</span>
+</span>
+<span class="hll"><span class="nt">networks</span><span class="p">:</span>
+</span><span class="hll"><span class="w">  </span><span class="nt">proxy_default</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>What's changed?</p>
+<ol>
+<li>The exposed ports were removed.</li>
+<li>Caddy's site address has changed to <code>:80</code> (The application layer no longer
+   handles TLS).</li>
+<li>We connect to the proxy's network, so the proxy can direct traffic to the
+   app.</li>
+<li>A container alias was added. This alias allows the proxy to target this
+   container, while still allowing Docker to manage the container name.</li>
+</ol>
+<p>The <code>CADDY_SITE_ADDRESS</code> environment variable can be removed from the override
+file.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>app
+</code></pre></div>
+<p>Commit these changes.</p>
 <h2 id="deploying">Deploying</h2>
 <div class="highlight"><pre><span></span><code>proxy/
   compose.yaml
