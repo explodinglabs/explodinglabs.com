@@ -14,6 +14,8 @@
         <link rel="prev" href="..">
       
       
+        <link rel="next" href="../deploy/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
@@ -378,18 +380,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-start-the-stack" class="md-nav__link">
+  <a href="#3-start-the-app" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Start the Stack
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-just-happened" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧩 What Just Happened?
+      3. Start the App
     </span>
   </a>
   
@@ -419,7 +412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deploying.md" class="md-nav__link">
+      <a href="../deploy/" class="md-nav__link">
         
   
   
@@ -503,18 +496,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-start-the-stack" class="md-nav__link">
+  <a href="#3-start-the-app" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Start the Stack
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-just-happened" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧩 What Just Happened?
+      3. Start the App
     </span>
   </a>
   
@@ -549,14 +533,14 @@
 
 
 <h1 id="getting-started">🚀 Getting Started</h1>
-<video controls width="100%">
+<!--video controls width="100%">
   <source src="/superstack/assets/getting-started.mp4" type="video/mp4">
-  <data 
-    value="Music: Bensound, License: UZG5X7IWWLQOQEU1, Artist: Lunar Years" 
+  <data
+    value="Music: Bensound, License: UZG5X7IWWLQOQEU1, Artist: Lunar Years"
     hidden>
   </data>
   Your browser does not support the video tag.
-</video>
+</video-->
 
 <p>SuperStack uses Docker, so make sure <a href="https://docs.docker.com/get-docker/">Docker is
 installed</a> before you begin.</p>
@@ -584,31 +568,24 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
 </code></pre></div>
 <h2 id="2-configure-environment-variables">2. Configure Environment Variables</h2>
 <p>Copy the example environment file:</p>
-<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>app/example.env<span class="w"> </span>app/.env
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>app
+cp<span class="w"> </span>example.env<span class="w"> </span>.env
 </code></pre></div>
-<p>This <code>.env</code> file is used to set secrets, passwords, keys, etc.</p>
+<p>The <code>.env</code> file is used to set secrets, passwords, keys, etc.</p>
 <blockquote>
 <p>⚠️ Never store secrets in version control.</p>
 </blockquote>
-<h2 id="3-start-the-stack">3. Start the Stack</h2>
+<h2 id="3-start-the-app">3. Start the App</h2>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>That's it – your backend is live.</p>
+<p>Test it with:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>curl<span class="w"> </span>http://localhost:8000/healthcheck
+OK
+</code></pre></div>
 <hr />
-<h2 id="what-just-happened">🧩 What Just Happened?</h2>
-<p>SuperStack automatically:</p>
-<ol>
-<li>Starts a fresh Postgres database</li>
-<li>Applies initial migrations</li>
-<li>Launches PostgREST</li>
-<li>Serves everything through Caddy</li>
-</ol>
-<blockquote>
-<p>💡 Only Caddy exposes a port – all services are routed through it.</p>
-</blockquote>
 <h2 id="whats-next">➕ What's Next?</h2>
-<p>👉 <a href="migrations.md">Create your database schema with migrations</a><br />
-👉 <a href="deploying.md">Deploy to a remote environment</a></p>
+<p>👉 <a href="../deploy/">Deploy to a remote environment</a></p>
 
 
 
@@ -653,6 +630,22 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
             </div>
           </a>
         
+        
+          
+          <a href="../deploy/" class="md-footer__link md-footer__link--next" aria-label="Next: Deploying to Remote Environments">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Deploying to Remote Environments
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
