@@ -375,10 +375,9 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📦 2. Copy to Server">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#3-set-secrets" class="md-nav__link">
     <span class="md-ellipsis">
       3. Set Secrets
@@ -386,16 +385,11 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#launch-the-app" class="md-nav__link">
+  <a href="#3-launch-the-app" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Launch the App
+      🚀 3. Launch the App
     </span>
   </a>
   
@@ -482,10 +476,9 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📦 2. Copy to Server">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#3-set-secrets" class="md-nav__link">
     <span class="md-ellipsis">
       3. Set Secrets
@@ -493,16 +486,11 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#launch-the-app" class="md-nav__link">
+  <a href="#3-launch-the-app" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Launch the App
+      🚀 3. Launch the App
     </span>
   </a>
   
@@ -556,16 +544,16 @@ docker<span class="w"> </span>compose<span class="w"> </span>push
 <p>Copy your <code>compose.yaml</code> to the remote host:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
-<h3 id="3-set-secrets">3. Set Secrets</h3>
+<h2 id="3-set-secrets">3. Set Secrets</h2>
 <p>Your app will need credentials such as database passwords or API keys. Choose
 one of these approaches:</p>
 <ol>
 <li><strong><code>.env</code> file</strong> — simply place a <code>.env</code> file alongside your <code>compose.yaml</code>.
    Be sure to <code>chmod 600 .env</code>.</li>
-<li><strong>Environment variables</strong> — pass them directly to the command line.</li>
+<li><strong>Environment variables</strong> — pass secrets directly to the command line.</li>
 <li><strong>CI/CD injection</strong> — good for automated pipelines.</li>
 </ol>
-<h2 id="launch-the-app">🚀 Launch the App</h2>
+<h2 id="3-launch-the-app">🚀 3. Launch the App</h2>
 <p>Start the application on the server:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
@@ -573,9 +561,8 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 <p>Your backend is now live. 🚀</p>
 <hr />
 <h2 id="next-steps">🧭 Next Steps</h2>
-<p>This setup replaces the stack in place.</p>
 <p>If you want zero-downtime deployments, rollback support, or blue-green testing,
-continue reading to <a href="../advanced/">Advanced Deployments</a>.</p>
+continue to <a href="../advanced/">Advanced Deployments</a>.</p>
 
 
 

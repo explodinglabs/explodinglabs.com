@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-update-application" class="md-skip">
+        <a href="#1-create-a-new-project" class="md-skip">
           Skip to content
         </a>
       
@@ -376,27 +376,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-update-application" class="md-nav__link">
+  <a href="#1-create-a-new-project" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Update Application
+      1. Create a new project
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-add-a-traffic-switcher-proxy-service" class="md-nav__link">
+  <a href="#2-update-the-application" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Add a traffic-switcher proxy service
+      2. Update the Application
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#deploying" class="md-nav__link">
+  <a href="#deploy-the-proxy" class="md-nav__link">
     <span class="md-ellipsis">
-      Deploying
+      Deploy the Proxy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy the app
     </span>
   </a>
   
@@ -453,27 +462,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-update-application" class="md-nav__link">
+  <a href="#1-create-a-new-project" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Update Application
+      1. Create a new project
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-add-a-traffic-switcher-proxy-service" class="md-nav__link">
+  <a href="#2-update-the-application" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Add a traffic-switcher proxy service
+      2. Update the Application
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#deploying" class="md-nav__link">
+  <a href="#deploy-the-proxy" class="md-nav__link">
     <span class="md-ellipsis">
-      Deploying
+      Deploy the Proxy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy the app
     </span>
   </a>
   
@@ -518,14 +536,69 @@
 
   <h1>Advanced Deployments</h1>
 
-<p>A new <code>proxy</code> service is added to direct traffic.</p>
+<p>The standard SuperStack replaces the stack in place.</p>
+<ul>
+<li>There's some downtime while upgrading.</li>
+<li>You can't test one app while another is live (blue/green)</li>
+<li>Once an app is upgrade, you can't rollback.</li>
+</ul>
+<p>Once your app is ready for production, consider adding a traffic-switcher in
+front of your app.</p>
+<p>How it works:</p>
+<ul>
+<li>We stop exposing ports in the <code>app</code> project.</li>
+<li>A new <code>proxy</code> project is added, with ports open.</li>
+<li>It's purpose is to direct traffic to the right application.</li>
+<li>Apps are deployed completely separate to the live one.</li>
+</ul>
+<p>This way, environments are <em>ephemeral, immutable and idempotent</em>.</p>
+<p>The directory structure looks like:</p>
 <div class="highlight"><pre><span></span><code>proxy/
   compose.yaml
 app/
-  ...
+  a/
+    compose.yaml
+    .env
+  b/
+    compose.yaml
+    .env
 </code></pre></div>
-<h2 id="1-update-application">1. Update Application</h2>
-<p>Remove the exposed ports, and connect to the proxy's network:</p>
+<h2 id="1-create-a-new-project">1. Create a new project</h2>
+<p>From the root of the repository, create a new <code>proxy</code> project:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>proxy
+</code></pre></div>
+<p>Add a compose file:</p>
+<div class="highlight"><span class="filename">proxy/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:443&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">caddy_data:/data</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api.myapp.com</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">caddy_data</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">caddy-data</span><span class="w"> </span><span class="c1"># The proxy manages TLS, so give it a persistent volume for certificates</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">proxy/compose.override.yaml</span><pre><span></span><code><span class="c1"># Development overrides</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:80&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">proxy/caddy/Caddyfile</span><pre><span></span><code><span class="p p-Indicator">{</span><span class="nv">$CADDY_SITE_ADDRESS</span><span class="p p-Indicator">}</span>
+
+<span class="l l-Scalar l-Scalar-Plain">reverse_proxy app_caddy:80</span>
+</code></pre></div>
+<h2 id="2-update-the-application">2. Update the Application</h2>
+<p>Remove the app's exposed ports, and connect to the proxy's network:</p>
 <p>```yaml title="app/compose.yaml" hl_lines="6-13,15-17"
 services:
   caddy:
@@ -543,9 +616,7 @@ services:
 <p>networks:
   proxy_default:
     external: true
-<div class="highlight"><pre><span></span><code>**app/compose.override.yaml**
-
-```yaml
+<div class="highlight"><pre><span></span><code>```yaml title=&quot;app/compose.override.yaml&quot;
 # Development overrides
 
 services:
@@ -553,53 +624,8 @@ services:
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
 </code></pre></div></p>
-<h2 id="1-add-a-traffic-switcher-proxy-service">1. Add a traffic-switcher proxy service</h2>
-<p><strong>proxy/compose.yaml</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:443&quot;</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">caddy_data:/data</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api.myapp.com</span>
-
-<span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">caddy_data</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">caddy-data</span>
-</code></pre></div>
-<p><strong>proxy/compose.override.yaml</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Development overrides</span>
-
-<span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:80&quot;</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
-</code></pre></div>
-<p><strong>proxy/caddy/Caddyfile</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{</span><span class="nv">$CADDY_SITE_ADDRESS</span><span class="p p-Indicator">}</span>
-
-<span class="l l-Scalar l-Scalar-Plain">reverse_proxy app_caddy:80</span>
-</code></pre></div>
-<h2 id="deploying">Deploying</h2>
-<p>The proxy is deployed manually, and app infra files are created in a new
-directory every time.</p>
-<div class="highlight"><pre><span></span><code>proxy/
-  compose.yaml
-app/
-  a/
-    compose.yaml
-    .env
-  b/
-    compose.yaml
-    .env
-</code></pre></div>
-<p>the Proxy (Manual Step)</p>
+<h2 id="deploy-the-proxy">Deploy the Proxy</h2>
+<p>The proxy is only deployed once.</p>
 <p>On the server, create a proxy directory:</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>proxy
 </code></pre></div>
@@ -607,13 +633,9 @@ app/
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>proxy/compose.yaml<span class="w"> </span>app-backend:proxy/
 </code></pre></div>
 <blockquote>
-<p>Optionally, you might point a second hostname to an idle stack for testing.</p>
+<p>You might also point a second hostname to an idle stack for testing.</p>
 </blockquote>
-<p>The proxy manages TLS, so give it a persistent volume for certificates:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>caddy_data
-</code></pre></div>
-<p>Start the proxy, attaching it to both networks – this requires both stacks to
-be up first, so the networks exist:</p>
+<h2 id="deploy-the-app">Deploy the app</h2>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <h2 id="flip-traffic">Flip traffic</h2>
@@ -622,8 +644,7 @@ docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">ex
 <span class="w">  </span>http://localhost:2019/config/apps/http/servers/srv0/routes/0/handle/0/upstreams/0/dial
 </code></pre></div>
 <h2 id="github-actions-workflow">Github Actions Workflow</h2>
-<p><strong>.github/workflows/ci.yaml</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+<div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
 
 <span class="nt">on</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">push</span><span class="p">:</span>
