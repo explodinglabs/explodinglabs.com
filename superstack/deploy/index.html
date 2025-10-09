@@ -358,28 +358,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prepare-your-application" class="md-nav__link">
+  <a href="#1-build-your-images" class="md-nav__link">
     <span class="md-ellipsis">
-      Prepare your Application
+      🧱 1. Build Your Images
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#deploy" class="md-nav__link">
+  <a href="#2-copy-to-server" class="md-nav__link">
     <span class="md-ellipsis">
-      📦 Deploy
+      📦 2. Copy to Server
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📦 Deploy">
+    <nav class="md-nav" aria-label="📦 2. Copy to Server">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#secrets" class="md-nav__link">
+  <a href="#3-set-secrets" class="md-nav__link">
     <span class="md-ellipsis">
-      Secrets
+      3. Set Secrets
     </span>
   </a>
   
@@ -391,27 +391,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#launch-your-stack" class="md-nav__link">
+  <a href="#launch-the-app" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Launch your Stack
+      🚀 Launch the App
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#github-actions-workflow" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
-      Github Actions Workflow
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-now" class="md-nav__link">
-    <span class="md-ellipsis">
-      ➕ What Now?
+      🧭 Next Steps
     </span>
   </a>
   
@@ -452,28 +443,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prepare-your-application" class="md-nav__link">
+  <a href="#1-build-your-images" class="md-nav__link">
     <span class="md-ellipsis">
-      Prepare your Application
+      🧱 1. Build Your Images
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#deploy" class="md-nav__link">
+  <a href="#2-copy-to-server" class="md-nav__link">
     <span class="md-ellipsis">
-      📦 Deploy
+      📦 2. Copy to Server
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📦 Deploy">
+    <nav class="md-nav" aria-label="📦 2. Copy to Server">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#secrets" class="md-nav__link">
+  <a href="#3-set-secrets" class="md-nav__link">
     <span class="md-ellipsis">
-      Secrets
+      3. Set Secrets
     </span>
   </a>
   
@@ -485,27 +476,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#launch-your-stack" class="md-nav__link">
+  <a href="#launch-the-app" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Launch your Stack
+      🚀 Launch the App
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#github-actions-workflow" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
-      Github Actions Workflow
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-now" class="md-nav__link">
-    <span class="md-ellipsis">
-      ➕ What Now?
+      🧭 Next Steps
     </span>
   </a>
   
@@ -534,49 +516,46 @@
 <p>SuperStack is <strong>Docker-native</strong>, so deployments are simple, consistent, and
 portable. The goal is that only <code>compose.yaml</code> and secrets need to exist on the
 remote server.</p>
-<h2 id="prepare-your-application">Prepare your Application</h2>
-<p>Services that are built (they have a <code>build:</code> section in <code>compose.yaml</code>), add
-your own container repository image URIs (e.g. your Docker Hub or GitHub
-Container Registry account), for example:</p>
+<h2 id="1-build-your-images">🧱 1. Build Your Images</h2>
+<p>If a service has a <code>build:</code> section, add your own image name and version tag:</p>
 <div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">build</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy:0.1.0</span>
-</code></pre></div>
+<span class="hll"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy:0.1.0</span>
+</span></code></pre></div>
 <p>Build and push your images:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build
 docker<span class="w"> </span>compose<span class="w"> </span>push
 </code></pre></div>
-<h2 id="deploy">📦 Deploy</h2>
-<p>Copy <code>compose.yaml</code> to the server:</p>
+<h2 id="2-copy-to-server">📦 2. Copy to Server</h2>
+<p>Copy your <code>compose.yaml</code> to the remote host:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
-<h3 id="secrets">Secrets</h3>
-<p>The app also needs your secrets (passwords, keys, etc.).</p>
-<p>There are a few options:</p>
+<h3 id="3-set-secrets">3. Set Secrets</h3>
+<p>Your app will need credentials such as database passwords or API keys.
+Choose one of these approaches:</p>
 <ol>
-<li>Put secrets in a <code>.env</code> file on the server, alongside your compose.yaml.
-   Convenient but Less secure. Be sure to <code>chmod 600 .env</code>.</li>
-<li>Set environment variables in the the <code>docker compose</code> command. Inconvenient.
-   Be sure to disable shell history.</li>
-<li>Use environment injection in CI/CD.</li>
+<li><strong><code>.env</code> file</strong> — simplest for manual deploys.</li>
 </ol>
-<h2 id="launch-your-stack">🚀 Launch your Stack</h2>
-<p>Bring up the stack:</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>.env
+</code></pre></div>
+<ol>
+<li><strong>Environment variables</strong> — pass them directly to the command line.</li>
+<li><strong>CI/CD injection</strong> — good for automated pipelines.</li>
+</ol>
+<h2 id="launch-the-app">🚀 Launch the App</h2>
+<p>Start the application on the server:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
+<p>Your backend is now live. 🚀</p>
 <hr />
-<p>That’s it — your backend is live.</p>
-<p>This type of rolling deployment makes it hard to test before going live and to
-rollback, and can have some downtime while upgrading. Consider reading the Wiki
-page on <a href="">Advanced Deployments</a>.</p>
-<h2 id="github-actions-workflow">Github Actions Workflow</h2>
-<p>TODO</p>
-<hr />
-<h2 id="what-now">➕ What Now?</h2>
-<p>Add to your app by following guides in the <a href="https://github.com/explodinlabs/superstack/wiki">Wiki</a>.</p>
+<h2 id="next-steps">🧭 Next Steps</h2>
+<p>This setup replaces the stack in place.</p>
+<p>If you want zero-downtime deployments, rollback support, or blue-green testing,
+see the Wiki page: <a href="https://github.com/explodinlabs/superstack/wiki">Advanced
+Deployments</a>.</p>
 
 
 
