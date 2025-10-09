@@ -8,10 +8,8 @@
       
       
       
-        <link rel="canonical" href="https://explodinglabs.com/superstack/deploying/">
+        <link rel="canonical" href="https://explodinglabs.com/superstack/deploy/">
       
-      
-        <link rel="prev" href="../gettingstarted/">
       
       
       
@@ -20,7 +18,7 @@
     
     
       
-        <title>Deploying to Remote Environments - SuperStack</title>
+        <title>☁️ Deploying to Remote Environments - SuperStack</title>
       
     
     
@@ -109,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Deploying to Remote Environments
+              ☁️ Deploying to Remote Environments
             
           </span>
         </div>
@@ -305,32 +303,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Deploying to Remote Environments
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../deploying.md" class="md-nav__link">
         
   
   
@@ -341,77 +317,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-prepare-your-images" class="md-nav__link">
-    <span class="md-ellipsis">
-      ✅ 1. Prepare your Images
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-build-and-push-your-images" class="md-nav__link">
-    <span class="md-ellipsis">
-      🛠️ 2. Build and Push your Images
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-deploy-the-compose-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      📦 3. Deploy the Compose File
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📦 3. Deploy the Compose File">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#4-set-secrets" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Set Secrets
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-launch-your-stack" class="md-nav__link">
-    <span class="md-ellipsis">
-      🚀 5. Launch your Stack
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -443,37 +348,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-prepare-your-images" class="md-nav__link">
+  <a href="#prepare-your-application" class="md-nav__link">
     <span class="md-ellipsis">
-      ✅ 1. Prepare your Images
+      Prepare your Application
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-build-and-push-your-images" class="md-nav__link">
+  <a href="#deploy" class="md-nav__link">
     <span class="md-ellipsis">
-      🛠️ 2. Build and Push your Images
+      📦 Deploy
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-deploy-the-compose-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      📦 3. Deploy the Compose File
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📦 3. Deploy the Compose File">
+    <nav class="md-nav" aria-label="📦 Deploy">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#4-set-secrets" class="md-nav__link">
+  <a href="#secrets" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Set Secrets
+      Secrets
     </span>
   </a>
   
@@ -485,9 +381,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-launch-your-stack" class="md-nav__link">
+  <a href="#launch-your-stack" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 5. Launch your Stack
+      🚀 Launch your Stack
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github-actions-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Github Actions Workflow
     </span>
   </a>
   
@@ -513,55 +418,49 @@
 
 
 <h1 id="deploying-to-remote-environments">☁️ Deploying to Remote Environments</h1>
-<p>SuperStack is Docker-native, so deployment is simple and portable. Here's how
-to deploy it to a remote server.</p>
-<p>A goal of SuperStack is that only <code>compose.yaml</code> should be required on the
+<p>SuperStack is <strong>Docker-native</strong>, so deployments are simple, consistent, and
+portable. The goal is that only <code>compose.yaml</code> and secrets need to exist on the
 remote server.</p>
-<h2 id="1-prepare-your-images">✅ 1. Prepare your Images</h2>
-<p>For services that are built (they have a <code>build:</code> section in <code>compose.yaml</code>),
-add your own container repository image URIs (e.g. your Docker Hub or GitHub
+<h2 id="prepare-your-application">Prepare your Application</h2>
+<p>Services that are built (they have a <code>build:</code> section in <code>compose.yaml</code>), add
+your own container repository image URIs (e.g. your Docker Hub or GitHub
 Container Registry account), for example:</p>
-<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">caddy</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy:0.1.0</span>
-
-<span class="nt">postgres</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./postgres</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-postgres:0.1.0</span>
+<div class="highlight"><span class="filename">compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy:0.1.0</span>
 </code></pre></div>
-<h2 id="2-build-and-push-your-images">🛠️ 2. Build and Push your Images</h2>
-<p>Build your images locally and push to your registry:</p>
+<p>Build and push your images:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build
 docker<span class="w"> </span>compose<span class="w"> </span>push
 </code></pre></div>
-<h2 id="3-deploy-the-compose-file">📦 3. Deploy the Compose File</h2>
+<h2 id="deploy">📦 Deploy</h2>
 <p>Copy <code>compose.yaml</code> to the server:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
-<h3 id="4-set-secrets">4. Set Secrets</h3>
-<p>The stack needs your secrets (passwords, keys, etc.). There are a few options:</p>
+<h3 id="secrets">Secrets</h3>
+<p>The app also needs your secrets (passwords, keys, etc.).</p>
+<p>There are a few options:</p>
 <ol>
-<li>Put secrets in a <code>.env</code> file on the server. Convenient but Less secure. Be
-   sure to <code>chmod 600 .env</code>.</li>
+<li>Put secrets in a <code>.env</code> file on the server, alongside your compose.yaml.
+   Convenient but Less secure. Be sure to <code>chmod 600 .env</code>.</li>
 <li>Set environment variables in the the <code>docker compose</code> command. Inconvenient.
    Be sure to disable shell history.</li>
-<li>Use environment injection in your CI/CD.</li>
+<li>Use environment injection in CI/CD.</li>
 </ol>
-<h2 id="5-launch-your-stack">🚀 5. Launch your Stack</h2>
-<p>SSH into your server and bring up the stack:</p>
+<h2 id="launch-your-stack">🚀 Launch your Stack</h2>
+<p>Bring up the stack:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <hr />
 <p>That’s it — your backend is live.</p>
-<p>If this is the first time bringing up your stack, the migrations will run
-automatically. Subsequently, to upgrade your app you should:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
-docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
-docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres<span class="w"> </span>migrate
-</code></pre></div>
+<p>This type of rolling deployment makes it hard to test before going live and to
+rollback, and can have some downtime while upgrading. Consider reading the Wiki
+page on <a href="">Advanced Deployments</a>.</p>
+<h2 id="github-actions-workflow">Github Actions Workflow</h2>
+<p>TODO</p>
 
 
 
@@ -586,28 +485,6 @@ docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">ex
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="../gettingstarted/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                Getting Started
-              </div>
-            </div>
-          </a>
-        
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
