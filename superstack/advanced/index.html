@@ -288,22 +288,24 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1>Advanced Deployments</h1>
-<p>The standard SuperStack replaces the stack in place.</p>
+<p>The standard SuperStack has a single app, and it's upgraded in place.</p>
 <ul>
-<li>There's some downtime while upgrading.</li>
+<li>There's potentially some downtime while upgrading.</li>
+<li>Once an app is upgraded, you can't rollback.</li>
 <li>You can't test one app while another is live (blue/green)</li>
-<li>Once an app is upgrade, you can't rollback.</li>
 </ul>
-<p>Once your app is ready for production, consider adding a traffic-switcher in
+<p>When your app is ready for production, consider adding a traffic-switcher in
 front of your app.</p>
 <p>Here's how it works:</p>
 <ul>
 <li>We stop exposing ports in the <code>app</code> project.</li>
-<li>A new <code>proxy</code> service is added, with ports open.</li>
+<li>A new <code>proxy</code> service is added with ports open.</li>
 <li>It's purpose is to direct traffic to the right application. (it also takes
-  over TLS termination from the app layer).</li>
-<li>Rather than upgrading the one app, apps are deployed separate to the live
-  one. A fresh app every time.</li>
+  over TLS termination)</li>
+<li>Rather than upgrading the single app, new apps containers are brought up,
+  separate to the live one, and they connect to the proxy's network.</li>
+<li>Test the new app before it goes live.</li>
+<li>Finally traffic is flipped to the new app.</li>
 </ul>
 <p>This way, environments are <em>ephemeral, immutable and idempotent</em>.</p>
 <pre class="mermaid"><code>flowchart TD
