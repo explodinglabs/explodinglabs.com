@@ -194,48 +194,44 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-create-a-new-proxy-project">
+<a class="md-nav__link" href="#1-start-the-proxy">
 <span class="md-ellipsis">
-      1. Create a new proxy project
+      🧱 1. Start the Proxy
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#2-adjust-the-application">
 <span class="md-ellipsis">
-      2. Adjust the Application
+      ⚙️ 2. Adjust the Application
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#deploying">
+<a class="md-nav__link" href="#3-deploying">
 <span class="md-ellipsis">
-      Deploying
+      🚀 3. Deploying
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#deploy-the-app">
+<a class="md-nav__link" href="#4-deploy-the-new-app-stack">
 <span class="md-ellipsis">
-      Deploy the app
-    </span>
-</a>
-<nav aria-label="Deploy the app" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#flip-traffic">
-<span class="md-ellipsis">
-      Flip traffic
+      🆕 4. Deploy the New App Stack
     </span>
 </a>
 </li>
-</ul>
-</nav>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-flip-traffic">
+<span class="md-ellipsis">
+      🔁 5. Flip Traffic
+    </span>
+</a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#github-actions-workflow">
+<a class="md-nav__link" href="#github-actions-example">
 <span class="md-ellipsis">
-      Github Actions Workflow
+      ⚡ GitHub Actions Example
     </span>
 </a>
 </li>
@@ -271,48 +267,44 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-create-a-new-proxy-project">
+<a class="md-nav__link" href="#1-start-the-proxy">
 <span class="md-ellipsis">
-      1. Create a new proxy project
+      🧱 1. Start the Proxy
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#2-adjust-the-application">
 <span class="md-ellipsis">
-      2. Adjust the Application
+      ⚙️ 2. Adjust the Application
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#deploying">
+<a class="md-nav__link" href="#3-deploying">
 <span class="md-ellipsis">
-      Deploying
+      🚀 3. Deploying
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#deploy-the-app">
+<a class="md-nav__link" href="#4-deploy-the-new-app-stack">
 <span class="md-ellipsis">
-      Deploy the app
-    </span>
-</a>
-<nav aria-label="Deploy the app" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#flip-traffic">
-<span class="md-ellipsis">
-      Flip traffic
+      🆕 4. Deploy the New App Stack
     </span>
 </a>
 </li>
-</ul>
-</nav>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-flip-traffic">
+<span class="md-ellipsis">
+      🔁 5. Flip Traffic
+    </span>
+</a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#github-actions-workflow">
+<a class="md-nav__link" href="#github-actions-example">
 <span class="md-ellipsis">
-      Github Actions Workflow
+      ⚡ GitHub Actions Example
     </span>
 </a>
 </li>
@@ -331,81 +323,45 @@
 <li>No way to test a new version while another is live (blue/green)</li>
 <li>No quick rollback once upgraded</li>
 </ul>
-<p>When your app is ready for production, consider adding a <strong>traffic-switcher</strong>
-in front it.</p>
+<p>When your app is ready for production, you can enable a <strong>traffic-router</strong> in
+to eliminate downtime, enable blue/green testing and easy rollbacks.</p>
 <h2 id="how-it-works">🧭 How It Works</h2>
-<p>Instead of directly exposing ports from the app, you add a small proxy project
-that sits in front of it.</p>
-<p>The proxy’s job is to:</p>
+<p>The traffic router is a lightweight proxy project (already included with
+SuperStack) that sits in front of your app. Its responsibilities:</p>
 <ul>
-<li>Route incoming traffic to the active app stack</li>
-<li>Make it easy to flip traffic between app versions</li>
-<li>Terminate TLS</li>
+<li>Route traffic to the active app stack</li>
+<li>Simplify switching between versions</li>
+<li>Handle TLS termination</li>
 </ul>
 <pre class="mermaid"><code>flowchart TD
     Proxy["Traffic Router"]
     Proxy --&gt; LiveApp["Live App"]
     NextApp["Next App"]
 </code></pre>
+<p>In standard mode, the app exposes ports directly. In advanced mode, the <strong>proxy
+owns the ports</strong>, and apps connect to it internally over Docker networks.</p>
 <h2 id="deployment-flow">🔄 Deployment Flow</h2>
 <ol>
-<li>Stop exposing ports in the app project — only the proxy will listen on :80 and :443.</li>
-<li>Add a proxy project that runs Caddy (or another gateway).</li>
-<li>Each time you deploy, bring up a new app stack, connected to the proxy’s
-   network.</li>
-<li>Test the new stack while the old one is still live.</li>
-<li>Flip traffic in the proxy to point to the new stack.</li>
+<li>Stop exposing ports in the app project — only the proxy will listen on <code>:80</code>
+   and <code>:443</code>.</li>
+<li>Enable the proxy project (included in the repository).</li>
+<li>For each deployment, bring up a new app stack (e.g. <code>app/&lt;commit&gt;</code>),
+   connected to the proxy’s network.</li>
+<li>Test the new app while the current one remains live.</li>
+<li>Flip traffic in the proxy to point to the new app.</li>
 <li>Tear down the old one when ready.</li>
 </ol>
-<p>Ok, we need to make some changes to the repository.</p>
-<h2 id="1-create-a-new-proxy-project">1. Create a new <code>proxy</code> project</h2>
-<p>From the root of the repository, create a new <code>proxy</code> project:</p>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>proxy
+<h2 id="1-start-the-proxy">🧱 1. Start the Proxy</h2>
+<p>A <code>proxy</code> project already exists in your SuperStack project.</p>
+<blockquote>
+<p>For consistent environments, use the proxy in all environments including
+development.</p>
+</blockquote>
+<p>Start it:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<p>Give it a Compose file:</p>
-<div class="highlight"><span class="filename">proxy/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"80:80"</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"443:443"</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">caddy_data:/data</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api.myapp.com</span>
-
-<span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">caddy_data</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">caddy-data</span><span class="w"> </span><span class="c1"># Persistent volume for certificates</span>
-</code></pre></div>
-<p>Add development overrides:</p>
-<div class="highlight"><span class="filename">proxy/compose.override.yaml</span><pre><span></span><code><span class="c1"># Development overrides</span>
-
-<span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8000:80"</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">:80</span>
-</code></pre></div>
-<p>Configure Caddy:</p>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>proxy/caddy
-</code></pre></div>
-<div class="highlight"><span class="filename">proxy/caddy/Caddyfile</span><pre><span></span><code><span class="p p-Indicator">{</span><span class="nv">$CADDY_SITE_ADDRESS</span><span class="p p-Indicator">}</span>
-
-<span class="l l-Scalar l-Scalar-Plain">reverse_proxy app_caddy:80</span>
-</code></pre></div>
-<p>Add a Dockerfile:</p>
-<div class="highlight"><span class="filename">proxy/caddy/Dockerfile</span><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">caddy:2</span>
-
-<span class="k">COPY</span><span class="w"> </span>Caddyfile<span class="w"> </span>/etc/caddy/Caddyfile
-</code></pre></div>
-<p>Start the proxy service:</p>
-<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">docker compose up -d</span>
-</code></pre></div>
-<h2 id="2-adjust-the-application">2. Adjust the Application</h2>
-<p>Remove the app's exposed ports, and connect to the proxy's network:</p>
+<h2 id="2-adjust-the-application">⚙️ 2. Adjust the Application</h2>
+<p>Remove the app's exposed ports and connect it to the proxy's network:</p>
 <div class="highlight"><span class="filename">app/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">build</span><span class="p">:</span>
@@ -422,22 +378,22 @@ that sits in front of it.</p>
 </span><span class="hll"><span class="w">  </span><span class="nt">proxy_default</span><span class="p">:</span>
 </span><span class="hll"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
-<p>What's changed?</p>
+<p>What's Changed?</p>
 <ol>
-<li>The exposed ports were removed.</li>
-<li>Caddy's site address has changed to <code>:80</code> (The application layer no longer
-   handles TLS).</li>
-<li>We connect to the proxy's network, so the proxy can direct traffic to the
-   app.</li>
-<li>A container alias was added. This alias allows the proxy to target this
-   container, while still allowing Docker to manage the container name.</li>
+<li>Exposed ports were removed.</li>
+<li><code>CADDY_SITE_ADDRESS</code> now listens internally on port <code>:80</code>.</li>
+<li>The app joins the proxy's network so traffic can be routed to it.</li>
+<li>A container alias (<code>_caddy</code>) lets the proxy target this service reliably.</li>
 </ol>
-<p>The <code>CADDY_SITE_ADDRESS</code> environment variable can be removed from the override
-file.</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>app
+<p>You can also remove the <code>CADDY_SITE_ADDRESS</code> override in
+<code>compose.override.yaml</code>.</p>
+<p>Recreate the app's Caddy container:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate<span class="w"> </span>caddy
 </code></pre></div>
-<p>Commit these changes.</p>
-<h2 id="deploying">Deploying</h2>
+<p>Commit these changes – your app is now "proxy-ready".</p>
+<h2 id="3-deploying">🚀 3. Deploying</h2>
+<p>The proxy is deployed once (usually manually), and each app is deployed
+separately into its own directory.</p>
 <div class="highlight"><pre><span></span><code>proxy/
   compose.yaml
 app/
@@ -448,25 +404,46 @@ app/
     compose.yaml
     .env
 </code></pre></div>
-<p>The proxy is deployed once.</p>
-<p>On the server, create a proxy directory:</p>
+<p>Before deploying, build and push your own proxy image by adding an image name
+to the Compose file:</p>
+<div class="highlight"><span class="filename">proxy/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
+<span class="hll"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-proxy:0.1.0</span>
+</span></code></pre></div>
+<p>Build and push it:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>build
+docker<span class="w"> </span>compose<span class="w"> </span>push
+</code></pre></div>
+<p>Create a proxy directory on the server:</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>proxy
 </code></pre></div>
-<p>Copy your Compose file to the server:</p>
+<p>Copy the proxy's Compose file:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>proxy/compose.yaml<span class="w"> </span>app-backend:proxy/
 </code></pre></div>
-<blockquote>
-<p>You might also point a second hostname to an idle stack for testing.</p>
-</blockquote>
-<h2 id="deploy-the-app">Deploy the app</h2>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<p>Start the proxy:</p>
+<p>docker compose up -d</p>
+<h2 id="4-deploy-the-new-app-stack">🆕 4. Deploy the New App Stack</h2>
+<p>Deploy your app into a new directory (e.g. <code>b/</code>):</p>
+<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>yourserver:app/b/
 </code></pre></div>
-<h3 id="flip-traffic">Flip traffic</h3>
+<p>Start it on the server:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>app/b
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>Optionally, verify it's healthy before switching traffic:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>caddy<span class="w"> </span>curl<span class="w"> </span>-fsS<span class="w"> </span>http://caddy:80/healthz
+</code></pre></div>
+<h2 id="5-flip-traffic">🔁 5. Flip Traffic</h2>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>proxy
 docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>caddy<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>-d<span class="w"> </span><span class="s1">'"newapp_caddy:80"'</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>http://localhost:2019/config/apps/http/servers/srv0/routes/0/handle/0/upstreams/0/dial
 </code></pre></div>
-<h2 id="github-actions-workflow">Github Actions Workflow</h2>
+<p>Traffic now points to the new stack.</p>
+<h2 id="github-actions-example">⚡ GitHub Actions Example</h2>
+<details>
+<summary>Show full workflow</summary>
 <div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
 
 <span class="nt">on</span><span class="p">:</span>
@@ -542,6 +519,7 @@ docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">ex
 <span class="w">            </span><span class="no">mkdir -p /var/log/sku-generator</span>
 <span class="w">            </span><span class="no">echo "$(date -u +"%Y-%m-%dT%H:%M:%SZ") ${{ github.sha }}" &gt;&gt; /var/log/sku-generator/deploy.log</span>
 </code></pre></div>
+</details>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
