@@ -512,9 +512,9 @@ docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">ex
 <span class="w">            </span><span class="no"># Bring up stack and run healthchecks</span>
 <span class="w">            </span><span class="no">trap 'docker compose down' ERR</span>
 <span class="w">            </span><span class="no">docker compose up --detach</span>
-<span class="w">            </span><span class="no">docker compose exec -T caddy curl -fsS http://caddy:80/healthcheck</span>
+<span class="w">            </span><span class="no">docker compose exec -T caddy curl -fsS http://caddy:80/healthz</span>
 <span class="w">            </span><span class="no"># Add more healthchecks here</span>
-<span class="w">            </span><span class="no"># docker compose exec -T caddy curl -fsS http://api:8080/healthcheck</span>
+<span class="w">            </span><span class="no"># docker compose exec -T caddy curl -fsS http://api:8080/healthz</span>
 <span class="w">            </span><span class="no"># docker compose exec -T caddy curl -fsS http://postgrest:3000/</span>
 
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Flip traffic</span>
