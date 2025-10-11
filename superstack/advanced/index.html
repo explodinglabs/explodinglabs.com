@@ -187,9 +187,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#deployment-flow">
+<a class="md-nav__link" href="#tasks">
 <span class="md-ellipsis">
-      🔄 Deployment Flow
+      🔄 Tasks
     </span>
 </a>
 </li>
@@ -208,25 +208,54 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-deploying">
+<a class="md-nav__link" href="#3-deploying-to-a-remote-server">
 <span class="md-ellipsis">
-      🚀 3. Deploying
+      🚀 3. Deploying to a Remote Server
+    </span>
+</a>
+<nav aria-label="🚀 3. Deploying to a Remote Server" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-deploy-the-proxy">
+<span class="md-ellipsis">
+      1. Deploy the Proxy
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4-deploy-the-new-app-stack">
+<a class="md-nav__link" href="#2-deploy-a-new-app-version">
 <span class="md-ellipsis">
-      🆕 4. Deploy the New App Stack
+      2. Deploy a new App version
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-route-traffic">
+<span class="md-ellipsis">
+      🔁 4. Route Traffic
+    </span>
+</a>
+<nav aria-label="🔁 4. Route Traffic" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#option-1-use-the-rest-api">
+<span class="md-ellipsis">
+      Option 1: Use the REST API
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#5-flip-traffic">
+<a class="md-nav__link" href="#option-2-mount-a-caddyfile">
 <span class="md-ellipsis">
-      🔁 5. Flip Traffic
+      Option 2: Mount a Caddyfile
     </span>
 </a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#github-actions-example">
@@ -260,9 +289,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#deployment-flow">
+<a class="md-nav__link" href="#tasks">
 <span class="md-ellipsis">
-      🔄 Deployment Flow
+      🔄 Tasks
     </span>
 </a>
 </li>
@@ -281,25 +310,54 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-deploying">
+<a class="md-nav__link" href="#3-deploying-to-a-remote-server">
 <span class="md-ellipsis">
-      🚀 3. Deploying
+      🚀 3. Deploying to a Remote Server
+    </span>
+</a>
+<nav aria-label="🚀 3. Deploying to a Remote Server" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-deploy-the-proxy">
+<span class="md-ellipsis">
+      1. Deploy the Proxy
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4-deploy-the-new-app-stack">
+<a class="md-nav__link" href="#2-deploy-a-new-app-version">
 <span class="md-ellipsis">
-      🆕 4. Deploy the New App Stack
+      2. Deploy a new App version
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-route-traffic">
+<span class="md-ellipsis">
+      🔁 4. Route Traffic
+    </span>
+</a>
+<nav aria-label="🔁 4. Route Traffic" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#option-1-use-the-rest-api">
+<span class="md-ellipsis">
+      Option 1: Use the REST API
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#5-flip-traffic">
+<a class="md-nav__link" href="#option-2-mount-a-caddyfile">
 <span class="md-ellipsis">
-      🔁 5. Flip Traffic
+      Option 2: Mount a Caddyfile
     </span>
 </a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#github-actions-example">
@@ -323,47 +381,49 @@
 <li>No way to test a new version while another is live (blue/green)</li>
 <li>No quick rollback once upgraded</li>
 </ul>
-<p>When your app is ready for production, you can enable a traffic router to
-eliminate these issues.</p>
+<p>When your app is ready for production, you can enable a simple <strong>traffic
+router</strong> to eliminate these issues.</p>
 <h2 id="how-it-works">🧭 How It Works</h2>
-<p>The traffic router is a lightweight proxy project (already included with
-SuperStack) that sits in front of your app. Its responsibilities:</p>
+<p>The traffic router is a lightweight proxy already included with SuperStack that
+sits in front of your app. Its responsibilities:</p>
 <ul>
-<li>Route traffic to the active app stack</li>
+<li>Route traffic to the correct app</li>
 <li>Simplify switching between versions</li>
 <li>Handle TLS termination</li>
 </ul>
 <pre class="mermaid"><code>flowchart TD
+    FormerApp["Former App"]
     Proxy["Traffic Router"]
     Proxy --&gt; LiveApp["Live App"]
     NextApp["Next App"]
 </code></pre>
 <p>Normally the app exposes ports directly, but in this advanced mode, the <strong>proxy
 owns the ports</strong>, and apps connect to its Docker network.</p>
-<h2 id="deployment-flow">🔄 Deployment Flow</h2>
+<h2 id="tasks">🔄 Tasks</h2>
 <ol>
-<li>Enable the proxy project (included in the repository).</li>
-<li>Stop exposing ports in the app — only the proxy will listen on <code>:80</code> and
-   <code>:443</code>.</li>
-<li>For each deployment, bring up a new app stack (e.g. <code>app/&lt;commit&gt;</code>),
-   connected to the proxy’s network.</li>
-<li>Test the new app while the current one remains live.</li>
-<li>Flip traffic in the proxy to point to the new app.</li>
-<li>Tear down the old one when ready.</li>
+<li>Enable the proxy project (included in SuperStack)</li>
+<li>Stop exposing ports in the app</li>
+<li>Instead, connect to the proxy's Docker network</li>
+<li>The proxy will listen on <code>:80</code> and <code>:443</code></li>
 </ol>
+<p>The application still manages api routes, auth, etc.</p>
 <h2 id="1-start-the-proxy">🧱 1. Start the Proxy</h2>
-<p>A <code>proxy</code> project already exists in your SuperStack project.</p>
 <blockquote>
 <p>For consistent environments, use the proxy in all environments, including
 development.</p>
 </blockquote>
+<p>A <code>proxy</code> project already exists in your SuperStack project.</p>
+<p>First, stop your app to release the ports:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>app
+docker<span class="w"> </span>compose<span class="w"> </span>down
+</code></pre></div>
 <p>Start the proxy:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>proxy
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>../proxy
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <h2 id="2-adjust-the-application">⚙️ 2. Adjust the Application</h2>
-<p><strong>Remove the <code>ports:</code> section from the app,</strong> and connect it to the proxy's
-network by adding these lines:</p>
+<p><strong>Remove the <code>ports:</code> from the app,</strong> and connect it to the proxy's network by
+adding these lines:</p>
 <div class="highlight"><span class="filename">app/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">build</span><span class="p">:</span>
@@ -375,29 +435,38 @@ network by adding these lines:</p>
 </span><span class="hll"><span class="w">      </span><span class="nt">proxy_default</span><span class="p">:</span>
 </span><span class="hll"><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span>
 </span><span class="hll"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${COMPOSE_PROJECT_NAME}_caddy</span>
-</span>
-<span class="hll"><span class="nt">networks</span><span class="p">:</span>
+</span><span class="hll">
+</span><span class="hll"><span class="nt">networks</span><span class="p">:</span>
 </span><span class="hll"><span class="w">  </span><span class="nt">proxy_default</span><span class="p">:</span>
 </span><span class="hll"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
-<p>You should also remove the <code>ports:</code> and <code>CADDY_SITE_ADDRESS</code> in
+<p>Also remove the <code>ports:</code> and <code>CADDY_SITE_ADDRESS</code> in
 <code>app/compose.override.yaml</code>.</p>
 <p>What's Changed?</p>
 <ol>
-<li>Exposed ports were removed.</li>
-<li><code>CADDY_SITE_ADDRESS</code> now listens internally on port <code>:80</code>.</li>
-<li>The app joins the proxy's network so traffic can be routed to it.</li>
+<li>Exposed ports were removed</li>
+<li><code>CADDY_SITE_ADDRESS</code> now listens internally on port <code>:80</code></li>
+<li>The app joins the proxy's network so traffic can be routed to it</li>
 <li>A container alias (<code>_caddy</code>) allows the proxy to target this service
-   reliably.</li>
+   reliably</li>
 </ol>
-<p>Recreate the app's Caddy container:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>app
-docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate<span class="w"> </span>caddy
+<p>Bring up the app:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>Test with:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>curl<span class="w"> </span>http://localhost:8000/healthcheck
+OK
 </code></pre></div>
 <p>Commit these changes – your app is now proxy-ready.</p>
-<h2 id="3-deploying">🚀 3. Deploying</h2>
-<p>The proxy is deployed once (usually manually), and each app is deployed
-separately into its own directory.</p>
+<h2 id="3-deploying-to-a-remote-server">🚀 3. Deploying to a Remote Server</h2>
+<p>The proxy is deployed once (usually manually). After that, each app version is
+deployed separately into its own directory.</p>
+<ol>
+<li>For each deployment, bring up a new app (e.g. <code>app/&lt;commit&gt;</code>)</li>
+<li>Test the new app while the current one remains live</li>
+<li>Flip traffic in the proxy to point to the new app</li>
+<li>Tear down the old one when ready</li>
+</ol>
 <div class="highlight"><pre><span></span><code>proxy/
   compose.yaml
 app/
@@ -408,6 +477,7 @@ app/
     compose.yaml
     .env
 </code></pre></div>
+<h3 id="1-deploy-the-proxy">1. Deploy the Proxy</h3>
 <p>Before deploying, build and push your own proxy image by adding an <code>image:</code>
 line to the Compose file:</p>
 <div class="highlight"><span class="filename">proxy/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
@@ -429,28 +499,59 @@ docker<span class="w"> </span>compose<span class="w"> </span>push
 <p>Start the proxy:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<h2 id="4-deploy-the-new-app-stack">🆕 4. Deploy the New App Stack</h2>
-<p>Deploy your app into a new directory (e.g. <code>b/</code>):</p>
+<h3 id="2-deploy-a-new-app-version">2. Deploy a new App version</h3>
+<p>Deploy your app into a new directory (e.g. <code>app/b/</code>):</p>
+<blockquote>
+<p>Important: Give it a unique directory name every time. Here we use 'b' for
+simplicity, but I recommend using the commit hash.</p>
+</blockquote>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>app/b
 </code></pre></div>
+<p>Copy <code>compose.yaml</code> (and secrets) there:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>yourserver:app/b/
 </code></pre></div>
-<p>Start it on the server:</p>
+<p>Start the app on the server:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>app/b
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<p>Optionally, verify the new app is healthy before switching traffic:</p>
+<p>Verify the new app is healthy before switching traffic:</p>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>caddy<span class="w"> </span>curl<span class="w"> </span>-fsS<span class="w"> </span>http://caddy:80/healthz
 OK
 </code></pre></div>
-<h2 id="5-flip-traffic">🔁 5. Flip Traffic</h2>
+<h2 id="4-route-traffic">🔁 4. Route Traffic</h2>
+<h3 id="option-1-use-the-rest-api">Option 1: Use the REST API</h3>
+<p>Caddy's configuration can be adjusted via HTTP using its <a href="https://caddyserver.com/docs/api">REST
+API</a>.</p>
+<p>Since the app was brought up in a directory named <code>b</code>, the app's Caddy service
+was given the alias <code>b_caddy</code>.</p>
+<p>Direct all traffic to <code>b_caddy</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>proxy
-docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>caddy<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>-d<span class="w"> </span><span class="s1">'"newapp_caddy:80"'</span><span class="w"> </span><span class="se">\</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>caddy<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>-d<span class="w"> </span><span class="s1">'"b_caddy:80"'</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>http://localhost:2019/config/apps/http/servers/srv0/routes/0/handle/0/upstreams/0/dial
 </code></pre></div>
 <p>Traffic now points to the new stack.</p>
+<h3 id="option-2-mount-a-caddyfile">Option 2: Mount a Caddyfile</h3>
+<p>Create a simple Caddyfile on the server, such as:</p>
+<div class="highlight"><span class="filename">proxy/caddy/Caddyfile</span><pre><span></span><code>{$CADDY_SITE_ADDRESS}
+
+reverse_proxy b_caddy:80
+</code></pre></div>
+<p>Mount it into the proxy's Caddy container:</p>
+<div class="highlight"><span class="filename">proxy/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="hll"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy:/etc/caddy</span>
+</span></code></pre></div>
+<p>Recreate the container:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>proxy
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate<span class="w"> </span>caddy
+</code></pre></div>
+<p>After that, to re-route traffic, simply change the app service name in
+<code>proxy/caddy/Caddyfile</code> and reload the proxy's configuration:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>caddy<span class="w"> </span>caddy<span class="w"> </span>reload<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
+</code></pre></div>
 <h2 id="github-actions-example">⚡ GitHub Actions Example</h2>
-<p>Use this Github Actions Workflow to automate deployments.</p>
+<p>Add this Github Actions workflow to automate deployments:</p>
 <details>
 <summary>Show full workflow</summary>
 <div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
