@@ -524,7 +524,7 @@ OK
 API</a>.</p>
 <p>Since the app was brought up in a directory named <code>b</code>, the app's Caddy service
 was given the alias <code>b_caddy</code>.</p>
-<p>Direct all traffic to <code>b_caddy</code>:</p>
+<p>Redirect all traffic to <code>b_caddy</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>proxy
 docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>caddy<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>-d<span class="w"> </span><span class="s1">'"b_caddy:80"'</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>http://localhost:2019/config/apps/http/servers/srv0/routes/0/handle/0/upstreams/0/dial
