@@ -531,19 +531,17 @@ portable.</p>
 server.</p>
 <h2 id="1-build-your-images">🧱 1. Build Your Images</h2>
 <p>If a service has a <code>build:</code> section, add your own <code>image:</code> name and version tag:</p>
-<p>```yaml title="app/compose.yaml" hl_lines=3
-services:
-  caddy:
-    image: ghcr.io/youruser/yourapp-caddy:0.1.0
-    build:
-      context: ./caddy
-<div class="highlight"><pre><span></span><code>Build and push your images:
-
-```sh
-cd app
-docker compose build
-docker compose push
-</code></pre></div></p>
+<div class="highlight"><span class="filename">app/compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">caddy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./caddy</span>
+<span class="hll"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/youruser/yourapp-caddy:0.1.0</span>
+</span></code></pre></div>
+<p>Build and push your images:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>app
+docker<span class="w"> </span>compose<span class="w"> </span>build
+docker<span class="w"> </span>compose<span class="w"> </span>push
+</code></pre></div>
 <h2 id="2-copy-to-server">📦 2. Copy to Server</h2>
 <p>Copy your <code>compose.yaml</code> to the remote host:</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
