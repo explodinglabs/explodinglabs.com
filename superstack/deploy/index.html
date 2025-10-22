@@ -396,6 +396,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#upgrading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       🧭 Next Steps
@@ -497,6 +506,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#upgrading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       🧭 Next Steps
@@ -558,11 +576,19 @@ one of these approaches:</p>
 </ol>
 <h2 id="3-launch-the-app">🚀 3. Launch the App</h2>
 <p>Start the application on the server:</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>pull
-docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 <p>Your backend is now live. 🚀</p>
 <hr />
+<h2 id="upgrading">Upgrading</h2>
+<p>To upgrade your app, simply increment the image tag versions in compose.yaml.</p>
+<p>The rest is the same:</p>
+<ol>
+<li><code>docker compose build</code></li>
+<li><code>docker compose push</code></li>
+<li><code>scp compose.yaml yourserver:</code></li>
+<li><code>docker compose up -d</code></li>
+</ol>
 <h2 id="next-steps">🧭 Next Steps</h2>
 <p>If you want zero-downtime deployments, rollback support, or blue-green testing,
 continue to <a href="../advanced/">Advanced Deployments</a>.</p>
