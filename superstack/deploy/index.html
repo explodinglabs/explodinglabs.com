@@ -579,8 +579,8 @@ docker<span class="w"> </span>compose<span class="w"> </span>build
 docker<span class="w"> </span>compose<span class="w"> </span>push
 </code></pre></div>
 <h2 id="2-copy-to-server">📦 2. Copy to Server</h2>
-<p>Copy your <code>compose.yaml</code> to the remote host:</p>
-<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
+<p>Create an <code>app</code> directory on the server and copy your <code>compose.yaml</code> there:</p>
+<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:app/
 </code></pre></div>
 <h2 id="3-set-secrets">3. Set Secrets</h2>
 <p>Your app will need credentials such as database passwords or API keys. Choose
