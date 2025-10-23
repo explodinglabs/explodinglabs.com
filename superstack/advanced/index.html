@@ -258,9 +258,9 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#github-actions-example">
+<a class="md-nav__link" href="#github-actions">
 <span class="md-ellipsis">
-      ⚡ GitHub Actions Example
+      ⚡ GitHub Actions
     </span>
 </a>
 </li>
@@ -360,9 +360,9 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#github-actions-example">
+<a class="md-nav__link" href="#github-actions">
 <span class="md-ellipsis">
-      ⚡ GitHub Actions Example
+      ⚡ GitHub Actions
     </span>
 </a>
 </li>
@@ -397,8 +397,8 @@ front of your app. Its responsibilities:</p>
     Proxy --&gt; LiveApp["Live App"]
     NextApp["Next App"]
 </code></pre>
-<p>Normally the app exposes ports directly, but in this advanced mode, the <strong>proxy
-owns the ports</strong>, and apps connect to its Docker network.</p>
+<p>Normally the app exposes ports directly, but in this mode, the <strong>proxy owns the
+ports</strong>, and apps connect to its Docker network.</p>
 <h2 id="tasks">🔄 Tasks</h2>
 <ol>
 <li>Enable the proxy project (included in SuperStack)</li>
@@ -550,8 +550,8 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 <code>proxy/caddy/Caddyfile</code> and reload the proxy's configuration:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>caddy<span class="w"> </span>caddy<span class="w"> </span>reload<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
 </code></pre></div>
-<h2 id="github-actions-example">⚡ GitHub Actions Example</h2>
-<p>Add this Github Actions workflow to automate deployments:</p>
+<h2 id="github-actions">⚡ GitHub Actions</h2>
+<p>Here's a Github Actions workflow you can use to automate deployments:</p>
 <details>
 <summary>Show full workflow</summary>
 <div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
