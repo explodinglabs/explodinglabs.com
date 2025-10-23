@@ -413,6 +413,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ GitHub Actions
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -523,6 +532,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ GitHub Actions
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -559,11 +577,10 @@ server.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>app
 docker<span class="w"> </span>compose<span class="w"> </span>build
 docker<span class="w"> </span>compose<span class="w"> </span>push
-<span class="nb">cd</span><span class="w"> </span>..
 </code></pre></div>
 <h2 id="2-copy-to-server">📦 2. Copy to Server</h2>
 <p>Copy your <code>compose.yaml</code> to the remote host:</p>
-<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>app/compose.yaml<span class="w"> </span>youruser@yourserver:
+<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>compose.yaml<span class="w"> </span>youruser@yourserver:
 </code></pre></div>
 <h2 id="3-set-secrets">3. Set Secrets</h2>
 <p>Your app will need credentials such as database passwords or API keys. Choose
@@ -581,7 +598,7 @@ one of these approaches:</p>
 <p>Your backend is now live. 🚀</p>
 <hr />
 <h2 id="upgrading">Upgrading</h2>
-<p>To upgrade your app, simply increment the image tag versions in compose.yaml.</p>
+<p>To upgrade your app, simply increment the image tag versions in <code>compose.yaml</code>.</p>
 <p>The rest is the same:</p>
 <ol>
 <li><code>docker compose build</code></li>
@@ -592,6 +609,64 @@ one of these approaches:</p>
 <h2 id="next-steps">🧭 Next Steps</h2>
 <p>If you want zero-downtime deployments, rollback support, or blue-green testing,
 continue to <a href="../advanced/">Advanced Deployments</a>.</p>
+<h2 id="github-actions">⚡ GitHub Actions</h2>
+<p>Here's a Github Actions workflow you can use to automate deployments.</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>.github/workflows
+</code></pre></div>
+<details>
+<summary>Show full workflow</summary>
+
+<div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout code</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Copy compose.yaml from repository to deployment dir</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/scp-action@master</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_HOST }}</span>
+<span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_USER }}</span>
+<span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_SSH_KEY }}</span>
+<span class="w">          </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;app/compose.yaml&quot;</span>
+<span class="w">          </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;app/&quot;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy with Docker Compose</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/ssh-action@v1.0.3</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">GHCR_PAT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GHCR_PAT }}</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_HOST }}</span>
+<span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_USER }}</span>
+<span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.VPS_SSH_KEY }}</span>
+<span class="w">          </span><span class="nt">envs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GHCR_PAT</span>
+<span class="w">          </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">            </span><span class="no">set -euo pipefail</span>
+<span class="w">            </span><span class="no">cp .env app/</span>
+<span class="w">            </span><span class="no">cd app</span>
+
+<span class="w">            </span><span class="no"># Pull images</span>
+<span class="w">            </span><span class="no">echo &quot;$GHCR_PAT&quot; | docker login ghcr.io --username &quot;${{ github.actor }}&quot; --password-stdin</span>
+<span class="w">            </span><span class="no">DOCKER_CLIENT_TIMEOUT=300 COMPOSE_HTTP_TIMEOUT=300 docker compose pull --quiet</span>
+
+<span class="w">            </span><span class="no"># Bring up stack and run healthchecks</span>
+<span class="w">            </span><span class="no">trap &#39;docker compose down&#39; ERR</span>
+<span class="w">            </span><span class="no">docker compose up -d</span>
+<span class="w">            </span><span class="no">docker compose exec -T caddy curl -fsS http://caddy:80/healthz</span>
+<span class="w">            </span><span class="no"># Add more healthchecks here</span>
+<span class="w">            </span><span class="no"># docker compose exec -T caddy curl -fsS http://api:8080/healthz</span>
+<span class="w">            </span><span class="no"># docker compose exec -T caddy curl -fsS http://postgrest:3000/</span>
+</code></pre></div>
+
+</details>
 
 
 

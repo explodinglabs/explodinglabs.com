@@ -551,7 +551,9 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>caddy<span class="w"> </span>caddy<span class="w"> </span>reload<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
 </code></pre></div>
 <h2 id="github-actions">⚡ GitHub Actions</h2>
-<p>Here's a Github Actions workflow you can use to automate deployments:</p>
+<p>Here's a Github Actions workflow you can use to automate deployments.</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>.github/workflows
+</code></pre></div>
 <details>
 <summary>Show full workflow</summary>
 <div class="highlight"><span class="filename">.github/workflows/ci.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
@@ -598,7 +600,7 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 
 <span class="w">            </span><span class="no"># Bring up stack and run healthchecks</span>
 <span class="w">            </span><span class="no">trap 'docker compose down' ERR</span>
-<span class="w">            </span><span class="no">docker compose up --detach</span>
+<span class="w">            </span><span class="no">docker compose up -d</span>
 <span class="w">            </span><span class="no">docker compose exec -T caddy curl -fsS http://caddy:80/healthz</span>
 <span class="w">            </span><span class="no"># Add more healthchecks here</span>
 <span class="w">            </span><span class="no"># docker compose exec -T caddy curl -fsS http://api:8080/healthz</span>
