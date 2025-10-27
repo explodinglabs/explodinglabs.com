@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Create a Cloudflare Pages frontend" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-10-27T21:39:55+00:00","datePublished":"2025-10-28T00:00:00+00:00","description":"Delete all default DNS records","headline":"Create a Cloudflare Pages frontend","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/cloudflare"},"url":"https://explodinglabs.com/posts/cloudflare"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-10-27T21:57:19+00:00","datePublished":"2025-10-28T00:00:00+00:00","description":"Delete all default DNS records","headline":"Create a Cloudflare Pages frontend","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/cloudflare"},"url":"https://explodinglabs.com/posts/cloudflare"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -109,29 +109,19 @@
 
 <p>Add Cloudflare nameservers to the domain</p>
 
-<p>Setup github auto-deployment</p>
+<h2 id="setup-pages">Setup Pages</h2>
 
-<p>In CF “Overview &gt; Get more from your free plan” tick Always use https and Automatic HTTPS Rewrites, the rest can be off</p>
-
-<p>Go to dash.cloudflare.com &gt; Compute &amp; AI &gt; Workers &amp; Pages &gt; Create an Application &gt; Pages tab &gt; Add from git repository. Add your new frontend to cloudflare integration. Build command: npm install -g elm &amp;&amp; npm run build. Build output directory: /site. The rest blank.</p>
-
-<p>In workers &amp; page &gt; your-frontend, Custom Domains tab, add your domain.</p>
-
-<p>If safari won’t show the domain, go to Develop &gt; Empty Caches for all ProfilesDelete all default DNS records</p>
-
-<p>Disable dnssec.</p>
-
-<p>Onboard domain at Cloudflare.</p>
-
-<p>Add Cloudflare nameservers to the domain</p>
-
-<p>Setup Pages: Go to Worker Routes &gt; Manage workers &gt; create application &gt; import from GitHub. Build command: npm install - elm &amp;&amp; npm run build. Deploy command: true (do nothing). Disable builds for non production branches. Root directory: /site.</p>
+<p>Go to Worker Routes &gt; Manage workers &gt; create application &gt; import from GitHub.
+Build command: npm install - elm &amp;&amp; npm run build.
+Deploy command: <code class="language-plaintext highlighter-rouge">true</code> (do nothing).
+Disable “builds for non production branches.”
+Root directory: /site.</p>
 
 <p>In SSL/TLS overview, choose auto configure.</p>
 
-<p>Custom Domains tab, add your domain.</p>
+<p>In Workers &amp; Pages &gt; your project, Settings &gt; Domains &amp; Routes &gt; + Add.</p>
 
-<p>If Safari won’t show the domain, go to Develop &gt; Empty Caches for all Profiles.</p>
+<p>If Safari won’t show the site, try Develop &gt; Empty Caches for all Profiles.</p>
 
         <footer>
           <a href="/posts/">More  posts</a>
