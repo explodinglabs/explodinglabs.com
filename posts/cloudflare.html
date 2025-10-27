@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta property="og:title" content="How to upgrade versions in Pre-commit?" />
+        <meta property="og:title" content="Create a Cloudflare Pages frontend" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://explodinglabs.com/posts/" />
         <meta property="og:image" content="https://explodinglabs.com/posts/posts/assets/opengraph.png" />
@@ -33,22 +33,22 @@
         
 
         <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>How to upgrade versions in Pre-commit? | Exploding Labs</title>
+<title>Create a Cloudflare Pages frontend | Exploding Labs</title>
 <meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="How to upgrade versions in Pre-commit?" />
+<meta property="og:title" content="Create a Cloudflare Pages frontend" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
-<meta name="description" content="Change the version in .pre-commit-config.yaml. Run pre-commit autoupdate." />
-<meta property="og:description" content="Change the version in .pre-commit-config.yaml. Run pre-commit autoupdate." />
-<link rel="canonical" href="https://explodinglabs.com/posts/pre-commit" />
-<meta property="og:url" content="https://explodinglabs.com/posts/pre-commit" />
+<meta name="description" content="Delete all default DNS records" />
+<meta property="og:description" content="Delete all default DNS records" />
+<link rel="canonical" href="https://explodinglabs.com/posts/cloudflare" />
+<meta property="og:url" content="https://explodinglabs.com/posts/cloudflare" />
 <meta property="og:site_name" content="Exploding Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-02-02T00:00:00+00:00" />
+<meta property="article:published_time" content="2025-10-28T00:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="How to upgrade versions in Pre-commit?" />
+<meta property="twitter:title" content="Create a Cloudflare Pages frontend" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-10-27T21:39:55+00:00","datePublished":"2021-02-02T00:00:00+00:00","description":"Change the version in .pre-commit-config.yaml. Run pre-commit autoupdate.","headline":"How to upgrade versions in Pre-commit?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/pre-commit"},"url":"https://explodinglabs.com/posts/pre-commit"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-10-27T21:39:55+00:00","datePublished":"2025-10-28T00:00:00+00:00","description":"Delete all default DNS records","headline":"Create a Cloudflare Pages frontend","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/cloudflare"},"url":"https://explodinglabs.com/posts/cloudflare"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -88,25 +88,50 @@
 
     <article itemscope itemtype="http://schema.org/BlogPosting">
         <header>
-            <h1>How to upgrade versions in Pre-commit?</h1>
+            <h1>Create a Cloudflare Pages frontend</h1>
             <div class="post-meta">
-                <time datetime="2021-02-02T00:00:00+00:00" itemprop="datePublished">
-                    Beau Barker, <time>Feb 2, 2021</time>.
+                <time datetime="2025-10-28T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Oct 28, 2025</time>.
                     
                         Updated <time>Oct 27, 2025</time>.
                     
-                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2021-02-02-pre-commit.markdown">
+                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2025-10-28-create-cloudflare-frontend.markdown">
                         &#9998;
                     </a>
                 </time>
             </div>
         </header>
-        <ol>
-  <li>Change the version in <code class="language-plaintext highlighter-rouge">.pre-commit-config.yaml</code>.</li>
-  <li>Run <code class="language-plaintext highlighter-rouge">pre-commit autoupdate</code>.</li>
-</ol>
+        <p>Delete all default DNS records</p>
 
-<p>Next time you commit, the package will upgrade.</p>
+<p>Disable dnssec.</p>
+
+<p>Onboard domain at Cloudflare.</p>
+
+<p>Add Cloudflare nameservers to the domain</p>
+
+<p>Setup github auto-deployment</p>
+
+<p>In CF “Overview &gt; Get more from your free plan” tick Always use https and Automatic HTTPS Rewrites, the rest can be off</p>
+
+<p>Go to dash.cloudflare.com &gt; Compute &amp; AI &gt; Workers &amp; Pages &gt; Create an Application &gt; Pages tab &gt; Add from git repository. Add your new frontend to cloudflare integration. Build command: npm install -g elm &amp;&amp; npm run build. Build output directory: /site. The rest blank.</p>
+
+<p>In workers &amp; page &gt; your-frontend, Custom Domains tab, add your domain.</p>
+
+<p>If safari won’t show the domain, go to Develop &gt; Empty Caches for all ProfilesDelete all default DNS records</p>
+
+<p>Disable dnssec.</p>
+
+<p>Onboard domain at Cloudflare.</p>
+
+<p>Add Cloudflare nameservers to the domain</p>
+
+<p>Setup Pages: Go to Worker Routes &gt; Manage workers &gt; create application &gt; import from GitHub. Build command: npm install - elm &amp;&amp; npm run build. Deploy command: true (do nothing). Disable builds for non production branches. Root directory: /site.</p>
+
+<p>In SSL/TLS overview, choose auto configure.</p>
+
+<p>Custom Domains tab, add your domain.</p>
+
+<p>If Safari won’t show the domain, go to Develop &gt; Empty Caches for all Profiles.</p>
 
         <footer>
           <a href="/posts/">More  posts</a>
