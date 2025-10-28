@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Create a Cloudflare Pages frontend" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-10-27T23:32:41+00:00","datePublished":"2025-10-28T00:00:00+00:00","description":"Delete all default DNS records","headline":"Create a Cloudflare Pages frontend","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/cloudflare"},"url":"https://explodinglabs.com/posts/cloudflare"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-10-28T00:16:50+00:00","datePublished":"2025-10-28T00:00:00+00:00","description":"Delete all default DNS records","headline":"Create a Cloudflare Pages frontend","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/cloudflare"},"url":"https://explodinglabs.com/posts/cloudflare"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -93,8 +93,6 @@
                 <time datetime="2025-10-28T00:00:00+00:00" itemprop="datePublished">
                     Beau Barker, <time>Oct 28, 2025</time>.
                     
-                        Updated <time>Oct 27, 2025</time>.
-                    
                     <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2025-10-28-create-cloudflare-frontend.markdown">
                         &#9998;
                     </a>
@@ -125,9 +123,22 @@ Environment variables: None.
 Save and deploy.</p>
 
 <p>Go to Custom domains tab &gt; Setup a custom domain.
-Add your domain, and just wait a few minutes for it to setup.</p>
+Add your domain</p>
 
-<p>If Safari won’t show the site, try Develop &gt; Empty Caches for all Profiles.</p>
+<p>Wait a few minutes for it to setup.
+It can take a while for your computer to pick up the change.</p>
+
+<h2 id="add-a-www-dns-record">Add a www DNS record</h2>
+
+<p>Go to Rules &gt; Overview &gt; + Create rule.
+Redirect from WWW to root &gt; Preview template
+Deploy (no need to change settings)
+It will show a warning, choose “create a new proxied DNS record”
+Type: CNAME
+Name: <code class="language-plaintext highlighter-rouge">www</code> (remove the trailing dot it adds)
+Target: resetcleaning.com.au</p>
+
+<p>Submit the form.</p>
 
         <footer>
           <a href="/posts/">More  posts</a>
