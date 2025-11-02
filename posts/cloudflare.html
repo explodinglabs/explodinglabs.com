@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta property="og:title" content="How to make a FaceTime phone call without video on a Mac?" />
+        <meta property="og:title" content="Create a Cloudflare Pages frontend" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://explodinglabs.com/posts/" />
         <meta property="og:image" content="https://explodinglabs.com/posts/posts/assets/opengraph.png" />
@@ -33,22 +33,22 @@
         
 
         <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>How to make a FaceTime phone call without video on a Mac? | Exploding Labs</title>
+<title>Create a Cloudflare Pages frontend | Exploding Labs</title>
 <meta name="generator" content="Jekyll v4.3.4" />
-<meta property="og:title" content="How to make a FaceTime phone call without video on a Mac?" />
+<meta property="og:title" content="Create a Cloudflare Pages frontend" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
-<meta name="description" content="To make a FacteTime phone call without video on a Mac:" />
-<meta property="og:description" content="To make a FacteTime phone call without video on a Mac:" />
-<link rel="canonical" href="https://explodinglabs.com/posts/facetime-phone-call-without-video" />
-<meta property="og:url" content="https://explodinglabs.com/posts/facetime-phone-call-without-video" />
+<meta name="description" content="Delete all default DNS records" />
+<meta property="og:description" content="Delete all default DNS records" />
+<link rel="canonical" href="https://explodinglabs.com/posts/cloudflare" />
+<meta property="og:url" content="https://explodinglabs.com/posts/cloudflare" />
 <meta property="og:site_name" content="Exploding Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-02-28T00:00:00+00:00" />
+<meta property="article:published_time" content="2025-10-28T00:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="How to make a FaceTime phone call without video on a Mac?" />
+<meta property="twitter:title" content="Create a Cloudflare Pages frontend" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-10-28T21:02:36+00:00","datePublished":"2024-02-28T00:00:00+00:00","description":"To make a FacteTime phone call without video on a Mac:","headline":"How to make a FaceTime phone call without video on a Mac?","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/facetime-phone-call-without-video"},"url":"https://explodinglabs.com/posts/facetime-phone-call-without-video"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-10-28T21:02:36+00:00","datePublished":"2025-10-28T00:00:00+00:00","description":"Delete all default DNS records","headline":"Create a Cloudflare Pages frontend","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/cloudflare"},"url":"https://explodinglabs.com/posts/cloudflare"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -88,30 +88,57 @@
 
     <article itemscope itemtype="http://schema.org/BlogPosting">
         <header>
-            <h1>How to make a FaceTime phone call without video on a Mac?</h1>
+            <h1>Create a Cloudflare Pages frontend</h1>
             <div class="post-meta">
-                <time datetime="2024-02-28T00:00:00+00:00" itemprop="datePublished">
-                    Beau Barker, <time>Feb 28, 2024</time>.
+                <time datetime="2025-10-28T00:00:00+00:00" itemprop="datePublished">
+                    Beau Barker, <time>Oct 28, 2025</time>.
                     
-                        Updated <time>Oct 28, 2025</time>.
-                    
-                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2024-02-28-facetime-phone-call-without-video.markdown">
+                    <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2025-10-28-create-cloudflare-frontend.markdown">
                         &#9998;
                     </a>
                 </time>
             </div>
         </header>
-        <p>To make a <em>FacteTime phone call</em> without video on a Mac:</p>
+        <p>Delete all default DNS records</p>
 
-<ol>
-  <li>Start FaceTime</li>
-  <li>Click “New FaceTime”</li>
-  <li>Enter the phone number and press Enter.</li>
-  <li>Click the arrow that appears next to the phone number, and under Call using iPhone,
-click the phone number.</li>
-</ol>
+<p>Disable dnssec.</p>
 
-<p>The audio settings can be set under System Settings &gt; Sound.</p>
+<p>Onboard domain at Cloudflare.</p>
+
+<p>Add Cloudflare nameservers to the domain.</p>
+
+<p>In SSL/TLS overview, choose auto configure.</p>
+
+<h2 id="setup-pages">Setup Pages</h2>
+
+<p>Go to Compute &amp; AI &gt; Workers &amp; Pages &gt; Create application &gt; <strong>CLICK THE PAGES
+TAB</strong> &gt; Import an existing Git repository</p>
+
+<p>Production branch: prod
+Framework preset: None
+Build command: <code class="language-plaintext highlighter-rouge">npm run build</code>
+Build output directory: <code class="language-plaintext highlighter-rouge">/site</code>
+Root directory: (leave /)
+Environment variables: None.
+Save and deploy.</p>
+
+<p>Go to Custom domains tab &gt; Setup a custom domain.
+Add your domain</p>
+
+<p>Wait a few minutes for it to setup.
+It can take a while for your computer to pick up the change.</p>
+
+<h2 id="add-a-www-dns-record">Add a www DNS record</h2>
+
+<p>Go to Rules &gt; Overview &gt; + Create rule.
+Redirect from WWW to root &gt; Preview template
+Deploy (no need to change settings)
+It will show a warning, choose “create a new proxied DNS record”
+Type: CNAME
+Name: <code class="language-plaintext highlighter-rouge">www</code> (remove the trailing dot it adds)
+Target: resetcleaning.com.au</p>
+
+<p>Submit the form.</p>
 
         <footer>
           <a href="/posts/">More  posts</a>
