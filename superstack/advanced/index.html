@@ -9,7 +9,7 @@
 <link href="../deploy/" rel="prev"/>
 <link href="../keepreading/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.22" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
 <title>Advanced Deployments - SuperStack</title>
 <link href="../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
@@ -441,12 +441,12 @@ adding these lines:</p>
 </span><span class="hll"><span class="w">      </span><span class="nt">CADDY_SITE_ADDRESS</span><span class="p">:</span><span class="w"> </span><span class="s">":80"</span>
 </span><span class="hll"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
 </span><span class="hll"><span class="w">      </span><span class="nt">default</span><span class="p">:</span>
-</span><span class="hll"><span class="w">      </span><span class="nt">proxy_default</span><span class="p">:</span>
+</span><span class="hll"><span class="w">      </span><span class="nt">myapp-proxy_default</span><span class="p">:</span>
 </span><span class="hll"><span class="w">        </span><span class="nt">aliases</span><span class="p">:</span>
 </span><span class="hll"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${COMPOSE_PROJECT_NAME}_caddy</span>
 </span><span class="hll">
 </span><span class="hll"><span class="nt">networks</span><span class="p">:</span>
-</span><span class="hll"><span class="w">  </span><span class="nt">proxy_default</span><span class="p">:</span>
+</span><span class="hll"><span class="w">  </span><span class="nt">myapp-proxy_default</span><span class="p">:</span>
 </span><span class="hll"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
 <p>Also remove the <code>ports:</code> and <code>CADDY_SITE_ADDRESS</code> in
