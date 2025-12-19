@@ -36,8 +36,8 @@
 <meta property="og:title" content="Find Dead Markdown Links" />
 <meta name="author" content="Exploding Labs" />
 <meta property="og:locale" content="en_AU" />
-<meta name="description" content="npm install -g markdown-link-check" />
-<meta property="og:description" content="npm install -g markdown-link-check" />
+<meta name="description" content="Lychee" />
+<meta property="og:description" content="Lychee" />
 <link rel="canonical" href="https://explodinglabs.com/posts/find-dead-markdown-links" />
 <meta property="og:url" content="https://explodinglabs.com/posts/find-dead-markdown-links" />
 <meta property="og:site_name" content="Exploding Labs" />
@@ -46,7 +46,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Find Dead Markdown Links" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-11-06T02:04:31+00:00","datePublished":"2025-10-29T00:00:00+00:00","description":"npm install -g markdown-link-check","headline":"Find Dead Markdown Links","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/find-dead-markdown-links"},"url":"https://explodinglabs.com/posts/find-dead-markdown-links"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Exploding Labs"},"dateModified":"2025-11-15T05:21:55+00:00","datePublished":"2025-10-29T00:00:00+00:00","description":"Lychee","headline":"Find Dead Markdown Links","mainEntityOfPage":{"@type":"WebPage","@id":"https://explodinglabs.com/posts/find-dead-markdown-links"},"url":"https://explodinglabs.com/posts/find-dead-markdown-links"}</script>
 <!-- End Jekyll SEO tag -->
 
     </head>
@@ -91,7 +91,7 @@
                 <time datetime="2025-10-29T00:00:00+00:00" itemprop="datePublished">
                     Beau Barker, <time>Oct 29, 2025</time>.
                     
-                        Updated <time>Nov 6, 2025</time>.
+                        Updated <time>Nov 15, 2025</time>.
                     
                     <a href="https://github.com/explodinglabs/posts/edit/main/docs/_posts/2025-10-29-find-dead-markdown-links.markdown">
                         &#9998;
@@ -99,19 +99,25 @@
                 </time>
             </div>
         </header>
-        <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> markdown-link-check
+        <h2 id="lychee">Lychee</h2>
+
+<p>Install Lychee, then:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lychee <span class="nt">--base</span> <span class="s1">'https://github.com/explodinglabs/superstack/wiki/'</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<h2 id="markdown-link-check">markdown-link-check</h2>
+
+<p>Doesn’t work with Github Wiki links, unless you include the .md extension.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> markdown-link-check
 </code></pre></div></div>
 
 <p><strong>.mlc.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"ignorePatterns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w"> </span><span class="nl">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^http"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w"> </span><span class="nl">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^mailto:"</span><span class="w"> </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"replacementPatterns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w"> </span><span class="nl">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^</span><span class="se">\\</span><span class="s2">./"</span><span class="p">,</span><span class="w"> </span><span class="nl">"replacement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"ignorePatterns"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nl">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^http"</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^mailto:"</span><span class="w"> </span><span class="p">}],</span><span class="w">
+  </span><span class="nl">"replacementPatterns"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nl">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^</span><span class="se">\\</span><span class="s2">./"</span><span class="p">,</span><span class="w"> </span><span class="nl">"replacement"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
